@@ -28,21 +28,23 @@
   * Inspección del espacio de trabajo, verificación de no-código y alineación inicial.
 * **`WHO-002` — Arquitectura Base y Especificación de Cartas** `[APPROVED_COMPLETE]`
   * Creación de modelos de dominio inmutables en Python (`ScientificInfo`, `AnimalProfile`, `LoreProfile`, `AnimalCard`), separación de capas y primera suite de pruebas.
-* **`WHO-003` — Gobernanza, Memoria del Proyecto y Versionado** `[IN_PROGRESS]`
+* **`WHO-003` — Gobernanza, Memoria del Proyecto y Versionado** `[APPROVED_COMPLETE]`
   * Creación de manual de agentes (`AGENTS.md`), memoria oficial (`PROJECT_CONTEXT.md`), gobernanza de 3 roles, esquema de versionado semántico/Android y registro de decisiones.
-* **`WHO-004` — Validación de Esquemas y Serialización JSON (Planificado)** `[PLANNED]`
+* **`WHO-004` — Plan Maestro de Desarrollo y Alineación por Versión** `[IN_PROGRESS]`
+  * Creación del tablero operativo central (`docs/PLANNING.md`) para sincronización entre Director, PM y Developer.
+* **`WHO-005` — Validación de Esquemas y Serialización JSON (Planificado)** `[PLANNED]`
   * Definición de esquemas de exportación/importación JSON estandarizados para cartas y perfiles biológicos (con Pydantic / dataclasses).
-* **`WHO-005` — Banco de Datos Inicial de Fauna (Semilla Educativa)** `[PROPOSED]`
+* **`WHO-006` — Banco de Datos Inicial de Fauna (Semilla Educativa)** `[PROPOSED]`
   * Creación de un conjunto inicial de especímenes reales verificados (mamíferos, aves, reptiles) con información científica completa y Lore demarcado.
-* **`WHO-006` — Prototipo del Servicio de Generación de Cartas** `[PROPOSED]`
+* **`WHO-007` — Prototipo del Servicio de Generación de Cartas** `[PROPOSED]`
   * Implementación del generador de cartas en base al protocolo `CardGeneratorService`.
-* **`WHO-007` — Evaluación y Prototipo de Ingesta Taxonómica** `[PROPOSED]`
+* **`WHO-008` — Evaluación y Prototipo de Ingesta Taxonómica** `[PROPOSED]`
   * Conector experimental con APIs de biodiversidad abiertas (GBIF / iNaturalist) para validación de datos.
-* **`WHO-008` — Prototipo del Motor de Identificación por Visión** `[PROPOSED]`
+* **`WHO-009` — Prototipo del Motor de Identificación por Visión** `[PROPOSED]`
   * Implementación experimental de `IdentificationService` mediante modelos locales ligeros o API de visión.
-* **`WHO-009` — Motor de Persistencia y Álbum de Colección** `[PROPOSED]`
+* **`WHO-010` — Motor de Persistencia y Álbum de Colección** `[PROPOSED]`
   * Implementación de persistencia local (SQLite) para inventario y álbum de colección.
-* **`WHO-010` — Interfaz Gráfica / Prototipo de Cliente Móvil** `[PROPOSED]`
+* **`WHO-011` — Interfaz Gráfica / Prototipo de Cliente Móvil** `[PROPOSED]`
   * Configuración del frontend cliente (Flutter) para visualización e interacción de cartas con volteo.
 
 ---

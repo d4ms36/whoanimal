@@ -81,5 +81,11 @@ Cada tarea u objetivo debe documentarse utilizando la siguiente ficha estructura
 
 ### WHO-003: Gobernanza, Memoria del Proyecto y Versionado
 * **Propósito:** Establecer el marco de gobernanza, memoria oficial, reglas para agentes, sistema de versionado semántico/Android y roadmap estructurado.
+* **Estado:** `APPROVED_COMPLETE`
+* **Commit:** `66d6c67` (*docs(governance): establish project memory, workflow and versioning*)
+* **Versión:** `0.0.1`
+
+### WHO-004: Plan Maestro de Desarrollo y Alineación por Versión
+* **Propósito:** Crear el tablero operativo central `docs/PLANNING.md` para alinear en tiempo real al Director, Project Manager y Developer.
 * **Estado:** `IN_PROGRESS`
 * **Versión:** `0.0.1`

@@ -51,6 +51,7 @@ whoanimal/
 │   ├── DISCLAIMER.md            # Aviso de responsabilidad educativa y de seguridad
 │   ├── GDD.md                   # Game Design Document (visión, cartas, core loop)
 │   ├── GOVERNANCE.md            # Modelo de roles (Director, PM, Developer) y flujo
+│   ├── PLANNING.md              # Plan Maestro de desarrollo y alineación de versión
 │   ├── PRODUCT_RULES.md         # Reglas éticas y de separación Ciencia/Lore
 │   ├── PROJECT_CONTEXT.md       # Memoria oficial y los 8 pilares del producto
 │   ├── RELEASES.md              # Registro histórico de versiones y builds Android
@@ -114,6 +115,7 @@ pytest
 
 * **Gobernanza y Operación:**
   * [Manual para Agentes (AGENTS.md)](AGENTS.md)
+  * [Plan Maestro de Desarrollo](docs/PLANNING.md)
   * [Modelo de Gobernanza](docs/GOVERNANCE.md)
   * [Flujo de Trabajo por Objetivos](docs/WORKFLOW.md)
   * [Registro de Decisiones (ADR)](docs/DECISIONS.md)
