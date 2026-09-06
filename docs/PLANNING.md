@@ -63,7 +63,8 @@ $$\text{FASE} . \text{CORRECCIONES} . \text{ITERACIÓN}$$
 | **WHO-005B-E.1**| Cierre semántico de `rank` y `rarity` | `COMPLETADO` | Alta | 0.0.1 | Sí |
 | **WHO-006A**| Definición formal de tipos y obligatoriedad de los 19 campos de Card | `COMPLETADO` | Alta | 0.0.1 | Sí |
 | **WHO-006A.1**| Corrección del contrato de obligatoriedad, nullability y defaults de Card | `COMPLETADO` | Alta | 0.0.1 | Sí |
-| **WHO-006B**| Implementación formal del modelo Card (19 campos canónicos) | `COMPLETADO` | Alta | 0.0.1 | Sí |
+| **WHO-006B**| Implementación formal del modelo Card (19 campos canónicos) | `NEEDS_CORRECTION` | Alta | 0.0.1 | Sí |
+| **WHO-006B.1**| Corrección de contrato técnico del modelo Card | `REVIEW` | Alta | 0.0.1 | Sí |
 | **WHO-007** | Banco de Datos Inicial de Fauna (Semilla Educativa) | `PROPUESTO` | Media | 0.0.1 | No |
 
 ---
@@ -74,30 +75,32 @@ $$\text{FASE} . \text{CORRECCIONES} . \text{ITERACIÓN}$$
 ┌─────────────────────────────────────────────────────────────────────────────┐
 │                           OBJETIVO ACTIVO ACTUAL                            │
 ├──────────────────┬──────────────────────────────────────────────────────────┤
-│ ID               │ WHO-006B                                                 │
-│ Nombre           │ Implementación Formal del Modelo Card                    │
-│ Propósito        │ Implementar el modelo de dominio Card correspondiente a  │
-│                  │ los 19 campos canónicos, respetando strictly el contrato │
-│                  │ formal (required, nullable, defaults, inmutabilidad)     │
-│ Estado           │ COMPLETADO (Listo para revisión de PM)                   │
+│ ID               │ WHO-006B.1                                               │
+│ Nombre           │ Corrección de Contrato Técnico del Modelo Card           │
+│ Propósito        │ Corregir discrepancias contractuales: UUIDv4 estricto,   │
+│                  │ edition ausente omitida en serialización, artwork tipo   │
+│                  │ abierto, rank int/str, protección anti-GPS y 30 tests    │
+│ Estado           │ REVIEW (Listo para revisión de PM)                       │
 │ Versión Asociada │ 0.0.1                                                    │
-│ Requisitos       │ WHO-006A.1 completado y aprobado                         │
+│ Requisitos       │ WHO-006B evaluado con correcciones requeridas            │
 │ Responsable      │ Developer Principal (Antigravity)                        │
 └──────────────────┴──────────────────────────────────────────────────────────┘
 ```
 
 * **Criterios de Aceptación:**
-  1. Modelo `Card` implementado con exactamente los 19 campos canónicos (cero campos inventados ni PII).
-  2. Cumplimiento literal de obligatoriedad y nullability según WHO-006A.1 (Optional != Nullable).
-  3. Únicos defaults contractuales implementados: `verification_status = UNVERIFIED` y `visual_effects = []`.
-  4. Rarity y rank de tipo abierto sin tiers ni niveles inventados (`DEC-022-PENDING` y `DEC-037-PENDING` abiertas).
-  5. Inmutabilidad de atributos históricos protegida en el modelo; origen generalizado de `display_location` protegido sin GPS exacto.
-  6. Pruebas unitarias ampliadas y pasando al 100% (24/24). Cero dependencias externas agregadas.
-  7. Detención formal tras la entrega sin iniciar objetivos posteriores automáticamente.
-* **Archivos Afectados:** `src/whoanimal/domain/models/card.py`, `src/whoanimal/domain/enums.py`, `src/whoanimal/domain/models/__init__.py`, `src/whoanimal/domain/__init__.py`, `tests/test_models.py`, `docs/PLANNING.md`, `docs/ROADMAP.md`, `docs/WORKFLOW.md`.
+  1. `card_id` y `capture_id` exigen estrictamente UUIDv4 canónico (UUIDv5, UUIDv1 y strings inválidas rechazadas).
+  2. `edition` formalizado como Optional pero Non-nullable: se omite en `to_dict()` cuando está ausente (sin `null`), se rechaza `edition=None` en constructor y en `from_dict()`.
+  3. `artwork` ampliado como tipo abierto (`object / str / None`), permitiendo URI, diccionarios u objetos de encargo.
+  4. `rank` delimitado a `int` o `str` según CARD_SPEC, manteniendo `DEC-037-PENDING` abierta.
+  5. `rarity` se mantiene como tipo abierto sin tiers cerrados (`DEC-022-PENDING` abierta).
+  6. `display_location` conserva semántica protegida con filtro anti-GPS exacto.
+  7. Serialización y deserialización validada respetan ausencia vs. `null` y únicos defaults aprobados (`UNVERIFIED`, `[]`).
+  8. Suite de 30 tests pasando al 100% (cero dependencias añadidas).
+  9. Detención formal tras la entrega sin iniciar objetivos posteriores automáticamente.
+* **Archivos Afectados:** `src/whoanimal/domain/models/card.py`, `tests/test_models.py`, `docs/PLANNING.md`, `docs/ROADMAP.md`, `docs/WORKFLOW.md`.
 * **Dependencias:** Ninguna externa añadida (stdlib).
 * **Bloqueos:** Ninguno.
-* **Resultado Esperado:** Entidad `Card` formalizada en el dominio como pilar central de colección.
+* **Resultado Esperado:** Modelo `Card` 100% alineado con el contrato formal documental.
 
 ---
 
@@ -138,8 +141,8 @@ Ordenados por prioridad técnica y estratégica.
 | **WHO-005B-E**| `APROBADO` | `VALIDADO` | `COMPLETADO` | `APPROVED_COMPLETE` |
 | **WHO-005B-E.1**| `APROBADO` | `VALIDADO` | `COMPLETADO` | `APPROVED_COMPLETE` |
 | **WHO-006A**| `APROBADO` | `VALIDADO` | `COMPLETADO` | `APPROVED_COMPLETE` |
-| **WHO-006A.1**| `APROBADO` | `VALIDADO` | `COMPLETADO` | `APPROVED_COMPLETE` |
-| **WHO-006B**| `APROBADO` | `VALIDADO` | `COMPLETADO` | `APPROVED_COMPLETE` |
+| **WHO-006B**| `APROBADO` | `REVISADO` | `COMPLETADO` | `NEEDS_CORRECTION` |
+| **WHO-006B.1**| `APROBADO` | *PENDIENTE* | `COMPLETADO` | `REVIEW` |
 | **WHO-007** | *PENDIENTE* | *EN EVALUACIÓN* | `EN ESPERA` | `PROPOSED` |
 
 > **Regla:** El Developer no puede auto-aprobar objetivos. La autorización debe ser explícita por parte del Director Creativo y estructurada por el Project Manager.
@@ -236,6 +239,7 @@ Para prevenir el desvío del alcance (*scope creep*) y asegurar una base sólida
 | **2026-09-06** | Definición formal de tipos, obligatoriedad y nullability de los 19 campos de Card | Establecer contrato tipológico vinculante previo a la implementación de esquemas | Director / PM (`WHO-006A`) |
 | **2026-09-06** | Corrección del contrato de obligatoriedad, nullability y defaults de Card (WHO-006A.1) | Eliminar defaults no aprobados, formalizar Optional vs Nullable y proteger origen histórico de display_location | Director / PM (`WHO-006A.1`) |
 | **2026-09-06** | Implementación formal del modelo de dominio `Card` (19 campos canónicos) | Modelado y validación técnica según contrato WHO-006A.1 (WHO-006B) | Director / PM (`WHO-006B`) |
+| **2026-09-06** | Corrección de contrato técnico del modelo Card (WHO-006B.1) | Alineación estricta UUIDv4, ausencia vs null en edition, artwork tipo abierto, rank int/str y 30 tests unitarios | Developer (`WHO-006B.1`) |
 
 ---
 

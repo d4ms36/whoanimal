@@ -1,8 +1,9 @@
+import re
 import uuid
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
 from enum import Enum
-from typing import Optional, Any, List, Dict
+from typing import Optional, Any, List, Dict, Union
 from ..enums import AnimalCategory, CardRarity, VerificationStatus
 from ...core.exceptions import ValidationError
 from .animal import AnimalProfile
@@ -36,11 +37,11 @@ class Card:
     generation: str
     issued_at: datetime
     population_at_issuance: int
-    rarity: Any
+    rarity: str
     capture_id: str
     identification_method: str
     identification_confidence: Optional[float]
-    rank: Any
+    rank: Union[int, str]
     display_location: Optional[str]
     visual_effects: List[str] = field(default_factory=list)
     artwork: Optional[Any]
@@ -73,6 +74,50 @@ class Card:
         "display_location",
     })
 
+    @staticmethod
+    def _validate_uuidv4(val: Any, field_name: str) -> str:
+        """Valida que un campo contenga estrictamente un UUIDv4 canónico."""
+        if val is _UNSET:
+            raise ValidationError(f"Field '{field_name}' is required")
+        if val is None:
+            raise ValidationError(f"Field '{field_name}' cannot be None")
+        if isinstance(val, bool):
+            raise ValidationError(f"Field '{field_name}' must be a valid UUIDv4 string, got {val!r}")
+        if isinstance(val, uuid.UUID):
+            if val.version != 4:
+                raise ValidationError(
+                    f"Field '{field_name}' must be UUIDv4, got UUIDv{val.version}"
+                )
+            return str(val)
+        if isinstance(val, str) and val.strip():
+            cleaned = val.strip()
+            try:
+                u = uuid.UUID(cleaned)
+            except (ValueError, AttributeError):
+                raise ValidationError(
+                    f"Field '{field_name}' must be a valid UUIDv4 string, got {val!r}"
+                )
+            if u.version != 4:
+                raise ValidationError(
+                    f"Field '{field_name}' must be UUIDv4, got UUIDv{u.version}"
+                )
+            return str(u)
+        raise ValidationError(
+            f"Field '{field_name}' must be a valid UUIDv4 string, got {val!r}"
+        )
+
+    @staticmethod
+    def _validate_display_location(loc: str) -> None:
+        """Protección razonable contra la inclusión accidental de coordenadas exactas."""
+        if not isinstance(loc, str) or not loc.strip():
+            raise ValidationError("display_location must be a non-empty string when present")
+        if re.search(r"[-+]?\d{1,3}\.\d{4,}\s*,\s*[-+]?\d{1,3}\.\d{4,}", loc) or re.search(
+            r"\b(lat|latitude|lon|longitude)\s*[:=]\s*[-+]?\d+", loc, re.IGNORECASE
+        ):
+            raise ValidationError(
+                f"display_location cannot contain exact GPS coordinates (privacy / anti-poaching protection): {loc!r}"
+            )
+
     def __init__(
         self,
         card_id: str = _UNSET,
@@ -101,20 +146,8 @@ class Card:
                 f"Unexpected extra fields not permitted in Card: {list(extra_kwargs.keys())}"
             )
 
-        # 1. card_id (Required + non-null, UUID válido)
-        if card_id is _UNSET:
-            raise ValidationError("Field 'card_id' is required")
-        if card_id is None:
-            raise ValidationError("Field 'card_id' cannot be None")
-        if isinstance(card_id, uuid.UUID):
-            self.card_id = str(card_id)
-        elif isinstance(card_id, str) and card_id.strip():
-            try:
-                self.card_id = str(uuid.UUID(card_id.strip()))
-            except Exception:
-                raise ValidationError(f"card_id must be a valid UUID string, got {card_id!r}")
-        else:
-            raise ValidationError(f"card_id must be a valid UUID string, got {card_id!r}")
+        # 1. card_id (Required + non-null, estrictamente UUIDv4)
+        self.card_id = self._validate_uuidv4(card_id, "card_id")
 
         # 2. animal_id (Required + non-null, string no vacía)
         if animal_id is _UNSET:
@@ -143,15 +176,14 @@ class Card:
             raise ValidationError(f"schema_version must be a non-empty string, got {schema_version!r}")
         self.schema_version = schema_version.strip()
 
-        # 5. edition (Optional + non-null, se omite o string no vacía; no admite None)
-        if edition is _UNSET:
-            self.edition = None
-        elif edition is None:
-            raise ValidationError("edition cannot be None (Optional but non-nullable)")
-        elif not isinstance(edition, str) or not edition.strip():
-            raise ValidationError(f"edition must be a non-empty string when present, got {edition!r}")
-        else:
-            self.edition = edition.strip()
+        # 5. edition (Optional + non-null: se omite o string no vacía; no admite None)
+        if edition is not _UNSET:
+            if edition is None:
+                raise ValidationError("edition cannot be None (Optional but non-nullable; omit the field if absent)")
+            elif not isinstance(edition, str) or not edition.strip():
+                raise ValidationError(f"edition must be a non-empty string when present, got {edition!r}")
+            else:
+                self.edition = edition.strip()
 
         # 6. generation (Required + non-null, string no vacía, sin default universal)
         if generation is _UNSET:
@@ -186,32 +218,20 @@ class Card:
             raise ValidationError(f"population_at_issuance must be an integer >= 1, got {population_at_issuance!r}")
         self.population_at_issuance = population_at_issuance
 
-        # 9. rarity (Required + non-null, tipo abierto, sin enum cerrado fijo)
+        # 9. rarity (Required + non-null, tipo abierto, sin enum cerrado fijo, DEC-022-PENDING)
         if rarity is _UNSET:
             raise ValidationError("Field 'rarity' is required")
         if rarity is None:
             raise ValidationError("Field 'rarity' cannot be None")
         if isinstance(rarity, Enum):
-            self.rarity = rarity
+            self.rarity = rarity.value if isinstance(rarity.value, str) else str(rarity.value)
         elif isinstance(rarity, str) and rarity.strip():
             self.rarity = rarity.strip()
         else:
             raise ValidationError(f"rarity must be a non-empty string or Enum, got {rarity!r}")
 
-        # 10. capture_id (Required + non-null, UUID válido)
-        if capture_id is _UNSET:
-            raise ValidationError("Field 'capture_id' is required")
-        if capture_id is None:
-            raise ValidationError("Field 'capture_id' cannot be None")
-        if isinstance(capture_id, uuid.UUID):
-            self.capture_id = str(capture_id)
-        elif isinstance(capture_id, str) and capture_id.strip():
-            try:
-                self.capture_id = str(uuid.UUID(capture_id.strip()))
-            except Exception:
-                raise ValidationError(f"capture_id must be a valid UUID string, got {capture_id!r}")
-        else:
-            raise ValidationError(f"capture_id must be a valid UUID string, got {capture_id!r}")
+        # 10. capture_id (Required + non-null, estrictamente UUIDv4)
+        self.capture_id = self._validate_uuidv4(capture_id, "capture_id")
 
         # 11. identification_method (Required + non-null, string no vacía)
         if identification_method is _UNSET:
@@ -230,14 +250,14 @@ class Card:
         else:
             self.identification_confidence = float(identification_confidence)
 
-        # 13. rank (Required + non-null, tipo abierto, int o str, sin niveles inventados)
+        # 13. rank (Required + non-null, tipo abierto int o str, sin niveles inventados, DEC-037-PENDING)
         if rank is _UNSET:
             raise ValidationError("Field 'rank' is required")
         if rank is None:
             raise ValidationError("Field 'rank' cannot be None")
         if isinstance(rank, bool) or not isinstance(rank, (int, str)) or (isinstance(rank, str) and not rank.strip()):
             raise ValidationError(f"rank must be an integer or non-empty string, got {rank!r}")
-        self.rank = rank
+        self.rank = rank if isinstance(rank, int) else rank.strip()
 
         # 14. display_location (Optional + nullable, origen generalizado protegido, sin GPS exacto)
         if display_location is _UNSET or display_location is None:
@@ -245,7 +265,8 @@ class Card:
         elif not isinstance(display_location, str):
             raise ValidationError(f"display_location must be a string when present, got {display_location!r}")
         else:
-            self.display_location = display_location
+            self._validate_display_location(display_location)
+            self.display_location = display_location.strip()
 
         # 15. visual_effects (Optional + non-null, default contractual: [])
         if visual_effects is _UNSET:
@@ -257,11 +278,18 @@ class Card:
         else:
             self.visual_effects = list(visual_effects)
 
-        # 16. artwork (Optional + nullable, objeto/URI o None)
+        # 16. artwork (Optional + nullable, object / str / None, tipo abierto)
         if artwork is _UNSET or artwork is None:
             self.artwork = None
+        elif isinstance(artwork, (str, dict)) or hasattr(artwork, "__dict__"):
+            if isinstance(artwork, str):
+                if not artwork.strip():
+                    raise ValidationError("artwork cannot be an empty string when present")
+                self.artwork = artwork.strip()
+            else:
+                self.artwork = artwork
         else:
-            self.artwork = artwork
+            raise ValidationError(f"artwork must be a string, object/dict, or None, got {artwork!r}")
 
         # 17. owner_id (Optional + nullable, string o None)
         if owner_id is _UNSET or owner_id is None:
@@ -302,6 +330,17 @@ class Card:
 
         object.__setattr__(self, "_initialized", True)
 
+    def __getattr__(self, name: str) -> Any:
+        # Permite acceso a edition como None en Python cuando fue omitida sin exponer None en el contrato
+        if name == "edition":
+            return None
+        raise AttributeError(f"'{type(self).__name__}' object has no attribute '{name}'")
+
+    @property
+    def has_edition(self) -> bool:
+        """Indica si la carta posee una edición asignada en emisión (ausencia = False)."""
+        return "edition" in self.__dict__
+
     def __setattr__(self, name: str, value: Any) -> None:
         if getattr(self, "_initialized", False):
             if name in self._IMMUTABLE_FIELDS:
@@ -317,10 +356,18 @@ class Card:
             if name == "rank":
                 if value is None or isinstance(value, bool) or not isinstance(value, (int, str)) or (isinstance(value, str) and not value.strip()):
                     raise ValidationError(f"rank must be an integer or non-empty string, got {value!r}")
+                value = value if isinstance(value, int) else value.strip()
             elif name == "visual_effects":
                 if value is None or not isinstance(value, list) or not all(isinstance(x, str) for x in value):
                     raise ValidationError(f"visual_effects must be a list of strings, got {value!r}")
                 value = list(value)
+            elif name == "artwork":
+                if value is not None and not isinstance(value, (str, dict)) and not hasattr(value, "__dict__"):
+                    raise ValidationError(f"artwork must be a string, object/dict, or None, got {value!r}")
+                if isinstance(value, str):
+                    if not value.strip():
+                        raise ValidationError("artwork cannot be an empty string when present")
+                    value = value.strip()
             elif name == "owner_id":
                 if value is not None and (not isinstance(value, str) or not value.strip()):
                     raise ValidationError(f"owner_id must be a non-empty string or None, got {value!r}")
@@ -344,19 +391,29 @@ class Card:
                         f"verification_status must be a VerificationStatus or str, got {value!r}"
                     )
             elif name == "display_location":
-                if value is not None and not isinstance(value, str):
-                    raise ValidationError(f"display_location must be a string or None, got {value!r}")
+                if value is not None:
+                    if not isinstance(value, str):
+                        raise ValidationError(f"display_location must be a string or None, got {value!r}")
+                    self._validate_display_location(value)
+                    value = value.strip()
 
         super().__setattr__(name, value)
 
     def to_dict(self) -> Dict[str, Any]:
-        """Serializa la entidad Card a un diccionario con los 19 campos canónicos."""
-        return {
+        """
+        Serializa la entidad Card a un diccionario conforme al contrato.
+        Si 'edition' fue omitida en emisión, se omite de la serialización
+        (no aparece como null) respetando Optional != Nullable.
+        """
+        data: Dict[str, Any] = {
             "card_id": self.card_id,
             "animal_id": self.animal_id,
             "specimen_number": self.specimen_number,
             "schema_version": self.schema_version,
-            "edition": self.edition,
+        }
+        if self.has_edition and "edition" in self.__dict__:
+            data["edition"] = self.edition
+        data.update({
             "generation": self.generation,
             "issued_at": (
                 self.issued_at.isoformat()
@@ -371,7 +428,11 @@ class Card:
             "rank": self.rank,
             "display_location": self.display_location,
             "visual_effects": list(self.visual_effects),
-            "artwork": self.artwork,
+            "artwork": (
+                self.artwork.to_dict()
+                if hasattr(self.artwork, "to_dict") and callable(self.artwork.to_dict)
+                else self.artwork
+            ),
             "owner_id": self.owner_id,
             "serial": self.serial,
             "verification_status": (
@@ -379,18 +440,34 @@ class Card:
                 if isinstance(self.verification_status, Enum)
                 else self.verification_status
             ),
-        }
+        })
+        return data
 
     @classmethod
     def from_dict(cls, data: Dict[str, Any]) -> "Card":
         """
         Reconstruye una instancia de Card a partir de un diccionario validando el contrato.
-        Si 'edition' es None en el diccionario (representando ausencia), se omite para respetar
-        el contrato de presencia (Optional pero non-nullable).
+        - Rechaza 'edition: null' porque es Optional pero Non-nullable (debe omitirse si está ausente).
+        - Rechaza 'verification_status: null' en el esquema actual.
+        - Rechaza 'visual_effects: null' porque su default es [].
         """
         clean_data = dict(data)
+
         if "edition" in clean_data and clean_data["edition"] is None:
-            del clean_data["edition"]
+            raise ValidationError(
+                "Field 'edition' cannot be null in contract (Optional but non-nullable; omit the key if absent)"
+            )
+
+        if "verification_status" in clean_data and clean_data["verification_status"] is None:
+            raise ValidationError(
+                "Field 'verification_status' cannot be null in current schema"
+            )
+
+        if "visual_effects" in clean_data and clean_data["visual_effects"] is None:
+            raise ValidationError(
+                "Field 'visual_effects' cannot be null (Optional but non-nullable; default is [])"
+            )
+
         return cls(**clean_data)
 
 

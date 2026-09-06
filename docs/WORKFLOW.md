@@ -153,8 +153,14 @@ Cada tarea u objetivo debe documentarse utilizando la siguiente ficha estructura
 
 ### WHO-006B: Implementación Formal del Modelo Card
 * **Propósito:** Implementar el modelo de dominio `Card` correspondiente a los 19 campos canónicos respetando estrictamente el contrato formal aprobado en WHO-006A.1 (requiredness, nullability, tipos abiertos para rarity y rank, defaults contractuales únicos UNVERIFIED y [], inmutabilidad post-emisión y validación técnica sin dependencias externas).
-* **Estado:** `APPROVED_COMPLETE`
-* **Commit:** `a8b39d0` (*feat(card): implement formal card domain model*)
+* **Estado:** `NEEDS_CORRECTION`
+* **Commit:** `a051d0c` (*feat(card): implement formal card domain model*)
+* **Versión:** `0.0.1`
+
+### WHO-006B.1: Corrección de Contrato Técnico del Modelo Card
+* **Propósito:** Corregir discrepancias técnicas con el contrato formal: exigir estrictamente UUIDv4 en `card_id` y `capture_id` (rechazando UUIDv5/v1), formalizar `edition` como Optional no-nullable omitiéndolo de la serialización cuando está ausente y rechazando `None`, ampliar `artwork` a tipo abierto (objeto/dict, string o None), restringir `rank` a int o str sin inventar niveles, añadir protección razonable anti-GPS en `display_location` y validar el contrato con 30 tests unitarios pasando al 100%.
+* **Estado:** `REVIEW`
+* **Commit:** `b647960` (*fix(card): align domain model with card contract*)
 * **Versión:** `0.0.1`
 
 

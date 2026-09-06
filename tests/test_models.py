@@ -504,19 +504,286 @@ class TestCardDomainModel(unittest.TestCase):
         """Verifica la serialización a diccionario y deserialización validada."""
         from whoanimal.domain import Card, VerificationStatus
 
+        # 1. Caso sin edition (omisión en emisión)
         card = Card(**self._make_valid_required_kwargs())
         data = card.to_dict()
         self.assertIsInstance(data, dict)
-        self.assertEqual(len(data), 19)
+        self.assertEqual(len(data), 18)
+        self.assertNotIn("edition", data)
         self.assertEqual(data["card_id"], "c84d7285-807e-468a-b5a8-ef075a3e1201")
         self.assertEqual(data["verification_status"], "UNVERIFIED")
 
-        # Reconstrucción mediante from_dict
+        # Reconstrucción mediante from_dict respetando ausencia
         restored = Card.from_dict(data)
         self.assertEqual(restored.card_id, card.card_id)
+        self.assertFalse(restored.has_edition)
+        self.assertIsNone(restored.edition)
         self.assertEqual(restored.verification_status, VerificationStatus.UNVERIFIED)
+
+        # 2. Caso con edition
+        kwargs = self._make_valid_required_kwargs()
+        kwargs["edition"] = "1st Edition"
+        card_with_edition = Card(**kwargs)
+        data_with_edition = card_with_edition.to_dict()
+        self.assertEqual(len(data_with_edition), 19)
+        self.assertEqual(data_with_edition["edition"], "1st Edition")
+
+        restored_with_edition = Card.from_dict(data_with_edition)
+        self.assertTrue(restored_with_edition.has_edition)
+        self.assertEqual(restored_with_edition.edition, "1st Edition")
+
+    def test_21_uuid_strictly_v4_validation(self):
+        """
+        Obligatorio WHO-006B.1:
+        - UUIDv4 válido → PASS
+        - UUIDv5 → FAIL
+        - UUID inválido → FAIL
+        """
+        import uuid
+        from whoanimal.domain import Card
+        from whoanimal.core.exceptions import ValidationError
+
+        # UUIDv4 válidos
+        valid_v4_str = str(uuid.uuid4())
+        valid_v4_obj = uuid.uuid4()
+        kwargs = self._make_valid_required_kwargs()
+        kwargs["card_id"] = valid_v4_str
+        kwargs["capture_id"] = valid_v4_obj
+        card = Card(**kwargs)
+        self.assertEqual(card.card_id, valid_v4_str)
+        self.assertEqual(card.capture_id, str(valid_v4_obj))
+
+        # UUIDv5 debe ser rechazado
+        v5_card_id = str(uuid.uuid5(uuid.NAMESPACE_DNS, "whoanimal.org"))
+        v5_capture_id = uuid.uuid5(uuid.NAMESPACE_URL, "https://whoanimal.org")
+
+        with self.subTest(rejected="uuidv5_card_id"):
+            kwargs_v5 = self._make_valid_required_kwargs()
+            kwargs_v5["card_id"] = v5_card_id
+            with self.assertRaises(ValidationError):
+                Card(**kwargs_v5)
+
+        with self.subTest(rejected="uuidv5_capture_id"):
+            kwargs_v5 = self._make_valid_required_kwargs()
+            kwargs_v5["capture_id"] = v5_capture_id
+            with self.assertRaises(ValidationError):
+                Card(**kwargs_v5)
+
+        # UUIDv1 debe ser rechazado
+        v1_id = str(uuid.uuid1())
+        with self.subTest(rejected="uuidv1"):
+            kwargs_v1 = self._make_valid_required_kwargs()
+            kwargs_v1["card_id"] = v1_id
+            with self.assertRaises(ValidationError):
+                Card(**kwargs_v1)
+
+        # UUID inválido debe ser rechazado
+        invalid_uuids = ["not-a-uuid", "12345", "", "c84d7285-807e-468a-b5a8", None, True]
+        for inv in invalid_uuids:
+            with self.subTest(invalid_uuid=inv):
+                kwargs_inv = self._make_valid_required_kwargs()
+                kwargs_inv["card_id"] = inv
+                with self.assertRaises(ValidationError):
+                    Card(**kwargs_inv)
+
+    def test_22_edition_contract_optional_non_nullable(self):
+        """
+        Obligatorio WHO-006B.1:
+        - omitido → PASS
+        - string válida → PASS
+        - None explícito → FAIL
+        - vacío → FAIL
+        """
+        from whoanimal.domain import Card
+        from whoanimal.core.exceptions import ValidationError
+
+        # Omitido → PASS
+        kwargs = self._make_valid_required_kwargs()
+        card_omitted = Card(**kwargs)
+        self.assertFalse(card_omitted.has_edition)
+        self.assertIsNone(card_omitted.edition)
+
+        # String válida → PASS
+        kwargs_valid = self._make_valid_required_kwargs()
+        kwargs_valid["edition"] = "1st Edition"
+        card_with_edition = Card(**kwargs_valid)
+        self.assertTrue(card_with_edition.has_edition)
+        self.assertEqual(card_with_edition.edition, "1st Edition")
+
+        # None explícito → FAIL
+        kwargs_none = self._make_valid_required_kwargs()
+        kwargs_none["edition"] = None
+        with self.assertRaises(ValidationError):
+            Card(**kwargs_none)
+
+        # Vacío o sólo espacios → FAIL
+        for empty in ["", "   ", "\t\n"]:
+            with self.subTest(empty_edition=empty):
+                kwargs_empty = self._make_valid_required_kwargs()
+                kwargs_empty["edition"] = empty
+                with self.assertRaises(ValidationError):
+                    Card(**kwargs_empty)
+
+    def test_23_artwork_contract_open_type(self):
+        """
+        Obligatorio WHO-006B.1:
+        - omitido → PASS
+        - None → PASS
+        - string → PASS
+        - object → PASS
+        """
+        from whoanimal.domain import Card
+        from whoanimal.core.exceptions import ValidationError
+
+        # Omitido → PASS
+        kwargs = self._make_valid_required_kwargs()
+        card_omitted = Card(**kwargs)
+        self.assertIsNone(card_omitted.artwork)
+
+        # None → PASS
+        kwargs_none = self._make_valid_required_kwargs()
+        kwargs_none["artwork"] = None
+        card_none = Card(**kwargs_none)
+        self.assertIsNone(card_none.artwork)
+
+        # String (URI o ruta) → PASS
+        kwargs_str = self._make_valid_required_kwargs()
+        kwargs_str["artwork"] = "https://assets.whoanimal.org/art/vulpes_oil.webp"
+        card_str = Card(**kwargs_str)
+        self.assertEqual(card_str.artwork, "https://assets.whoanimal.org/art/vulpes_oil.webp")
+
+        # Object (dict o estructura de datos) → PASS
+        artwork_dict = {
+            "uri": "https://assets.whoanimal.org/art/vulpes_oil.webp",
+            "illustrator_name": "Elena Rostova",
+            "commission_year": 2026,
+        }
+        kwargs_obj = self._make_valid_required_kwargs()
+        kwargs_obj["artwork"] = artwork_dict
+        card_obj = Card(**kwargs_obj)
+        self.assertEqual(card_obj.artwork, artwork_dict)
+
+        # String vacía → FAIL
+        kwargs_empty = self._make_valid_required_kwargs()
+        kwargs_empty["artwork"] = "   "
+        with self.assertRaises(ValidationError):
+            Card(**kwargs_empty)
+
+    def test_24_serialization_contract_details(self):
+        """
+        Obligatorio WHO-006B.1:
+        - edition omitido → no aparece como null (se omite la clave)
+        - edition=None en dict → FAIL en from_dict
+        - artwork=None → permitido
+        - visual_effects omitido → []
+        - verification_status omitido → UNVERIFIED
+        """
+        from whoanimal.domain import Card, VerificationStatus
+        from whoanimal.core.exceptions import ValidationError
+
+        kwargs = self._make_valid_required_kwargs()
+        card = Card(**kwargs)
+        data = card.to_dict()
+
+        # edition omitido no aparece como null
+        self.assertNotIn("edition", data)
+
+        # edition=None en from_dict debe fallar
+        dict_with_none_edition = dict(data)
+        dict_with_none_edition["edition"] = None
+        with self.assertRaises(ValidationError):
+            Card.from_dict(dict_with_none_edition)
+
+        # artwork=None permitido en serialización y deserialización
+        self.assertIn("artwork", data)
+        self.assertIsNone(data["artwork"])
+        restored_artwork = Card.from_dict(data)
+        self.assertIsNone(restored_artwork.artwork)
+
+        # visual_effects omitido inicializa en []
+        self.assertEqual(card.visual_effects, [])
+        self.assertEqual(data["visual_effects"], [])
+        self.assertEqual(restored_artwork.visual_effects, [])
+
+        # verification_status omitido inicializa en UNVERIFIED
+        self.assertEqual(card.verification_status, VerificationStatus.UNVERIFIED)
+        self.assertEqual(data["verification_status"], "UNVERIFIED")
+        self.assertEqual(restored_artwork.verification_status, VerificationStatus.UNVERIFIED)
+
+        # verification_status=None en from_dict debe fallar
+        dict_with_none_vs = dict(data)
+        dict_with_none_vs["verification_status"] = None
+        with self.assertRaises(ValidationError):
+            Card.from_dict(dict_with_none_vs)
+
+        # visual_effects=None en from_dict debe fallar
+        dict_with_none_ve = dict(data)
+        dict_with_none_ve["visual_effects"] = None
+        with self.assertRaises(ValidationError):
+            Card.from_dict(dict_with_none_ve)
+
+    def test_25_rank_open_type_int_and_str(self):
+        """Verifica que rank acepte tipo abierto (int y str) y rechace bool o None."""
+        from whoanimal.domain import Card
+        from whoanimal.core.exceptions import ValidationError
+
+        kwargs = self._make_valid_required_kwargs()
+
+        # int válido
+        kwargs["rank"] = 42
+        c_int = Card(**kwargs)
+        self.assertEqual(c_int.rank, 42)
+
+        # str válido
+        kwargs["rank"] = "Gran Maestro"
+        c_str = Card(**kwargs)
+        self.assertEqual(c_str.rank, "Gran Maestro")
+
+        # None falla
+        kwargs["rank"] = None
+        with self.assertRaises(ValidationError):
+            Card(**kwargs)
+
+        # bool falla
+        kwargs["rank"] = True
+        with self.assertRaises(ValidationError):
+            Card(**kwargs)
+
+    def test_26_display_location_anti_gps_protection(self):
+        """Verifica que display_location rechace coordenadas GPS exactas para salvaguardar privacidad."""
+        from whoanimal.domain import Card
+        from whoanimal.core.exceptions import ValidationError
+
+        kwargs = self._make_valid_required_kwargs()
+
+        # Ubicación general válida → PASS
+        valid_locations = [
+            "Parque Nacional de Doñana, España",
+            "Selva Amazónica, Brasil",
+            "Región Andina",
+            None,
+        ]
+        for loc in valid_locations:
+            with self.subTest(valid_loc=loc):
+                kwargs["display_location"] = loc
+                c = Card(**kwargs)
+                self.assertEqual(c.display_location, loc)
+
+        # Coordenadas exactas → FAIL
+        forbidden_locations = [
+            "40.416775, -3.703790",
+            "-12.046374, -77.042793",
+            "lat: 40.4168, lon: -3.7038",
+            "latitude=51.5074, longitude=-0.1278",
+        ]
+        for forbidden in forbidden_locations:
+            with self.subTest(forbidden_loc=forbidden):
+                kwargs["display_location"] = forbidden
+                with self.assertRaises(ValidationError):
+                    Card(**kwargs)
 
 
 if __name__ == "__main__":
     unittest.main()
+
 
