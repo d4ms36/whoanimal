@@ -136,8 +136,15 @@ Cada tarea u objetivo debe documentarse utilizando la siguiente ficha estructura
 ### WHO-005B-E.1: Cierre Semántico de rank y rarity
 * **Propósito:** Corregir y precisar las definiciones de `rank` y `rarity`: establecer que las listas de tiers de rareza son ejemplos no contractuales (curvas pendientes en DEC-022-PENDING), delimitar `rank` a la progresión/experiencia del usuario sin implicación biológica ni de combate, y consagrar la ortogonalidad absoluta e independencia bidireccional entre ambos conceptos (`rank ≠ rarity`).
 * **Estado:** `APPROVED_COMPLETE`
-* **Commit:** `4ce53d5` (*docs(card): clarify rank and rarity semantics*)
+* **Commit:** `8844010` (*docs(card): clarify rank and rarity semantics*)
 * **Versión:** `0.0.1`
+
+### WHO-006A: Definición Formal de Tipos y Obligatoriedad de los 19 Campos de Card
+* **Propósito:** Formalizar documentalmente el contrato técnico de tipos, obligatoriedad (required/optional), nullability, valores por defecto e inmutabilidad de los 19 campos canónicos de `Card`, estableciendo las reglas de validación precisas sin inventar taxonomías de tiers ni mecánicas de progresión pendientes.
+* **Estado:** `APPROVED_COMPLETE`
+* **Commit:** `7f7208e` (*docs(card): formalize field types and requiredness*)
+* **Versión:** `0.0.1`
+
 
 
 

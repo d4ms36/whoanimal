@@ -15,12 +15,12 @@
 | **Fase actual** | Alpha |
 | **Versión actual** | `0.0.1` |
 | **Estado** | Foundation |
-| **Objetivo activo** | Ninguno (Ciclo WHO-005B-E.1 completado; listo para revisión de PM) |
-| **Último objetivo completado** | `WHO-005B-E.1` — Cierre semántico de `rank` y `rarity` (ortogonalidad y ejemplos no contractuales) |
-| **Próximo objetivo propuesto** | `WHO-005B-B` — Validación de Esquemas y Serialización JSON |
+| **Objetivo activo** | Ninguno (Ciclo WHO-006A completado; listo para revisión de PM) |
+| **Último objetivo completado** | `WHO-006A` — Definición formal de tipos y obligatoriedad de los 19 campos de Card |
+| **Próximo objetivo propuesto** | `WHO-006B` — Modelado formal de esquemas (Pydantic / Dataclasses) |
 | **Bloqueos** | Ninguno |
 | **Decisiones pendientes** | `DEC-009` a `DEC-012`, `DEC-020` a `DEC-025`, `DEC-037-PENDING` |
-| **Último commit** | `4ce53d5` |
+| **Último commit** | `7f7208e` |
 | **Última actualización** | 2026-09-06 |
 
 ---
@@ -61,8 +61,9 @@ $$\text{FASE} . \text{CORRECCIONES} . \text{ITERACIÓN}$$
 | **WHO-005C.1**| Definición conceptual de `sex` en Animal/Capture | `COMPLETADO` | Alta | 0.0.1 | Sí |
 | **WHO-005B-E**| Auditoría semántica final de la estructura `Card` | `COMPLETADO` | Alta | 0.0.1 | Sí |
 | **WHO-005B-E.1**| Cierre semántico de `rank` y `rarity` | `COMPLETADO` | Alta | 0.0.1 | Sí |
-| **WHO-005B-B**| Validación de Esquemas y Serialización JSON | `PROPUESTO` | Alta | 0.0.1 | No |
-| **WHO-006** | Banco de Datos Inicial de Fauna (Semilla Educativa) | `PROPUESTO` | Media | 0.0.1 | No |
+| **WHO-006A**| Definición formal de tipos y obligatoriedad de los 19 campos de Card | `COMPLETADO` | Alta | 0.0.1 | Sí |
+| **WHO-006B**| Modelado formal de esquemas (Pydantic / Dataclasses) | `PROPUESTO` | Alta | 0.0.1 | No |
+| **WHO-007** | Banco de Datos Inicial de Fauna (Semilla Educativa) | `PROPUESTO` | Media | 0.0.1 | No |
 
 ---
 
@@ -134,8 +135,9 @@ Ordenados por prioridad técnica y estratégica.
 | **WHO-005C.1**| `APROBADO` | `VALIDADO` | `COMPLETADO` | `APPROVED_COMPLETE` |
 | **WHO-005B-E**| `APROBADO` | `VALIDADO` | `COMPLETADO` | `APPROVED_COMPLETE` |
 | **WHO-005B-E.1**| `APROBADO` | `VALIDADO` | `COMPLETADO` | `APPROVED_COMPLETE` |
-| **WHO-005B-B**| *PENDIENTE* | `PLANIFICADO` | `EN ESPERA` | `PROPOSED` |
-| **WHO-006** | *PENDIENTE* | *EN EVALUACIÓN* | `EN ESPERA` | `PROPOSED` |
+| **WHO-006A**| `APROBADO` | `VALIDADO` | `COMPLETADO` | `APPROVED_COMPLETE` |
+| **WHO-006B**| *PENDIENTE* | `PLANIFICADO` | `EN ESPERA` | `PROPOSED` |
+| **WHO-007** | *PENDIENTE* | *EN EVALUACIÓN* | `EN ESPERA` | `PROPOSED` |
 
 > **Regla:** El Developer no puede auto-aprobar objetivos. La autorización debe ser explícita por parte del Director Creativo y estructurada por el Project Manager.
 
@@ -228,6 +230,7 @@ Para prevenir el desvío del alcance (*scope creep*) y asegurar una base sólida
 | **2026-09-06** | Definición conceptual de `sex` en Animal/Capture (DEC-036) | Atribuir sexo biológico a Capture/Specimen y desacoplarlo del modelo zoológico Animal | Director / PM (`WHO-005C.1`) |
 | **2026-09-06** | Auditoría semántica final de la estructura `Card` (19 campos canónicos) | Consolidación y cierre de los 19 campos y 6 módulos funcionales antes de la serialización | Director / PM (`WHO-005B-E`) |
 | **2026-09-06** | Cierre semántico de `rank` y `rarity` (ortogonalidad y ejemplos no contractuales) | Delimitar estrictamente rank (mutable/progresión) y rarity (inmutable/emisión) | Director / PM (`WHO-005B-E.1`) |
+| **2026-09-06** | Definición formal de tipos, obligatoriedad y nullability de los 19 campos de Card | Establecer contrato tipológico vinculante previo a la implementación de esquemas | Director / PM (`WHO-006A`) |
 
 ---
 

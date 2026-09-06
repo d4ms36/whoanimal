@@ -48,9 +48,11 @@
   * Auditoría y cierre conceptual de los 19 campos y 6 módulos funcionales previa a la serialización formal de esquemas.
 * **`WHO-005B-E.1` — Cierre Semántico de `rank` y `rarity`** `[APPROVED_COMPLETE]`
   * Delimitación estricta de `rarity` (inmutable/emisión, ejemplos de tiers no contractuales) y `rank` (mutable/progresión, sin fórmulas ni implicaciones zoológicas).
-* **`WHO-005B-B` — Validación de Esquemas y Serialización JSON (Planificado)** `[PLANNED]`
-  * Definición de esquemas de exportación/importación JSON estandarizados para cartas y perfiles biológicos (con Pydantic / dataclasses).
-* **`WHO-006` — Banco de Datos Inicial de Fauna (Semilla Educativa)** `[PROPOSED]`
+* **`WHO-006A` — Definición Formal de Tipos y Obligatoriedad de los 19 Campos de Card** `[APPROVED_COMPLETE]`
+  * Formalización contractual de tipos técnicos, requiredness, nullability, defaults e inmutabilidad previa a la implementación de modelos.
+* **`WHO-006B` — Modelado Formal de Esquemas (Pydantic / Dataclasses) (Planificado)** `[PLANNED]`
+  * Implementación y validación de esquemas de datos serializados para `Card` estructurados en los 6 módulos canónicos.
+* **`WHO-007` — Banco de Datos Inicial de Fauna (Semilla Educativa)** `[PROPOSED]`
   * Creación de un conjunto inicial de especímenes reales verificados (mamíferos, aves, reptiles) con información científica completa y Lore demarcado.
 * **`WHO-007` — Prototipo del Servicio de Generación de Cartas** `[PROPOSED]`
   * Implementación del generador de cartas en base al protocolo `CardGeneratorService`.
