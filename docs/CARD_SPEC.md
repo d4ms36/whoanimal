@@ -43,76 +43,99 @@
 
 ---
 
-## 3. Estructura de Campos y Metadatos
+## 3. Estructura Conceptual de Campos (19 Campos Oficiales)
 
-### 3.1. Metadatos de Sistema e Identidad Histórica (`CardMetadata`)
-* `card_id` (str): Identificador universal inmutable de sistema (ej. UUIDv4 `550e8400-e29b-41d4-a716-446655440000`).
-* `specimen_number` (int / str): Número de espécimen visible y legible para el coleccionista (ej. `#0042`).
-* `animal_id` (str): Identificador único del perfil biológico del animal asociado (ej. `animal_panthera_onca`).
-* `card_code` (str): Código amigable de exhibición (ej. `WA-MAM-0042`).
-* `created_at` (datetime / ISO 8601): Fecha y hora exacta de emisión original.
-* `edition` (str, opcional): Edición de la tirada (ej. `"1st Edition"`, `"Standard"`).
-* `generation` (str): Generación histórica de emisión (ej. `"genesis"`, `"gen_1"`).
-* `population_at_issuance` (int, >= 1): Cantidad acumulada de Cards válidamente emitidas para esta especie (`animal_id`) en WHO Animal hasta el momento exacto de emisión de la carta (incluyendo a la carta actual como el ejemplar N). *(DEC-033; alias histórico: `population_at_issue`).*
-* `auth_serial` (str): Serial alfanumérico visible discreto para trazabilidad y anclaje de autenticación.
-* `schema_version` (str): Versión independiente del esquema de datos (ej. `"1.0"`).
-* `is_collectible` (bool): Si la carta está desbloqueada y pertenece a la colección.
-* `rarity_tier` (enum): Nivel de rareza de colección asignado (`COMMON`, `UNCOMMON`, `RARE`, `EPIC`, `LEGENDARY`).
-* `owner_id` (str): Identificador del usuario propietario actual *(atributo mutable mediante intercambio o comercio futuro sin afectar los metadatos históricos de emisión)*.
-* `verification_status` (enum, requerido con valor inicial `UNVERIFIED` en schema actual / `null` reservado a compatibilidad histórica): Estado actual de autenticación y validez certificado por la autoridad oficial (`UNVERIFIED`, `VERIFIED`, `FLAGGED`, `REVOKED`). Nombre canónico oficial que reemplaza a `verification`. Atributo mutable que no altera la identidad histórica de la carta *(DEC-034, DEC-035)*.
-* `specimen_sex` (enum, opcional / proyectado de Capture, valores: `MALE`, `FEMALE`, `UNKNOWN`): Sexo biológico del individuo observado proyectado para exhibición desde el registro de `Capture` de origen (`DEC-036`). No forma parte de la entidad `AnimalProfile` (especie) y su fuente primaria de verdad reside en la captura.
+La entidad `Card` se estructura conceptualmente en 6 módulos funcionales que comprenden exactamente 19 campos canónicos:
+
+```text
+CARD
+│
+├── identity
+│   ├── card_id
+│   ├── animal_id
+│   ├── specimen_number
+│   └── schema_version
+│
+├── issuance
+│   ├── edition
+│   ├── generation
+│   ├── issued_at
+│   ├── population_at_issuance
+│   └── rarity
+│
+├── provenance
+│   ├── capture_id
+│   ├── identification_method
+│   └── identification_confidence
+│
+├── presentation
+│   ├── rank
+│   ├── display_location
+│   ├── visual_effects
+│   └── artwork
+│
+├── ownership
+│   └── owner_id
+│
+└── authentication
+    ├── serial
+    └── verification_status
+```
+
+### 3.1. Detalle de Campos por Módulo
+
+#### A. Identidad (`identity`)
+* `card_id` (str, UUIDv4): Identificador técnico universal e inmutable de sistema para persistencia e integridad relacional.
+* `animal_id` (str): Llave foránea inmutable hacia el perfil zoológico/taxonómico universal de la especie (`AnimalProfile`). Respeta `Animal ≠ Card`.
+* `specimen_number` (int / str): Número visible de espécimen legible para el coleccionista (ej. `#0042`, *DEC-031*).
+* `schema_version` (str): Versión del contrato de datos de la carta (ej. `"1.0"`, *DEC-019*), totalmente desacoplada de la versión de la app móvil.
+
+#### B. Emisión (`issuance`) — Inmutables Históricos
+* `edition` (str, opcional): Edición o serie de colección de la tirada (ej. `"1st Edition"`, `"Standard"`, `"Fundadores"`).
+* `generation` (str): Generación histórica del sistema (ej. `"genesis"`, `"gen_1"`, *DEC-017*).
+* `issued_at` (datetime / ISO 8601 UTC): Marca temporal exacta de acuñación/emisión oficial de la carta. *(Nombre canónico oficial; alias histórico: `created_at`)*.
+* `population_at_issuance` (int, $\ge 1$): Conteo acumulado de cartas emitidas válidamente para esa especie (`animal_id`) al momento exacto de emisión (*DEC-033*).
+* `rarity` (enum): Nivel cualitativo de rareza de colección (`COMMON`, `UNCOMMON`, `RARE`, `EPIC`, `LEGENDARY`). Desacoplado de rareza biológica (*DEC-016*). *(Alias de tipo: `rarity_tier`)*.
+
+#### C. Procedencia (`provenance`) — Inmutables Históricos
+* `capture_id` (str): Llave foránea hacia el evento de observación de campo (`Capture`) que originó la carta.
+* `identification_method` (str): Metodología o modelo de visión empleado para clasificar la especie (ej. `"onnx_local_v1"`, `"cloud_vision"`, `"manual_curator"`).
+* `identification_confidence` (float, 0.0 - 1.0, opcional/nullable): Nivel cuantitativo de confianza probabilística devuelto por el método de identificación. Nullable si el método no produce score. Prohibido inventar datos.
+
+#### D. Presentación y Experiencia (`presentation`)
+* `rank` (int, mutable): Rango dinámico o nivel de progresión y maestría de la carta. Desacoplado de `rarity` (*DEC-032*).
+* `display_location` (str): Ubicación geográfica pública generalizada (país, región, bioma) para salvaguardar la privacidad del usuario y la fauna protegida (*DEC-030*). Coherente con `Capture` pero sin exponer GPS exacto.
+* `visual_effects` (str / dict, mutable): Efectos cosméticos especiales (foil, marcos holográficos, texturas). Desacoplados de datos biológicos (*DEC-032*).
+* `artwork` (str / URI / objeto, opcional / mutable): Capa de ilustración artística única de encargo con ilustradores (*DEC-028*). No sustituye información zoológica ni identidad histórica.
+
+#### E. Posesión (`ownership`)
+* `owner_id` (str, mutable): Identificador del usuario custodio o propietario actual. Se actualiza en transferencias/intercambios sin alterar la identidad histórica (*DEC-027*).
+
+#### F. Autenticación (`authentication`)
+* `serial` (str, inmutable): Serial visible acuñado en la carta para trazabilidad visual y anclaje ante el servicio oficial (*DEC-018*). *(Alias descriptivo: `auth_serial`)*.
+* `verification_status` (enum, mutable): Estado actual de autenticación (`UNVERIFIED`, `VERIFIED`, `FLAGGED`, `REVOKED`, `null` reservado a schemas previos) respaldado por la autoridad oficial de WHO Animal (*DEC-034, DEC-035*).
+
+#### Campo Proyectado Adicional (Límite Ontológico)
+* `specimen_sex` (enum, opcional / proyectado de `Capture`, valores: `MALE`, `FEMALE`, `UNKNOWN`): Sexo biológico del individuo observado proyectado para exhibición desde el registro de `Capture` de origen (*DEC-036*). Reside formalmente en `Capture` (`sex ∈ Capture`, `sex ∉ Animal`) y la Card actúa únicamente como capa de proyección visual sin ser la fuente primaria de verdad.
 
 ---
 
-### 3.2. Frente de la Carta (`CardFront`)
-* `image_uri` (str): Ruta local o remota de la fotografía de avistamiento o del arte representativo.
-* `common_name` (str): Nombre popular principal en el idioma del usuario (ej. *"Jaguar"*).
-* `scientific_name_secondary` (str): Nombre binomial en latín en formato secundario/cursiva (ej. *"Panthera onca"*).
-* `category` (enum): Categoría zoológica elemental (`MAMMAL`, `BIRD`, `REPTILE`, `AMPHIBIAN`, `FISH`, `INVERTEBRATE`).
-* `visual_theme` (str): Tema estético del marco influenciado por la rareza (ej. `"emerald_foil"`, `"mythic_gold"`).
-* `specimen_display` (str): Representación visible del número de espécimen (ej. `"Specimen #0042"`).
-* `auth_serial_display` (str): Representación tipográfica reducida del serial en el borde inferior.
-* `custom_artwork` (opcional): Capa visual adicional de ilustración personalizada (ver sección 6).
+### 3.2. Proyección en Interfaz: Frente y Reverso (`CardFront` / `CardBack`)
 
----
+Los 19 campos conceptuales se proyectan visualmente en las dos caras de la carta:
 
-### 3.3. Reverso de la Carta (`CardBack`)
+#### Frente de la Carta (`CardFront`)
+* Visual y de atracción: `artwork` / `image_uri`, `specimen_number`, `serial` (visible en borde inferior), `visual_effects`, `rank` y proyección taxonómica desde `AnimalProfile` (`common_name`, `scientific_name_secondary`, `category`).
 
-#### A. Información Científica Factual (`ScientificData`)
-* `description` (str): Resumen conciso, accesible y educativo del animal (máx. 200 caracteres recomendados).
-* `habitat` (str): Ecosistema característico (ej. *"Selvas tropicales y humedales"*).
-* `distribution` (str): Región geográfica natural amplia (ej. *"América del Sur y Central"*).
-* `display_location` (str): Ubicación geográfica pública generalizada del avistamiento (ej. *"Costa Rica"* o *"Península Ibérica"*).
-* `diet` (str): Clasificación trófica y presas usuales (ej. *"Carnívoro oportunista"*).
-* `behavior` (str): Patrones notables de actividad (ej. *"Solitario, crepuscular, excelente nadador"*).
-* `size` (str): Medidas típicas de longitud / altura (ej. *"1.1 a 1.8 m de longitud corporal"*).
-* `weight` (str, opcional): Rango de masa corporal cuando sea relevante (ej. *"55 a 100 kg"*).
-* `sources` (list[str]): Referencias de fuentes biológicas (ej. `["UICN Red List", "GBIF"]`).
-
-#### B. Indicadores Secundarios (`ConservationIndicators`)
-* `is_protected` (bool): `True` si la especie cuenta con estatus de protección legal/ambiental.
-* `is_rare_species` (bool): `True` si es de avistamiento biológicamente inusual o baja densidad en la naturaleza.
-
-#### C. Sección de Seguridad (`DangerAssessment` - Condicional)
-* `has_notice` (bool): Determina si se renderiza el bloque de seguridad.
-* `level` (enum): `NONE`, `PRECAUTION` (⚠️ Precaución), `DANGER` (⚠️ Peligro).
-* `notice_text` (str): Mensaje preventivo, educativo y ponderado (ej. *"⚠️ Precaución: Depredador de gran fuerza. Mantener estricta distancia de seguridad en áreas silvestres."*).
-* `risk_factors` (list[str]): Etiquetas descriptivas (`venomous`, `territorial`, `bite_risk`, etc.).
-
-#### D. Curiosidades (`Curiosities`)
-* Colección de 1 a 3 micro-datos sorprendentes y verídicos sobre la adaptación o biología de la especie.
-
-#### E. Lore Narrativo (`LoreProfile` - Capa Independiente)
-* `title` (str): Título de fábula, mito o arquetipo (ej. *"La Sombra de los Cenotes"*).
-* `narrative` (str): Micro-relato fantástico contextualizado en el universo de Who Animal.
-* `disclaimer_tag` (str): Marca de agua o etiqueta fija: *"Contenido narrativo ficticio / Who Animal Lore"*.
+#### Reverso de la Carta (`CardBack`)
+* Educativo y formativo: `display_location`, información científica factual de `AnimalProfile` (hábitat, dieta, comportamiento, tamaño, conservación, advertencias ponderadas) y la capa independiente de `LoreProfile` con marca de ficción.
 
 ---
 
 ## 4. Principio de Inmutabilidad Post-Emisión y Transferencia
 
-* Las propiedades históricas de una carta (`card_id`, `specimen_number`, `generation`, `population_at_issuance`, `rarity_tier`, `auth_serial`, `edition` y `created_at`) quedan estrictamente congeladas tras su emisión.
-* **El cambio de propietario mediante intercambio o comercio futuro NO altera estas propiedades.** El traspaso únicamente actualiza el campo de posesión (`owner_id`) e historial de custodia, manteniendo intacto el valor histórico de la pieza.
+* Las propiedades históricas de una carta (`card_id`, `animal_id`, `specimen_number`, `schema_version`, `edition`, `generation`, `issued_at`, `population_at_issuance`, `rarity`, `capture_id`, `identification_method`, `identification_confidence` y `serial`) quedan estrictamente congeladas tras su emisión.
+* **El cambio de propietario mediante intercambio o comercio futuro NO altera estas propiedades.** El traspaso únicamente actualiza el campo de posesión (`owner_id`) e historial de custodia, manteniendo intacto el valor histórico de la pieza (*DEC-027*).
 
 ### 4.1. Semántica Formal y Alcance de `population_at_issuance` (DEC-033)
 

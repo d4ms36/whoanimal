@@ -44,6 +44,8 @@
   * Formalización definitiva del nombre canónico, estado inicial `UNVERIFIED` y reserva de `null` para compatibilidad histórica (DEC-035).
 * **`WHO-005C.1` — Definición Conceptual de `sex` en Animal/Capture** `[APPROVED_COMPLETE]`
   * Delimitación ontológica del sexo biológico en Capture/Specimen y desacoplamiento del modelo taxonómico Animal (DEC-036).
+* **`WHO-005B-E` — Auditoría Semántica Final de la Estructura `Card`** `[APPROVED_COMPLETE]`
+  * Auditoría y cierre conceptual de los 19 campos y 6 módulos funcionales previa a la serialización formal de esquemas.
 * **`WHO-005B-B` — Validación de Esquemas y Serialización JSON (Planificado)** `[PLANNED]`
   * Definición de esquemas de exportación/importación JSON estandarizados para cartas y perfiles biológicos (con Pydantic / dataclasses).
 * **`WHO-006` — Banco de Datos Inicial de Fauna (Semilla Educativa)** `[PROPOSED]`

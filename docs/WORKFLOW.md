@@ -124,6 +124,13 @@ Cada tarea u objetivo debe documentarse utilizando la siguiente ficha estructura
 ### WHO-005C.1: Definición Conceptual de sex en Animal/Capture
 * **Propósito:** Formalizar la delimitación ontológica de `sex` asignándolo a `Capture / Specimen` y excluyéndolo del modelo taxonómico `Animal` (DEC-036), definiendo los valores `MALE`, `FEMALE` y `UNKNOWN`, la regla anti-inferencia y la proyección visual en `Card`.
 * **Estado:** `APPROVED_COMPLETE`
-* **Commit:** `a2f89cb` (*docs(domain): define biological sex at capture level*)
+* **Commit:** `a66f069` (*docs(domain): define biological sex at capture level*)
 * **Versión:** `0.0.1`
+
+### WHO-005B-E: Auditoría Semántica Final de la Estructura Card
+* **Propósito:** Realizar una auditoría semántica exhaustiva de los 19 campos conceptuales de la entidad `Card` distribuidos en 6 módulos funcionales (`identity`, `issuance`, `provenance`, `presentation`, `ownership`, `authentication`), verificando inmutabilidad, mutabilidad, límites ontológicos y ausencia de ambigüedades previo a la implementación de esquemas JSON.
+* **Estado:** `APPROVED_COMPLETE`
+* **Commit:** `2dddd45` (*docs(card): audit final card semantics*)
+* **Versión:** `0.0.1`
+
 
