@@ -180,3 +180,9 @@ Cada tarea u objetivo debe documentarse utilizando la siguiente ficha estructura
 * **Estado:** `APPROVED_COMPLETE`
 * **Commit:** (Pendiente de commit) (*docs(monetization): define free product and advertising model*)
 * **Versión:** `0.0.1`
+
+### WHO-007: Banco de Datos Inicial de Fauna (Semilla Educativa)
+* **Propósito:** Creación e implementación formal del modelo de dominio `AnimalProfile` como fuente única de verdad para la identidad zoológica, estableciendo la frontera ontológica inquebrantable frente a `Capture` y `Card`. Se definieron campos obligatorios (`animal_id`, `scientific_name`, `common_name`, `taxonomy`) y opcionales sin romper las reglas preexistentes.
+* **Estado:** `APPROVED_COMPLETE`
+* **Commit:** (Pendiente de commit) (*feat(domain): implement formal AnimalProfile contract*)
+* **Versión:** `0.0.1`

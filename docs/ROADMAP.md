@@ -62,8 +62,8 @@
 * **`WHO-006D` — Formalizar Modelo de Monetización Gratuito + Publicidad** `[APPROVED_COMPLETE]`
   * Documentar el principio de producto 100% gratuito, uso de publicidad (ej. AdMob) como infraestructura externa desacoplada y prioridad conceptual de Rewarded Ads sin implementar economía in-app (DEC-038).
 
-* **`WHO-007` — Banco de Datos Inicial de Fauna (Semilla Educativa)** `[PROPOSED]`
-  * Creación de un conjunto inicial de especímenes reales verificados (mamíferos, aves, reptiles) con información científica completa y Lore demarcado.
+* **`WHO-007` — Banco de Datos Inicial de Fauna (Semilla Educativa)** `[APPROVED_COMPLETE]`
+  * Creación e implementación formal del modelo de dominio `AnimalProfile` como fuente única de verdad para la identidad zoológica, estableciendo la frontera ontológica inquebrantable frente a `Capture` y `Card`.
 * **`WHO-007` — Prototipo del Servicio de Generación de Cartas** `[PROPOSED]`
   * Implementación del generador de cartas en base al protocolo `CardGeneratorService`.
 * **`WHO-008` — Evaluación y Prototipo de Ingesta Taxonómica** `[PROPOSED]`

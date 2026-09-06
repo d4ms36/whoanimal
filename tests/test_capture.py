@@ -224,7 +224,7 @@ class TestCaptureDomainModel(unittest.TestCase):
         from dataclasses import fields
 
         # 1. AnimalProfile y ScientificInfo no tienen 'sex'
-        animal_field_names = [f.name for f in fields(AnimalProfile)]
+        animal_field_names = list(AnimalProfile._IMMUTABLE_FIELDS)
         scientific_field_names = [f.name for f in fields(ScientificInfo)]
         self.assertNotIn("sex", animal_field_names)
         self.assertNotIn("specimen_sex", animal_field_names)

@@ -54,19 +54,18 @@ class TestDomainModels(unittest.TestCase):
         )
 
         profile = AnimalProfile(
-            id="animal_vulpes_vulpes",
-            category=AnimalCategory.MAMMAL,
-            scientific_info=sci_info,
-            conservation=indicators,
-            danger=danger,
-            curiosities=[curiosity],
+            animal_id="animal_vulpes_vulpes",
+            scientific_name="Vulpes vulpes",
+            common_name="Zorro Rojo",
+            taxonomy={"kingdom": "Animalia", "class": "Mammalia"},
+            conservation_status="LC",
+            is_rare_species=False
         )
 
-        self.assertEqual(profile.scientific_info.common_name, "Zorro Rojo")
-        self.assertEqual(profile.scientific_info.scientific_name, "Vulpes vulpes")
-        self.assertFalse(profile.conservation.is_protected)
-        self.assertTrue(profile.danger.has_warning)
-        self.assertEqual(len(profile.curiosities), 1)
+        self.assertEqual(profile.common_name, "Zorro Rojo")
+        self.assertEqual(profile.scientific_name, "Vulpes vulpes")
+        self.assertEqual(profile.conservation_status, "LC")
+        self.assertFalse(profile.is_rare_species)
 
     def test_lore_separation_and_fictional_nature(self):
         """Verifica que el Lore se mantenga aislado, etiquetado y con advertencia de ficción."""
@@ -95,11 +94,12 @@ class TestDomainModels(unittest.TestCase):
         )
 
         profile = AnimalProfile(
-            id="animal_bubo_bubo",
-            category=AnimalCategory.BIRD,
-            scientific_info=sci_info,
-            conservation=ConservationIndicators(is_protected=True, is_rare_species=False),
-            danger=DangerAssessment(level=DangerLevel.NONE),
+            animal_id="animal_bubo_bubo",
+            scientific_name="Bubo bubo",
+            common_name="Búho Real",
+            taxonomy={"kingdom": "Animalia", "class": "Aves"},
+            conservation_status="Protected",
+            is_rare_species=False
         )
 
         lore = LoreProfile(
@@ -136,9 +136,9 @@ class TestDomainModels(unittest.TestCase):
 
         self.assertEqual(card.metadata.card_code, "WA-AV-0012")
         self.assertEqual(card.front.common_name, "Búho Real")
-        self.assertEqual(card.back.profile.scientific_info.scientific_name, "Bubo bubo")
-        self.assertTrue(card.back.profile.conservation.is_protected)
-        self.assertFalse(card.back.profile.danger.has_warning)
+        self.assertEqual(card.back.profile.scientific_name, "Bubo bubo")
+        self.assertEqual(card.back.profile.conservation_status, "Protected")
+        self.assertFalse(card.back.profile.is_rare_species)
         self.assertIsNotNone(card.back.lore)
         self.assertTrue(card.back.lore.is_fictional)
 

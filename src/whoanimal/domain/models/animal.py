@@ -59,12 +59,90 @@ class ScientificInfo:
     sources: List[str] = field(default_factory=list)
 
 
-@dataclass(frozen=True)
+from typing import Any, Dict, Optional
+from ...core.exceptions import ValidationError
+
+_UNSET = object()
+
 class AnimalProfile:
-    """Perfil biológico completo de un espécimen animal."""
-    id: str
-    category: AnimalCategory
-    scientific_info: ScientificInfo
-    conservation: ConservationIndicators = field(default_factory=ConservationIndicators)
-    danger: DangerAssessment = field(default_factory=DangerAssessment)
-    curiosities: List[Curiosity] = field(default_factory=list)
+    """
+    Entidad de Dominio: Perfil biológico completo de la especie (WHO-007).
+    Representa el conocimiento zoológico, NO un individuo concreto ni una carta.
+    """
+    animal_id: str
+    scientific_name: str
+    common_name: str
+    taxonomy: Dict[str, Any]
+    conservation_status: Optional[str]
+    is_rare_species: Optional[bool]
+    
+    _IMMUTABLE_FIELDS = frozenset({
+        "animal_id", "scientific_name", "common_name", "taxonomy", 
+        "conservation_status", "is_rare_species"
+    })
+
+    def __init__(
+        self,
+        animal_id: Any = _UNSET,
+        scientific_name: Any = _UNSET,
+        common_name: Any = _UNSET,
+        taxonomy: Any = _UNSET,
+        conservation_status: Any = None,
+        is_rare_species: Any = None,
+        **extra_kwargs: Any
+    ):
+        if extra_kwargs:
+            raise ValidationError(
+                f"Unexpected extra fields not permitted in AnimalProfile: {list(extra_kwargs.keys())}"
+            )
+            
+        if animal_id is _UNSET or not isinstance(animal_id, str) or not animal_id.strip():
+            raise ValidationError("Field 'animal_id' is required and must be a non-empty string.")
+        
+        if scientific_name is _UNSET or not isinstance(scientific_name, str) or not scientific_name.strip():
+            raise ValidationError("Field 'scientific_name' is required and must be a non-empty string.")
+            
+        if common_name is _UNSET or not isinstance(common_name, str) or not common_name.strip():
+            raise ValidationError("Field 'common_name' is required and must be a non-empty string.")
+            
+        if taxonomy is _UNSET or not isinstance(taxonomy, dict):
+            raise ValidationError("Field 'taxonomy' is required and must be a dict (object).")
+            
+        if conservation_status is not None and (not isinstance(conservation_status, str) or not conservation_status.strip()):
+            raise ValidationError("Field 'conservation_status' must be a non-empty string if provided.")
+            
+        if is_rare_species is not None and not isinstance(is_rare_species, bool):
+            raise ValidationError("Field 'is_rare_species' must be a boolean if provided.")
+
+        self.animal_id = animal_id.strip()
+        self.scientific_name = scientific_name.strip()
+        self.common_name = common_name.strip()
+        self.taxonomy = taxonomy
+        self.conservation_status = conservation_status.strip() if conservation_status else None
+        self.is_rare_species = is_rare_species
+        
+        object.__setattr__(self, "_initialized", True)
+
+    def __setattr__(self, name: str, value: Any) -> None:
+        if getattr(self, "_initialized", False):
+            raise ValidationError(
+                f"AnimalProfile is immutable after creation: cannot modify attribute '{name}'."
+            )
+        super().__setattr__(name, value)
+        
+    def to_dict(self) -> Dict[str, Any]:
+        result = {
+            "animal_id": self.animal_id,
+            "scientific_name": self.scientific_name,
+            "common_name": self.common_name,
+            "taxonomy": self.taxonomy,
+        }
+        if self.conservation_status is not None:
+            result["conservation_status"] = self.conservation_status
+        if self.is_rare_species is not None:
+            result["is_rare_species"] = self.is_rare_species
+        return result
+        
+    @classmethod
+    def from_dict(cls, data: Dict[str, Any]) -> "AnimalProfile":
+        return cls(**data)
