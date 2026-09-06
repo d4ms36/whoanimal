@@ -95,7 +95,7 @@ CARD
 * `generation` (str): Generación histórica del sistema (ej. `"genesis"`, `"gen_1"`, *DEC-017*).
 * `issued_at` (datetime / ISO 8601 UTC): Marca temporal exacta de acuñación/emisión oficial de la carta. *(Nombre canónico oficial; alias histórico: `created_at`)*.
 * `population_at_issuance` (int, $\ge 1$): Conteo acumulado de cartas emitidas válidamente para esa especie (`animal_id`) al momento exacto de emisión (*DEC-033*).
-* `rarity` (enum): Nivel cualitativo de rareza de colección (`COMMON`, `UNCOMMON`, `RARE`, `EPIC`, `LEGENDARY`). Desacoplado de rareza biológica (*DEC-016*). *(Alias de tipo: `rarity_tier`)*.
+* `rarity` (enum / str): Categoría cualitativa de valor de colección asignada al momento de emisión e históricamente inmutable (*DEC-016*, *DEC-033*). Representa exclusivamente *collection rarity*, totalmente desacoplada de la rareza biológica (`is_rare_species`) y de `rank`. *(Nota contractual vinculante: Denominaciones como `COMMON`, `UNCOMMON`, `RARE`, `EPIC`, `LEGENDARY` constituyen EJEMPLOS NO CONTRACTUALES; la taxonomía formal definitiva de tiers y sus curvas probabilísticas continúan pendientes de aprobación en DEC-022-PENDING. Alias de tipo: `rarity_tier`)*.
 
 #### C. Procedencia (`provenance`) — Inmutables Históricos
 * `capture_id` (str): Llave foránea hacia el evento de observación de campo (`Capture`) que originó la carta.
@@ -103,7 +103,7 @@ CARD
 * `identification_confidence` (float, 0.0 - 1.0, opcional/nullable): Nivel cuantitativo de confianza probabilística devuelto por el método de identificación. Nullable si el método no produce score. Prohibido inventar datos.
 
 #### D. Presentación y Experiencia (`presentation`)
-* `rank` (int, mutable): Rango dinámico o nivel de progresión y maestría de la carta. Desacoplado de `rarity` (*DEC-032*).
+* `rank` (int / str, mutable): Nivel o clasificación dinámica de progresión y maestría de la experiencia del usuario con la carta o espécimen (*DEC-032*). Pertenece al sistema externo de progresión/gamificación, residiendo en `Card` exclusivamente como referencia o proyección de presentación visual. Es mutable y refleja el avance en el descubrimiento y aprendizaje. Desacoplado de `rarity` y de datos biológicos (no representa rareza, calidad zoológica, nivel taxonómico, edad, tamaño ni fuerza del animal). Sin fórmulas, XP, niveles específicos ni combate aprobados en esta fase (quedan diferidos como decisiones futuras).
 * `display_location` (str): Ubicación geográfica pública generalizada (país, región, bioma) para salvaguardar la privacidad del usuario y la fauna protegida (*DEC-030*). Coherente con `Capture` pero sin exponer GPS exacto.
 * `visual_effects` (str / dict, mutable): Efectos cosméticos especiales (foil, marcos holográficos, texturas). Desacoplados de datos biológicos (*DEC-032*).
 * `artwork` (str / URI / objeto, opcional / mutable): Capa de ilustración artística única de encargo con ilustradores (*DEC-028*). No sustituye información zoológica ni identidad histórica.
@@ -156,7 +156,7 @@ Los 19 campos conceptuales se proyectan visualmente en las dos caras de la carta
 * **Relación con `rarity`:**
   * `population_at_issuance` es un **dato cuantitativo histórico de entrada** (input inmutable).
   * `rarity` (o `rarity_tier`) es la **categoría cualitativa de valor de colección** asignada en el instante de emisión en base a dicho input y las reglas/curvas de juego vigentes.
-  * No son equivalentes ni se confunden: una carta con `population_at_issuance = 12` puede recibir `rarity_tier = EPIC` por pertenecer a la tirada temprana de la especie, mientras que una con `population_at_issuance = 20000` recibirá `rarity_tier = COMMON`.
+  * No son equivalentes ni se confunden: a modo de ejemplo puramente ilustrativo y no contractual, una carta con `population_at_issuance = 12` podría recibir una rareza alta (ej. `EPIC`) por pertenecer a la tirada temprana de la especie, mientras que una con `population_at_issuance = 20000` recibiría una rareza base (ej. `COMMON`). Las categorías formales definitivas continúan pendientes de aprobación.
 * **Clasificación y Atributos:**
   ```text
   REQUIRED:        sí
@@ -234,6 +234,33 @@ Los 19 campos conceptuales se proyectan visualmente en las dos caras de la carta
   * La `Card` puede proyectar este dato (`specimen_sex`) para enriquecer la experiencia visual del coleccionista, pero **la fuente primaria inmutable de verdad reside siempre en el registro de captura (`capture_id`)**, sin que la carta sustituya al registro de origen.
 * **Separación de Pilares:**
   * El sexo biológico pertenece estrictamente a **INFORMACIÓN REAL**, quedando prohibida su invención o asignación mediante elementos narrativos de Lore o Experiencia.
+
+### 4.4. Delimitación Semántica y Ortogonalidad de `rank` y `rarity` (DEC-016, DEC-032)
+
+* **Principio Innegociable de Ortogonalidad Absoluta:**
+  $$\text{rank} \neq \text{rarity}$$
+  $$\text{rank alto} \quad \not\Rightarrow \quad \text{rarity alta}$$
+  $$\text{rarity alta} \quad \not\Rightarrow \quad \text{rank alto}$$
+  `rank` y `rarity` pertenecen a dimensiones conceptuales completamente distintas e independientes dentro del ecosistema de WHO Animal:
+  * **`rarity` $\longrightarrow$ Dimensión de Colección y Emisión (Histórica e Inmutable):**
+    * Califica exclusivamente el artefacto coleccionable en el momento exacto de su acuñación/emisión en base a `population_at_issuance` y las reglas del ecosistema (*DEC-016*, *DEC-033*).
+    * Una vez emitida la carta, su `rarity` queda **estrictamente congelada e inmutable de por vida**.
+    * Es totalmente independiente de la rareza biológica (`is_rare_species`) y no representa censos de animales reales en la Tierra (*DEC-016*).
+    * **Ejemplos No Contractuales:** Enumeraciones como `COMMON`, `UNCOMMON`, `RARE`, `EPIC`, `LEGENDARY` constituyen **ejemplos ilustrativos no vinculantes**. La escala definitiva de tiers, sus nombres oficiales, porcentajes, fórmulas y umbrales matemáticos continúan pendientes de aprobación en *DEC-022-PENDING*.
+    * **Restricción de Alcance:** Queda prohibido diseñar en esta etapa fórmulas matemáticas, probabilidades de drop, curvas económicas o monetización.
+  * **`rank` $\longrightarrow$ Dimensión de Progresión y Experiencia (Dinámica y Mutable):**
+    * Califica el avance, maestría, estudio y experiencia del usuario con la carta o espécimen en su viaje continuo de descubrimiento.
+    * Es un atributo **mutable** que evoluciona con la interacción formativa y lúdica del usuario.
+    * Pertenece al sistema externo de progresión/gamificación; reside en `Card` exclusivamente como **referencia o proyección de presentación visual**.
+    * Si la carta es transferida (`owner_id`), el `rank` interactúa según las reglas del sistema de progresión del usuario, pero **jamás altera los metadatos históricos inmutables de emisión de la carta** (*DEC-027*).
+    * **Exclusiones Terminantes (Qué NO representa `rank`):**
+      1. ❌ **NO es rareza:** Una carta de rareza común puede alcanzar el rango más alto mediante dedicación, mientras que una carta recién emitida de máxima rareza nace en rango inicial.
+      2. ❌ **NO es calidad zoológica ni valor biológico:** Ninguna especie ni ejemplar es "superior" o "inferior" biológicamente a otro.
+      3. ❌ **NO es nivel taxonómico:** No representa familia, género, orden ni clado.
+      4. ❌ **NO es la edad del animal físico:** No indica si el animal observado era cría, juvenil o adulto.
+      5. ❌ **NO es tamaño ni peso:** No refleja envergadura, masa corporal ni dimensiones físicas.
+      6. ❌ **NO es fuerza, agresividad ni poder real:** No mide letalidad, potencia física ni estatus de combate.
+    * **Elementos Pendientes de Aprobación Futura:** Queda terminantemente prohibido inventar en esta etapa fórmulas de progresión, curvas de puntos de experiencia (XP), niveles concretos (ej. 1 a 5, estrellas), estadísticas numéricas de enfrentamiento o combate (ataque, defensa, salud) o tablas de recompensas. Todos estos aspectos permanecen explícitamente como decisiones futuras no aprobadas.
 
 ---
 

@@ -497,10 +497,10 @@ Aprobado por: [Director Creativo / Project Manager / Consenso]
 
 ---
 
-### DEC-022-PENDING: Algoritmo Matemático Definitivo y Curvas de Probabilidad para Rareza Dinámica
-* **Tema:** Economía de Juego y Progresión
+### DEC-022-PENDING: Taxonomía Definitiva de Tiers, Algoritmo Matemático y Curvas de Rareza Dinámica
+* **Tema:** Economía de Colección y Progresión
 * **Estado:** `PENDING`
-* **Descripción:** Formulación de la función matemática que mapea la población de registros acumulados a las probabilidades de rareza (Común, Poco común, Rara, Épica, Legendaria / Génesis).
+* **Descripción:** Aprobación de la escala nominal cerrada de tiers de rareza de colección (las denominaciones como Común, Rara, Épica, etc., permanecen como ejemplos no contractuales) y formulación de la función matemática que mapea la población acumulada (`population_at_issuance`) a probabilidades de asignación al momento de emisión.
 * **Decisión requerida de:** Director Creativo / Project Manager
 
 ---
@@ -526,3 +526,11 @@ Aprobado por: [Director Creativo / Project Manager / Consenso]
 * **Estado:** `PENDING`
 * **Descripción:** Protocolo para que los parsers lean cartas generadas en esquemas antiguos (`schema_version: 1.0`) sin corrupción ni pérdida de datos cuando el esquema evolucione a versiones superiores.
 * **Decisión requerida de:** Project Manager / Developer (durante WHO-005)
+
+---
+
+### DEC-037-PENDING: Sistema Definitivo de Progresión, Niveles y Mecánicas de `rank`
+* **Tema:** Gamificación y Progresión de Experiencia
+* **Estado:** `PENDING`
+* **Descripción:** Definición del sistema de progresión y maestría del usuario asociado al campo mutable `rank` de la carta (escalas de nivel, puntos de avance, interacción formativa y aprendizaje), asegurando que no represente atributos biológicos, edad, tamaño ni estadísticas de combate.
+* **Decisión requerida de:** Director Creativo / Project Manager

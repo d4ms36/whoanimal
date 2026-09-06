@@ -130,7 +130,14 @@ Cada tarea u objetivo debe documentarse utilizando la siguiente ficha estructura
 ### WHO-005B-E: Auditoría Semántica Final de la Estructura Card
 * **Propósito:** Realizar una auditoría semántica exhaustiva de los 19 campos conceptuales de la entidad `Card` distribuidos en 6 módulos funcionales (`identity`, `issuance`, `provenance`, `presentation`, `ownership`, `authentication`), verificando inmutabilidad, mutabilidad, límites ontológicos y ausencia de ambigüedades previo a la implementación de esquemas JSON.
 * **Estado:** `APPROVED_COMPLETE`
-* **Commit:** `2dddd45` (*docs(card): audit final card semantics*)
+* **Commit:** `e88e53f` (*docs(card): audit final card semantics*)
 * **Versión:** `0.0.1`
+
+### WHO-005B-E.1: Cierre Semántico de rank y rarity
+* **Propósito:** Corregir y precisar las definiciones de `rank` y `rarity`: establecer que las listas de tiers de rareza son ejemplos no contractuales (curvas pendientes en DEC-022-PENDING), delimitar `rank` a la progresión/experiencia del usuario sin implicación biológica ni de combate, y consagrar la ortogonalidad absoluta e independencia bidireccional entre ambos conceptos (`rank ≠ rarity`).
+* **Estado:** `APPROVED_COMPLETE`
+* **Commit:** `4ce53d5` (*docs(card): clarify rank and rarity semantics*)
+* **Versión:** `0.0.1`
+
 
 

@@ -46,6 +46,8 @@
   * Delimitación ontológica del sexo biológico en Capture/Specimen y desacoplamiento del modelo taxonómico Animal (DEC-036).
 * **`WHO-005B-E` — Auditoría Semántica Final de la Estructura `Card`** `[APPROVED_COMPLETE]`
   * Auditoría y cierre conceptual de los 19 campos y 6 módulos funcionales previa a la serialización formal de esquemas.
+* **`WHO-005B-E.1` — Cierre Semántico de `rank` y `rarity`** `[APPROVED_COMPLETE]`
+  * Delimitación estricta de `rarity` (inmutable/emisión, ejemplos de tiers no contractuales) y `rank` (mutable/progresión, sin fórmulas ni implicaciones zoológicas).
 * **`WHO-005B-B` — Validación de Esquemas y Serialización JSON (Planificado)** `[PLANNED]`
   * Definición de esquemas de exportación/importación JSON estandarizados para cartas y perfiles biológicos (con Pydantic / dataclasses).
 * **`WHO-006` — Banco de Datos Inicial de Fauna (Semilla Educativa)** `[PROPOSED]`

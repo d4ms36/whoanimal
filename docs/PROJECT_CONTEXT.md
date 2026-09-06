@@ -144,12 +144,15 @@ Ante la ausencia de datos en el sistema, se aplica una distinción estricta:
 
 ---
 
-## 9. Desacoplamiento de Rarezas: Biológica vs. Colección
+## 9. Desacoplamiento de Rarezas: Biológica vs. Colección, y Ortogonalidad con `rank`
 
-* **Rareza Biológica:** Refleja la abundancia poblacional, densidad y estado de conservación de una especie en el ecosistema natural real.
-* **Rareza de Colección:** Expresa el valor lúdico, la dificultad de adquisición y la exclusividad de una carta dentro del sistema de coleccionismo de WHO Animal.
+* **Rareza Biológica:** Refleja la abundancia poblacional, densidad y estado de conservación de una especie en el ecosistema natural real (`AnimalProfile.is_rare_species`).
+* **Rareza de Colección (`rarity`):** Expresa el valor lúdico, la dificultad de adquisición y la exclusividad de una carta dentro del sistema de coleccionismo de WHO Animal. Es asignada al momento de emisión e inmutable de por vida. *(Nota: Categorías como Común, Rara o Épica son ejemplos ilustrativos no contractuales; la escala formal y curvas matemáticas permanecen pendientes en DEC-022-PENDING)*.
 * **Efectos Visuales Cosméticos:** La rareza de colección puede inducir modificaciones visuales en el marco, color, brillo o efectos holográficos/foil de la carta, sin guardar relación con la abundancia biológica de la especie en la naturaleza.
-* **Ejemplo ilustrativo:** Un perro doméstico (*Canis lupus familiaris*) es biológicamente muy común y abundante en el planeta; sin embargo, una carta de perro emitida en las primeras horas de vida de la aplicación puede ser un objeto de colección de rareza colosal (*Ultra Rare / Genesis*).
+* **Ejemplo ilustrativo:** Un perro doméstico (*Canis lupus familiaris*) es biológicamente muy común y abundante en el planeta; sin embargo, una carta de perro emitida en las primeras horas de vida de la aplicación puede ser un objeto de colección de rareza colosal (a modo de ejemplo ilustrativo: *Ultra Rare / Genesis*).
+* **Ortogonalidad Estricta con `rank` (`DEC-032`):**
+  $$\text{rank} \ne \text{rarity}$$
+  `rarity` califica la emisión y colección (inmutable); `rank` califica la maestría y progresión del usuario en el descubrimiento (mutable). Un `rank` alto no implica `rarity` alta, ni una carta de alta `rarity` confiere automáticamente un `rank` avanzado. `rank` no representa edad, tamaño, calidad zoológica ni fuerza del animal real, y sus mecánicas de progresión/XP continúan pendientes de diseño.
 
 ---
 
