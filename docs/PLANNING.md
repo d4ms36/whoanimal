@@ -15,12 +15,12 @@
 | **Fase actual** | Alpha |
 | **Versión actual** | `0.0.1` |
 | **Estado** | Foundation |
-| **Objetivo activo** | Ninguno (Ciclo WHO-005B-C completado; listo para revisión de PM) |
-| **Último objetivo completado** | `WHO-005B-C` — Resolución A: Semántica de `population_at_issuance` (DEC-033) |
+| **Objetivo activo** | Ninguno (Ciclo WHO-005B-D completado; listo para revisión de PM) |
+| **Último objetivo completado** | `WHO-005B-D` — Auditoría y resolución de `verification` (DEC-034) |
 | **Próximo objetivo propuesto** | `WHO-005B-B` — Validación de Esquemas y Serialización JSON |
 | **Bloqueos** | Ninguno |
 | **Decisiones pendientes** | `DEC-009` a `DEC-012`, `DEC-020` a `DEC-025` |
-| **Último commit** | `172203d` |
+| **Último commit** | `507e66e` |
 | **Última actualización** | 2026-09-06 |
 
 ---
@@ -56,6 +56,7 @@ $$\text{FASE} . \text{CORRECCIONES} . \text{ITERACIÓN}$$
 | **WHO-005A**| Incorporación de Nuevas Decisiones al Contexto | `COMPLETADO` | Alta | 0.0.1 | Sí |
 | **WHO-005B-A**| Actualización Documental de Capacidades Futuras | `COMPLETADO` | Alta | 0.0.1 | Sí |
 | **WHO-005B-C**| Resolución A: Semántica de `population_at_issuance` | `COMPLETADO` | Alta | 0.0.1 | Sí |
+| **WHO-005B-D**| Auditoría y resolución de `verification` | `COMPLETADO` | Alta | 0.0.1 | Sí |
 | **WHO-005B-B**| Validación de Esquemas y Serialización JSON | `PROPUESTO` | Alta | 0.0.1 | No |
 | **WHO-006** | Banco de Datos Inicial de Fauna (Semilla Educativa) | `PROPUESTO` | Media | 0.0.1 | No |
 
@@ -124,6 +125,7 @@ Ordenados por prioridad técnica y estratégica.
 | **WHO-005A**| `APROBADO` | `VALIDADO` | `COMPLETADO` | `APPROVED_COMPLETE` |
 | **WHO-005B-A**| `APROBADO` | `VALIDADO` | `COMPLETADO` | `APPROVED_COMPLETE` |
 | **WHO-005B-C**| `APROBADO` | `VALIDADO` | `COMPLETADO` | `APPROVED_COMPLETE` |
+| **WHO-005B-D**| `APROBADO` | `VALIDADO` | `COMPLETADO` | `APPROVED_COMPLETE` |
 | **WHO-005B-B**| *PENDIENTE* | `PLANIFICADO` | `EN ESPERA` | `PROPOSED` |
 | **WHO-006** | *PENDIENTE* | *EN EVALUACIÓN* | `EN ESPERA` | `PROPOSED` |
 
@@ -212,6 +214,7 @@ Para prevenir el desvío del alcance (*scope creep*) y asegurar una base sólida
 | **2026-09-06** | Incorporación de decisiones de entidad animal/carta, inmutabilidad, rareza dinámica y serial | Consolidación de memoria y reglas de producto (WHO-005A) | Director / PM (`WHO-005A`) |
 | **2026-09-06** | Incorporación de capacidades futuras (PVP, intercambio, artwork único/ilustradores, privacidad GPS) | Blindaje arquitectónico para esquemas de datos sin cerrar opciones (WHO-005B-A) | Director / PM (`WHO-005B-A`) |
 | **2026-09-06** | Resolución A: Semántica formal y alcance de `population_at_issuance` (DEC-033) | Eliminar ambigüedad entre población zoológica y emisión de cartas en la colección | Director / PM (`WHO-005B-C`) |
+| **2026-09-06** | Auditoría y resolución de `verification` y estados de autenticación (DEC-034) | Formalizar verification_status como CURRENT STATE desacoplado de la identidad | Director / PM (`WHO-005B-D`) |
 
 ---
 

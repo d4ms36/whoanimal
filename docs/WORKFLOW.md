@@ -106,4 +106,10 @@ Cada tarea u objetivo debe documentarse utilizando la siguiente ficha estructura
 ### WHO-005B-C: Resolución A: Semántica de population_at_issuance
 * **Propósito:** Formalizar la definición canónica, alcance (`ANIMAL/SPECIES`), inmutabilidad y relación con rareza de `population_at_issuance` (DEC-033), desacoplándolo de censos biológicos reales y métricas de plataforma.
 * **Estado:** `APPROVED_COMPLETE`
+* **Commit:** `507e66e` (*docs(card): define population at issuance semantics*)
+* **Versión:** `0.0.1`
+
+### WHO-005B-D: Auditoría y Resolución de verification
+* **Propósito:** Resolver la semántica de `verification` (DEC-034), formalizando `verification_status` como campo mutable de estado actual (`UNVERIFIED`, `VERIFIED`, `FLAGGED`, `REVOKED`), desacoplándolo del ancla inmutable `serial` y de la identidad histórica.
+* **Estado:** `APPROVED_COMPLETE`
 * **Versión:** `0.0.1`

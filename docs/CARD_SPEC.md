@@ -59,6 +59,7 @@
 * `is_collectible` (bool): Si la carta está desbloqueada y pertenece a la colección.
 * `rarity_tier` (enum): Nivel de rareza de colección asignado (`COMMON`, `UNCOMMON`, `RARE`, `EPIC`, `LEGENDARY`).
 * `owner_id` (str): Identificador del usuario propietario actual *(atributo mutable mediante intercambio o comercio futuro sin afectar los metadatos históricos de emisión)*.
+* `verification_status` (enum, opcional / nullable): Estado actual de autenticación y validez certificado por la autoridad oficial (`UNVERIFIED`, `VERIFIED`, `FLAGGED`, `REVOKED`). Atributo mutable que no altera la identidad histórica de la carta *(DEC-034)*.
 
 ---
 
@@ -140,6 +141,51 @@
   BIOLOGICAL DATA: no
   COLLECTION DATA: sí
   ```
+
+### 4.2. Semántica Formal y Modelo de `verification` (DEC-034)
+
+* **Definición Canónica:**  
+  `verification` (formalizado en el contrato como **`verification_status`**) es el **campo mutable de estado actual que expresa la condición de autenticidad y validez operativa de la Card certificada por la autoridad oficial de WHO Animal**, siendo estrictamente independiente de la identidad histórica inmutable de emisión anclada en `card_id` y `serial`.
+* **Tipo Conceptual:** **`CURRENT STATE`** (Campo escalar de estado / Enum de dominio) con punto de extensión desacoplado hacia infraestructura externa de auditoría.
+* **Estados Conceptuales Aprobados:**
+  1. `UNVERIFIED` (No verificada): Estado inicial por defecto; la carta ha sido acuñada pero aún no certificada por la autoridad oficial.
+  2. `VERIFIED` (Verificada): Ratificada formalmente por el servicio de autenticación de WHO Animal como registro fidedigno y auténtico.
+  3. `FLAGGED` (En revisión / Sospechosa): Marcada para auditoría por anomalías en telemetría o sospecha de fraude/duplicación.
+  4. `REVOKED` (Revocada / Invalidada): Declarada nula o ilegítima tras auditoría. No borra el registro de la base de datos (se preserva por trazabilidad forense), pero anula toda validez operativa, de colección o de juego oficial.
+* **Transiciones de Estado:**
+  * `UNVERIFIED` $\rightarrow$ `VERIFIED` (tras validación oficial).
+  * `UNVERIFIED` o `VERIFIED` $\rightarrow$ `FLAGGED` (al detectar anomalías o reportes de abuso).
+  * `FLAGGED` $\rightarrow$ `VERIFIED` (auditoría confirma legitimidad).
+  * `FLAGGED` $\rightarrow$ `REVOKED` (auditoría confirma fraude). Estado terminal.
+* **Obligatoriedad y Nullability:**
+  * `REQUIRED: no` (la carta existe y opera como artefacto de colección en Fase 0 sin depender de un servicio de autenticación conectado).
+  * `OPTIONAL: sí`.
+  * `NULLABLE: sí` (admite `null` para reflejar ausencia de servicio de verificación, inicializándose conceptualmente en `UNVERIFIED`).
+* **Mutabilidad y Clasificación del Atributo:**
+  ```text
+  REQUIRED:        no
+  IMMUTABLE:       no (es mutable)
+  HISTORICAL:      no (refleja el estado presente)
+  CURRENT STATE:   sí
+  BIOLOGICAL DATA: no
+  SECURITY/STATUS: sí
+  ```
+* **Fuente de Verdad:**
+  El **Verification Service / Authority** de WHO Animal. La carta no es su propia autoridad y el cliente móvil no puede auto-certificarse como `VERIFIED` unilateralmente.
+* **Relación con otros Identificadores:**
+  * **Con `card_id`:** `card_id` es la identidad técnica universal inmutable; `verification_status` es una propiedad mutable que califica su estado de validez.
+  * **Con `serial`:** `serial` (`auth_serial`) es el ancla visible inmutable acuñada en la carta. El usuario o sistema consulta el `serial` ante el servicio para obtener el `verification_status` actual. El `serial` es la llave/ancla de consulta; `verification_status` es el estado actual retornado.
+  * **Con `owner_id`:** El traspaso de propiedad actualiza `owner_id` pero **no altera la identidad histórica ni revoca el estado de verificación** si la transferencia es legítima. La verificación certifica la autenticidad del artefacto zoológico, no la persona que lo custodia.
+* **Exclusiones Terminantes (Qué NO significa):**
+  1. ❌ **NO es la identidad de la carta:** La carta conserva su identidad histórica inmutable aunque su estado sea `UNVERIFIED` o `REVOKED`.
+  2. ❌ **NO es el `serial` ni lo sustituye:** El serial es un ancla alfanumérica fija; `verification` es una condición mutable.
+  3. ❌ **NO almacena credenciales ni claves privadas:** Prohibido guardar secretos o claves de firma en la carta.
+  4. ❌ **NO almacena datos personales (PII):** No contiene nombres, correos ni perfiles de usuarios.
+  5. ❌ **NO almacena telemetría GPS privada:** La privacidad del usuario y de la fauna silvestre se mantiene según `DEC-030`.
+  6. ❌ **NO es un log histórico acumulativo incrustado:** No infla el payload de la carta con listas de auditorías.
+  7. ❌ **NO es un mecanismo propietario rígido:** Es agnóstico a la tecnología de autenticación subyacente.
+* **Neutralidad hacia Tecnologías Futuras:**
+  Cualquier mecanismo futuro (códigos QR, chips NFC, APIs REST, firmas criptográficas PKI o anclajes en blockchain) interactúa con la infraestructura de seguridad externa y se proyecta limpiamente en la carta como una actualización de su `verification_status`, sin romper el contrato base ni corromper los datos históricos inmutables.
 
 ---
 

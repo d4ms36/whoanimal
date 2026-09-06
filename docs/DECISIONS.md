@@ -312,6 +312,68 @@ Aprobado por: [Director Creativo / Project Manager / Consenso]
 
 ---
 
+### DEC-034: Definición Canónica, Semántica y Modelo de `verification`
+* **Tema:** Dominio de Cartas, Autenticación y Seguridad
+* **Fecha:** 2026-09-06
+* **Estado:** `APPROVED`
+* **Problema:** Existía ambigüedad sobre si `verification` debía ser un identificador redundante, un objeto complejo de auditoría forense con firmas y timestamps, o un estado actual, con riesgo de acoplar prematuramente el contrato de `Card` a tecnologías de seguridad específicas o de inflar el payload de datos.
+* **Alternativas Auditadas:**
+  * **A (Estado de verificación simple):** Campo enum escalar (`UNVERIFIED`, `VERIFIED`, `FLAGGED`, `REVOKED`). Ligero, mutable, sin duplicidad.
+  * **B (Evidencia histórica incrustada):** Estructura con `verified_at`, `verified_by`, `method`, `reference`. *Descartada:* Mezcla artefacto de colección con auditoría de infraestructura y fuerza componentes prematuros.
+  * **C (Identificador/Token de verificación):** Token de validación. *Descartada:* Duplica innecesariamente las funciones ya cubiertas por `card_id` (identidad técnica) y `serial` (trazabilidad visible).
+  * **D (Objeto completo de autenticación con firmas y PKI):** *Descartada:* Viola Clean Architecture y sobrecarga la app cliente en Fase 0.
+  * **E (Referencia externa pura):** URI obligatorio a servidor externo. *Descartada:* Rompe la operación offline y acopla a infraestructura de red.
+  * **F (Solución Integral Canónica — CURRENT STATE Desacoplado):** `verification` modelado formalmente como campo de estado actual de validez (`verification_status`), respaldado por un servicio de verificación externo sin incrustar logs pesados en la carta. *Seleccionada.*
+* **Decisión:** Se aprueba formalmente la siguiente definición canónica:
+  > **`verification`** (representado formalmente en el contrato como **`verification_status`**) es el **campo mutable de estado actual que expresa la condición de autenticidad y validez operativa de la Card certificada por la autoridad oficial de WHO Animal**, siendo estrictamente independiente de la identidad histórica inmutable de emisión anclada en `card_id` y `serial`.
+* **Tipo Conceptual:** **`CURRENT STATE`** (Campo escalar de estado / Enum de dominio) con punto de extensión desacoplado hacia futuros servicios de auditoría.
+* **Estados Conceptuales Aprobados:**
+  1. `UNVERIFIED` (No verificada): Estado inicial por defecto tras la emisión; la carta existe legítimamente pero no ha sido certificada por la autoridad central.
+  2. `VERIFIED` (Verificada): Certificada formalmente por el servicio de verificación oficial de WHO Animal como registro fidedigno y auténtico.
+  3. `FLAGGED` (En revisión / Sospechosa): Marcada para auditoría por anomalías en telemetría, sospecha de foto de pantalla o reporte de abuso.
+  4. `REVOKED` (Revocada / Invalidada): Declarada nula o fraudulenta tras auditoría. *Aclaración:* No elimina el registro físico de la base de datos (se preserva por trazabilidad forense), pero anula toda validez operativa, de colección o de juego de la carta.
+* **Transiciones Permitidas:**
+  * `UNVERIFIED` $\rightarrow$ `VERIFIED` (tras validación satisfactoria).
+  * `UNVERIFIED` o `VERIFIED` $\rightarrow$ `FLAGGED` (detección de sospecha o reporte).
+  * `FLAGGED` $\rightarrow$ `VERIFIED` (auditoría concluye legitimidad).
+  * `FLAGGED` $\rightarrow$ `REVOKED` (auditoría confirma fraude).
+  * `REVOKED` es un estado terminal de invalidación.
+* **Obligatoriedad y Nullability:**
+  ```text
+  REQUIRED: no (opcional / nullable)
+  OPTIONAL: sí
+  NULLABLE: sí (admite null para reflejar ausencia de servicio de verificación, inicializándose conceptualmente en UNVERIFIED)
+  ```
+* **Mutabilidad y Clasificación:**
+  ```text
+  REQUIRED:        no
+  IMMUTABLE:       no (es mutable)
+  HISTORICAL:      no (refleja el estado presente)
+  CURRENT STATE:   sí
+  BIOLOGICAL DATA: no
+  SECURITY/STATUS: sí
+  ```
+* **Fuente de Verdad:**
+  El **Verification Service / Authority** de WHO Animal. La carta no es su propia autoridad y el cliente móvil local no puede auto-certificarse como `VERIFIED` unilateralmente.
+* **Relación con otros Identificadores:**
+  * **Con `card_id`:** `card_id` es la identidad técnica universal inmutable; `verification_status` es un estado mutable que califica a dicha identidad.
+  * **Con `serial`:** `serial` (`auth_serial`) es el ancla visible inmutable acuñada en la carta. El usuario o sistema consulta el `serial` ante el servicio para obtener el `verification_status` actual. Son roles complementarios: `serial` es la llave/ancla de consulta; `verification_status` es el estado actual devuelto.
+  * **Con `owner_id`:** La transferencia o cambio de dueño actualiza `owner_id` pero **no altera la identidad histórica ni revoca el estado de verificación** si la transacción fue legítima. La verificación avala la autenticidad del artefacto zoológico, no la persona que lo custodia.
+  * **Con `capture_id`:** `capture_id` es la telemetría del evento de origen; `verification_status` es el estado de validez de la carta resultante.
+* **Qué NO Significa (Exclusiones Terminantes):**
+  1. ❌ **NO es la identidad de la carta:** La carta conserva su identidad histórica inmutable aunque su estado sea `UNVERIFIED` o `REVOKED`.
+  2. ❌ **NO es el `serial` ni lo reemplaza:** El serial es un ancla alfanumérica fija; `verification` es una condición mutable.
+  3. ❌ **NO almacena credenciales ni claves privadas:** Prohibido guardar secretos o claves de firma en la carta.
+  4. ❌ **NO almacena datos personales (PII):** No contiene nombres, correos ni perfiles de usuarios.
+  5. ❌ **NO almacena telemetría GPS privada:** La privacidad del usuario y de la fauna silvestre se mantiene según `DEC-030`.
+  6. ❌ **NO es un log histórico acumulativo incrustado:** No infla el payload de la carta con listas de auditorías.
+  7. ❌ **NO es un mecanismo propietario rígido:** Es agnóstico a la tecnología de autenticación subyacente.
+* **Neutralidad hacia Tecnologías Futuras:**
+  Cualquier mecanismo futuro (códigos QR, chips NFC, APIs REST, firmas criptográficas PKI o anclajes en blockchain) interactúa con la infraestructura de seguridad externa y se proyecta limpiamente en la carta como una actualización de su `verification_status`, sin romper el contrato base ni corromper los datos históricos inmutables.
+* **Aprobado por:** Director Creativo / Project Manager / Developer
+
+---
+
 ## Decisiones Pendientes de Aprobación (Pending)
 
 ### DEC-009-PENDING: Motor Definitivo de Identificación Visual

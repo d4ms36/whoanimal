@@ -38,6 +38,8 @@
   * Registro y blindaje arquitectónico de capacidades futuras aprobadas: PVP, intercambio/comercio, artwork único/ilustradores y privacidad de ubicación.
 * **`WHO-005B-C` — Resolución A: Semántica de `population_at_issuance`** `[APPROVED_COMPLETE]`
   * Definición formal, alcance (`ANIMAL/SPECIES`), inmutabilidad y desacoplamiento estricto de censos biológicos reales (DEC-033).
+* **`WHO-005B-D` — Auditoría y Resolución de `verification`** `[APPROVED_COMPLETE]`
+  * Formalización canónica de `verification_status` como estado actual mutable, desacoplado de `serial` e identidad histórica (DEC-034).
 * **`WHO-005B-B` — Validación de Esquemas y Serialización JSON (Planificado)** `[PLANNED]`
   * Definición de esquemas de exportación/importación JSON estandarizados para cartas y perfiles biológicos (con Pydantic / dataclasses).
 * **`WHO-006` — Banco de Datos Inicial de Fauna (Semilla Educativa)** `[PROPOSED]`
