@@ -88,81 +88,114 @@ CARD
 * `card_id` (str, UUIDv4): Identificador técnico universal e inmutable de sistema para persistencia e integridad relacional.
 * `animal_id` (str): Llave foránea inmutable hacia el perfil zoológico/taxonómico universal de la especie (`AnimalProfile`). Respeta `Animal ≠ Card`.
 * `specimen_number` (int / str): Número visible de espécimen legible para el coleccionista (ej. `#0042`, *DEC-031*).
-* `schema_version` (str): Versión del contrato de datos de la carta (ej. `"1.0"`, *DEC-019*), totalmente desacoplada de la versión de la app móvil.
+* `schema_version` (str): Versión del contrato de datos de la carta (ej. `"1.0"`, *DEC-019*), totalmente desacoplada de la versión de la app móvil. (Definición formal de valor de esquema inicial pendiente en *DEC-020-PENDING*; sin default contractual predeterminado).
 
 #### B. Emisión (`issuance`) — Inmutables Históricos
-* `edition` (str, opcional): Edición o serie de colección de la tirada (ej. `"1st Edition"`, `"Standard"`, `"Fundadores"`).
-* `generation` (str): Generación histórica del sistema (ej. `"genesis"`, `"gen_1"`, *DEC-017*).
-* `issued_at` (datetime / ISO 8601 UTC): Marca temporal exacta de acuñación/emisión oficial de la carta. *(Nombre canónico oficial; alias histórico: `created_at`)*.
+* `edition` (str, opcional): Edición o serie de colección de la tirada (ej. `"1st Edition"`, `"Standard"`, `"Fundadores"` como ejemplos ilustrativos no contractuales; sin default contractual). Opcional (se omite si la tirada no tiene serie especial); no nullable.
+* `generation` (str): Generación histórica del sistema (ej. `"genesis"`, `"gen_1"`, *DEC-017* como ejemplos ilustrativos). Asignada en emisión; sin default universal.
+* `issued_at` (datetime / ISO 8601 UTC): Marca temporal exacta de acuñación/emisión oficial de la carta provista por el proceso de emisión en tiempo real (sin default silencioso automático). *(Nombre canónico oficial; alias histórico: `created_at`)*.
 * `population_at_issuance` (int, $\ge 1$): Conteo acumulado de cartas emitidas válidamente para esa especie (`animal_id`) al momento exacto de emisión (*DEC-033*).
-* `rarity` (enum / str): Categoría cualitativa de valor de colección asignada al momento de emisión e históricamente inmutable (*DEC-016*, *DEC-033*). Representa exclusivamente *collection rarity*, totalmente desacoplada de la rareza biológica (`is_rare_species`) y de `rank`. *(Nota contractual vinculante: Denominaciones como `COMMON`, `UNCOMMON`, `RARE`, `EPIC`, `LEGENDARY` constituyen EJEMPLOS NO CONTRACTUALES; la taxonomía formal definitiva de tiers y sus curvas probabilísticas continúan pendientes de aprobación en DEC-022-PENDING. Alias de tipo: `rarity_tier`)*.
+* `rarity` (enum / str): Categoría cualitativa de valor de colección asignada al momento de emisión e históricamente inmutable (*DEC-016*, *DEC-033*). Representa exclusivamente *collection rarity*, totalmente desacoplada de la rareza biológica (`is_rare_species`) y de `rank`. *(Nota contractual vinculante: Denominaciones como `COMMON`, `UNCOMMON`, `RARE`, `EPIC`, `LEGENDARY` constituyen EJEMPLOS NO CONTRACTUALES; la taxonomía formal definitiva de tiers y sus curvas probabilísticas continúan pendientes de aprobación en DEC-022-PENDING. Sin default contractual. Alias de tipo: `rarity_tier`)*.
 
 #### C. Procedencia (`provenance`) — Inmutables Históricos
-* `capture_id` (str): Llave foránea hacia el evento de observación de campo (`Capture`) que originó la carta.
+* `capture_id` (str): Llave foránea hacia el registro de observación en campo (`Capture`) que originó la carta.
 * `identification_method` (str): Metodología o modelo de visión empleado para clasificar la especie (ej. `"onnx_local_v1"`, `"cloud_vision"`, `"manual_curator"`).
-* `identification_confidence` (float, 0.0 - 1.0, opcional/nullable): Nivel cuantitativo de confianza probabilística devuelto por el método de identificación. Nullable si el método no produce score. Prohibido inventar datos.
+* `identification_confidence` (float, 0.0 - 1.0, opcional/nullable): Nivel cuantitativo de confianza probabilística devuelto por el método de identificación. Opcional y nullable si el método no produce score. Prohibido inventar datos.
 
 #### D. Presentación y Experiencia (`presentation`)
-* `rank` (int / str, mutable): Nivel o clasificación dinámica de progresión y maestría de la experiencia del usuario con la carta o espécimen (*DEC-032*). Pertenece al sistema externo de progresión/gamificación, residiendo en `Card` exclusivamente como referencia o proyección de presentación visual. Es mutable y refleja el avance en el descubrimiento y aprendizaje. Desacoplado de `rarity` y de datos biológicos (no representa rareza, calidad zoológica, nivel taxonómico, edad, tamaño ni fuerza del animal). Sin fórmulas, XP, niveles específicos ni combate aprobados en esta fase (quedan diferidos como decisiones futuras).
-* `display_location` (str): Ubicación geográfica pública generalizada (país, región, bioma) para salvaguardar la privacidad del usuario y la fauna protegida (*DEC-030*). Coherente con `Capture` pero sin exponer GPS exacto.
-* `visual_effects` (str / dict, mutable): Efectos cosméticos especiales (foil, marcos holográficos, texturas). Desacoplados de datos biológicos (*DEC-032*).
-* `artwork` (str / URI / objeto, opcional / mutable): Capa de ilustración artística única de encargo con ilustradores (*DEC-028*). No sustituye información zoológica ni identidad histórica.
+* `rank` (int / str, mutable): Nivel o clasificación dinámica de progresión y maestría de la experiencia del usuario con la carta o espécimen (*DEC-032*). Pertenece al sistema externo de progresión/gamificación, residiendo en `Card` exclusivamente como referencia o proyección de presentación visual. Es mutable y refleja el avance en el descubrimiento y aprendizaje. Desacoplado de `rarity` y de datos biológicos (no representa rareza, calidad zoológica, nivel taxonómico, edad, tamaño ni fuerza del animal). Sin nivel inicial predeterminado (*DEC-037-PENDING* permanece abierta; sin default contractual).
+* `display_location` (str, opcional/nullable, semántica especial): Ubicación geográfica pública generalizada (país, región, bioma) para salvaguardar la privacidad del usuario y la fauna protegida (*DEC-030*). El GPS exacto jamás forma parte de Card. El origen geográfico generalizado derivado de Capture queda protegido para mantener la coherencia histórica (`historical source = protected`), mientras que la presentación visual en UI es evolutiva (`presentation = evolvable`). Admite omisión o `null` si la captura carece de geolocalización. Sin default contractual.
+* `visual_effects` (list[string], mutable, opcional): Modificadores cosméticos especiales (foil, marcos holográficos, texturas). Desacoplados de datos biológicos (*DEC-032*). Su ausencia contractual se expresa como lista vacía `[]`, nunca `null`.
+* `artwork` (object / str URI, mutable, opcional/nullable): Capa de renderizado o ilustración artística única de encargo con ilustradores (*DEC-028*). Opcional y nullable para piezas estándar sin encargo artístico. Sin default artificial. No sustituye información zoológica ni identidad histórica.
 
 #### E. Posesión (`ownership`)
-* `owner_id` (str, mutable): Identificador del usuario custodio o propietario actual. Se actualiza en transferencias/intercambios sin alterar la identidad histórica (*DEC-027*).
+* `owner_id` (str, mutable, opcional/nullable): Identificador de la cuenta del usuario custodio o propietario actual (*DEC-027*). No exigido obligatoriamente al emitir; la Card puede nacer sin custodio asignado o en inventario del sistema (`null`). Se actualiza en transferencias/intercambios sin alterar la identidad histórica. Sin default contractual (no asumir "Usuario emisor").
 
 #### F. Autenticación (`authentication`)
-* `serial` (str, inmutable): Serial visible acuñado en la carta para trazabilidad visual y anclaje ante el servicio oficial (*DEC-018*). *(Alias descriptivo: `auth_serial`)*.
-* `verification_status` (enum, mutable): Estado actual de autenticación (`UNVERIFIED`, `VERIFIED`, `FLAGGED`, `REVOKED`, `null` reservado a schemas previos) respaldado por la autoridad oficial de WHO Animal (*DEC-034, DEC-035*).
+* `serial` (str, inmutable): Serial visible acuñado en la carta para trazabilidad visual y anclaje ante el servicio oficial (*DEC-018*). *(Alias descriptivo: `auth_serial`)*. Sin default contractual.
+* `verification_status` (enum / str, mutable): Estado actual de autenticación (`UNVERIFIED`, `VERIFIED`, `FLAGGED`, `REVOKED`, *DEC-034*, *DEC-035*). Default contractual obligatorio en schema actual: `UNVERIFIED`; `null` reservado exclusivamente a piezas históricas emitidas bajo schemas previos sin este campo.
 
 #### Campo Proyectado Adicional (Límite Ontológico)
 * `specimen_sex` (enum, opcional / proyectado de `Capture`, valores: `MALE`, `FEMALE`, `UNKNOWN`): Sexo biológico del individuo observado proyectado para exhibición desde el registro de `Capture` de origen (*DEC-036*). Reside formalmente en `Capture` (`sex ∈ Capture`, `sex ∉ Animal`) y la Card actúa únicamente como capa de proyección visual sin ser la fuente primaria de verdad. **NO pertenece a los 19 campos canónicos de la entidad `Card`**.
 
 ---
 
-### 3.2. Contrato Formal de Tipos, Obligatoriedad y Nullability (WHO-006A)
+### 3.2. Contrato Formal de Tipos, Obligatoriedad, Nullability y Defaults (WHO-006A / WHO-006A.1)
 
-Este contrato formaliza la especificación técnica de tipos, obligatoriedad de presencia y mutabilidad de los **19 campos canónicos** de la entidad `Card` bajo el esquema vigente (`schema_version >= 1.0`), sirviendo como marco vinculante para la posterior implementación de modelos (Pydantic / dataclasses) y esquemas JSON.
+Este contrato formaliza la especificación técnica de tipos, obligatoriedad de presencia, admisibilidad de nulos (`nullability`), valores por defecto contractuales y mutabilidad de los **19 campos canónicos** de la entidad `Card` bajo el esquema vigente (`schema_version >= 1.0`), sirviendo como marco vinculante para la posterior implementación de modelos (Pydantic / dataclasses) y esquemas JSON.
+
+#### Regla Fundamental de Defaults Contractuales (WHO-006A.1)
+> **Si un valor concreto no fue aprobado explícitamente como default por una decisión formal vigente, NO debe aparecer como default contractual.**  
+> Los ejemplos ilustrativos de documentación (ej. `"1st Edition"`, `"Standard"`, `"genesis"`, nivel `1`, o timestamp actual) **NO son defaults contractuales**. En todos esos casos, el default contractual es estrictamente **`NINGUNO`**. Queda prohibido utilizar valores "razonables" por mera conveniencia técnica para librerías de serialización.
 
 #### Tabla Contractual de los 19 Campos Canónicos
 
-| # | Campo | Módulo | Tipo Técnico / Conceptual | Required | Nullable | Default | Mutabilidad | Restricciones Aprobadas de Dominio |
-| :-: | :--- | :--- | :--- | :---: | :---: | :---: | :---: | :--- |
-| 1 | `card_id` | `identity` | `string (UUIDv4)` | **Sí** | **No** | *Ninguno* | **IMMUTABLE** | Identificador unívoco técnico universal (*DEC-014*). Formato canónico UUIDv4 en minúsculas. Congelado en emisión. |
-| 2 | `animal_id` | `identity` | `string` | **Sí** | **No** | *Ninguno* | **IMMUTABLE** | Llave foránea hacia `AnimalProfile`. Desacopla la especie de la carta (`Animal ≠ Card`, *DEC-013*). Congelado en emisión. |
-| 3 | `specimen_number` | `identity` | `integer` ($\ge 1$) | **Sí** | **No** | *Ninguno* | **IMMUTABLE** | Identificador visible humano de espécimen (*DEC-031*). Desacoplado de `card_id` y de `population_at_issuance`. Congelado en emisión. |
-| 4 | `schema_version` | `identity` | `string` | **Sí** | **No** | `"1.0"` | **IMMUTABLE** | Versión del contrato de datos JSON (*DEC-019*). Totalmente independiente de la versión de la app y del `versionCode` de Android. |
-| 5 | `edition` | `issuance` | `string` | **No** | **Sí** | `"Standard"` | **IMMUTABLE** | Serie o tirada de colección (ej. `"1st Edition"`, `"Standard"`). Desacoplada de `generation`. Congelada en emisión. |
-| 6 | `generation` | `issuance` | `string` | **Sí** | **No** | `"genesis"` | **IMMUTABLE** | Era o ciclo generacional del ecosistema (*DEC-017*). Otorga prestigio a pioneros. Desacoplada de `edition`. Congelada en emisión. |
-| 7 | `issued_at` | `issuance` | `datetime (ISO 8601 UTC)` | **Sí** | **No** | *Timestamp UTC* | **IMMUTABLE** | Marca temporal exacta de acuñación oficial (*DEC-014*). No sustituye el momento de captura en campo de `Capture`. Congelado en emisión. |
-| 8 | `population_at_issuance` | `issuance` | `integer` ($\ge 1$) | **Sí** | **No** | *Ninguno* | **IMMUTABLE** | Total histórico acumulado de Cards válidas de esa especie (`animal_id`) al momento de acuñar (*DEC-033*). Alcance `ANIMAL/SPECIES`. |
-| 9 | `rarity` | `issuance` | `enum / string` *(tipo formal)* | **Sí** | **No** | *Ninguno* | **IMMUTABLE** | *Collection rarity* asignada en emisión (*DEC-016*). Desacoplada de rareza biológica y de `rank`. Escala final pendiente en *DEC-022-PENDING*. |
-| 10 | `capture_id` | `provenance` | `string (UUIDv4)` | **Sí** | **No** | *Ninguno* | **IMMUTABLE** | Llave foránea hacia el registro de observación en campo (`Capture`). Trazabilidad: 1 captura $\to \le 1$ carta. Congelada en emisión. |
-| 11 | `identification_method` | `provenance` | `string` | **Sí** | **No** | *Ninguno* | **IMMUTABLE** | Pipeline o clasificador empleado para identificar la especie. No es enum cerrado fijo. Congelado en emisión. |
-| 12 | `identification_confidence` | `provenance` | `float` (0.0 a 1.0) | **Sí** (clave) | **Sí** | `null` | **IMMUTABLE** | Confianza probabilística del clasificador. Admite `null` si el método no produce score numérico; prohibido conjeturar datos. |
-| 13 | `rank` | `presentation` | `integer / string` *(tipo formal)* | **Sí** | **No** | `1` | **MUTABLE** | Proyección visual del nivel de progresión/maestría del usuario (*DEC-032*). $\text{rank} \ne \text{rarity}$. No es cualidad zoológica ni fuerza. |
-| 14 | `display_location` | `presentation` | `string` | **Sí** | **No** | *De captura* | **MUTABLE / Esp.** | Ubicación pública generalizada (país, región) (*DEC-030*). Principio 100% Pet Friendly. Coherente con origen, jamás expone GPS exacto. |
-| 15 | `visual_effects` | `presentation` | `list[string]` | **No** | **No** | `[]` | **MUTABLE** | Modificadores cosméticos (foil, marcos) (*DEC-032*). Ausencia = lista vacía `[]`, nunca `null`. Desacoplados de datos biológicos. |
-| 16 | `artwork` | `presentation` | `object / string (URI)` | **No** | **Sí** | `null` | **MUTABLE** | Capa visual de renderizado artístico (*DEC-028*). Opcional/nullable en cartas estándar. No altera datos zoológicos ni identidad histórica. |
-| 17 | `owner_id` | `ownership` | `string (UUID/User ID)` | **Sí** | **No** | *Usuario creador*| **MUTABLE** | Cuenta del usuario custodio actual (*DEC-027*). Transferible sin degradar ni alterar los metadatos históricos inmutables de emisión. |
-| 18 | `serial` | `authentication` | `string` | **Sí** | **No** | *Ninguno* | **IMMUTABLE** | Serial alfanumérico visible acuñado para trazabilidad visual y anclaje de consulta (*DEC-018*). No es UUID técnico ni clave criptográfica. |
-| 19 | `verification_status` | `authentication` | `enum / string` | **Sí** | **No** *(schema actual)* | `UNVERIFIED` | **MUTABLE** | Estado actual de validez (`UNVERIFIED`, `VERIFIED`, `FLAGGED`, `REVOKED`, *DEC-034*, *DEC-035*). `null` reservado a piezas históricas previas. |
+| Campo | Tipo | Required | Nullable | Default contractual | Mutabilidad | Restricciones Aprobadas de Dominio |
+| :--- | :--- | :---: | :---: | :---: | :---: | :--- |
+| `card_id` | `string (UUIDv4)` | **Sí** | **No** | `NINGUNO` | **IMMUTABLE** | Identificador unívoco técnico universal (*DEC-014*). Formato canónico UUIDv4 en minúsculas. Congelado en emisión. |
+| `animal_id` | `string` | **Sí** | **No** | `NINGUNO` | **IMMUTABLE** | Llave foránea hacia `AnimalProfile`. Desacopla la especie de la carta (`Animal ≠ Card`, *DEC-013*). Congelado en emisión. |
+| `specimen_number` | `integer` ($\ge 1$) | **Sí** | **No** | `NINGUNO` | **IMMUTABLE** | Identificador visible humano de espécimen (*DEC-031*). Desacoplado de `card_id` y de `population_at_issuance`. Congelado en emisión. |
+| `schema_version` | `string` | **Sí** | **No** | `NINGUNO` | **IMMUTABLE** | Versión del contrato de datos JSON (*DEC-019*). Totalmente independiente de la versión de la app y del `versionCode` de Android. Definición formal del valor de esquema inicial pendiente en *DEC-020-PENDING*. |
+| `edition` | `string` | **No** | **No** | `NINGUNO` | **IMMUTABLE** | Serie o tirada especial de colección (ej. `"1st Edition"`, `"Fundadores"`). Opcional (se omite si la tirada no tiene serie especial). No admite `null` si la propiedad está presente (opcional $\ne$ nullable). Congelada en emisión. |
+| `generation` | `string` | **Sí** | **No** | `NINGUNO` | **IMMUTABLE** | Era o ciclo generacional del ecosistema (*DEC-017*). Desacoplada de `edition`. Asignada en el proceso de emisión; sin default universal (ej. `"genesis"` es un ejemplo histórico fundacional, no un default). Congelada en emisión. |
+| `issued_at` | `datetime (ISO 8601 UTC)` | **Sí** | **No** | `NINGUNO` | **IMMUTABLE** | Marca temporal exacta de emisión oficial (*DEC-014*). El timestamp real debe ser suministrado explícitamente por el proceso de emisión; prohibido default silencioso automático para no falsear el momento histórico. Congelado en emisión. |
+| `population_at_issuance` | `integer` ($\ge 1$) | **Sí** | **No** | `NINGUNO` | **IMMUTABLE** | Total histórico acumulado de Cards emitidas válidamente de esa especie (`animal_id`) al momento de acuñar (*DEC-033*). Alcance `ANIMAL/SPECIES`. Congelado en emisión. |
+| `rarity` | `enum / string` *(tipo abierto)* | **Sí** | **No** | `NINGUNO` | **IMMUTABLE** | *Collection rarity* asignada en emisión (*DEC-016*). Desacoplada de rareza biológica y de `rank`. Escala de tiers, nombres y curvas pendientes de aprobación en *DEC-022-PENDING*; sin default contractual. |
+| `capture_id` | `string (UUIDv4)` | **Sí** | **No** | `NINGUNO` | **IMMUTABLE** | Llave foránea hacia el registro de observación en campo (`Capture`). Trazabilidad inmutable: 1 captura $\to \le 1$ carta. Congelada en emisión. |
+| `identification_method` | `string` | **Sí** | **No** | `NINGUNO` | **IMMUTABLE** | Pipeline o clasificador empleado para identificar la especie. No es enum cerrado fijo. Congelado en emisión. |
+| `identification_confidence` | `float` (0.0 a 1.0) | **No** | **Sí** | `NINGUNO` | **IMMUTABLE** | Confianza probabilística del clasificador. Admite omisión o `null` si el método no produce score numérico cuantitativo; prohibido conjeturar o inventar scores. |
+| `rank` | `integer / string` *(tipo abierto)* | **Sí** | **No** | `NINGUNO` | **MUTABLE** | Proyección visual del nivel de progresión/maestría del usuario (*DEC-032*). $\text{rank} \ne \text{rarity}$. No representa valor zoológico ni combate. Escala y nivel inicial pendientes en *DEC-037-PENDING*; prohibido asignar defaults (1, 0, beginner). |
+| `display_location` | `string` | **No** | **Sí** | `NINGUNO` | **PROTECTED SOURCE / EVOLVABLE PRESENTATION** | Ubicación pública generalizada (país, región) (*DEC-030*). Coordenadas GPS exactas jamás forman parte de Card. Origen histórico generalizado protegido; presentación visual en UI evolutiva. Admite omisión o `null` si no hay geolocalización. |
+| `visual_effects` | `list[string]` | **No** | **No** | `[]` | **MUTABLE** | Modificadores cosméticos (foil, marcos) (*DEC-032*). Su ausencia contractual se formaliza como lista vacía `[]`, nunca `null`. Desacoplados de datos biológicos. |
+| `artwork` | `object / string (URI)` | **No** | **Sí** | `NINGUNO` | **MUTABLE** | Capa visual de renderizado artístico de encargo (*DEC-028*). Opcional y nullable en cartas estándar sin encargo artístico. Sin default artificial. No altera identidad histórica. |
+| `owner_id` | `string (UUID / User ID)` | **No** | **Sí** | `NINGUNO` | **MUTABLE** | Cuenta del usuario custodio actual (*DEC-027*). No obligatorio en emisión; la Card puede nacer sin dueño asignado o en custodia de sistema (`null`). Transferible sin alterar metadatos históricos. |
+| `serial` | `string` | **Sí** | **No** | `NINGUNO` | **IMMUTABLE** | Serial alfanumérico visible acuñado para trazabilidad visual y anclaje de consulta (*DEC-018*). No es UUID técnico ni secreto criptográfico. Congelado en emisión. |
+| `verification_status` | `enum / string` | **Sí** | **No** *(schema actual)* | `UNVERIFIED` | **MUTABLE** | Estado actual de validez (`UNVERIFIED`, `VERIFIED`, `FLAGGED`, `REVOKED`, *DEC-034*, *DEC-035*). Default obligatorio `UNVERIFIED` para toda Card nueva en schema actual; `null` reservado exclusivamente a piezas históricas previas. |
 
-#### Reglas Contractuales de Presencia y Nullability
+#### Diferenciación Contractual Fundamental: `Optional` vs. `Nullable`
 
-1. **`Required` (Obligatorio):** La propiedad debe figurar obligatoriamente en la carga útil (payload / serialización) de la carta bajo el esquema actual (`schema_version >= 1.0`). La omisión de la clave invalida la entidad.
-2. **`Optional` (Opcional):** La propiedad puede no suministrarse explícitamente en el payload si la carta no dispone de esa capa particular (ej. `edition`, `artwork`, `visual_effects`), resolviéndose mediante su valor por defecto autorizado.
-3. **`Nullable` (Admite Nulo):** El valor del campo puede ser explícitamente `null` (en JSON) o `None` (en Python) sin violar la integridad del esquema:
-   * `identification_confidence`: Admite `null` cuando el método de identificación no genera una métrica matemática de confianza (ej. validación humana o dicotómica). Prohibido rellenar con valores ficticios.
-   * `artwork`: Admite `null` para cartas estándar que utilizan únicamente la fotografía o renderizado básico de campo sin capa de encargo artístico.
-   * `edition`: Admite `null` si no pertenece a una serie especial y no se utiliza el default `"Standard"`.
-4. **`Default` (Valor Predeterminado):** Valor canónico aplicado automáticamente cuando la propiedad no se explicita en la creación de una nueva instancia:
-   * `schema_version`: `"1.0"`
-   * `generation`: `"genesis"` (en la fase fundacional actual)
-   * `verification_status`: `"UNVERIFIED"`
-   * `visual_effects`: `[]` (lista vacía, nunca `null`)
-   * `rank`: `1` (nivel base inicial)
-   * `artwork`: `null`
+En WHO Animal se establece una distinción formal y estricta entre la **presencia de la propiedad en el mensaje/serialización** (`Required` / `Optional`) y la **admisibilidad del valor nulo** (`Nullable`):
+
+1. **`Required` (Presencia Obligatoria):**  
+   La clave/propiedad **debe figurar obligatoriamente** en la carga útil (payload / serialización) de la carta bajo el esquema actual (`schema_version >= 1.0`). La ausencia de la clave produce un fallo de validación de contrato.
+2. **`Optional` (Presencia Opcional, `Required = No`):**  
+   La clave/propiedad **puede omitirse** en la carga útil si la carta no dispone de esa capa particular.
+3. **`Nullable` (Admisibilidad de Nulo):**  
+   El valor del campo puede ser explícitamente `null` (en JSON) o `None` (en Python) sin violar el contrato del tipo de datos.
+4. **Regla de No Equivalencia (`Optional ≠ Nullable`):**  
+   * **Opcional NO Nullable (`Required = No`, `Nullable = No`):**  
+     Un campo puede ser opcional sin que el valor `null` sea legal.  
+     *Ejemplo 1:* `edition`. Si la carta pertenece a una tirada ordinaria sin serie especial, la clave `edition` simplemente se omite del payload. Pero si el campo se suministra, **no puede ser `null`**; debe contener una cadena de texto representativa de la serie (ej. `"1st Edition"`).  
+     *Ejemplo 2:* `visual_effects`. Si la carta no posee efectos cosméticos, la clave puede omitirse resolviéndose al default formal `[]`. Sin embargo, asignar explícitamente `"visual_effects": null` es **inválido**; la ausencia se representa siempre con lista vacía `[]`.
+   * **Opcional y Nullable (`Required = No`, `Nullable = Sí`):**  
+     Campos que pueden omitirse o portar explícitamente `null` cuando no existe información aplicable:  
+     * `identification_confidence`: Admite `null` u omisión si el método de visión empleado no devuelve una métrica probabilística numérica (regla anti-conjetura).  
+     * `display_location`: Admite `null` u omisión si la observación de campo no fue georreferenciada (regla anti-invención).  
+     * `artwork`: Admite `null` u omisión en cartas estándar sin encargo artístico.  
+     * `owner_id`: Admite `null` u omisión si la carta no nace asignada a un usuario o permanece en almacén del sistema.
+   * **Requerido y NO Nullable (`Required = Sí`, `Nullable = No`):**  
+     Campos estructurales indispensables que deben figurar siempre con un valor válido no nulo: `card_id`, `animal_id`, `specimen_number`, `schema_version`, `generation`, `issued_at`, `population_at_issuance`, `rarity`, `capture_id`, `identification_method`, `rank`, `serial` y `verification_status` (bajo el esquema vigente).
+
+#### Auditoría de Defaults Contractuales: Valores Aprobados vs. Retirados
+
+Bajo la regla de que ningún valor no aprobado explícitamente puede consagrarse como contrato:
+
+* **ÚNICOS DEFAULTS CONTRACTUALES APROBADOS:**
+  1. `verification_status`: **`UNVERIFIED`**  
+     *Justificación:* Aprobado formalmente por *DEC-034* y *DEC-035* como estado inicial mandatorio para toda Card nueva bajo el esquema actual.
+  2. `visual_effects`: **`[]`** (lista vacía)  
+     *Justificación:* Aprobado formalmente por *DEC-032*; la ausencia de efectos cosméticos se formaliza como ausencia de elementos (`[]`), garantizando tipado uniforme de lista y prohibiendo `null`.
+
+* **DEFAULTS AUDITADOS Y TERMINANTEMENTE RETIRADOS (`NINGUNO`):**
+  1. `schema_version`: Retirado `"1.0"`. Aunque el versionado independiente está aprobado (*DEC-019*), el valor concreto de esquema inicial está supeditado al diseño formal del esquema en *DEC-020-PENDING*.
+  2. `edition`: Retirado `"Standard"`. No existe decisión que imponga "Standard" como valor por defecto; es un ejemplo ilustrativo. Si no hay serie especial, el campo se omite.
+  3. `generation`: Retirado `"genesis"`. Genesis es una generación histórica para piezas pioneras, no un default universal. La asignación corresponde al proceso de emisión según el ciclo del sistema.
+  4. `issued_at`: Retirado *Timestamp UTC automático*. La marca temporal debe reflejar el instante real y oficial de emisión acuñado por el emisor; un default implícito o silencioso arriesga falsear la trazabilidad histórica.
+  5. `rank`: Retirado `1`. La decisión *DEC-037-PENDING* permanece abierta. No existe nivel inicial aprobado (no se autoriza 1, 0, estrellas, XP ni beginner como contrato).
+  6. `owner_id`: Retirado `"Usuario emisor"`. No existe aprobación que imponga que la carta deba nacer con custodio asignado. Se distingue entre obligatoriedad del modelo y asignación posterior por el flujo de emisión.
+  7. `display_location`: Retirado `*De captura*`. No existe default contractual; la representación pública generalizada se deriva de la captura si existe geolocalización, pero no se asigna un default estático.
+  8. `artwork`: Retirado `null` como default forzado. Es un campo opcional/nullable cuya ausencia es válida, sin necesidad de consagrar `null` como default contractual.
+  9. `rarity`: Confirmado `NINGUNO`. *DEC-022-PENDING* continúa abierta; no existen tiers por defecto (como `COMMON`).
 
 #### Casos Especiales de Validación y Límites de Dominio
 
@@ -172,11 +205,22 @@ Este contrato formaliza la especificación técnica de tipos, obligatoriedad de 
   * El valor `null` queda reservado de manera exclusiva para compatibilidad histórica con piezas legadas emitidas bajo versiones de esquema anteriores a la introducción del campo.
 * **`rarity` (*DEC-016*, *DEC-022-PENDING*):**
   * Campo obligatorio e inmutable tras la emisión.
-  * Su tipo conceptual es categórico (`enum / string`), pero **las listas de tiers (ej. `COMMON`, `UNCOMMON`, etc.) son EJEMPLOS NO CONTRACTUALES**. La taxonomía cerrada definitiva y sus algoritmos de asignación continúan pendientes en *DEC-022-PENDING*.
+  * Su tipo conceptual es categórico flexible (`enum / string`), pero **las listas de tiers (ej. `COMMON`, `UNCOMMON`, etc.) son EJEMPLOS NO CONTRACTUALES**. La taxonomía cerrada definitiva y sus algoritmos de asignación continúan pendientes en *DEC-022-PENDING*. Default contractual: **`NINGUNO`**.
 * **`rank` (*DEC-032*, *DEC-037-PENDING*):**
   * Campo mutable que reside en `Card` como proyección de presentación visual del avance del usuario.
   * NO representa rareza, calidad biológica, nivel taxonómico, edad, tamaño ni fuerza del animal.
-  * Las fórmulas de XP, niveles concretos y reglas de combate continúan pendientes en *DEC-037-PENDING*.
+  * Las fórmulas de XP, niveles concretos (ej. 1, 0, estrellas) y reglas de combate continúan pendientes en *DEC-037-PENDING*. Default contractual: **`NINGUNO`**.
+* **`display_location` (Privacidad y Coherencia Histórica — *DEC-030*):**
+  * **Separación Estricta:** `Capture` contiene la telemetría GPS privada exacta; `Card` contiene exclusivamente la representación pública generalizada. Las coordenadas GPS exactas **jamás forman parte de `Card`**.
+  * **Fuente Histórica Protegida (`historical source = protected`):** El valor generalizado derivado del evento de captura original no debe alterarse arbitrariamente para preservar la coherencia histórica de la observación.
+  * **Presentación Evolutiva (`presentation = evolvable`):** La interfaz de usuario puede evolucionar y enriquecer cómo visualiza la ubicación generalizada sin alterar el dato de origen ni violar la privacidad.
+  * **Ausencia de Georreferencia:** Si la captura no cuenta con ubicación, el campo es opcional/nullable (admite `null`). Default contractual: **`NINGUNO`**.
+* **`owner_id` (Custodia sin Forzar Posesión en Emisión — *DEC-027*):**
+  * Campo mutable que identifica al custodio actual.
+  * No es obligatorio que la Card nazca con propietario asignado (puede emitirse a inventario del sistema o a un repositorio de recompensas antes de adjudicación). Admite `null`. Default contractual: **`NINGUNO`**.
+* **`issued_at` (Integridad Histórica de Emisión — *DEC-014*):**
+  * Requerido, no nullable e inmutable.
+  * No admite default automático en el modelo; el proceso de emisión formal es el único responsable de proporcionar el timestamp UTC real y exacto en el momento de acuñar la pieza. Default contractual: **`NINGUNO`**.
 * **`specimen_sex` (Límite Ontológico — *DEC-036*):**
   * **`specimen_sex` NO pertenece a los 19 campos canónicos de `Card`**. Pertenece al dominio de `Capture / Specimen` (`sex ∈ Capture`, `sex ∉ Animal`). La Card puede proyectarlo visualmente si está disponible, pero la Card no es la fuente primaria del dato.
 
@@ -326,10 +370,16 @@ Los 19 campos conceptuales se proyectan visualmente en las dos caras de la carta
 
 ---
 
-## 5. Privacidad en Telemetría de Captura
+## 5. Privacidad en Telemetría de Captura y Semántica de `display_location`
 
-* **Telemetría Interna (Privada):** Coordenadas GPS exactas (latitud/longitud) retenidas para verificación antifraude y bitácora personal.
-* **Exposición Pública (`display_location`):** Ubicación generalizada a nivel regional/país para salvaguardar nidos, colonias y fauna protegida de actos de perturbación o furtivismo.
+* **Separación Estricta de Capas (Capture vs. Card):**
+  $$\text{Capture} \longrightarrow \text{Ubicación exacta privada (GPS latitud / longitud)}$$
+  $$\text{Card} \longrightarrow \text{Representación pública generalizada (\texttt{display\_location})}$$
+* **Regla Innegociable de Privacidad:** Las coordenadas GPS exactas **NUNCA forman parte de `Card`** ni se exponen públicamente en metadatos, serializaciones, payloads ni vistas de usuario (*DEC-030*).
+* **Semántica Dual de `display_location`:**
+  * **Origen Histórico Protegido (`historical source = protected`):** La representación generalizada (país, región o bioma) derivada del evento de captura original queda protegida para mantener la coherencia y trazabilidad histórica de la pieza sin alteraciones arbitrarias.
+  * **Presentación Evolutiva (`presentation = evolvable`):** La interfaz de usuario (UI) puede evolucionar y refinar la forma visual en que presenta dicha información generalizada sin alterar el dato de origen ni revelar jamás telemetría privada.
+  * **Ausencia de Ubicación:** Si el evento de captura carece de georreferencia (ej. permisos de ubicación denegados o captura de laboratorio/cautiverio), el campo admite omisión o valor explícito `null` para no inventar datos zoológicos ficticios (*DEC-003, DEC-015*). Default contractual: **`NINGUNO`**.
 
 ---
 

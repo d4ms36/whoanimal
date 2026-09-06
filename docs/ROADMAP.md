@@ -50,6 +50,8 @@
   * Delimitación estricta de `rarity` (inmutable/emisión, ejemplos de tiers no contractuales) y `rank` (mutable/progresión, sin fórmulas ni implicaciones zoológicas).
 * **`WHO-006A` — Definición Formal de Tipos y Obligatoriedad de los 19 Campos de Card** `[APPROVED_COMPLETE]`
   * Formalización contractual de tipos técnicos, requiredness, nullability, defaults e inmutabilidad previa a la implementación de modelos.
+* **`WHO-006A.1` — Corrección del Contrato de Obligatoriedad, Nullability y Defaults de Card** `[APPROVED_COMPLETE]`
+  * Eliminación de defaults no aprobados, distinción estricta entre Optional y Nullable, y protección histórica de `display_location`.
 * **`WHO-006B` — Modelado Formal de Esquemas (Pydantic / Dataclasses) (Planificado)** `[PLANNED]`
   * Implementación y validación de esquemas de datos serializados para `Card` estructurados en los 6 módulos canónicos.
 * **`WHO-007` — Banco de Datos Inicial de Fauna (Semilla Educativa)** `[PROPOSED]`

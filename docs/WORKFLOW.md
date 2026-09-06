@@ -142,7 +142,13 @@ Cada tarea u objetivo debe documentarse utilizando la siguiente ficha estructura
 ### WHO-006A: Definición Formal de Tipos y Obligatoriedad de los 19 Campos de Card
 * **Propósito:** Formalizar documentalmente el contrato técnico de tipos, obligatoriedad (required/optional), nullability, valores por defecto e inmutabilidad de los 19 campos canónicos de `Card`, estableciendo las reglas de validación precisas sin inventar taxonomías de tiers ni mecánicas de progresión pendientes.
 * **Estado:** `APPROVED_COMPLETE`
-* **Commit:** `7f7208e` (*docs(card): formalize field types and requiredness*)
+* **Commit:** `f76fca2` (*docs(card): formalize field types and requiredness*)
+* **Versión:** `0.0.1`
+
+### WHO-006A.1: Corrección del Contrato de Obligatoriedad, Nullability y Defaults de Card
+* **Propósito:** Auditar y corregir el contrato formal de los 19 campos canónicos de `Card` eliminando defaults no aprobados (`schema_version`, `edition`, `generation`, `issued_at`, `rank`, `owner_id`, `display_location`, `artwork`), consagrando la regla fundamental de no inventar defaults técnicos, diferenciando formalmente `Optional` (`Required = No`) de `Nullable`, protegiendo el origen histórico de `display_location` (`historical source = protected`, `presentation = evolvable`, sin GPS exacto) y manteniendo abiertas `DEC-022-PENDING` y `DEC-037-PENDING`.
+* **Estado:** `APPROVED_COMPLETE`
+* **Commit:** `34fb281` (*docs(card): correct field defaults and nullability*)
 * **Versión:** `0.0.1`
 
 
