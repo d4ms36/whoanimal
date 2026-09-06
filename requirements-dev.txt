@@ -1,0 +1,4 @@
+# WHO ANIMAL — Dependencias de Desarrollo y Pruebas
+# Instalar con: pip install -r requirements-dev.txt
+
+pytest>=8.0.0

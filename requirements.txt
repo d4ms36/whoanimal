@@ -1,0 +1,6 @@
+# WHO ANIMAL — Dependencias de Runtime
+#
+# Fase 0 (Fundación): Cero dependencias externas requeridas.
+# Toda la lógica de dominio actual utiliza la biblioteca estándar de Python (dataclasses, enum, typing).
+#
+# Para dependencias previstas en las siguientes fases, consultar pyproject.toml o docs/ARCHITECTURE.md.
