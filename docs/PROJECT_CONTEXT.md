@@ -115,7 +115,7 @@ Cada carta coleccionable posee una identidad inmutable e intransferible:
 
 ### Serial Visual de Autenticación y Estado de Verificación
 * Cada carta incorpora visualmente un serial/código discreto en la parte inferior (`auth_serial`).
-* **Aviso de Seguridad:** Un código visual impreso no constituye por sí mismo un sistema de autenticación seguro. La arquitectura vincula este serial como ancla de trazabilidad con registros verificables y un estado mutable de verificación oficial (`verification_status`, ver DEC-034: `UNVERIFIED`, `VERIFIED`, `FLAGGED`, `REVOKED`), sin mezclar la identidad histórica inmutable con la infraestructura externa de auditoría.
+* **Aviso de Seguridad:** Un código visual impreso no constituye por sí mismo un sistema de autenticación seguro. La arquitectura vincula este serial como ancla de trazabilidad con registros verificables y un estado mutable de verificación oficial (`verification_status`, ver DEC-034 y DEC-035: `UNVERIFIED`, `VERIFIED`, `FLAGGED`, `REVOKED`), donde toda Card nueva bajo el schema vigente nace obligatoriamente en `UNVERIFIED` y el valor `null` queda reservado exclusivamente a compatibilidad histórica con schemas previos, sin mezclar la identidad histórica inmutable con la infraestructura externa de auditoría.
 
 ---
 

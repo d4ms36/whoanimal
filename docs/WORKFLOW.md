@@ -112,4 +112,10 @@ Cada tarea u objetivo debe documentarse utilizando la siguiente ficha estructura
 ### WHO-005B-D: Auditoría y Resolución de verification
 * **Propósito:** Resolver la semántica de `verification` (DEC-034), formalizando `verification_status` como campo mutable de estado actual (`UNVERIFIED`, `VERIFIED`, `FLAGGED`, `REVOKED`), desacoplándolo del ancla inmutable `serial` y de la identidad histórica.
 * **Estado:** `APPROVED_COMPLETE`
+* **Commit:** `6c2b8b1` (*docs(card): define verification semantics*)
+* **Versión:** `0.0.1`
+
+### WHO-005B-D.1: Canonicalización de verification_status y Semántica null vs UNVERIFIED
+* **Propósito:** Formalizar `verification_status` como nombre canónico oficial (DEC-035), resolver la ambigüedad contractual fijando `UNVERIFIED` como estado inicial obligatorio de toda Card nueva bajo schema actual y reservar `null` exclusivamente para compatibilidad histórica con schemas previos.
+* **Estado:** `APPROVED_COMPLETE`
 * **Versión:** `0.0.1`

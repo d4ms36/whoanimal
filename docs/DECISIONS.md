@@ -374,6 +374,45 @@ Aprobado por: [Director Creativo / Project Manager / Consenso]
 
 ---
 
+### DEC-035: Canonicalización de `verification_status` y Semántica de `null` vs `UNVERIFIED`
+* **Tema:** Contratos de Dominio de Card, Normalización de Esquema y Compatibilidad Histórica
+* **Fecha:** 2026-09-06
+* **Estado:** `APPROVED`
+* **Problema:** En `DEC-034` persistía una ambigüedad contractual entre la cualidad de opcional/nullable y la inicialización conceptual en `UNVERIFIED`. Se requería además formalizar `verification_status` como nombre canónico oficial en sustitución definitiva del término preliminar `verification`.
+* **Decisión A — Nombre Canónico Oficial:**
+  Se aprueba formalmente que **`verification_status`** es el **único nombre canónico oficial** del campo en el contrato y esquemas de la entidad `Card`. El término provisional `verification` queda formalmente reemplazado y deprecado.
+* **Decisión B — Semántica Canónica de Estados y Distinción Estricta `null ≠ UNVERIFIED`:**
+  1. **`UNVERIFIED`:** La Card posee un estado de verificación conocido y formal en su esquema, pero todavía no ha sido certificada por la autoridad oficial de WHO Animal. Es el **estado inicial obligatorio para toda Card nueva** emitida bajo un esquema que contemple este campo.
+  2. **`VERIFIED`:** La Card ha sido formalmente verificada y autenticada por la autoridad oficial de WHO Animal como fidedigna y legítima.
+  3. **`FLAGGED`:** La Card está bajo revisión o auditoría técnica por presunta anomalía en telemetría, sospecha de fraude o reporte de abuso.
+  4. **`REVOKED`:** La Card ha sido invalidada oficialmente tras auditoría y carece de validez operativa, de colección, de intercambio o de juego en la plataforma (preservando el registro en base de datos para trazabilidad forense).
+  5. **`null`:** **Reservado exclusivamente para compatibilidad histórica** con Cards antiguas emitidas bajo versiones de esquema (`schema_version`) que no contemplaban todavía el campo `verification_status`.
+* **Regla Innegociable para Nuevas Cards:**
+  * Toda Card nueva emitida bajo un esquema vigente nace obligatoriamente con:
+    $$\text{verification\_status} = \text{UNVERIFIED}$$
+  * Queda **estrictamente prohibido** emitir una Card nueva con `verification_status = null` como sustituto semántico de `UNVERIFIED`.
+  * `null` denota estrictamente: *"campo no presente / no soportado en la versión de esquema de emisión original de esta pieza histórica"*.
+* **Compatibilidad Histórica por `schema_version` (`DEC-019`):**
+  * `schema_version` anterior al campo $\rightarrow$ `verification_status = null` (o campo omitido/opcional en el parser de lectura).
+  * `schema_version` canónico actual $\rightarrow$ `verification_status` es campo formal con valor inicial obligatorio `UNVERIFIED`.
+* **Relación con `serial` y `card_id`:**
+  * `card_id` (identidad técnica universal) y `serial` (`auth_serial`, ancla visible de trazabilidad) son **estrictamente inmutables e históricos**.
+  * `verification_status` es un **estado actual mutable** que califica la validez operativa de la carta sin alterar su identidad histórica.
+* **Mutabilidad y Clasificación del Campo:**
+  ```text
+  REQUIRED EN SCHEMA ACTUAL: sí (toda Card nueva bajo schema actual lo incluye con valor inicial)
+  NULLABLE EN DOMINIO:       sí (únicamente por compatibilidad histórica con schemas previos)
+  VALOR INICIAL NUEVA CARD:  UNVERIFIED
+  IMMUTABLE:                 no (es mutable)
+  HISTORICAL:                no (refleja el estado presente)
+  CURRENT STATE:             sí
+  BIOLOGICAL DATA:           no
+  SECURITY/STATUS:           sí
+  ```
+* **Aprobado por:** Director Creativo / Project Manager / Developer
+
+---
+
 ## Decisiones Pendientes de Aprobación (Pending)
 
 ### DEC-009-PENDING: Motor Definitivo de Identificación Visual

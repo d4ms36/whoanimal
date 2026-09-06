@@ -40,6 +40,8 @@
   * Definición formal, alcance (`ANIMAL/SPECIES`), inmutabilidad y desacoplamiento estricto de censos biológicos reales (DEC-033).
 * **`WHO-005B-D` — Auditoría y Resolución de `verification`** `[APPROVED_COMPLETE]`
   * Formalización canónica de `verification_status` como estado actual mutable, desacoplado de `serial` e identidad histórica (DEC-034).
+* **`WHO-005B-D.1` — Canonicalización de `verification_status` y Semántica `null` vs `UNVERIFIED`** `[APPROVED_COMPLETE]`
+  * Formalización definitiva del nombre canónico, estado inicial `UNVERIFIED` y reserva de `null` para compatibilidad histórica (DEC-035).
 * **`WHO-005B-B` — Validación de Esquemas y Serialización JSON (Planificado)** `[PLANNED]`
   * Definición de esquemas de exportación/importación JSON estandarizados para cartas y perfiles biológicos (con Pydantic / dataclasses).
 * **`WHO-006` — Banco de Datos Inicial de Fauna (Semilla Educativa)** `[PROPOSED]`

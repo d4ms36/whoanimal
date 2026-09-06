@@ -59,7 +59,7 @@
 * `is_collectible` (bool): Si la carta está desbloqueada y pertenece a la colección.
 * `rarity_tier` (enum): Nivel de rareza de colección asignado (`COMMON`, `UNCOMMON`, `RARE`, `EPIC`, `LEGENDARY`).
 * `owner_id` (str): Identificador del usuario propietario actual *(atributo mutable mediante intercambio o comercio futuro sin afectar los metadatos históricos de emisión)*.
-* `verification_status` (enum, opcional / nullable): Estado actual de autenticación y validez certificado por la autoridad oficial (`UNVERIFIED`, `VERIFIED`, `FLAGGED`, `REVOKED`). Atributo mutable que no altera la identidad histórica de la carta *(DEC-034)*.
+* `verification_status` (enum, requerido con valor inicial `UNVERIFIED` en schema actual / `null` reservado a compatibilidad histórica): Estado actual de autenticación y validez certificado por la autoridad oficial (`UNVERIFIED`, `VERIFIED`, `FLAGGED`, `REVOKED`). Nombre canónico oficial que reemplaza a `verification`. Atributo mutable que no altera la identidad histórica de la carta *(DEC-034, DEC-035)*.
 
 ---
 
@@ -142,33 +142,39 @@
   COLLECTION DATA: sí
   ```
 
-### 4.2. Semántica Formal y Modelo de `verification` (DEC-034)
+### 4.2. Semántica Formal y Modelo de `verification_status` (DEC-034, DEC-035)
 
+* **Nombre Canónico Oficial:**  
+  **`verification_status`** es el **único nombre canónico oficial** del campo en el contrato de `Card` y sus esquemas asociados. El término preliminar `verification` queda formalmente reemplazado y deprecado *(DEC-035)*.
 * **Definición Canónica:**  
-  `verification` (formalizado en el contrato como **`verification_status`**) es el **campo mutable de estado actual que expresa la condición de autenticidad y validez operativa de la Card certificada por la autoridad oficial de WHO Animal**, siendo estrictamente independiente de la identidad histórica inmutable de emisión anclada en `card_id` y `serial`.
+  `verification_status` es el **campo mutable de estado actual que expresa la condición de autenticidad y validez operativa de la Card certificada por la autoridad oficial de WHO Animal**, siendo estrictamente independiente de la identidad histórica inmutable de emisión anclada en `card_id` y `serial`.
 * **Tipo Conceptual:** **`CURRENT STATE`** (Campo escalar de estado / Enum de dominio) con punto de extensión desacoplado hacia infraestructura externa de auditoría.
-* **Estados Conceptuales Aprobados:**
-  1. `UNVERIFIED` (No verificada): Estado inicial por defecto; la carta ha sido acuñada pero aún no certificada por la autoridad oficial.
+* **Semántica Canónica de Estados y Distinción Estricta `null ≠ UNVERIFIED` (DEC-035):**
+  1. `UNVERIFIED` (No verificada): La Card posee un estado de verificación conocido y formal en su esquema, pero aún no ha sido certificada por la autoridad oficial. **Es el estado inicial obligatorio para toda Card nueva emitida bajo el esquema vigente**.
   2. `VERIFIED` (Verificada): Ratificada formalmente por el servicio de autenticación de WHO Animal como registro fidedigno y auténtico.
   3. `FLAGGED` (En revisión / Sospechosa): Marcada para auditoría por anomalías en telemetría o sospecha de fraude/duplicación.
   4. `REVOKED` (Revocada / Invalidada): Declarada nula o ilegítima tras auditoría. No borra el registro de la base de datos (se preserva por trazabilidad forense), pero anula toda validez operativa, de colección o de juego oficial.
+  5. `null`: **Reservado exclusivamente para compatibilidad histórica** con Cards antiguas emitidas bajo versiones de esquema (`schema_version`) que no contemplaban todavía este campo.
+* **Regla Innegociable para Nuevas Cards:**  
+  Toda Card nueva bajo el esquema actual nace con `verification_status = UNVERIFIED`. **Queda terminantemente prohibido asignar `null` a una Card nueva como sustituto de `UNVERIFIED`**.
 * **Transiciones de Estado:**
   * `UNVERIFIED` $\rightarrow$ `VERIFIED` (tras validación oficial).
   * `UNVERIFIED` o `VERIFIED` $\rightarrow$ `FLAGGED` (al detectar anomalías o reportes de abuso).
   * `FLAGGED` $\rightarrow$ `VERIFIED` (auditoría confirma legitimidad).
   * `FLAGGED` $\rightarrow$ `REVOKED` (auditoría confirma fraude). Estado terminal.
-* **Obligatoriedad y Nullability:**
-  * `REQUIRED: no` (la carta existe y opera como artefacto de colección en Fase 0 sin depender de un servicio de autenticación conectado).
-  * `OPTIONAL: sí`.
-  * `NULLABLE: sí` (admite `null` para reflejar ausencia de servicio de verificación, inicializándose conceptualmente en `UNVERIFIED`).
+* **Obligatoriedad y Compatibilidad por Schema (`DEC-019`, `DEC-035`):**
+  * **En Schema Actual (`schema_version >= 1.0`):** Requerido; no puede omitirse y se inicializa en `UNVERIFIED`.
+  * **En Dominio / Schemas Históricos Previos:** Nullable exclusivamente para permitir deserialización de piezas históricas emitidas antes de la introducción del campo.
 * **Mutabilidad y Clasificación del Atributo:**
   ```text
-  REQUIRED:        no
-  IMMUTABLE:       no (es mutable)
-  HISTORICAL:      no (refleja el estado presente)
-  CURRENT STATE:   sí
-  BIOLOGICAL DATA: no
-  SECURITY/STATUS: sí
+  REQUIRED EN SCHEMA ACTUAL: sí (toda Card nueva lo incluye con valor inicial)
+  NULLABLE EN DOMINIO:       sí (exclusivamente para compatibilidad histórica)
+  VALOR INICIAL NUEVA CARD:  UNVERIFIED
+  IMMUTABLE:                 no (es mutable)
+  HISTORICAL:                no (refleja el estado presente)
+  CURRENT STATE:             sí
+  BIOLOGICAL DATA:           no
+  SECURITY/STATUS:           sí
   ```
 * **Fuente de Verdad:**
   El **Verification Service / Authority** de WHO Animal. La carta no es su propia autoridad y el cliente móvil no puede auto-certificarse como `VERIFIED` unilateralmente.
