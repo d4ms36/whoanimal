@@ -118,4 +118,12 @@ Cada tarea u objetivo debe documentarse utilizando la siguiente ficha estructura
 ### WHO-005B-D.1: Canonicalización de verification_status y Semántica null vs UNVERIFIED
 * **Propósito:** Formalizar `verification_status` como nombre canónico oficial (DEC-035), resolver la ambigüedad contractual fijando `UNVERIFIED` como estado inicial obligatorio de toda Card nueva bajo schema actual y reservar `null` exclusivamente para compatibilidad histórica con schemas previos.
 * **Estado:** `APPROVED_COMPLETE`
+* **Commit:** `8f661d3` (*docs(card): clarify verification status semantics*)
 * **Versión:** `0.0.1`
+
+### WHO-005C.1: Definición Conceptual de sex en Animal/Capture
+* **Propósito:** Formalizar la delimitación ontológica de `sex` asignándolo a `Capture / Specimen` y excluyéndolo del modelo taxonómico `Animal` (DEC-036), definiendo los valores `MALE`, `FEMALE` y `UNKNOWN`, la regla anti-inferencia y la proyección visual en `Card`.
+* **Estado:** `APPROVED_COMPLETE`
+* **Commit:** `a2f89cb` (*docs(domain): define biological sex at capture level*)
+* **Versión:** `0.0.1`
+

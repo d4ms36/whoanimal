@@ -15,12 +15,12 @@
 | **Fase actual** | Alpha |
 | **Versión actual** | `0.0.1` |
 | **Estado** | Foundation |
-| **Objetivo activo** | Ninguno (Ciclo WHO-005B-D.1 completado; listo para revisión de PM) |
-| **Último objetivo completado** | `WHO-005B-D.1` — Canonicalización de `verification_status` y semántica `null` vs `UNVERIFIED` (DEC-035) |
+| **Objetivo activo** | Ninguno (Ciclo WHO-005C.1 completado; listo para revisión de PM) |
+| **Último objetivo completado** | `WHO-005C.1` — Definición conceptual de `sex` en Animal/Capture (DEC-036) |
 | **Próximo objetivo propuesto** | `WHO-005B-B` — Validación de Esquemas y Serialización JSON |
 | **Bloqueos** | Ninguno |
 | **Decisiones pendientes** | `DEC-009` a `DEC-012`, `DEC-020` a `DEC-025` |
-| **Último commit** | `6c2b8b1` |
+| **Último commit** | `a2f89cb` |
 | **Última actualización** | 2026-09-06 |
 
 ---
@@ -58,6 +58,7 @@ $$\text{FASE} . \text{CORRECCIONES} . \text{ITERACIÓN}$$
 | **WHO-005B-C**| Resolución A: Semántica de `population_at_issuance` | `COMPLETADO` | Alta | 0.0.1 | Sí |
 | **WHO-005B-D**| Auditoría y resolución de `verification` | `COMPLETADO` | Alta | 0.0.1 | Sí |
 | **WHO-005B-D.1**| Canonicalización de `verification_status` y `null` vs `UNVERIFIED` | `COMPLETADO` | Alta | 0.0.1 | Sí |
+| **WHO-005C.1**| Definición conceptual de `sex` en Animal/Capture | `COMPLETADO` | Alta | 0.0.1 | Sí |
 | **WHO-005B-B**| Validación de Esquemas y Serialización JSON | `PROPUESTO` | Alta | 0.0.1 | No |
 | **WHO-006** | Banco de Datos Inicial de Fauna (Semilla Educativa) | `PROPUESTO` | Media | 0.0.1 | No |
 
@@ -128,6 +129,7 @@ Ordenados por prioridad técnica y estratégica.
 | **WHO-005B-C**| `APROBADO` | `VALIDADO` | `COMPLETADO` | `APPROVED_COMPLETE` |
 | **WHO-005B-D**| `APROBADO` | `VALIDADO` | `COMPLETADO` | `APPROVED_COMPLETE` |
 | **WHO-005B-D.1**| `APROBADO` | `VALIDADO` | `COMPLETADO` | `APPROVED_COMPLETE` |
+| **WHO-005C.1**| `APROBADO` | `VALIDADO` | `COMPLETADO` | `APPROVED_COMPLETE` |
 | **WHO-005B-B**| *PENDIENTE* | `PLANIFICADO` | `EN ESPERA` | `PROPOSED` |
 | **WHO-006** | *PENDIENTE* | *EN EVALUACIÓN* | `EN ESPERA` | `PROPOSED` |
 
@@ -218,6 +220,7 @@ Para prevenir el desvío del alcance (*scope creep*) y asegurar una base sólida
 | **2026-09-06** | Resolución A: Semántica formal y alcance de `population_at_issuance` (DEC-033) | Eliminar ambigüedad entre población zoológica y emisión de cartas en la colección | Director / PM (`WHO-005B-C`) |
 | **2026-09-06** | Auditoría y resolución de `verification` y estados de autenticación (DEC-034) | Formalizar verification_status como CURRENT STATE desacoplado de la identidad | Director / PM (`WHO-005B-D`) |
 | **2026-09-06** | Canonicalización de `verification_status` y semántica de `null` vs `UNVERIFIED` (DEC-035) | Establecer UNVERIFIED como estado inicial y null exclusivo para compatibilidad histórica | Director / PM (`WHO-005B-D.1`) |
+| **2026-09-06** | Definición conceptual de `sex` en Animal/Capture (DEC-036) | Atribuir sexo biológico a Capture/Specimen y desacoplarlo del modelo zoológico Animal | Director / PM (`WHO-005C.1`) |
 
 ---
 

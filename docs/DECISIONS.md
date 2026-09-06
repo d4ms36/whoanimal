@@ -413,6 +413,35 @@ Aprobado por: [Director Creativo / Project Manager / Consenso]
 
 ---
 
+### DEC-036: Definición Conceptual y Atribución de `sex` en Capture/Specimen (`sex ∉ Animal`)
+* **Tema:** Modelo Conceptual de Dominio, Separación de Entidades y Datos Biológicos
+* **Fecha:** 2026-09-06
+* **Estado:** `APPROVED`
+* **Problema:** Existía el riesgo de modelar el sexo biológico (`sex`) dentro de la entidad `Animal`. Sin embargo, `Animal` representa conocimiento zoológico y taxonómico universal de una especie/taxón (la especie en sí no posee un sexo individual). El sexo biológico pertenece intrínsecamente al individuo o espécimen concreto registrado durante una observación/captura en campo.
+* **Decisión:** Se aprueba formalmente la delimitación conceptual:
+  $$\text{sex} \in \text{Capture / Specimen}$$
+  $$\text{sex} \notin \text{Animal}$$
+  * **`Animal`:** Modela el saber biológico abstracto de la especie (`animal_id`, taxonomía, hábitat, dieta, descripción general, etc.).
+  * **`Capture / Specimen`:** Modela el evento de observación y registro del individuo físico (`capture_id`, `animal_id`, telemetría, timestamp y `sex` del individuo observado).
+* **Valores Conceptuales Aprobados:**
+  1. `MALE`: El sexo biológico del espécimen observado fue determinado de manera suficientemente confiable.
+  2. `FEMALE`: El sexo biológico del espécimen observado fue determinado de manera suficientemente confiable.
+  3. `UNKNOWN`: No existe evidencia suficiente para determinar el sexo del individuo a partir de la observación/captura disponible.
+* **Semántica de `UNKNOWN` y Regla Anti-Inferencia:**
+  * `UNKNOWN` no significa que el animal carezca de sexo biológico ni representa una condición biológica anómala; describe honestidad epistémica ante la falta de evidencia diagnóstica en la observación.
+  * Queda **estrictamente prohibido inferir o adivinar** `MALE` o `FEMALE` por mera apariencia superficial sin evidencia biológica diagnóstica sólida (dimorfismo sexual claro, caracteres sexuales primarios/secundarios contrastados). Ante cualquier incertidumbre, el valor obligatorio es `UNKNOWN`.
+* **Reglas de Negocio Vinculantes:**
+  1. `Animal` representa conocimiento zoológico de la especie; `sex` representa un atributo del individuo observado.
+  2. Un mismo `animal_id` puede vincularse a múltiples Captures/Specimens con valores diversos de `sex` (`MALE`, `FEMALE`, `UNKNOWN`).
+  3. El dato conserva trazabilidad directa e inmutable hacia `capture_id`.
+  4. Principio de veracidad zoológica: Prohibido inventar el sexo biológico de un individuo.
+  5. La ausencia de información de sexo no contamina el modelo de `Animal` ni invalida la observación.
+  6. La `Card` puede proyectar este dato para presentación visual cuando esté disponible, pero la fuente primaria de verdad es siempre `Capture / Specimen`.
+  7. Separación de pilares: El sexo biológico pertenece exclusivamente a **INFORMACIÓN REAL**, nunca a narrativa de Lore ni a invención de Experiencia.
+* **Aprobado por:** Director Creativo / Project Manager / Developer
+
+---
+
 ## Decisiones Pendientes de Aprobación (Pending)
 
 ### DEC-009-PENDING: Motor Definitivo de Identificación Visual

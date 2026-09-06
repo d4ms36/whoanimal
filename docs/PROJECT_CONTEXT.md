@@ -71,12 +71,13 @@ Toda información asociada a un animal o a una carta en WHO Animal pertenece con
 
 ---
 
-## 4. Diferenciación Ontológica: Entidad Animal vs. Entidad Carta
+## 4. Diferenciación Ontológica: Animal vs. Capture vs. Carta
 
-> **Animal ≠ Carta**
+> **Animal ≠ Capture ≠ Carta**
 
-* **Animal (`AnimalProfile`):** Representa la entidad biológica y taxonómica objetiva en la base de conocimiento de WHO Animal. Puede existir en el sistema sin necesidad de haber sido emitido aún en una carta para ningún usuario.
-* **Carta (`AnimalCard`):** Representa un ejemplar coleccionable individual, acuñado y emitido en un momento histórico concreto para el álbum de un jugador, vinculado a un espécimen animal pero dotado de propiedades de colección, generación, rareza y autenticación propias.
+* **Animal (`AnimalProfile`):** Representa la entidad biológica y taxonómica objetiva de la especie en la base de conocimiento de WHO Animal. Describe rasgos universales de la especie (taxonomía, hábitat, dieta, distribución). Puede existir en el sistema sin necesidad de haber sido emitido aún en una carta para ningún usuario. **No contiene atributos particulares de individuos observados (ej. `sex ∉ Animal`)**.
+* **Captura / Espécimen (`Capture / Specimen`):** Representa el evento de observación y registro de un individuo físico concreto en el mundo real (`capture_id`, `animal_id`, telemetría de campo, timestamp). **Aquí reside el sexo biológico del ejemplar observado (`sex ∈ Capture`, valores: `MALE`, `FEMALE`, `UNKNOWN`; ver DEC-036)**.
+* **Carta (`AnimalCard`):** Representa un ejemplar coleccionable individual, acuñado y emitido en un momento histórico concreto para el álbum de un jugador, vinculado a un espécimen animal pero dotado de propiedades de colección, generación, rareza y autenticación propias. Puede proyectar datos de la captura (como el sexo del individuo observado) en su visualización, pero la fuente primaria de verdad es la captura.
 
 ---
 

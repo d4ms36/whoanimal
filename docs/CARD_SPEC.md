@@ -60,6 +60,7 @@
 * `rarity_tier` (enum): Nivel de rareza de colección asignado (`COMMON`, `UNCOMMON`, `RARE`, `EPIC`, `LEGENDARY`).
 * `owner_id` (str): Identificador del usuario propietario actual *(atributo mutable mediante intercambio o comercio futuro sin afectar los metadatos históricos de emisión)*.
 * `verification_status` (enum, requerido con valor inicial `UNVERIFIED` en schema actual / `null` reservado a compatibilidad histórica): Estado actual de autenticación y validez certificado por la autoridad oficial (`UNVERIFIED`, `VERIFIED`, `FLAGGED`, `REVOKED`). Nombre canónico oficial que reemplaza a `verification`. Atributo mutable que no altera la identidad histórica de la carta *(DEC-034, DEC-035)*.
+* `specimen_sex` (enum, opcional / proyectado de Capture, valores: `MALE`, `FEMALE`, `UNKNOWN`): Sexo biológico del individuo observado proyectado para exhibición desde el registro de `Capture` de origen (`DEC-036`). No forma parte de la entidad `AnimalProfile` (especie) y su fuente primaria de verdad reside en la captura.
 
 ---
 
@@ -192,6 +193,24 @@
   7. ❌ **NO es un mecanismo propietario rígido:** Es agnóstico a la tecnología de autenticación subyacente.
 * **Neutralidad hacia Tecnologías Futuras:**
   Cualquier mecanismo futuro (códigos QR, chips NFC, APIs REST, firmas criptográficas PKI o anclajes en blockchain) interactúa con la infraestructura de seguridad externa y se proyecta limpiamente en la carta como una actualización de su `verification_status`, sin romper el contrato base ni corromper los datos históricos inmutables.
+
+### 4.3. Atribución de `sex` en Capture/Specimen vs. Animal (DEC-036)
+
+* **Principio de Delimitación Ontológica:**  
+  $$\text{sex} \in \text{Capture / Specimen} \quad \land \quad \text{sex} \notin \text{Animal}$$
+  * `AnimalProfile` modela el conocimiento científico abstracto y universal de la especie; la especie como taxón no posee un único sexo biológico individual.
+  * `Capture / Specimen` registra el individuo físico concreto avistado en campo, donde reside el atributo biológico `sex`.
+* **Valores Conceptuales Aprobados:**
+  * `MALE`: Sexo biológico determinado con fiabilidad diagnóstica suficiente.
+  * `FEMALE`: Sexo biológico determinado con fiabilidad diagnóstica suficiente.
+  * `UNKNOWN`: Evidencia insuficiente para determinar el sexo del individuo a partir de la captura disponible.
+* **Semántica de `UNKNOWN` y Regla Anti-Inferencia:**
+  * `UNKNOWN` no denota ausencia de sexo biológico ni anomalía reproductiva; expresa rigor epistémico ante la falta de evidencia diagnóstica visible.
+  * Queda **estrictamente prohibido inferir o adivinar** `MALE` o `FEMALE` sin evidencia concluyente (dimorfismo sexual claro, caracteres sexuales contrastados). Ante cualquier duda, el valor obligatorio es `UNKNOWN`.
+* **Proyección en Card:**
+  * La `Card` puede proyectar este dato (`specimen_sex`) para enriquecer la experiencia visual del coleccionista, pero **la fuente primaria inmutable de verdad reside siempre en el registro de captura (`capture_id`)**, sin que la carta sustituya al registro de origen.
+* **Separación de Pilares:**
+  * El sexo biológico pertenece estrictamente a **INFORMACIÓN REAL**, quedando prohibida su invención o asignación mediante elementos narrativos de Lore o Experiencia.
 
 ---
 
