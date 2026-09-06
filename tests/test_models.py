@@ -141,6 +141,16 @@ class TestDomainModels(unittest.TestCase):
         self.assertIsNotNone(card.back.lore)
         self.assertTrue(card.back.lore.is_fictional)
 
+    def test_version_and_config_consistency(self):
+        """Verifica que la versión oficial sea 0.0.1 y que DEFAULT_CONFIG la sincronice sin duplicar."""
+        from whoanimal import __version__
+        from whoanimal.core.config import DEFAULT_CONFIG
+
+        self.assertEqual(__version__, "0.0.1")
+        self.assertEqual(DEFAULT_CONFIG.version, "0.0.1")
+        self.assertTrue(DEFAULT_CONFIG.is_pet_friendly)
+        self.assertTrue(DEFAULT_CONFIG.enforce_lore_separation)
+
 
 if __name__ == "__main__":
     unittest.main()

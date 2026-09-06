@@ -45,11 +45,17 @@ whoanimal/
 │   │   └── ci.yml               # Pipeline de Integración Continua (GitHub Actions)
 │   └── PULL_REQUEST_TEMPLATE.md # Guía y checklist de contribución
 ├── docs/
-│   ├── GDD.md                   # Game Design Document (visión, cartas, core loop)
+│   ├── ARCHITECTURE.md          # Especificación de capas y roadmap técnico
 │   ├── CARD_SPEC.md             # Especificación técnica y campos de las cartas
-│   ├── PRODUCT_RULES.md         # Reglas éticas y de separación Ciencia/Lore
+│   ├── DECISIONS.md             # Registro formal de decisiones (ADR)
 │   ├── DISCLAIMER.md            # Aviso de responsabilidad educativa y de seguridad
-│   └── ARCHITECTURE.md          # Especificación de capas y roadmap técnico
+│   ├── GDD.md                   # Game Design Document (visión, cartas, core loop)
+│   ├── GOVERNANCE.md            # Modelo de roles (Director, PM, Developer) y flujo
+│   ├── PRODUCT_RULES.md         # Reglas éticas y de separación Ciencia/Lore
+│   ├── PROJECT_CONTEXT.md       # Memoria oficial y los 8 pilares del producto
+│   ├── RELEASES.md              # Registro histórico de versiones y builds Android
+│   ├── ROADMAP.md               # Planificación estratégica por fases y objetivos
+│   └── VERSIONING.md            # Esquema semántico y control de versionCode
 ├── src/
 │   └── whoanimal/
 │       ├── core/                # Configuración global y excepciones base
@@ -57,6 +63,7 @@ whoanimal/
 │       │   └── models/          # Entidades: AnimalProfile, Card, Lore
 │       └── services/            # Protocolos e interfaces para IA, cartas y colección
 ├── tests/                       # Pruebas unitarias de contratos y separación de dominio
+├── AGENTS.md                    # Manual normativo obligatorio para agentes de desarrollo
 ├── .gitignore                   # Exclusiones estándar para Python y sistemas operativos
 ├── pyproject.toml               # Configuración estándar PEP 621 y dependencias por fases
 ├── requirements.txt             # Dependencias de producción (fase actual: stdlib)
@@ -99,16 +106,28 @@ Para comprobar la integridad de los modelos de dominio y las especificaciones de
 ```bash
 pytest
 ```
+*(O con la biblioteca estándar: `python -m unittest discover -s tests -p "test_*.py"` configurando `PYTHONPATH=src`).*
 
 ---
 
 ## 📚 Documentación de Referencia
 
-* [Game Design Document (GDD)](docs/GDD.md)
-* [Especificación de la Carta](docs/CARD_SPEC.md)
-* [Reglas de Producto (100% Pet Friendly)](docs/PRODUCT_RULES.md)
-* [Aviso de Responsabilidad](docs/DISCLAIMER.md)
-* [Arquitectura Técnica](docs/ARCHITECTURE.md)
+* **Gobernanza y Operación:**
+  * [Manual para Agentes (AGENTS.md)](AGENTS.md)
+  * [Modelo de Gobernanza](docs/GOVERNANCE.md)
+  * [Flujo de Trabajo por Objetivos](docs/WORKFLOW.md)
+  * [Registro de Decisiones (ADR)](docs/DECISIONS.md)
+* **Producto y Diseño de Juego:**
+  * [Memoria del Proyecto](docs/PROJECT_CONTEXT.md)
+  * [Game Design Document (GDD)](docs/GDD.md)
+  * [Especificación de la Carta](docs/CARD_SPEC.md)
+  * [Reglas de Producto (100% Pet Friendly)](docs/PRODUCT_RULES.md)
+  * [Aviso de Responsabilidad](docs/DISCLAIMER.md)
+* **Arquitectura y Versionado:**
+  * [Arquitectura Técnica](docs/ARCHITECTURE.md)
+  * [Sistema de Versionado y Android versionCode](docs/VERSIONING.md)
+  * [Registro de Releases](docs/RELEASES.md)
+  * [Hoja de Ruta (Roadmap)](docs/ROADMAP.md)
 
 ---
 
