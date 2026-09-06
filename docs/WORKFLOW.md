@@ -165,8 +165,14 @@ Cada tarea u objetivo debe documentarse utilizando la siguiente ficha estructura
 
 ### WHO-006C: Formalizar Dominio Capture/Specimen
 * **Propósito:** Formalizar en el dominio la entidad `Capture / Specimen` (`capture_id` UUIDv4 estricto, `sex ∈ {MALE, FEMALE, UNKNOWN}` conforme a DEC-036), estableciendo la frontera ontológica inquebrantable `Animal ≠ Capture ≠ Card`, consagrando que el sexo biológico pertenece al individuo observado y no a la especie (`Animal`) ni es campo canónico de `Card`, con 44 tests unitarios pasando al 100%.
-* **Estado:** `REVIEW`
+* **Estado:** `NEEDS_CORRECTION` (Subsumido por WHO-006C.2)
 * **Commit:** `edad99b` (*feat(domain): introduce capture specimen model*)
+* **Versión:** `0.0.1`
+
+### WHO-006C.2: Cierre técnico de Capture/Specimen y sex
+* **Propósito:** Corregir la cardinalidad y obligatoriedad de `Capture.sex` en base a la decisión de dominio `DEC-039`, haciéndolo OPTIONAL, NULLABLE y sin valor default `UNKNOWN`, adaptando su constructuor, serialización, y actualizando la batería de pruebas unitarias asociadas.
+* **Estado:** `APPROVED_COMPLETE`
+* **Commit:** (Pendiente de commit) (*fix(domain): finalize capture sex contract*)
 * **Versión:** `0.0.1`
 
 ### WHO-006D: Formalizar Modelo de Monetización Gratuito + Publicidad

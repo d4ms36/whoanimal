@@ -451,6 +451,17 @@ Aprobado por: [Director Creativo / Project Manager / Consenso]
 * **Impacto:** La publicidad (`AdMob` o similar) se define estrictamente como **Infraestructura Externa** y NO debe formar parte del `Domain`. Entidades inmutables (`Animal`, `Capture`, `Card`, `Lore`) no deben depender de la publicidad. Queda prohibido implementar economía in-app (tienda, monedas, loot boxes, sistemas de pago) en la fase actual.
 * **Aprobado por:** Director Creativo / Project Manager
 
+---
+
+### DEC-039: Resolución Contractual de Capture.sex (Cardinalidad y Nullability)
+* **Tema:** Modelo Conceptual de Dominio y Validaciones
+* **Fecha:** 2026-09-06
+* **Estado:** `APPROVED`
+* **Decisión:** Se aprueba formalmente que el atributo `sex` en `Capture / Specimen` es **OPTIONAL** (puede omitirse al instanciar), **NULLABLE** (puede recibir explícitamente el valor `null`), y **NO TIENE VALOR DEFAULT** (no se asume `UNKNOWN` por defecto si falta o es null). Los valores permitidos, cuando existen, siguen siendo `MALE`, `FEMALE`, y `UNKNOWN` (conforme a DEC-036).
+* **Motivo:** Evitar la inferencia arbitraria de datos. `UNKNOWN` denota que el sexo se intentó identificar pero faltó evidencia. La ausencia o `null` denota que el dato todavía no está disponible en la observación.
+* **Impacto:** El contrato del modelo `Capture` y su serialización/deserialización debe soportar la diferencia semántica entre un campo ausente, un campo explícitamente nulo y un campo con valor.
+* **Aprobado por:** Director Creativo / Project Manager
+
 ## Decisiones Pendientes de Aprobación (Pending)
 
 ### DEC-009-PENDING: Motor Definitivo de Identificación Visual

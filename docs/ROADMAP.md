@@ -56,8 +56,9 @@
   * Implementación del modelo de dominio `Card` con los 19 campos canónicos, validación técnica estricta, inmutabilidad post-emisión y cobertura de pruebas.
 * **`WHO-006B.1` — Corrección de Contrato Técnico del Modelo Card** `[APPROVED_COMPLETE]`
   * Alineación estricta con el contrato: UUIDv4 exclusivo, distinción ausencia vs. null en `edition`, `artwork` como tipo abierto, `rank` int/str, protección anti-GPS y 30 tests unitarios.
-* **`WHO-006C` — Formalizar Dominio Capture/Specimen** `[REVIEW]`
+* **`WHO-006C` — Formalizar Dominio Capture/Specimen** `[APPROVED_COMPLETE]`
   * Formalización de la entidad `Capture` (`capture_id` UUIDv4, `sex ∈ {MALE, FEMALE, UNKNOWN}`) delimitando estrictamente que el sexo biológico pertenece al espécimen observado y no al conocimiento taxonómico de la especie (`Animal`) ni es canónico de `Card` (DEC-036).
+  * **`WHO-006C.2`:** Corrección técnica para establecer `Capture.sex` como `OPTIONAL`, `NULLABLE` y sin valor default (DEC-039).
 * **`WHO-006D` — Formalizar Modelo de Monetización Gratuito + Publicidad** `[APPROVED_COMPLETE]`
   * Documentar el principio de producto 100% gratuito, uso de publicidad (ej. AdMob) como infraestructura externa desacoplada y prioridad conceptual de Rewarded Ads sin implementar economía in-app (DEC-038).
 

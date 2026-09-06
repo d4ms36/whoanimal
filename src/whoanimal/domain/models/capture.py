@@ -82,28 +82,25 @@ class Capture:
         # 1. capture_id (Required + non-null, estrictamente UUIDv4 no nulo)
         self.capture_id = self._validate_uuidv4(capture_id, "capture_id")
 
-        # 2. sex (Required + non-null, SpecimenSex: MALE, FEMALE, UNKNOWN)
-        if sex is _UNSET:
-            raise ValidationError("Field 'sex' is required")
-        if sex is None:
-            raise ValidationError(
-                "Field 'sex' cannot be None (use SpecimenSex.UNKNOWN when evidence is insufficient)"
-            )
-        if isinstance(sex, SpecimenSex):
-            self.sex = sex
-        elif isinstance(sex, str):
-            cleaned_sex = sex.strip().upper()
-            try:
-                self.sex = SpecimenSex(cleaned_sex)
-            except ValueError:
+        # 2. sex (Optional + nullable, SpecimenSex: MALE, FEMALE, UNKNOWN)
+        if sex is not _UNSET:
+            if sex is None:
+                self.sex = None
+            elif isinstance(sex, SpecimenSex):
+                self.sex = sex
+            elif isinstance(sex, str):
+                cleaned_sex = sex.strip().upper()
+                try:
+                    self.sex = SpecimenSex(cleaned_sex)
+                except ValueError:
+                    raise ValidationError(
+                        f"Invalid sex: {sex!r}. "
+                        f"Expected one of: {[s.value for s in SpecimenSex]}"
+                    )
+            else:
                 raise ValidationError(
-                    f"Invalid sex: {sex!r}. "
-                    f"Expected one of: {[s.value for s in SpecimenSex]}"
+                    f"sex must be a SpecimenSex, str or None, got {sex!r}"
                 )
-        else:
-            raise ValidationError(
-                f"sex must be a SpecimenSex or str, got {sex!r}"
-            )
 
         object.__setattr__(self, "_initialized", True)
 
@@ -116,10 +113,12 @@ class Capture:
 
     def to_dict(self) -> Dict[str, Any]:
         """Serializa la entidad Capture a diccionario conforme al contrato de dominio."""
-        return {
+        result: Dict[str, Any] = {
             "capture_id": self.capture_id,
-            "sex": self.sex.value,
         }
+        if hasattr(self, "sex"):
+            result["sex"] = self.sex.value if self.sex is not None else None
+        return result
 
     @classmethod
     def from_dict(cls, data: Dict[str, Any]) -> "Capture":

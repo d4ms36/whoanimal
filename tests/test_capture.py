@@ -136,26 +136,23 @@ class TestCaptureDomainModel(unittest.TestCase):
                 with self.assertRaises(ValidationError):
                     Capture(capture_id=valid_id, sex=arb)
 
-    def test_09_sex_none_rejected_without_unapproved_default(self):
-        """
-        Verifica que sex=None sea rechazado conforme a la regla de no inventar defaults silenciosos.
-        La incertidumbre o falta de evidencia diagnóstica debe expresarse explícitamente como UNKNOWN.
-        """
+    def test_09_sex_none_accepted_as_null(self):
+        """Verifica que sex=None sea aceptado (nullable)."""
         valid_id = str(uuid.uuid4())
-        with self.assertRaises(ValidationError):
-            Capture(capture_id=valid_id, sex=None)
+        capture = Capture(capture_id=valid_id, sex=None)
+        self.assertIsNone(capture.sex)
 
-    def test_10_missing_required_fields_raises_error(self):
-        """Verifica que la omisión de capture_id o sex levante ValidationError."""
+    def test_10_missing_sex_allowed_as_absence(self):
+        """Verifica que sex puede omitirse (optional) y capture_id sigue siendo requerido."""
         valid_id = str(uuid.uuid4())
 
         # Falta capture_id
         with self.assertRaises(ValidationError):
             Capture(sex=SpecimenSex.MALE)
 
-        # Falta sex
-        with self.assertRaises(ValidationError):
-            Capture(capture_id=valid_id)
+        # Falta sex (permitido)
+        capture = Capture(capture_id=valid_id)
+        self.assertFalse(hasattr(capture, "sex"))
 
     def test_11_no_unexpected_extra_fields_permitted(self):
         """
@@ -191,19 +188,30 @@ class TestCaptureDomainModel(unittest.TestCase):
             capture.extra_attribute = "test"
 
     def test_13_serialization_roundtrip(self):
-        """Verifica la serialización to_dict() y reconstrucción from_dict()."""
+        """Verifica la serialización to_dict() y reconstrucción from_dict() para distintos estados de sex."""
         valid_id = str(uuid.uuid4())
-        capture = Capture(capture_id=valid_id, sex=SpecimenSex.FEMALE)
+        
+        # 1. Campo explícitamente con valor
+        capture_val = Capture(capture_id=valid_id, sex=SpecimenSex.FEMALE)
+        data_val = capture_val.to_dict()
+        self.assertEqual(data_val, {"capture_id": valid_id, "sex": "FEMALE"})
+        restored_val = Capture.from_dict(data_val)
+        self.assertEqual(restored_val.sex, SpecimenSex.FEMALE)
 
-        data = capture.to_dict()
-        self.assertEqual(data, {
-            "capture_id": valid_id,
-            "sex": "FEMALE",
-        })
+        # 2. Campo explícitamente null
+        capture_null = Capture(capture_id=valid_id, sex=None)
+        data_null = capture_null.to_dict()
+        self.assertEqual(data_null, {"capture_id": valid_id, "sex": None})
+        restored_null = Capture.from_dict(data_null)
+        self.assertIsNone(restored_null.sex)
 
-        restored = Capture.from_dict(data)
-        self.assertEqual(restored.capture_id, capture.capture_id)
-        self.assertEqual(restored.sex, capture.sex)
+        # 3. Campo ausente
+        capture_absent = Capture(capture_id=valid_id)
+        data_absent = capture_absent.to_dict()
+        self.assertEqual(data_absent, {"capture_id": valid_id})
+        self.assertNotIn("sex", data_absent)
+        restored_absent = Capture.from_dict(data_absent)
+        self.assertFalse(hasattr(restored_absent, "sex"))
 
     def test_14_ontological_boundaries_animal_and_card(self):
         """
