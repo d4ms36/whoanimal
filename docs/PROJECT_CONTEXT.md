@@ -97,19 +97,21 @@ La identificación visual es una de las puertas de entrada fundamentales:
 
 Cada carta coleccionable posee una identidad inmutable e intransferible:
 * **Atributos de Identidad:**
-  * `card_id` único.
+  * `card_id` único universal (identificador técnico de sistema/persistencia).
+  * `specimen_number` (Specimen # legible y visible para el coleccionista, ej. `#0042`).
   * Relación con `animal_id`.
   * Edición (cuando aplique).
   * Rareza de colección asignada.
   * Marca temporal de emisión (timestamp).
   * Población registrada de la especie al momento de la emisión.
-  * Generación histórica.
+  * Generación histórica (ej. Genesis / Gen 1).
   * Información y anclaje de autenticación.
 
 ### Inmutabilidad Post-Emisión
 * Una vez emitida una carta, **sus propiedades históricas fundamentales quedan estrictamente congeladas**.
 * Si la población global de una especie aumenta de 50 a 5.000.000 de ejemplares en los años siguientes, la carta emitida en el registro 50 conserva perpetuamente su rareza original, su generación y su registro histórico de población.
 * **La población evoluciona; la carta histórica no muta ni se devalúa retroactivamente.**
+* Asimismo, **un cambio posterior de propietario (vía intercambio o comercio futuro) no altera jamás la identidad histórica original de la pieza**.
 
 ### Serial Visual de Autenticación
 * Cada carta incorpora visualmente un serial/código discreto en la parte inferior.
@@ -145,6 +147,7 @@ Ante la ausencia de datos en el sistema, se aplica una distinción estricta:
 
 * **Rareza Biológica:** Refleja la abundancia poblacional, densidad y estado de conservación de una especie en el ecosistema natural real.
 * **Rareza de Colección:** Expresa el valor lúdico, la dificultad de adquisición y la exclusividad de una carta dentro del sistema de coleccionismo de WHO Animal.
+* **Efectos Visuales Cosméticos:** La rareza de colección puede inducir modificaciones visuales en el marco, color, brillo o efectos holográficos/foil de la carta, sin guardar relación con la abundancia biológica de la especie en la naturaleza.
 * **Ejemplo ilustrativo:** Un perro doméstico (*Canis lupus familiaris*) es biológicamente muy común y abundante en el planeta; sin embargo, una carta de perro emitida en las primeras horas de vida de la aplicación puede ser un objeto de colección de rareza colosal (*Ultra Rare / Genesis*).
 
 ---
@@ -167,3 +170,30 @@ Ante la ausencia de datos en el sistema, se aplica una distinción estricta:
   JSON Data Schema:        1.0
   ```
 * **Principio de Compatibilidad no Destructiva:** El esquema de datos podrá evolucionar e incorporar nuevos atributos; sin embargo, **las cartas emitidas bajo versiones anteriores del esquema deben permanecer siempre válidas, legibles e interpretables** sin sufrir mutaciones destructivas.
+
+---
+
+## 12. Privacidad en la Captura: GPS Exacto vs. Ubicación Pública Generalizada
+
+En alineación estricta con el principio **100% Pet Friendly** y la protección de datos personales:
+* **Telemetría de Captura (Interna/Privada):** El sistema puede almacenar internamente las coordenadas geográficas exactas (latitud/longitud) para control de unicidad de registro, verificación contra fraude o bitácora personal del usuario.
+* **Exposición en la Carta (Pública/Visual):** La carta **expone únicamente una ubicación geográfica generalizada** (ej. "Costa Rica", "Península Ibérica", "Selva Misionera, Argentina").
+* **Motivo de Protección Animal:** Evitar la divulgación de ubicaciones geográficas precisas que puedan ser utilizadas por cazadores furtivos, traficantes o personas que perturben los nidos o madrigueras de especies amenazadas.
+
+---
+
+## 13. Capacidades Futuras Aprobadas (Extensiones de Fases Posteriores)
+
+Las siguientes capacidades han sido aprobadas a nivel de diseño conceptual para que **la arquitectura actual no cierre las puertas a su evolución**, pero **permanecen estrictamente fuera de la implementación en la Fase 0**:
+
+### A. Sistema de Enfrentamientos PVP
+* Enfrentamientos lúdicos o duelos de cartas entre usuarios.
+* Concebido como un módulo independiente desacoplado de los perfiles taxonómicos (`Animal`), de la identificación por visión, de la información científica real y del Lore.
+
+### B. Intercambio y Comercio de Cartas (Trading / Transferencia Controlada)
+* Capacidad de traspasar cartas entre usuarios manteniendo intacta e inmutable la identidad histórica (`card_id`, `specimen_number`, generación, rareza original, población de emisión y serial de autenticación).
+
+### C. Cartas con Artwork Único y Red de Ilustradores
+* Los usuarios podrán solicitar un diseño artístico personalizado para una carta específica interactuando directamente desde la app con ilustradores colaboradores asociados.
+* El artwork constituye una capa estética y creativa adicional que **no sustituye ni deforma**: la identidad del animal, la información científica ni los metadatos históricos de la carta.
+

@@ -13,6 +13,7 @@ El proyecto se encuentra en la **Fase 0 — Fundación y Diseño de Producto**.
 * El diseño conceptual, las mecánicas de colección y las reglas de contenido están siendo coordinados entre el Director Creativo (Usuario), el Project Manager (ChatGPT) y el Desarrollador Principal.
 * La base arquitectónica inicial se ha diseñado en **Python 3.10+** bajo principios de código limpio y desacoplado, lista para evolucionar hacia servicios de visión por computadora, APIs y aplicaciones cliente.
 * **No se han implementado mecánicas de juego definitivas, IA final ni bases de datos de producción todavía**, asegurando una base limpia y modular.
+* Las extensiones futuras aprobadas (PVP desacoplado, intercambio/comercio de cartas y arte exclusivo con red de ilustradores) se encuentran formalmente registradas en la memoria técnica para garantizar una arquitectura evolutiva sin anticipar código innecesario.
 
 ---
 

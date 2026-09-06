@@ -88,12 +88,26 @@ Cada animal avistado e identificado genera una carta con dos caras:
 
 ---
 
-## 6. Posibles Mecánicas Futuras (Propuestas no definitivas)
+## 6. Capacidades Futuras Aprobadas (Extensiones de Fases Posteriores)
 
-Estas mecánicas están en análisis conceptual y **NO deben implementarse todavía**:
-1. **Sistema RPG / Duelos de Sabiduría:** Enfrentamientos de conocimiento animal o estadísticas lúdicas ficticias, alejadas de cualquier violencia o combate físico animal.
-2. **Retos de Exploración / Badges:** Insignias por registrar diversidad de aves urbanas, insectos del jardín, etc.
-3. **Economía interna ética:** Moneda del juego obtenida por hitos educativos, nunca ligada a mecánicas abusivas.
+Las siguientes capacidades han sido formalmente aprobadas como parte de la visión a largo plazo, manteniéndose **estrictamente fuera del alcance de la Fase 0**:
+
+1. **Sistema de Enfrentamientos PVP:**
+   * Futuro sistema de duelos o desafíos entre cartas de jugadores.
+   * Totalmente independiente del perfil biológico (`Animal`), del motor de visión, de los datos científicos y del Lore.
+   * Sin violencia animal real ni mecánicas contrarias a la ética *Pet Friendly*.
+
+2. **Intercambio y Comercio de Cartas (Trading / Marketplace Controlado):**
+   * Las cartas podrán transferirse entre jugadores en fases posteriores.
+   * **Regla inmutable:** El cambio de dueño actualiza la custodia/posesión, pero **conserva congelada la identidad histórica** (`card_id`, `specimen_number`, generación, rareza original, población de emisión y serial de autenticación).
+
+3. **Artwork Único y Red de Ilustradores Colaboradores:**
+   * Capacidad para que un usuario solicite un diseño artístico exclusivo para una carta específica directamente desde la aplicación.
+   * Flujo integrado: Solicitud → Contacto con ilustrador → Propuesta → Aprobación → Vinculación del artwork.
+   * El arte personalizado es una capa visual complementaria que jamás reemplaza la taxonomía ni la información científica real.
+
+4. **Privacidad de Captura y Protección de Fauna:**
+   * La aplicación registrará internamente coordenadas GPS exactas para fines antifraude, pero la carta expondrá públicamente solo ubicaciones generalizadas para proteger a las especies silvestres contra la perturbación humana.
 
 ---
 

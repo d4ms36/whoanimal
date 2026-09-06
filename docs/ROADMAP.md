@@ -32,9 +32,11 @@
   * Creación de manual de agentes (`AGENTS.md`), memoria oficial (`PROJECT_CONTEXT.md`), gobernanza de 3 roles, esquema de versionado semántico/Android y registro de decisiones.
 * **`WHO-004` — Plan Maestro de Desarrollo y Alineación por Versión** `[APPROVED_COMPLETE]`
   * Creación del tablero operativo central (`docs/PLANNING.md`) para sincronización entre Director, PM y Developer.
-* **`WHO-005A` — Incorporación de Nuevas Decisiones al Contexto** `[IN_PROGRESS]`
+* **`WHO-005A` — Incorporación de Nuevas Decisiones al Contexto** `[APPROVED_COMPLETE]`
   * Consolidación en la memoria y gobernanza de las decisiones sobre entidad Animal vs. Carta, inmutabilidad, rareza dinámica y autenticación.
-* **`WHO-005B` — Validación de Esquemas y Serialización JSON (Planificado)** `[PLANNED]`
+* **`WHO-005B-A` — Actualización Documental de Capacidades Futuras** `[APPROVED_COMPLETE]`
+  * Registro y blindaje arquitectónico de capacidades futuras aprobadas: PVP, intercambio/comercio, artwork único/ilustradores y privacidad de ubicación.
+* **`WHO-005B-B` — Validación de Esquemas y Serialización JSON (Planificado)** `[PLANNED]`
   * Definición de esquemas de exportación/importación JSON estandarizados para cartas y perfiles biológicos (con Pydantic / dataclasses).
 * **`WHO-006` — Banco de Datos Inicial de Fauna (Semilla Educativa)** `[PROPOSED]`
   * Creación de un conjunto inicial de especímenes reales verificados (mamíferos, aves, reptiles) con información científica completa y Lore demarcado.
@@ -71,3 +73,13 @@
 * Sistema ampliado de álbumes, logros éticos y exploración por biomas.
 * Infraestructura de sincronización en la nube (si es aprobada por el Director).
 * Soporte continuo y ampliación del catálogo de especies y Lore.
+
+---
+
+## 4. EXTENSIONES FUTURAS APROBADAS (Post-Lanzamiento)
+
+Capacidades de evolución aprobadas conceptualmente que se implementarán en fases avanzadas:
+* **Módulo de Intercambio y Comercio de Cartas:** Transferencia controlada de propiedad entre coleccionistas preservando la inmutabilidad histórica original.
+* **Sistema de Artwork Único y Red de Ilustradores:** Encargos artísticos personalizados gestionados in-app asociados a cartas específicas.
+* **Módulo de Enfrentamientos PVP:** Sistema de duelos entre cartas desacoplado del conocimiento zoológico y del core loop.
+

@@ -93,5 +93,11 @@ Cada tarea u objetivo debe documentarse utilizando la siguiente ficha estructura
 
 ### WHO-005A: Incorporación de Nuevas Decisiones al Contexto del Proyecto
 * **Propósito:** Incorporar formalmente a la memoria y gobernanza las decisiones sobre entidad Animal vs. Carta, inmutabilidad de cartas, rareza dinámica ligada a población, serial visual de autenticación y criterios de validación funcional.
-* **Estado:** `IN_PROGRESS`
+* **Estado:** `APPROVED_COMPLETE`
+* **Commit:** `134637c` (*docs(context): incorporate animal card and rarity design principles*)
+* **Versión:** `0.0.1`
+
+### WHO-005B-A: Actualización Documental de Capacidades Futuras
+* **Propósito:** Registrar en la memoria y gobernanza las decisiones de diseño para extensiones futuras (PVP, comercio/intercambio, artwork único/red de ilustradores y privacidad GPS vs. ubicación generalizada) asegurando que la arquitectura de esquemas no cierre estas capacidades.
+* **Estado:** `APPROVED_COMPLETE`
 * **Versión:** `0.0.1`

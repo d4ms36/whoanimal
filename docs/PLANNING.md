@@ -3,7 +3,7 @@
 **Documento:** `docs/PLANNING.md`  
 **Propósito:** Tablero operativo central de alineación entre Director Creativo, Project Manager y Developer Principal.  
 **Estado:** Activo y dinámico  
-**Última actualización:** 2026-09-06 (Actualización de ciclo WHO-005A)
+**Última actualización:** 2026-09-06 (Actualización de ciclo WHO-005B-A)
 
 ---
 
@@ -15,12 +15,12 @@
 | **Fase actual** | Alpha |
 | **Versión actual** | `0.0.1` |
 | **Estado** | Foundation |
-| **Objetivo activo** | `WHO-005A` — Incorporación de Nuevas Decisiones al Contexto del Proyecto |
-| **Último objetivo completado** | `WHO-004` — Plan Maestro de Desarrollo y Alineación por Versión |
-| **Próximo objetivo propuesto** | `WHO-005B` — Validación de Esquemas y Serialización JSON |
+| **Objetivo activo** | Ninguno (Ciclo WHO-005B-A completado; a la espera de autorización para WHO-005B-B) |
+| **Último objetivo completado** | `WHO-005B-A` — Actualización Documental de Capacidades Futuras |
+| **Próximo objetivo propuesto** | `WHO-005B-B` — Validación de Esquemas y Serialización JSON |
 | **Bloqueos** | Ninguno |
-| **Decisiones pendientes** | `DEC-009` a `DEC-012`, `DEC-020` a `DEC-026` |
-| **Último commit** | `4e90895` |
+| **Decisiones pendientes** | `DEC-009` a `DEC-012`, `DEC-020` a `DEC-025` |
+| **Último commit** | `134637c` |
 | **Última actualización** | 2026-09-06 |
 
 ---
@@ -53,8 +53,9 @@ $$\text{FASE} . \text{CORRECCIONES} . \text{ITERACIÓN}$$
 | **WHO-002** | Fundación de Arquitectura y Especificación de Cartas | `COMPLETADO` | Alta | 0.0.1 | Sí |
 | **WHO-003** | Gobernanza, Memoria del Proyecto y Versionado | `COMPLETADO` | Alta | 0.0.1 | Sí |
 | **WHO-004** | Plan Maestro de Desarrollo y Alineación por Versión | `COMPLETADO` | Alta | 0.0.1 | Sí |
-| **WHO-005A**| Incorporación de Nuevas Decisiones al Contexto | `EN DESARROLLO` | Alta | 0.0.1 | Sí |
-| **WHO-005B**| Validación de Esquemas y Serialización JSON | `PROPUESTO` | Alta | 0.0.1 | No |
+| **WHO-005A**| Incorporación de Nuevas Decisiones al Contexto | `COMPLETADO` | Alta | 0.0.1 | Sí |
+| **WHO-005B-A**| Actualización Documental de Capacidades Futuras | `COMPLETADO` | Alta | 0.0.1 | Sí |
+| **WHO-005B-B**| Validación de Esquemas y Serialización JSON | `PROPUESTO` | Alta | 0.0.1 | No |
 | **WHO-006** | Banco de Datos Inicial de Fauna (Semilla Educativa) | `PROPUESTO` | Media | 0.0.1 | No |
 
 ---
@@ -65,29 +66,29 @@ $$\text{FASE} . \text{CORRECCIONES} . \text{ITERACIÓN}$$
 ┌─────────────────────────────────────────────────────────────────────────────┐
 │                           OBJETIVO ACTIVO ACTUAL                            │
 ├──────────────────┬──────────────────────────────────────────────────────────┤
-│ ID               │ WHO-005A                                                 │
-│ Nombre           │ Incorporación de Nuevas Decisiones al Contexto           │
-│ Propósito        │ Incorporar a la memoria oficial las decisiones de cartas,│
-│                  │ rareza dinámica, inmutabilidad y serial de autenticación │
-│ Estado           │ IN_PROGRESS                                              │
+│ ID               │ WHO-005B-A                                               │
+│ Nombre           │ Actualización Documental de Capacidades Futuras          │
+│ Propósito        │ Registrar en la memoria y gobernanza las decisiones sobre│
+│                  │ PVP, comercio de cartas, red de ilustradores y privacidad│
+│                  │ para evitar bloqueos arquitectónicos en esquemas futuros │
+│ Estado           │ COMPLETADO                                                │
 │ Versión Asociada │ 0.0.1                                                    │
-│ Requisitos       │ WHO-004 completado y aprobado                            │
+│ Requisitos       │ WHO-005A completado y aprobado                           │
 │ Responsable      │ Developer Principal (Antigravity)                        │
 └──────────────────┴──────────────────────────────────────────────────────────┘
 ```
 
 * **Criterios de Aceptación:**
-  1. `docs/PROJECT_CONTEXT.md` actualizado con los principios de Animal ≠ Carta, identificación probabilística, inmutabilidad post-emisión, serial visual, campos obligatorios funcionales, error crítico vs. nulo, rareza biológica vs. colección, rareza dinámica por población y versionado independiente del esquema JSON.
-  2. `docs/DECISIONS.md` actualizado con decisiones aprobadas `DEC-013` a `DEC-019` y registradas pendientes `DEC-020` a `DEC-026`.
-  3. `docs/CARD_SPEC.md` complementado con metadatos de emisión, serial visual e inmutabilidad.
-  4. Tablero `docs/PLANNING.md` sincronizado con el estado real de decisiones y objetivos.
-  5. Cero código prematuro implementado (no JSON parser, no cámara, no matemáticas de rareza).
-  6. Suite unitaria verificada sin regresiones.
-  7. Detención formal del desarrollo tras la entrega sin iniciar `WHO-005B`.
-* **Archivos Afectados:** `docs/PROJECT_CONTEXT.md`, `docs/DECISIONS.md`, `docs/CARD_SPEC.md`, `docs/PLANNING.md`, `docs/WORKFLOW.md`, `docs/ROADMAP.md`.
+  1. `docs/DECISIONS.md` actualizado con decisiones `DEC-026` a `DEC-032` catalogadas como `APPROVED — FUTURE EXTENSION`.
+  2. `docs/PROJECT_CONTEXT.md` y `docs/CARD_SPEC.md` actualizados con `specimen_number`, privacidad GPS vs. pública, inmutabilidad ante transferencia y capa de artwork único.
+  3. `docs/GDD.md` y `docs/ROADMAP.md` sincronizados reflejando estas capacidades en fases posteriores.
+  4. Cero código implementado (sin modelos PVP, sin trading, sin marketplace, sin perfiles de ilustrador).
+  5. Pruebas unitarias ejecutadas y aprobadas al 100%.
+  6. Detención formal tras la entrega sin encadenar `WHO-005B-B`.
+* **Archivos Afectados:** `docs/DECISIONS.md`, `docs/PROJECT_CONTEXT.md`, `docs/CARD_SPEC.md`, `docs/GDD.md`, `docs/ROADMAP.md`, `docs/WORKFLOW.md`, `docs/PLANNING.md`.
 * **Dependencias:** Ninguna externa.
 * **Bloqueos:** Ninguno.
-* **Resultado Esperado:** Memoria y tablero alineados con las directrices de producto, commit independiente y reporte final emitido.
+* **Resultado Esperado:** Memoria documental blindada para soportar extensiones futuras sin corromper la arquitectura base.
 
 ---
 
@@ -97,12 +98,12 @@ Ordenados por prioridad técnica y estratégica.
 
 | ID | Nombre | Propósito | Prioridad | Dependencias | Estado | Req. Aprobación Director |
 | :--- | :--- | :--- | :---: | :--- | :---: | :---: |
-| **WHO-005B** | Validación de Esquemas y Serialización JSON | Garantizar importación/exportación estándar de cartas y perfiles | Alta | WHO-002, WHO-005A | `PROPUESTO` | **Sí** |
-| **WHO-006** | Banco de Datos Inicial de Fauna (Semilla) | Dotar al sistema de especímenes reales con datos y Lore | Media | WHO-005B | `PROPUESTO` | **Sí** |
-| **WHO-007** | Prototipo del Servicio de Generación de Cartas | Implementación del ensamblador en base al protocolo | Media | WHO-005B | `PROPUESTO` | **Sí** |
-| **WHO-008** | Evaluación y Prototipo de Ingesta Taxonómica | Conector experimental con APIs de biodiversidad (GBIF/iNat) | Media | WHO-005B, DEC-009 | `PROPUESTO` | **Sí** |
-| **WHO-009** | Prototipo del Motor de Identificación por Visión | Implementación experimental de `IdentificationService` | Alta | WHO-005B, DEC-009, DEC-021 | `PROPUESTO` | **Sí** |
-| **WHO-010** | Motor de Persistencia y Álbum de Colección | Almacenamiento local para inventario y álbum | Media | WHO-005B | `PROPUESTO` | **Sí** |
+| **WHO-005B-B** | Validación de Esquemas y Serialización JSON | Importación/exportación estándar de cartas y perfiles compatibles con extensiones | Alta | WHO-002, WHO-005B-A | `PROPUESTO` | **Sí** |
+| **WHO-006** | Banco de Datos Inicial de Fauna (Semilla) | Dotar al sistema de especímenes reales con datos y Lore | Media | WHO-005B-B | `PROPUESTO` | **Sí** |
+| **WHO-007** | Prototipo del Servicio de Generación de Cartas | Implementación del ensamblador en base al protocolo | Media | WHO-005B-B | `PROPUESTO` | **Sí** |
+| **WHO-008** | Evaluación y Prototipo de Ingesta Taxonómica | Conector experimental con APIs de biodiversidad (GBIF/iNat) | Media | WHO-005B-B, DEC-009 | `PROPUESTO` | **Sí** |
+| **WHO-009** | Prototipo del Motor de Identificación por Visión | Implementación experimental de `IdentificationService` | Alta | WHO-005B-B, DEC-009, DEC-021 | `PROPUESTO` | **Sí** |
+| **WHO-010** | Motor de Persistencia y Álbum de Colección | Almacenamiento local para inventario y álbum | Media | WHO-005B-B | `PROPUESTO` | **Sí** |
 | **WHO-011** | Interfaz Gráfica / Prototipo Cliente Móvil | Primer frontend visual interactivo para volteo de cartas | Alta | WHO-004, DEC-012 | `PROPUESTO` | **Sí** |
 
 > ⚠️ **Aviso de Gobernanza:**  
@@ -119,8 +120,9 @@ Ordenados por prioridad técnica y estratégica.
 | **WHO-002** | `APROBADO` | `VALIDADO` | `COMPLETADO` | `APPROVED_COMPLETE` |
 | **WHO-003** | `APROBADO` | `VALIDADO` | `COMPLETADO` | `APPROVED_COMPLETE` |
 | **WHO-004** | `APROBADO` | `VALIDADO` | `COMPLETADO` | `APPROVED_COMPLETE` |
-| **WHO-005A**| `APROBADO` | `PLANIFICADO` | `EN CURSO` | `IN_PROGRESS` |
-| **WHO-005B**| *PENDIENTE* | `PLANIFICADO` | `EN ESPERA` | `PROPOSED` |
+| **WHO-005A**| `APROBADO` | `VALIDADO` | `COMPLETADO` | `APPROVED_COMPLETE` |
+| **WHO-005B-A**| `APROBADO` | `VALIDADO` | `COMPLETADO` | `APPROVED_COMPLETE` |
+| **WHO-005B-B**| *PENDIENTE* | `PLANIFICADO` | `EN ESPERA` | `PROPOSED` |
 | **WHO-006** | *PENDIENTE* | *EN EVALUACIÓN* | `EN ESPERA` | `PROPOSED` |
 
 > **Regla:** El Developer no puede auto-aprobar objetivos. La autorización debe ser explícita por parte del Director Creativo y estructurada por el Project Manager.
@@ -137,12 +139,12 @@ Vista operativa de las decisiones pendientes documentadas oficialmente en [docs/
 | **DEC-010** | Estilo y universo del Lore (mitología única vs. folclore regional) | Medio | No (en fase de fundación) | `PENDING` |
 | **DEC-011** | Convención definitiva de identificadores `card_id` y códigos de colección | Medio | No (temporal en v0.1) | `PENDING` |
 | **DEC-012** | Tecnología cliente definitiva para la app de usuario (Flutter / nativo) | Alto | Sí (bloquea WHO-011) | `PENDING` |
-| **DEC-020** | Diseño definitivo del esquema JSON de datos (`Animal` y `Card`) | Alto | Sí (bloquea WHO-005B) | `PENDING` |
+| **DEC-020** | Diseño definitivo del esquema JSON de datos (`Animal` y `Card`) | Alto | Sí (requerido para WHO-005B-B)| `PENDING` |
 | **DEC-021** | Umbrales definitivos de confianza en la identificación por visión/cámara | Medio | Sí (para WHO-009) | `PENDING` |
 | **DEC-022** | Algoritmo matemático y curvas de probabilidad para rareza dinámica | Alto | No (en fase documental) | `PENDING` |
 | **DEC-023** | Reglas anti-abuso para validación de observaciones y población | Alto | No (en fase documental) | `PENDING` |
 | **DEC-024** | Sistema definitivo de autenticación y verificación de cartas | Medio | No (en fase documental) | `PENDING` |
-| **DEC-025** | Estrategia de compatibilidad y migración entre versiones del esquema JSON | Medio | No (definible en WHO-005B)| `PENDING` |
+| **DEC-025** | Estrategia de compatibilidad y migración entre versiones del esquema JSON | Medio | No (definible en WHO-005B-B)| `PENDING` |
 
 ---
 
@@ -160,7 +162,7 @@ Vista operativa de las decisiones pendientes documentadas oficialmente en [docs/
 
 | Versión | Fase | Estado | Objetivos Asociados | VersionCode | Tipo |
 | :--- | :--- | :--- | :--- | :---: | :--- |
-| **0.0.1** | Alpha | Foundation | WHO-001 a WHO-005A | **1\*** | Internal / Foundation |
+| **0.0.1** | Alpha | Foundation | WHO-001 a WHO-005B-A | **1\*** | Internal / Foundation |
 
 *\*Nota: El `versionCode` 1 es de carácter lógico y documental en la fundación del repositorio. Todavía no se ha generado ningún binario físico APK o AAB.*  
 *La fuente histórica y vinculante completa reside en [docs/RELEASES.md](RELEASES.md).*
@@ -192,11 +194,11 @@ Para prevenir el desvío del alcance (*scope creep*) y asegurar una base sólida
 * ❌ **Backend definitivo o infraestructura cloud:** No autorizado en Fase 0.
 * ❌ **Bases de datos definitivas o conectores externos:** No autorizado en Fase 0.
 * ❌ **Sistema de cuentas, login o autenticación:** No contemplado para Alpha temprana.
-* ❌ **Sistemas de combate, duelos o estadísticas RPG de juego:** No aprobados.
-* ❌ **Economía, compras in-app o monetización:** Prohibido en esta etapa.
+* ❌ **Motor de enfrentamientos PVP:** Capacidad futura aprobada (`DEC-026`), prohibida su implementación en Fase 0.
+* ❌ **Sistema de intercambio, marketplace o comercio:** Capacidad futura aprobada (`DEC-027`), prohibida su implementación en Fase 0.
+* ❌ **Gestión de ilustradores o pasarelas de pago:** Capacidad futura aprobada (`DEC-028` / `DEC-029`), prohibida su implementación en Fase 0.
 * ❌ **Publicación en Google Play Store:** No aplicable en Fase 0.
 * ❌ **Generador automático o asistido de Lore por LLM en runtime:** No autorizado.
-* ❌ **Implementación matemática de rareza o algoritmos antifraude en código:** No autorizado en WHO-005A.
 
 ---
 
@@ -206,6 +208,7 @@ Para prevenir el desvío del alcance (*scope creep*) y asegurar una base sólida
 | :--- | :--- | :--- | :---: |
 | **2026-09-06** | Creación del Plan Maestro (`docs/PLANNING.md`) | Establecer tablero operativo central de alineación Director/PM/Dev | Director / PM (`WHO-004`) |
 | **2026-09-06** | Incorporación de decisiones de entidad animal/carta, inmutabilidad, rareza dinámica y serial | Consolidación de memoria y reglas de producto (WHO-005A) | Director / PM (`WHO-005A`) |
+| **2026-09-06** | Incorporación de capacidades futuras (PVP, intercambio, artwork único/ilustradores, privacidad GPS) | Blindaje arquitectónico para esquemas de datos sin cerrar opciones (WHO-005B-A) | Director / PM (`WHO-005B-A`) |
 
 ---
 

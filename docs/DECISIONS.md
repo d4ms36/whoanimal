@@ -187,6 +187,87 @@ Aprobado por: [Director Creativo / Project Manager / Consenso]
 
 ---
 
+## Decisiones Aprobadas — Extensiones Futuras (Approved — Future Extensions)
+
+> ⚠️ **Nota:** Estas decisiones están formalmente aprobadas como parte del diseño conceptual a largo plazo, pero **NO están autorizadas para implementación en la fase actual**. Sirven como restricciones arquitectónicas para no cerrar opciones en el diseño del dominio.
+
+### DEC-026: Arquitectura Desacoplada para Futuro Sistema de Enfrentamientos PVP
+* **Tema:** Mecánicas de Juego Futuras
+* **Fecha:** 2026-09-06
+* **Estado:** `APPROVED — FUTURE EXTENSION`
+* **Decisión:** WHO Animal podrá incorporar en el futuro un sistema de enfrentamientos PVP entre usuarios/cartas. Este sistema debe concebirse como un módulo independiente desacoplado de: `Animal`, Identificación por visión, Información científica factual, Lore y el motor básico de emisión de cartas.
+* **Motivo:** Asegurar que la capa de enfrentamiento lúdico no contamine la pureza de los datos científicos ni el flujo principal de descubrimiento y colección.
+* **Impacto:** Ningún modelo del dominio biológico ni de cartas básicas debe depender de lógica o estadísticas de combate en esta etapa.
+* **Aprobado por:** Director Creativo / Project Manager
+
+---
+
+### DEC-027: Transferencia de Propiedad e Intercambio de Cartas sin Pérdida de Identidad Histórica
+* **Tema:** Economía de Colección y Transacciones
+* **Fecha:** 2026-09-06
+* **Estado:** `APPROVED — FUTURE EXTENSION`
+* **Decisión:** Las cartas podrán cambiar de propietario en el futuro mediante intercambio, comercio o transferencia controlada. Regla innegociable: **El cambio de dueño NO modifica la identidad histórica de la carta** (`card_id`, `specimen_number`, generación, rareza, población al momento de emisión, edición, serial de autenticación e historial de eventos relevantes).
+* **Motivo:** Preservar la inmutabilidad y el valor de colección histórico de cada pieza acuñada ante eventos de mercado o traspaso.
+* **Impacto:** El propietario actual es un atributo de posesión/inventario mutable, mientras que los metadatos de acuñación de la carta son perpetuamente inmutables.
+* **Aprobado por:** Director Creativo / Project Manager
+
+---
+
+### DEC-028: Capa de Artwork Único / Cartas Ilustradas y Red de Ilustradores
+* **Tema:** Arte y Personalización
+* **Fecha:** 2026-09-06
+* **Estado:** `APPROVED — FUTURE EXTENSION`
+* **Decisión:** En el futuro, WHO Animal podrá ofrecer diseños artísticos únicos asociados a una carta específica mediante colaboración con ilustradores. El artwork personalizado es una **capa visual/creativa asociada a la carta** y **NO sustituye**: la identidad del Animal, la información científica, la identidad histórica de la Card, la rareza, la generación ni el serial/specimen.
+* **Motivo:** Permitir personalización estética de alto valor coleccionable sin corromper la veracidad biológica ni los registros históricos de la carta.
+* **Impacto:** Los contratos de la carta deben prever soporte para asociar metadatos de artwork personalizado sin sobreescribir la información canónica de la especie.
+* **Aprobado por:** Director Creativo / Project Manager
+
+---
+
+### DEC-029: Solicitud y Gestión de Encargos Artísticos Directamente desde la Aplicación
+* **Tema:** UX y Servicios Integrados
+* **Fecha:** 2026-09-06
+* **Estado:** `APPROVED — FUTURE EXTENSION`
+* **Decisión:** Se aprueba que el usuario pueda solicitar un diseño único y establecer contacto con el ecosistema de ilustradores colaboradores directamente desde la aplicación (Flujo: Solicitud del usuario → Gestión interna → Contacto con ilustrador → Propuesta/Diseño → Aprobación → Vinculación del artwork a la carta).
+* **Motivo:** Facilitar la interacción directa y una experiencia integrada de personalización para coleccionistas.
+* **Impacto:** La arquitectura futura de servicios contemplará la gestión de solicitudes artísticas de forma completamente separada de los datos zoológicos.
+* **Aprobado por:** Director Creativo / Project Manager
+
+---
+
+### DEC-030: Privacidad en Captura: Separación entre GPS Exacto y Ubicación Pública Generalizada
+* **Tema:** Seguridad, Privacidad y Preservación de Fauna
+* **Fecha:** 2026-09-06
+* **Estado:** `APPROVED — FUTURE EXTENSION`
+* **Decisión:** Al capturar/registrar un espécimen, el sistema puede almacenar internamente las coordenadas GPS exactas para fines de validación científica o personal; sin embargo, **la carta expone públicamente únicamente una ubicación generalizada** (país, región, provincia o bioma).
+* **Motivo:** Proteger la privacidad del usuario y, fundamentalmente, **proteger a las especies silvestres o en peligro contra la caza furtiva o la perturbación**, en estricto cumplimiento del principio 100% Pet Friendly.
+* **Impacto:** Separación clara en los modelos de captura entre telemetría privada y datos públicos de la carta.
+* **Aprobado por:** Director Creativo / Project Manager
+
+---
+
+### DEC-031: Doble Identificador de Carta: `card_id` Técnico y `Specimen #` Visible
+* **Tema:** Identificadores de Colección
+* **Fecha:** 2026-09-06
+* **Estado:** `APPROVED — FUTURE EXTENSION`
+* **Decisión:** Cada carta poseerá tanto un identificador técnico universal (`card_id`, ej. UUID) para integridad de base de datos, como un `Specimen #` (número de espécimen visible y legible, ej. `#0042`) para la experiencia del coleccionista.
+* **Motivo:** Combinar rigor técnico en la persistencia con una experiencia amigable y reconocible en la interfaz de usuario.
+* **Impacto:** Los esquemas y modelos contemplan ambos campos de manera complementaria.
+* **Aprobado por:** Director Creativo / Project Manager
+
+---
+
+### DEC-032: Independencia Conceptual entre Rareza de Colección y Rank con Efectos Visuales
+* **Tema:** Gamificación y Diseño Visual
+* **Fecha:** 2026-09-06
+* **Estado:** `APPROVED — FUTURE EXTENSION`
+* **Decisión:** La Rareza de Colección y el Rank son conceptos independientes. La rareza de colección puede inducir modificaciones cosméticas y estéticas en la carta (marcos especiales, paletas cromáticas, texturas holográficas o efectos visuales dinámicos), sin representar abundancia biológica ni vincularse obligatoriamente al rango de progresión.
+* **Motivo:** Enriquecer la dimensión visual de coleccionismo preservando la claridad conceptual entre dificultad de obtención y nivel alcanzado.
+* **Impacto:** Soporte en la capa de vista para temas visuales condicionales basados en rareza.
+* **Aprobado por:** Director Creativo / Project Manager
+
+---
+
 ## Decisiones Pendientes de Aprobación (Pending)
 
 ### DEC-009-PENDING: Motor Definitivo de Identificación Visual
