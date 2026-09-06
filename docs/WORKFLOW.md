@@ -184,5 +184,11 @@ Cada tarea u objetivo debe documentarse utilizando la siguiente ficha estructura
 ### WHO-007: Banco de Datos Inicial de Fauna (Semilla Educativa)
 * **Propósito:** Creación e implementación formal del modelo de dominio `AnimalProfile` como fuente única de verdad para la identidad zoológica, estableciendo la frontera ontológica inquebrantable frente a `Capture` y `Card`. Se definieron campos obligatorios (`animal_id`, `scientific_name`, `common_name`, `taxonomy`) y opcionales sin romper las reglas preexistentes.
 * **Estado:** `APPROVED_COMPLETE`
-* **Commit:** (Pendiente de commit) (*feat(domain): implement formal AnimalProfile contract*)
+* **Commit:** `45df12a` (*feat(domain): implement formal AnimalProfile contract*)
+* **Versión:** `0.0.1`
+
+### WHO-008A: Formalizar Historia Personal de la Carta (Personal Lore)
+* **Propósito:** Formalización documental del concepto de "Lore" como Historia Personal escrita por el usuario. Limita el contenido a 300 caracteres, lo asocia a una carta específica (1 Card -> 0..1 Personal Story) y asegura que no interfiera con los 19 campos canónicos de la entidad Card. Quedan pendientes las mecánicas de edición controlada.
+* **Estado:** `APPROVED_COMPLETE`
+* **Commit:** (Pendiente de commit) (*docs(WHO-008A): formalize personal card story*)
 * **Versión:** `0.0.1`

@@ -10,7 +10,7 @@
 
 > **"Descubre. Identifica. Colecciona."**
 
-**WHO Animal** no es una simple herramienta utilitaria de identificación de especies. Es una **experiencia interactiva de descubrimiento, aprendizaje y colección de fauna** articulada alrededor de un sistema visual de cartas coleccionables con profundidad narrativa (*Lore*) y base científica rigurosa.
+**WHO Animal** no es una simple herramienta utilitaria de identificación de especies. Es una **experiencia interactiva de descubrimiento, aprendizaje y colección de fauna** articulada alrededor de un sistema visual de cartas coleccionables con historias personales de los usuarios (*Lore*) y base científica rigurosa.
 
 ### El Bucle Conceptual de Experiencia (Core Loop)
 
@@ -19,7 +19,7 @@ flowchart LR
     A[📷 Identificar] --> B[✨ Descubrir]
     B --> C[🃏 Obtener Carta]
     C --> D[🔬 Explorar Info Real]
-    D --> E[📖 Descubrir Lore]
+    D --> E[💭 Escribir Historia Personal]
     E --> F[📚 Coleccionar y Preservar]
 ```
 
@@ -27,7 +27,7 @@ flowchart LR
 2. **Descubrir:** El sistema reconoce el animal y presenta la revelación.
 3. **Obtener Carta:** Se genera y entrega la carta correspondiente con arte y atributos iniciales.
 4. **Explorar Información:** El usuario gira la carta para descubrir datos biológicos, hábitat, dieta y curiosidades.
-5. **Descubrir Lore:** Se desbloquea una narrativa de fantasía o leyenda ligada al animal dentro del universo Who Animal.
+5. **Escribir Historia Personal (Lore):** El usuario puede asociar a su carta un relato corto personal de hasta 300 caracteres sobre su encuentro.
 6. **Coleccionar:** El espécimen se archiva en el álbum/inventario personal de avistamientos para su consulta y futura evolución.
 
 ---
@@ -38,7 +38,7 @@ Todo el diseño y la arquitectura de datos de Who Animal respetan esta separaci�
 
 1. **INFORMACIÓN REAL:** Datos taxonómicos, biológicos, morfológicos y de conservación verídicos, contrastables y educativos.
 2. **EXPERIENCIA:** Diseño de interfaz, estética de cartas, sensaciones de recompensa, descubrimiento y colección.
-3. **LORE:** Capa narrativa y de ficción que da personalidad mitológica o de aventura a los animales sin ser jamás confundida con hechos científicos.
+3. **HISTORIA PERSONAL (LORE):** Capa narrativa personal escrita por el usuario, sin ser jamás confundida con hechos científicos.
 
 ---
 
@@ -67,7 +67,7 @@ Cada animal avistado e identificado genera una carta con dos caras:
     * ⚠️ **Precaución** o ⚠️ **Peligro**: Se activa exclusivamente para especies con riesgos reales comprobados (veneno, mordedura, agresividad territorial).
     * Enfoque: Responsable, preventivo, sin sensacionalismo ni estigmatización.
   * **Curiosidades:** Datos llamativos y asombrosos sobre su biología o hábitos.
-  * **Lore (Capa Narrativa Independiente):** Micro-relato o título de leyenda (e.g., *"El Susurro del Viento Helado"*), claramente demarcado como ficción lúdica.
+  * **Lore (Historia Personal):** Micro-relato del usuario sobre su experiencia (hasta 300 caracteres).
 
 ---
 
@@ -126,4 +126,4 @@ Las siguientes capacidades han sido formalmente aprobadas como parte de la visi�
 * Formato final del arte de cartas (generación procedural, plantillas vectoriales o renderizado dinámico).
 * Sistema definitivo de identificación: Modelo on-device vs. API híbrida de taxonomía (iNaturalist / GBIF / Modelo custom).
 * Convención formal de nomenclatura para los identificadores de cartas (`WA-MAM-001`, etc.).
-* Criterio editorial específico para la redacción de Lore por bioma.
+* Lineamientos para la escritura y moderación de Historias Personales de los usuarios.

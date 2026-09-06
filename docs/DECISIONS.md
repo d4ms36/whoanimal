@@ -462,6 +462,16 @@ Aprobado por: [Director Creativo / Project Manager / Consenso]
 * **Impacto:** El contrato del modelo `Capture` y su serialización/deserialización debe soportar la diferencia semántica entre un campo ausente, un campo explícitamente nulo y un campo con valor.
 * **Aprobado por:** Director Creativo / Project Manager
 
+---
+
+### DEC-040: Formalización de la Historia Personal (Lore)
+* **Tema:** Modelo Conceptual de Coleccionismo y Experiencia
+* **Fecha:** 2026-09-06
+* **Estado:** `APPROVED`
+* **Decisión:** La Historia Personal/Lore es un contenido personal escrito por el usuario y asociado a una Card específica (1 Card -> 0..1 Personal Story). Tiene un límite inicial de 300 caracteres (longitud real, sin truncamiento silencioso). No forma parte del conocimiento zoológico del `AnimalProfile` ni de la información científica del animal. La historia podrá evolucionar únicamente mediante reglas de edición controlada que serán definidas posteriormente.
+* **Motivo:** Asegurar que la experiencia narrativa y personal del usuario no contamine la verdad zoológica inmutable de la especie ni los datos históricos de autenticación de la carta (`issued_at`, `display_location`, `serial`).
+* **Impacto:** Modela la Historia Personal como una capa evolutiva, separada de la identidad histórica inmutable de la `Card`. Las mecánicas exactas de edición (límite por cuenta/carta, validación de historial, solicitudes y persistencia) quedan pendientes de resolución. Ningún campo canónico de la `Card` es alterado.
+* **Aprobado por:** Director Creativo / Project Manager
 ## Decisiones Pendientes de Aprobación (Pending)
 
 ### DEC-009-PENDING: Motor Definitivo de Identificación Visual

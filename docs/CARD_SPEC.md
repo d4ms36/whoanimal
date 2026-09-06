@@ -9,7 +9,7 @@
 ## 1. Principios de Diseño de la Carta
 
 1. **Jerarquía Visual Clara:** El usuario debe identificar de un vistazo el animal en el frente y desear conservarlo en su colección.
-2. **Separación Realidad / Ficción:** Los datos biológicos y el Lore narrativo habitan en contenedores aislados.
+2. **Separación Realidad / Historia Personal:** Los datos biológicos y la Historia Personal / Lore habitan en contenedores aislados.
 3. **No Sobrecarga:** Los datos técnicos de conservación y taxonomía se presentan con síntesis y elegancia.
 4. **Inmutabilidad Post-Emisión:** Las propiedades históricas de una carta quedan congeladas una vez emitida, incluso ante transferencias de dueño.
 5. **Privacidad y Pet Friendly:** La carta expone ubicación generalizada para proteger los hábitats de fauna vulnerable.
@@ -36,7 +36,7 @@
 │  Specimen #0042      [Icono]  │        │ ├───────────────────────────┤ │
 │  [SN: 9A8F-42] (Serial)       │        │ │ 💡 Curiosidades           │ │
 │  [Ilustrador: @artista]*      │        │ ├───────────────────────────┤ │
-│                               │        │ │ ✨ LORE (Narrativa)       │ │
+│                               │        │ │ ✨ LORE (Historia Personal)   │ │
 └───────────────────────────────┘        └───────────────────────────────┘
 ```
 *\*El distintivo de ilustrador solo aparece si la carta posee una capa de artwork único personalizado.*
@@ -234,7 +234,7 @@ Los 19 campos conceptuales se proyectan visualmente en las dos caras de la carta
 * Visual y de atracción: `artwork` / `image_uri`, `specimen_number`, `serial` (visible en borde inferior), `visual_effects`, `rank` y proyección taxonómica desde `AnimalProfile` (`common_name`, `scientific_name_secondary`, `category`).
 
 #### Reverso de la Carta (`CardBack`)
-* Educativo y formativo: `display_location`, información científica factual de `AnimalProfile` (hábitat, dieta, comportamiento, tamaño, conservación, advertencias ponderadas) y la capa independiente de `LoreProfile` con marca de ficción.
+* Educativo y formativo: `display_location`, información científica factual de `AnimalProfile` (hábitat, dieta, comportamiento, tamaño, conservación, advertencias ponderadas) y la capa independiente de `LoreProfile` (Historia Personal escrita por el usuario, limitada a 300 caracteres).
 
 ---
 

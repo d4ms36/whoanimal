@@ -66,6 +66,8 @@
   * Creación e implementación formal del modelo de dominio `AnimalProfile` como fuente única de verdad para la identidad zoológica, estableciendo la frontera ontológica inquebrantable frente a `Capture` y `Card`.
 * **`WHO-007` — Prototipo del Servicio de Generación de Cartas** `[PROPOSED]`
   * Implementación del generador de cartas en base al protocolo `CardGeneratorService`.
+* **`WHO-008A` — Formalizar Historia Personal de la Carta (Personal Lore)** `[APPROVED_COMPLETE]`
+  * Formalización documental del concepto de "Lore" como Historia Personal escrita por el usuario, limitada a 300 caracteres, asociada a la carta.
 * **`WHO-008` — Evaluación y Prototipo de Ingesta Taxonómica** `[PROPOSED]`
   * Conector experimental con APIs de biodiversidad abiertas (GBIF / iNaturalist) para validación de datos.
 * **`WHO-009` — Prototipo del Motor de Identificación por Visión** `[PROPOSED]`

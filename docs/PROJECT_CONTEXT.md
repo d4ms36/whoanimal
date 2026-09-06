@@ -19,7 +19,7 @@ flowchart TD
     A[📷 IDENTIFICAR] --> B[✨ DESCUBRIR]
     B --> C[🃏 OBTENER CARTA]
     C --> D[🔬 EXPLORAR INFORMACIÓN]
-    D --> E[📖 DESCUBRIR LORE]
+    D --> E[💭 ESCRIBIR HISTORIA PERSONAL (LORE)]
     E --> F[📚 COLECCIONAR]
     F --> G[🗺️ SEGUIR DESCUBRIENDO]
     G --> A
@@ -35,7 +35,7 @@ flowchart TD
 4. **Cartas:** Formato visual de dos caras (Frente estético y atrayente; Reverso estructurado y formativo) que materializa cada avistamiento.
 5. **Colección:** Mecánica de progresión que permite organizar especímenes en álbumes temáticos, biomas o categorías taxonómicas.
 6. **Exploración:** Invitación a prestar atención a la naturaleza circundante, desde aves urbanas e insectos hasta fauna silvestre protegida.
-7. **Lore:** Capa de ficción mitológica y creativa que otorga dimensión de personaje a los animales dentro del universo Who Animal.
+7. **Historia Personal (Lore):** Capa de contenido personal escrita por el usuario, asociada a una carta específica, que refleja su experiencia individual (hasta 300 caracteres).
 8. **Experiencia Visual:** Diseño de interfaces moderno, limpio, con micro-interacciones de alta fidelidad, dinámico y respetuoso de la fauna.
 
 ---
@@ -49,13 +49,6 @@ Toda información asociada a un animal o a una carta en WHO Animal pertenece con
 │                          WHO ANIMAL ECOSYSTEM                          │
 ├───────────────────┬───────────────────────────────┬────────────────────┤
 │  INFORMACIÓN REAL │          EXPERIENCIA          │        LORE        │
-├───────────────────┼───────────────────────────────┼────────────────────┤
-│ • Nombre común    │ • Categoría de carta          │ • Historias        │
-│ • Nombre científ. │ • Habilidades de experiencia  │ • Títulos narrativ.│
-│ • Taxonomía       │ • Características de juego    │ • Leyendas         │
-│ • Hábitat y Dieta │ • Rareza de colección         │ • Origen ficticio  │
-│ • Tamaño y Peso   │ • Generación (Genesis, Gen 1) │ • Clasificaciones  │
-│ • Conducta        │ • Población al momento de     │   narrativas       │
 │ • Curiosidades      emisión                       │ • Elementos mito-  │
 │ • Protección      │ • Elementos de colección        lógicos            │
 │ • Rareza natural  │ • Interfaz, álbum y volteo    │                    │
@@ -67,7 +60,7 @@ Toda información asociada a un animal o a una carta en WHO Animal pertenece con
 ### Regla Absoluta contra Datos Científicos Inventados
 * **La Información Real jamás se inventa.** No se admiten conjeturas en taxonomía, distribución, hábitats, medidas ni dietas.
 * Si el sistema no dispone de un dato verídico contrastado, **debe consultarlo en una fuente válida o representarlo como desconocido (`null`)**, nunca rellenarlo con suposiciones.
-* Si se desea incorporar contenido imaginativo o fantástico, debe residir obligatoriamente en **EXPERIENCIA** o en **LORE**, portando siempre su correspondiente demarcación de ficción.
+* Si se desea incorporar contenido personal o narrativo sobre el encuentro, debe residir obligatoriamente en **EXPERIENCIA** o en **LORE** (Historia Personal asociada a la carta, escrita por el usuario).
 
 ---
 

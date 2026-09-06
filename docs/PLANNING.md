@@ -15,8 +15,8 @@
 | **Fase actual** | Alpha |
 | **Versión actual** | `0.0.1` |
 | **Estado** | Foundation |
-| **Objetivo activo** | Ninguno (Ciclo WHO-007 completado; listo para revisión de PM) |
-| **Último objetivo completado** | `WHO-007` — Banco de Datos Inicial de Fauna (Semilla Educativa) |
+| **Objetivo activo** | Ninguno (Ciclo WHO-008A completado; listo para revisión de PM) |
+| **Último objetivo completado** | `WHO-008A` — Formalizar Historia Personal de la Carta (Personal Lore) |
 | **Próximo objetivo propuesto** | `WHO-007` — Banco de Datos Inicial de Fauna (Semilla Educativa) |
 | **Bloqueos** | Ninguno |
 | **Decisiones pendientes** | `DEC-009` a `DEC-012`, `DEC-020` a `DEC-025`, `DEC-037-PENDING` |
@@ -69,6 +69,7 @@ $$\text{FASE} . \text{CORRECCIONES} . \text{ITERACIÓN}$$
 | **WHO-006C.2**| Cierre técnico de Capture/Specimen y sex (DEC-039) | `COMPLETADO` | Alta | 0.0.1 | Sí |
 | **WHO-006D**| Formalizar Modelo de Monetización Gratuito + Publicidad | `COMPLETADO` | Alta | 0.0.1 | Sí |
 | **WHO-007** | Banco de Datos Inicial de Fauna (Semilla Educativa) | `COMPLETADO` | Media | 0.0.1 | No |
+| **WHO-008A** | Formalizar Historia Personal de la Carta (Personal Lore) | `COMPLETADO` | Media | 0.0.1 | No |
 
 ---
 
@@ -78,13 +79,13 @@ $$\text{FASE} . \text{CORRECCIONES} . \text{ITERACIÓN}$$
 ┌─────────────────────────────────────────────────────────────────────────────┐
 │                           OBJETIVO ACTIVO ACTUAL                            │
 ├──────────────────┬──────────────────────────────────────────────────────────┤
-│ ID               │ WHO-007                                                  │
-│ Nombre           │ Banco de Datos Inicial de Fauna (Semilla Educativa)      │
-│ Propósito        │ Creación del modelo formal AnimalProfile delimitando     │
-│                  │ estrictamente la información de la especie.              │
+│ ID               │ WHO-008A                                                 │
+│ Nombre           │ Formalizar Historia Personal de la Carta (Personal Lore) │
+│ Propósito        │ Formalizar documentalmente el concepto de Lore como      │
+│                  │ Historia Personal escrita por el usuario.                │
 │ Estado           │ APPROVED_COMPLETE                                        │
 │ Versión Asociada │ 0.0.1                                                    │
-│ Requisitos       │ WHO-006C.2 completado                                    │
+│ Requisitos       │ Ninguno                                                  │
 │ Responsable      │ Developer Principal (Antigravity)                        │
 └──────────────────┴──────────────────────────────────────────────────────────┘
 ```
@@ -148,6 +149,7 @@ Ordenados por prioridad técnica y estratégica.
 | **WHO-006C.2**| `APROBADO` | `VALIDADO` | `COMPLETADO` | `APPROVED_COMPLETE` |
 | **WHO-006D**| `APROBADO` | `VALIDADO` | `COMPLETADO` | `APPROVED_COMPLETE` |
 | **WHO-007** | `APROBADO` | `VALIDADO` | `COMPLETADO` | `APPROVED_COMPLETE` |
+| **WHO-008A** | `APROBADO` | `VALIDADO` | `COMPLETADO` | `APPROVED_COMPLETE` |
 
 > **Regla:** El Developer no puede auto-aprobar objetivos. La autorización debe ser explícita por parte del Director Creativo y estructurada por el Project Manager.
 
@@ -248,6 +250,7 @@ Para prevenir el desvío del alcance (*scope creep*) y asegurar una base sólida
 | **2026-09-06** | Formalización del Modelo de Monetización (WHO-006D) | Documentar modelo gratuito y uso de publicidad externa como infraestructura, protegiendo datos biológicos (DEC-038) | Developer (`WHO-006D`) |
 | **2026-09-06** | Corrección de Capture.sex (WHO-006C.2) | Implementación de `sex` como OPTIONAL y NULLABLE sin valor default (DEC-039) y actualización de tests y documentación | Developer (`WHO-006C.2`) |
 | **2026-09-06** | Creación del modelo formal AnimalProfile (WHO-007) | Implementación de `AnimalProfile` como fuente única de verdad para la especie, separado de `Capture` y `Card`. | Developer (`WHO-007`) |
+| **2026-09-06** | Formalización Historia Personal (WHO-008A) | Formalización documental del Lore como Historia Personal escrita por el usuario y asociada a una carta. | Developer (`WHO-008A`) |
 
 ---
 
