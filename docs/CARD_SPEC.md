@@ -53,7 +53,7 @@
 * `created_at` (datetime / ISO 8601): Fecha y hora exacta de emisión original.
 * `edition` (str, opcional): Edición de la tirada (ej. `"1st Edition"`, `"Standard"`).
 * `generation` (str): Generación histórica de emisión (ej. `"genesis"`, `"gen_1"`).
-* `population_at_issue` (int): Cantidad de registros válidos acumulados de la especie en el instante exacto de emisión.
+* `population_at_issuance` (int, >= 1): Cantidad acumulada de Cards válidamente emitidas para esta especie (`animal_id`) en WHO Animal hasta el momento exacto de emisión de la carta (incluyendo a la carta actual como el ejemplar N). *(DEC-033; alias histórico: `population_at_issue`).*
 * `auth_serial` (str): Serial alfanumérico visible discreto para trazabilidad y anclaje de autenticación.
 * `schema_version` (str): Versión independiente del esquema de datos (ej. `"1.0"`).
 * `is_collectible` (bool): Si la carta está desbloqueada y pertenece a la colección.
@@ -109,8 +109,37 @@
 
 ## 4. Principio de Inmutabilidad Post-Emisión y Transferencia
 
-* Las propiedades históricas de una carta (`card_id`, `specimen_number`, `generation`, `population_at_issue`, `rarity_tier`, `auth_serial`, `edition` y `created_at`) quedan estrictamente congeladas tras su emisión.
+* Las propiedades históricas de una carta (`card_id`, `specimen_number`, `generation`, `population_at_issuance`, `rarity_tier`, `auth_serial`, `edition` y `created_at`) quedan estrictamente congeladas tras su emisión.
 * **El cambio de propietario mediante intercambio o comercio futuro NO altera estas propiedades.** El traspaso únicamente actualiza el campo de posesión (`owner_id`) e historial de custodia, manteniendo intacto el valor histórico de la pieza.
+
+### 4.1. Semántica Formal y Alcance de `population_at_issuance` (DEC-033)
+
+* **Definición Canónica:**  
+  `population_at_issuance` es la **cantidad acumulada de Cards válidamente emitidas por WHO Animal para la especie específica (`animal_id`) hasta el momento exacto de emisión de la Card actual (incluyendo a dicha Card como el espécimen $N$)**.
+* **Alcance Oficial:** **`ANIMAL/SPECIES`** (específico del taxón/perfil zoológico representado por `animal_id`).
+* **Significado Unívoco:**  
+  `population_at_issuance = N` ($N \ge 1$) indica que en el momento histórico de acuñación de la carta, existían exactamente $N$ cartas válidas emitidas de esa especie en el universo de WHO Animal, siendo esta pieza la $N$-ésima.
+* **Exclusiones Terminantes (Qué NO significa):**
+  1. ❌ **NO es población biológica mundial:** No representa censos de animales reales en la Tierra.
+  2. ❌ **NO es población biológica regional:** No indica cuántos animales habitan en el área del avistamiento.
+  3. ❌ **NO es conteo de animales físicos observados:** No censa individuos biológicos; avistamientos válidos independientes generan cartas separadas.
+  4. ❌ **NO es número de usuarios:** No cuenta cuántos usuarios tienen la carta ni cuántos juegan en la app.
+  5. ❌ **NO es número de capturas (`Capture`):** No cuenta eventos crudos de cámara ni escaneos fallidos o descartados.
+  6. ❌ **NO es conteo global de cartas en la app:** No suma cartas de otras especies zoológicas.
+  7. ❌ **NO es conteo de una tirada o edición física:** Su eje natural es el taxón zoológico en el juego.
+  8. ❌ **NO es un contador dinámico ni mutable:** Permanece estático de por vida tras la emisión.
+* **Relación con `rarity`:**
+  * `population_at_issuance` es un **dato cuantitativo histórico de entrada** (input inmutable).
+  * `rarity` (o `rarity_tier`) es la **categoría cualitativa de valor de colección** asignada en el instante de emisión en base a dicho input y las reglas/curvas de juego vigentes.
+  * No son equivalentes ni se confunden: una carta con `population_at_issuance = 12` puede recibir `rarity_tier = EPIC` por pertenecer a la tirada temprana de la especie, mientras que una con `population_at_issuance = 20000` recibirá `rarity_tier = COMMON`.
+* **Clasificación y Atributos:**
+  ```text
+  REQUIRED:        sí
+  IMMUTABLE:       sí
+  HISTORICAL:      sí
+  BIOLOGICAL DATA: no
+  COLLECTION DATA: sí
+  ```
 
 ---
 

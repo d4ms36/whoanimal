@@ -268,6 +268,50 @@ Aprobado por: [Director Creativo / Project Manager / Consenso]
 
 ---
 
+### DEC-033: Definición Formal, Semántica y Alcance de `population_at_issuance`
+* **Tema:** Dominio de Cartas, Coleccionismo y Rareza Dinámica
+* **Fecha:** 2026-09-06
+* **Estado:** `APPROVED`
+* **Problema:** Existía ambigüedad conceptual sobre el significado exacto de la "población al momento de emisión", con riesgo crítico de confundir el término con censos biológicos de fauna real, eventos efímeros de captura, inventario global de la app o cuentas de usuarios.
+* **Alternativas Consideradas:**
+  * **A (Global):** Total de Cards emitidas por WHO Animal en todas las especies. *Descartada:* Diluye la novedad de especies raras descubiertas tardíamente; no refleja la abundancia dentro del taxón.
+  * **B (Capturas brutas):** Total de eventos de telemetría registrados. *Descartada:* Confunde `Capture` con `Card`, introduce ruido de intentos fallidos/descartados y sugiere erróneamente un censo de animales físicos.
+  * **C (Especie / Taxón):** Total de Cards emitidas dentro de la misma especie (`animal_id`). *Evaluada positivamente como base fundacional.*
+  * **D (Edición):** Total de Cards emitidas dentro de un lote o tirada cerrada. *Descartada como alcance primario:* WHO Animal opera con avistamiento orgánico continuo, no con tiradas preimpresas.
+  * **E (Generación):** Total de Cards emitidas en una ventana generacional. *Descartada como alcance primario:* Sin discriminar especie, replica los defectos de la alternativa global.
+  * **F (Solución Integral Especie-Colección):** Definición formal rigurosa con alcance primario `ANIMAL/SPECIES` compatible con generaciones y reglas de rareza. *Seleccionada.*
+* **Decisión:** Se aprueba formalmente la siguiente definición canónica:
+  > **`population_at_issuance`** es la **cantidad acumulada de Cards válidamente emitidas por WHO Animal para la especie específica (`animal_id`) hasta el momento exacto de emisión de la Card actual (incluyendo a dicha Card como el espécimen $N$)**.
+* **Alcance Oficial:** **`ANIMAL/SPECIES`** (Especie / Taxón representado por `animal_id`).
+* **Significado Exacto:**  
+  `population_at_issuance = N` significa de forma inequívoca:  
+  *"Al momento exacto de emisión de esta Card, existen exactamente $N$ Cards válidamente emitidas por WHO Animal para esta especie (`animal_id`), siendo esta Card la $N$-ésima emitida dentro del catálogo de colección del juego."*
+* **Qué NO Significa (Exclusiones Estrictas):**
+  1. ❌ **NO es la población biológica mundial:** No representa cuántos ejemplares vivos de la especie existen en la naturaleza en el planeta Tierra.
+  2. ❌ **NO es la población biológica regional o local:** No representa cuántos animales habitan en el país, región o bioma de la observación.
+  3. ❌ **NO es el número de animales reales observados:** No realiza censos de individuos físicos; avistamientos separados válidos generan cartas independientes.
+  4. ❌ **NO es el número de usuarios:** No representa cuántos jugadores han visto la especie ni cuántos poseen la carta.
+  5. ❌ **NO es el número de capturas (`Capture`):** No contabiliza intentos de escaneo de cámara, fotos borrosas o eventos descartados por filtros antifraude.
+  6. ❌ **NO es el número total global de Cards en la app:** No suma cartas de otras especies zoológicas.
+  7. ❌ **NO es el número de Cards de una edición o lote:** Su alcance natural e intransferible es la especie (`animal_id`).
+  8. ❌ **NO es un contador dinámico ni mutable:** No aumenta cuando se emiten nuevas cartas de esa especie en el futuro.
+* **Relación con `rarity`:**
+  * `population_at_issuance` es un **dato histórico cuantitativo de entrada** (input inmutable, $N \in \mathbb{N}_{\ge 1}$).
+  * `rarity` (o `rarity_tier`) es la **categoría cualitativa de valor de colección** (`COMMON`, `UNCOMMON`, `RARE`, `EPIC`, `LEGENDARY`), determinada por el motor de emisión en el momento de acuñar la carta mediante reglas o curvas probabilísticas que evalúan dicho input.
+  * *Ejemplo:* Si para *Panthera onca* una carta se emite con `population_at_issuance = 42`, las reglas de emisión le asignan `rarity_tier = EPIC` por pertenecer a los primeros 100 ejemplares (Genesis). Si otra carta de la misma especie se emite años después con `population_at_issuance = 25000`, las reglas le asignarán `rarity_tier = COMMON`.
+* **Inmutabilidad y Clasificación del Atributo:**
+  ```text
+  REQUIRED: sí
+  IMMUTABLE: sí
+  HISTORICAL: sí
+  BIOLOGICAL DATA: no
+  COLLECTION DATA: sí
+  ```
+* **Consecuencias Futuras:** Permite formular de manera limpia algoritmos de rareza dinámica (`DEC-022`), validar observaciones sin mezclar capas (`DEC-023`), implementar esquemas JSON sin ambigüedades (`DEC-020`) y preservar la inmutabilidad histórica absoluta ante intercambios futuros (`DEC-027`).
+* **Aprobado por:** Director Creativo / Project Manager / Developer
+
+---
+
 ## Decisiones Pendientes de Aprobación (Pending)
 
 ### DEC-009-PENDING: Motor Definitivo de Identificación Visual

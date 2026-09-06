@@ -103,14 +103,14 @@ Cada carta coleccionable posee una identidad inmutable e intransferible:
   * Edición (cuando aplique).
   * Rareza de colección asignada.
   * Marca temporal de emisión (timestamp).
-  * Población registrada de la especie al momento de la emisión.
+  * Población registrada de la especie en la colección al momento de la emisión (`population_at_issuance`, ver DEC-033).
   * Generación histórica (ej. Genesis / Gen 1).
   * Información y anclaje de autenticación.
 
 ### Inmutabilidad Post-Emisión
 * Una vez emitida una carta, **sus propiedades históricas fundamentales quedan estrictamente congeladas**.
-* Si la población global de una especie aumenta de 50 a 5.000.000 de ejemplares en los años siguientes, la carta emitida en el registro 50 conserva perpetuamente su rareza original, su generación y su registro histórico de población.
-* **La población evoluciona; la carta histórica no muta ni se devalúa retroactivamente.**
+* Si la cantidad acumulada de cartas emitidas de esa especie en WHO Animal aumenta de 50 a 5.000.000 en los años siguientes, la carta emitida en el registro 50 conserva perpetuamente su rareza original, su generación y su registro histórico inmutable (`population_at_issuance = 50`).
+* **La colección de la comunidad evoluciona; la carta histórica no muta ni se devalúa retroactivamente.**
 * Asimismo, **un cambio posterior de propietario (vía intercambio o comercio futuro) no altera jamás la identidad histórica original de la pieza**.
 
 ### Serial Visual de Autenticación
@@ -154,10 +154,10 @@ Ante la ausencia de datos en el sistema, se aplica una distinción estricta:
 
 ## 10. Sistema de Rareza Dinámica y Generaciones Históricas (Concepto en Diseño)
 
-* **Determinación en Emisión:** La rareza de colección se calcula y fija dinámicamente en el instante exacto en que la carta es acuñada/emitida, tomando como factor la población registrada acumulada para esa especie.
+* **Determinación en Emisión:** La rareza de colección se calcula y fija dinámicamente en el instante exacto en que la carta es acuñada/emitida, tomando como factor cuantitativo de entrada la cantidad acumulada de cartas válidas emitidas para esa especie (`population_at_issuance`, ver DEC-033).
 * **Generaciones Históricas:** Se introduce el concepto de generaciones (ej. **Genesis / Generación 1**). Las primeras cartas emitidas retienen un prestigio y valor histórico permanente para los pioneros de la comunidad.
 * **Ventana de Oportunidad de los Primeros Registros:** Los primeros registros de una especie (ej. primeros 100 avistamientos válidos) ofrecen una probabilidad significativamente más alta de obtener cartas raras o ultra-raras. Posteriormente, a medida que la especie se registra masivamente, las probabilidades de rareza alta disminuyen progresivamente. *(Las curvas matemáticas y fórmulas exactas quedan pendientes de simulación económica).*
-* **Regla Anti-Abuso para el Conteo Poblacional:** La población se sustenta en **observaciones válidas y distintas**, no en ráfagas de fotos de un mismo ejemplar o evento repetido. Queda pendiente diseñar la lógica que prevenga el spam o fraude de registros.
+* **Regla Anti-Abuso para el Conteo Poblacional:** La emisión válida se sustenta en **observaciones verificadas y distintas**, no en ráfagas de fotos de un mismo ejemplar o evento repetido. Queda pendiente diseñar la lógica que prevenga el spam o fraude de registros.
 
 ---
 

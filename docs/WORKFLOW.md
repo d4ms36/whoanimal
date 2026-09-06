@@ -100,4 +100,10 @@ Cada tarea u objetivo debe documentarse utilizando la siguiente ficha estructura
 ### WHO-005B-A: Actualización Documental de Capacidades Futuras
 * **Propósito:** Registrar en la memoria y gobernanza las decisiones de diseño para extensiones futuras (PVP, comercio/intercambio, artwork único/red de ilustradores y privacidad GPS vs. ubicación generalizada) asegurando que la arquitectura de esquemas no cierre estas capacidades.
 * **Estado:** `APPROVED_COMPLETE`
+* **Commit:** `172203d` (*docs(extensions): document future capabilities for pvp trading custom artwork and privacy*)
+* **Versión:** `0.0.1`
+
+### WHO-005B-C: Resolución A: Semántica de population_at_issuance
+* **Propósito:** Formalizar la definición canónica, alcance (`ANIMAL/SPECIES`), inmutabilidad y relación con rareza de `population_at_issuance` (DEC-033), desacoplándolo de censos biológicos reales y métricas de plataforma.
+* **Estado:** `APPROVED_COMPLETE`
 * **Versión:** `0.0.1`
