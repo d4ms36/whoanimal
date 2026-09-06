@@ -159,8 +159,14 @@ Cada tarea u objetivo debe documentarse utilizando la siguiente ficha estructura
 
 ### WHO-006B.1: Corrección de Contrato Técnico del Modelo Card
 * **Propósito:** Corregir discrepancias técnicas con el contrato formal: exigir estrictamente UUIDv4 en `card_id` y `capture_id` (rechazando UUIDv5/v1), formalizar `edition` como Optional no-nullable omitiéndolo de la serialización cuando está ausente y rechazando `None`, ampliar `artwork` a tipo abierto (objeto/dict, string o None), restringir `rank` a int o str sin inventar niveles, añadir protección razonable anti-GPS en `display_location` y validar el contrato con 30 tests unitarios pasando al 100%.
+* **Estado:** `APPROVED_COMPLETE`
+* **Commit:** `018fc4e` (*fix(card): align domain model with card contract*)
+* **Versión:** `0.0.1`
+
+### WHO-006C: Formalizar Dominio Capture/Specimen
+* **Propósito:** Formalizar en el dominio la entidad `Capture / Specimen` (`capture_id` UUIDv4 estricto, `sex ∈ {MALE, FEMALE, UNKNOWN}` conforme a DEC-036), estableciendo la frontera ontológica inquebrantable `Animal ≠ Capture ≠ Card`, consagrando que el sexo biológico pertenece al individuo observado y no a la especie (`Animal`) ni es campo canónico de `Card`, con 44 tests unitarios pasando al 100%.
 * **Estado:** `REVIEW`
-* **Commit:** `b647960` (*fix(card): align domain model with card contract*)
+* **Commit:** `edad99b` (*feat(domain): introduce capture specimen model*)
 * **Versión:** `0.0.1`
 
 

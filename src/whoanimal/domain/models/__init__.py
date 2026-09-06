@@ -9,9 +9,12 @@ from .animal import (
 )
 from .lore import LoreProfile
 from .card import Card, AnimalCard, CardFront, CardBack, CardMetadata
+from .capture import Capture, Specimen
 
 __all__ = [
     "Card",
+    "Capture",
+    "Specimen",
     "AnimalProfile",
     "ScientificInfo",
     "ConservationIndicators",

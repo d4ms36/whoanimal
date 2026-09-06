@@ -44,3 +44,20 @@ class VerificationStatus(str, Enum):
     FLAGGED = "FLAGGED"
     REVOKED = "REVOKED"
 
+
+class SpecimenSex(str, Enum):
+    """
+    Sexo biológico del espécimen o individuo observado en una captura (DEC-036).
+    Valores: MALE, FEMALE, UNKNOWN.
+    - MALE: El espécimen fue identificado como macho con evidencia diagnóstica suficiente.
+    - FEMALE: El espécimen fue identificado como hembra con evidencia diagnóstica suficiente.
+    - UNKNOWN: No existe evidencia suficiente para determinar el sexo a partir de la observación.
+    """
+    MALE = "MALE"
+    FEMALE = "FEMALE"
+    UNKNOWN = "UNKNOWN"
+
+
+# Alias semántico para claridad biológica
+BiologicalSex = SpecimenSex
+
