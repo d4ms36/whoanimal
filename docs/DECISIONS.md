@@ -442,6 +442,15 @@ Aprobado por: [Director Creativo / Project Manager / Consenso]
 
 ---
 
+### DEC-038: Modelo Inicial de Monetización Gratuito y Basado en Publicidad
+* **Tema:** Modelo de Negocio, Producto y Arquitectura
+* **Fecha:** 2026-09-06
+* **Estado:** `APPROVED`
+* **Decisión:** WHO Animal será un producto internacional y global 100% gratuito para el usuario en sus funcionalidades fundamentales (identificación, información zoológica, fichas, colección, descubrimiento y lore). La monetización principal inicial se basará en publicidad (como Google AdMob).
+* **Motivo:** Asegurar accesibilidad sin crear barreras de pago en el núcleo del producto, definiendo una base de monetización viable que respete el principio de no alterar ni vender verdades biológicas.
+* **Impacto:** La publicidad (`AdMob` o similar) se define estrictamente como **Infraestructura Externa** y NO debe formar parte del `Domain`. Entidades inmutables (`Animal`, `Capture`, `Card`, `Lore`) no deben depender de la publicidad. Queda prohibido implementar economía in-app (tienda, monedas, loot boxes, sistemas de pago) en la fase actual.
+* **Aprobado por:** Director Creativo / Project Manager
+
 ## Decisiones Pendientes de Aprobación (Pending)
 
 ### DEC-009-PENDING: Motor Definitivo de Identificación Visual

@@ -169,7 +169,8 @@ Cada tarea u objetivo debe documentarse utilizando la siguiente ficha estructura
 * **Commit:** `edad99b` (*feat(domain): introduce capture specimen model*)
 * **Versión:** `0.0.1`
 
-
-
-
-
+### WHO-006D: Formalizar Modelo de Monetización Gratuito + Publicidad
+* **Propósito:** Formalizar conceptualmente el modelo comercial inicial de WHO Animal como un producto 100% gratuito (Free-to-Play) en su núcleo y soportado mediante publicidad externa (DEC-038). Establecer que la publicidad (ej. AdMob) opera estrictamente en infraestructura y aislar los datos biológicos y la rareza histórica para prohibir expresamente la monetización o alteración retroactiva de la verdad zoológica o identidad de colección.
+* **Estado:** `APPROVED_COMPLETE`
+* **Commit:** (Pendiente de commit) (*docs(monetization): define free product and advertising model*)
+* **Versión:** `0.0.1`

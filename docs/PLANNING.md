@@ -15,8 +15,8 @@
 | **Fase actual** | Alpha |
 | **Versión actual** | `0.0.1` |
 | **Estado** | Foundation |
-| **Objetivo activo** | Ninguno (Ciclo WHO-006B completado; listo para revisión de PM) |
-| **Último objetivo completado** | `WHO-006B` — Implementación formal del modelo Card (19 campos canónicos) |
+| **Objetivo activo** | Ninguno (Ciclo WHO-006D completado; listo para revisión de PM) |
+| **Último objetivo completado** | `WHO-006D` — Formalizar Modelo de Monetización Gratuito + Publicidad |
 | **Próximo objetivo propuesto** | `WHO-007` — Banco de Datos Inicial de Fauna (Semilla Educativa) |
 | **Bloqueos** | Ninguno |
 | **Decisiones pendientes** | `DEC-009` a `DEC-012`, `DEC-020` a `DEC-025`, `DEC-037-PENDING` |
@@ -66,6 +66,7 @@ $$\text{FASE} . \text{CORRECCIONES} . \text{ITERACIÓN}$$
 | **WHO-006B**| Implementación formal del modelo Card (19 campos canónicos) | `NEEDS_CORRECTION` | Alta | 0.0.1 | Sí |
 | **WHO-006B.1**| Corrección de contrato técnico del modelo Card | `COMPLETADO` | Alta | 0.0.1 | Sí |
 | **WHO-006C**| Formalizar dominio Capture/Specimen (DEC-036) | `REVIEW` | Alta | 0.0.1 | Sí |
+| **WHO-006D**| Formalizar Modelo de Monetización Gratuito + Publicidad | `COMPLETADO` | Alta | 0.0.1 | Sí |
 | **WHO-007** | Banco de Datos Inicial de Fauna (Semilla Educativa) | `PROPUESTO` | Media | 0.0.1 | No |
 
 ---
@@ -76,15 +77,14 @@ $$\text{FASE} . \text{CORRECCIONES} . \text{ITERACIÓN}$$
 ┌─────────────────────────────────────────────────────────────────────────────┐
 │                           OBJETIVO ACTIVO ACTUAL                            │
 ├──────────────────┬──────────────────────────────────────────────────────────┤
-│ ID               │ WHO-006C                                                 │
-│ Nombre           │ Formalizar Dominio Capture/Specimen                      │
-│ Propósito        │ Formalizar la entidad de dominio Capture / Specimen      │
-│                  │ (capture_id UUIDv4, sex ∈ {MALE, FEMALE, UNKNOWN})       │
-│                  │ estableciendo la frontera ontológica Animal ≠ Capture ≠  │
-│                  │ Card conforme a DEC-036                                  │
-│ Estado           │ REVIEW (Listo para revisión de PM)                       │
+│ ID               │ WHO-006D                                                 │
+│ Nombre           │ Formalizar Modelo de Monetización Gratuito + Publicidad  │
+│ Propósito        │ Formalizar conceptualmente el modelo comercial Free-to-  │
+│                  │ Play soportado en publicidad (DEC-038) y proteger los    │
+│                  │ datos zoológicos contra la monetización.                 │
+│ Estado           │ APPROVED_COMPLETE                                        │
 │ Versión Asociada │ 0.0.1                                                    │
-│ Requisitos       │ WHO-006B.1 completado y aprobado                         │
+│ Requisitos       │ WHO-006C                                                 │
 │ Responsable      │ Developer Principal (Antigravity)                        │
 └──────────────────┴──────────────────────────────────────────────────────────┘
 ```
@@ -145,6 +145,7 @@ Ordenados por prioridad técnica y estratégica.
 | **WHO-006B**| `APROBADO` | `REVISADO` | `COMPLETADO` | `NEEDS_CORRECTION` |
 | **WHO-006B.1**| `APROBADO` | `VALIDADO` | `COMPLETADO` | `APPROVED_COMPLETE` |
 | **WHO-006C**| `APROBADO` | *PENDIENTE* | `COMPLETADO` | `REVIEW` |
+| **WHO-006D**| `APROBADO` | `VALIDADO` | `COMPLETADO` | `APPROVED_COMPLETE` |
 | **WHO-007** | *PENDIENTE* | *EN EVALUACIÓN* | `EN ESPERA` | `PROPOSED` |
 
 > **Regla:** El Developer no puede auto-aprobar objetivos. La autorización debe ser explícita por parte del Director Creativo y estructurada por el Project Manager.
@@ -243,6 +244,7 @@ Para prevenir el desvío del alcance (*scope creep*) y asegurar una base sólida
 | **2026-09-06** | Implementación formal del modelo de dominio `Card` (19 campos canónicos) | Modelado y validación técnica según contrato WHO-006A.1 (WHO-006B) | Director / PM (`WHO-006B`) |
 | **2026-09-06** | Corrección de contrato técnico del modelo Card (WHO-006B.1) | Alineación estricta UUIDv4, ausencia vs null en edition, artwork tipo abierto, rank int/str y 30 tests unitarios | Developer (`WHO-006B.1`) |
 | **2026-09-06** | Formalización del dominio Capture/Specimen (WHO-006C) | Entidad Capture mínima con capture_id UUIDv4 y sex (DEC-036), frontera ontológica Animal ≠ Capture ≠ Card y 44 tests | Developer (`WHO-006C`) |
+| **2026-09-06** | Formalización del Modelo de Monetización (WHO-006D) | Documentar modelo gratuito y uso de publicidad externa como infraestructura, protegiendo datos biológicos (DEC-038) | Developer (`WHO-006D`) |
 
 ---
 

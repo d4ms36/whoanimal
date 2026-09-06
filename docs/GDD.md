@@ -88,7 +88,17 @@ Cada animal avistado e identificado genera una carta con dos caras:
 
 ---
 
-## 6. Capacidades Futuras Aprobadas (Extensiones de Fases Posteriores)
+## 6. Modelo Inicial de Monetización (Gratuito y Publicidad)
+
+* **Núcleo Gratuito (Free-to-Play):** El descubrimiento, identificación, aprendizaje y colección de avistamientos son 100% gratuitos para el usuario.
+* **Publicidad como Motor Inicial:** La plataforma se sustentará inicialmente mediante publicidad. Esta se define estrictamente como infraestructura externa, sin acoplamiento al dominio zoológico (DEC-038).
+* **Rewarded Ads (Prioridad Conceptual):** La publicidad debe fluir de forma natural sin interrumpir destructivamente la experiencia del usuario. Se prioriza el uso de *Rewarded Ads* (anuncios por recompensa interactiva voluntaria) para otorgar beneficios que pertenecen exclusivamente a la capa de experiencia y no a la biológica.
+* **Ausencia de Economía In-App:** Queda explícitamente excluido en esta fase inicial el diseño de "WHO Coins", tiendas virtuales, packs de pago, compras in-app o elementos "pay-to-win".
+* **Respeto Absoluto a la Biología e Identidad Histórica:** Está rigurosamente prohibido monetizar, vender modificaciones o falsificar cualquier información biológica real. La rareza y atributos históricos de emisión de una carta no podrán comprarse retroactivamente.
+
+---
+
+## 7. Capacidades Futuras Aprobadas (Extensiones de Fases Posteriores)
 
 Las siguientes capacidades han sido formalmente aprobadas como parte de la visión a largo plazo, manteniéndose **estrictamente fuera del alcance de la Fase 0**:
 
@@ -111,7 +121,7 @@ Las siguientes capacidades han sido formalmente aprobadas como parte de la visi�
 
 ---
 
-## 7. Decisiones Pendientes (Requieren Aprobación del Director/PM)
+## 8. Decisiones Pendientes (Requieren Aprobación del Director/PM)
 
 * Formato final del arte de cartas (generación procedural, plantillas vectoriales o renderizado dinámico).
 * Sistema definitivo de identificación: Modelo on-device vs. API híbrida de taxonomía (iNaturalist / GBIF / Modelo custom).

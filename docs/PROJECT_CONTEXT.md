@@ -201,3 +201,15 @@ Las siguientes capacidades han sido aprobadas a nivel de diseño conceptual para
 * Los usuarios podrán solicitar un diseño artístico personalizado para una carta específica interactuando directamente desde la app con ilustradores colaboradores asociados.
 * El artwork constituye una capa estética y creativa adicional que **no sustituye ni deforma**: la identidad del animal, la información científica ni los metadatos históricos de la carta.
 
+---
+
+## 14. Modelo Inicial de Monetización (Gratuito y Publicidad)
+
+En alineación formal con la decisión **DEC-038**, el modelo comercial inicial y su relación con la arquitectura del sistema se rigen por los siguientes principios:
+
+* **Núcleo 100% Gratuito (Free-to-Play):** WHO Animal es un producto de alcance **internacional y global**. Las funcionalidades fundamentales (identificación, información zoológica, fichas, colección, descubrimiento y lore) serán accesibles sin coste.
+* **Monetización Publicitaria:** La principal fuente de monetización en esta etapa inicial será la publicidad.
+* **Desacoplamiento Arquitectónico Estricto:** Los proveedores de publicidad (como Google AdMob u otros) operan estrictamente en la capa de **Infraestructura Externa**. Ninguna entidad inmutable del Dominio (`Animal`, `Capture`, `Card`, `Lore`) debe depender ni conocer de SDKs publicitarios.
+* **Prioridad UX: Rewarded Ads:** La publicidad no debe destruir el flujo de descubrimiento ni la experiencia interactiva mediante interrupciones constantes. Se prioriza conceptualmente el uso de **Anuncios Recompensados** (*Rewarded Ads*), donde el usuario interactúa de forma voluntaria a cambio de beneficios en la capa de experiencia.
+* **Respeto Biológico e Identidad Histórica:** **Está terminantemente prohibido monetizar, falsificar o alterar información biológica real**. La monetización pertenece a la capa de experiencia de producto, jamás a la verdad zoológica. Igualmente, la identidad histórica de una carta (`card_id`, población en la emisión, rareza original) no puede comprarse ni modificarse retroactivamente.
+* **Ausencia de Economía In-App:** Durante la fase actual de fundación, **no se implementarán** sistemas de economía interna, monedas, "WHO Coins", "Gems", tiendas, loot boxes, sistemas de pago directo, suscripciones ni funcionalidades de "pay-to-win".
