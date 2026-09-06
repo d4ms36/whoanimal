@@ -30,9 +30,11 @@
   * Creación de modelos de dominio inmutables en Python (`ScientificInfo`, `AnimalProfile`, `LoreProfile`, `AnimalCard`), separación de capas y primera suite de pruebas.
 * **`WHO-003` — Gobernanza, Memoria del Proyecto y Versionado** `[APPROVED_COMPLETE]`
   * Creación de manual de agentes (`AGENTS.md`), memoria oficial (`PROJECT_CONTEXT.md`), gobernanza de 3 roles, esquema de versionado semántico/Android y registro de decisiones.
-* **`WHO-004` — Plan Maestro de Desarrollo y Alineación por Versión** `[IN_PROGRESS]`
+* **`WHO-004` — Plan Maestro de Desarrollo y Alineación por Versión** `[APPROVED_COMPLETE]`
   * Creación del tablero operativo central (`docs/PLANNING.md`) para sincronización entre Director, PM y Developer.
-* **`WHO-005` — Validación de Esquemas y Serialización JSON (Planificado)** `[PLANNED]`
+* **`WHO-005A` — Incorporación de Nuevas Decisiones al Contexto** `[IN_PROGRESS]`
+  * Consolidación en la memoria y gobernanza de las decisiones sobre entidad Animal vs. Carta, inmutabilidad, rareza dinámica y autenticación.
+* **`WHO-005B` — Validación de Esquemas y Serialización JSON (Planificado)** `[PLANNED]`
   * Definición de esquemas de exportación/importación JSON estandarizados para cartas y perfiles biológicos (con Pydantic / dataclasses).
 * **`WHO-006` — Banco de Datos Inicial de Fauna (Semilla Educativa)** `[PROPOSED]`
   * Creación de un conjunto inicial de especímenes reales verificados (mamíferos, aves, reptiles) con información científica completa y Lore demarcado.

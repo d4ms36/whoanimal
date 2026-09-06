@@ -110,6 +110,83 @@ Aprobado por: [Director Creativo / Project Manager / Consenso]
 
 ---
 
+### DEC-013: Diferenciación Ontológica entre Entidad Animal y Entidad Carta
+* **Tema:** Arquitectura de Dominio
+* **Fecha:** 2026-09-06
+* **Estado:** `APPROVED`
+* **Decisión:** `Animal` y `Card` son entidades de datos ontológicamente distintas e independientes. Un espécimen animal puede residir en la base zoológica sin haber sido emitido en una carta para ningún usuario.
+* **Motivo:** Evitar acoplamiento entre la realidad biológica objetiva y los artefactos de juego/colección de los usuarios.
+* **Impacto:** Separación clara entre modelos `AnimalProfile` y `AnimalCard` en el dominio y en la futura serialización JSON.
+* **Aprobado por:** Director Creativo / Project Manager
+
+---
+
+### DEC-014: Inmutabilidad Histórica de las Cartas tras su Emisión
+* **Tema:** Economía de Colección y Reglas de Dominio
+* **Fecha:** 2026-09-06
+* **Estado:** `APPROVED`
+* **Decisión:** Una vez emitida una carta, sus atributos históricos fundamentales (`card_id`, generación, población registrada al momento de emisión, rareza asignada, serial de autenticación y edición) quedan congelados e inmutables.
+* **Motivo:** Garantizar que los objetos coleccionables de los pioneros retengan permanentemente su valor y autenticidad histórica, aunque la especie se registre millones de veces en el futuro.
+* **Impacto:** Prohibición estricta de recálculos destructivos o retroactivos de rareza en cartas ya emitidas.
+* **Aprobado por:** Director Creativo / Project Manager
+
+---
+
+### DEC-015: Criterio Funcional para Campos Obligatorios y Clasificación de Errores
+* **Tema:** Integridad y Validación de Datos
+* **Fecha:** 2026-09-06
+* **Estado:** `APPROVED`
+* **Decisión:** Se abandona la regla de "obligatorio es lo que no puede calcularse". Campo obligatorio es aquel sin el cual la entidad no puede considerarse válida ni operar. Si falta un dato crítico esencial, se genera ERROR (prohibido crear entidades inválidas). Si falta un dato complementario, se representa como nulo/desconocido sin inventar información.
+* **Motivo:** Proporcionar una regla inequívoca para los esquemas de validación y erradicar conjeturas falsas en la información real.
+* **Impacto:** Diseños de validadores que rechazan instancias incompletas críticas y admiten `None`/`null` en atributos biológicos accesorios.
+* **Aprobado por:** Director Creativo / Project Manager
+
+---
+
+### DEC-016: Desacoplamiento Estricto entre Rareza Biológica Natural y Rareza de Colección
+* **Tema:** Gamificación y Rigor Pedagógico
+* **Fecha:** 2026-09-06
+* **Estado:** `APPROVED`
+* **Decisión:** La rareza biológica (escasez o densidad natural de una especie) y la rareza de colección (dificultad lúdica de obtención de una carta en el juego) son propiedades totalmente desacopladas.
+* **Motivo:** Evitar confundir a los usuarios sobre el verdadero estatus ecológico de las especies (e.g., una carta de perro doméstico puede ser Ultra Rare por su generación, sin que el perro sea biológicamente escaso).
+* **Impacto:** Los modelos diferencian `ConservationIndicators.is_rare_species` de `CardMetadata.rarity_tier`.
+* **Aprobado por:** Director Creativo / Project Manager
+
+---
+
+### DEC-017: Incorporación Conceptual de Rareza Dinámica y Generaciones Históricas (Genesis/Gen 1)
+* **Tema:** Diseño de Coleccionismo
+* **Fecha:** 2026-09-06
+* **Estado:** `APPROVED`
+* **Decisión:** Se aprueba conceptualmente que la rareza de colección se determine en el instante de emisión de la carta tomando en cuenta la población acumulada de la especie, introduciendo generaciones históricas (Genesis/Gen 1) y mayor probabilidad de rarezas superiores para los primeros registros.
+* **Motivo:** Estimular el descubrimiento temprano de fauna y recompensar a la comunidad pionera con piezas de gran valor histórico.
+* **Impacto:** La arquitectura de emisión requerirá registrar la población al momento del avistamiento. Las fórmulas matemáticas exactas quedan diferidas a simulación posterior.
+* **Aprobado por:** Director Creativo / Project Manager
+
+---
+
+### DEC-018: Incorporación de Serial Visual Discreto de Autenticación
+* **Tema:** Estética y Seguridad de Cartas
+* **Fecha:** 2026-09-06
+* **Estado:** `APPROVED`
+* **Decisión:** Las cartas incluirán en el diseño visual de su cara un serial discreto inferior. Se asume que el serial por sí solo no garantiza seguridad, pero servirá de anclaje de interfaz para futuros sistemas de verificación criptográfica o centralizada.
+* **Motivo:** Proporcionar sensación táctil de autenticidad coleccionable preparando la arquitectura para validación antifraude.
+* **Impacto:** Reserva de atributo `auth_serial` en los metadatos de la carta y espacio reservado en la maqueta visual.
+* **Aprobado por:** Director Creativo / Project Manager
+
+---
+
+### DEC-019: Aislamiento e Independencia de Versionado para el Esquema de Datos JSON
+* **Tema:** Gobernanza Técnica y Compatibilidad
+* **Fecha:** 2026-09-06
+* **Estado:** `APPROVED`
+* **Decisión:** El esquema de serialización JSON (`schema_version`) se versiona de forma completamente independiente del `versionName` de la aplicación y del `versionCode` de Android. Las evoluciones del esquema deben asegurar retrocompatibilidad sin invalidar cartas históricas.
+* **Motivo:** Evitar acoplar el formato de datos e intercambio a los ciclos de lanzamiento o despliegue en tiendas de aplicaciones móviles.
+* **Impacto:** Los metadatos de las cartas portan su propio `schema_version` (ej. `"1.0"`).
+* **Aprobado por:** Project Manager / Developer
+
+---
+
 ## Decisiones Pendientes de Aprobación (Pending)
 
 ### DEC-009-PENDING: Motor Definitivo de Identificación Visual
@@ -133,10 +210,10 @@ Aprobado por: [Director Creativo / Project Manager / Consenso]
 
 ---
 
-### DEC-011-PENDING: Formato Definitivo de Códigos de Carta
+### DEC-011-PENDING: Convención Definitiva de Identificadores `card_id` y Códigos de Colección
 * **Tema:** Identificadores de Colección
 * **Estado:** `PENDING`
-* **Propuesta actual:** Formato `WA-[CATEGORÍA]-[NÚMERO]` (ej. `WA-MAM-0001` para mamíferos, `WA-AV-0001` para aves).
+* **Propuesta actual:** Formato amigable de exhibición `WA-[CATEGORÍA]-[NÚMERO]` complementado con identificador universal inmutable.
 * **Decisión requerida de:** Director Creativo / Project Manager
 
 ---
@@ -146,3 +223,51 @@ Aprobado por: [Director Creativo / Project Manager / Consenso]
 * **Estado:** `PENDING`
 * **Propuesta inicial:** Flutter para aplicación móvil multiplataforma (Android / iOS) consumiendo los servicios y modelos definidos en Python.
 * **Decisión requerida de:** Director Creativo / Project Manager
+
+---
+
+### DEC-020-PENDING: Diseño Definitivo del Esquema JSON de Datos
+* **Tema:** Formato de Intercambio y Persistencia
+* **Estado:** `PENDING`
+* **Descripción:** Definición formal de los contratos de esquema JSON (campos, tipos, anidamiento y validación) para `Animal` y `Card`.
+* **Decisión requerida de:** Project Manager / Developer (durante WHO-005)
+
+---
+
+### DEC-021-PENDING: Umbrales Definitivos de Confianza en la Identificación por Visión/Cámara
+* **Tema:** Visión Computacional / UX
+* **Estado:** `PENDING`
+* **Descripción:** Determinación de valores mínimos de confianza para aceptar una identificación, solicitar re-escaneo o advertir incertidumbre taxonómica al usuario.
+* **Decisión requerida de:** Director Creativo / Project Manager
+
+---
+
+### DEC-022-PENDING: Algoritmo Matemático Definitivo y Curvas de Probabilidad para Rareza Dinámica
+* **Tema:** Economía de Juego y Progresión
+* **Estado:** `PENDING`
+* **Descripción:** Formulación de la función matemática que mapea la población de registros acumulados a las probabilidades de rareza (Común, Poco común, Rara, Épica, Legendaria / Génesis).
+* **Decisión requerida de:** Director Creativo / Project Manager
+
+---
+
+### DEC-023-PENDING: Definición Exacta y Reglas Anti-Abuso para Validación de Observaciones y Conteo de Población
+* **Tema:** Integridad de Datos y Prevención de Fraude
+* **Estado:** `PENDING`
+* **Descripción:** Reglas técnicas (cooldowns, geolocalización, análisis de similitud fotográfica) para asegurar que fotos repetidas del mismo animal no inflen artificialmente la población.
+* **Decisión requerida de:** Project Manager / Developer
+
+---
+
+### DEC-024-PENDING: Sistema Definitivo de Autenticación y Verificación de Cartas
+* **Tema:** Seguridad e Infraestructura
+* **Estado:** `PENDING`
+* **Descripción:** Mecanismo técnico para corroborar la autenticidad del serial visual (firmas criptográficas, hash de integridad, o validación remota contra base de datos oficial).
+* **Decisión requerida de:** Project Manager / Developer
+
+---
+
+### DEC-025-PENDING: Estrategia Definitiva de Compatibilidad y Migración entre Versiones del Esquema JSON
+* **Tema:** Evolución de Esquemas y Persistencia
+* **Estado:** `PENDING`
+* **Descripción:** Protocolo para que los parsers lean cartas generadas en esquemas antiguos (`schema_version: 1.0`) sin corrupción ni pérdida de datos cuando el esquema evolucione a versiones superiores.
+* **Decisión requerida de:** Project Manager / Developer (durante WHO-005)

@@ -1,7 +1,8 @@
 # Memoria Oficial del Proyecto (Project Context) — WHO Animal
 
 **Documento:** `docs/PROJECT_CONTEXT.md`  
-**Propósito:** Memoria y contexto fundamental de WHO Animal para asegurar coherencia transversal a lo largo de todo el ciclo de vida del producto.
+**Propósito:** Memoria y contexto fundamental de WHO Animal para asegurar coherencia transversal a lo largo de todo el ciclo de vida del producto.  
+**Última actualización:** 2026-09-06 (Consolidación de directrices WHO-005A)
 
 ---
 
@@ -41,7 +42,7 @@ flowchart TD
 
 ## 3. Separación Ontológica Tripartita
 
-Para garantizar la integridad ética y científica del proyecto, toda entidad, pantalla o modelo debe respetar estrictamente esta partición:
+Toda información asociada a un animal o a una carta en WHO Animal pertenece conceptualmente a uno de estos tres dominios estancos:
 
 ```text
 ┌────────────────────────────────────────────────────────────────────────┐
@@ -49,24 +50,120 @@ Para garantizar la integridad ética y científica del proyecto, toda entidad, p
 ├───────────────────┬───────────────────────────────┬────────────────────┤
 │  INFORMACIÓN REAL │          EXPERIENCIA          │        LORE        │
 ├───────────────────┼───────────────────────────────┼────────────────────┤
-│ • Taxonomía       │ • Estética de cartas (2 caras)│ • Leyendas y mitos │
-│ • Hábitat y Dieta │ • Animaciones de volteo       │ • Arquetipos       │
-│ • Tamaño y Peso   │ • Álbum de avistamientos      │ • Ficción lúdica   │
-│ • Indicadores     │ • Interfaz y navegación       │ • Etiquetas claras │
-│   secundarios     │ • Coleccionismo               │   de fantasía      │
-│ • Precaución real │ • Sensación de logro          │                    │
+│ • Nombre común    │ • Categoría de carta          │ • Historias        │
+│ • Nombre científ. │ • Habilidades de experiencia  │ • Títulos narrativ.│
+│ • Taxonomía       │ • Características de juego    │ • Leyendas         │
+│ • Hábitat y Dieta │ • Rareza de colección         │ • Origen ficticio  │
+│ • Tamaño y Peso   │ • Generación (Genesis, Gen 1) │ • Clasificaciones  │
+│ • Conducta        │ • Población al momento de     │   narrativas       │
+│ • Curiosidades      emisión                       │ • Elementos mito-  │
+│ • Protección      │ • Elementos de colección        lógicos            │
+│ • Rareza natural  │ • Interfaz, álbum y volteo    │                    │
 ├───────────────────┼───────────────────────────────┼────────────────────┤
 │  100% Verificable │     100% Estimulante          │   100% Ficticio    │
 └───────────────────┴───────────────────────────────┴────────────────────┘
 ```
 
-* **INFORMACIÓN REAL:** Rigurosa, contrastable y de valor pedagógico. Queda terminantemente prohibido inventar datos biológicos o distorsionar la realidad zoológica.
-* **EXPERIENCIA:** Elementos que dinamizan la retención, el juego, el placer de coleccionar y el aprendizaje interactivo.
-* **LORE:** Universo narrativo que jamás compite ni se confunde con la ciencia; siempre se identifica con advertencias claras de ficción.
+### Regla Absoluta contra Datos Científicos Inventados
+* **La Información Real jamás se inventa.** No se admiten conjeturas en taxonomía, distribución, hábitats, medidas ni dietas.
+* Si el sistema no dispone de un dato verídico contrastado, **debe consultarlo en una fuente válida o representarlo como desconocido (`null`)**, nunca rellenarlo con suposiciones.
+* Si se desea incorporar contenido imaginativo o fantástico, debe residir obligatoriamente en **EXPERIENCIA** o en **LORE**, portando siempre su correspondiente demarcación de ficción.
 
 ---
 
-## 4. Filosofía del Producto
+## 4. Diferenciación Ontológica: Entidad Animal vs. Entidad Carta
 
-* **Diversión con Rigor:** WHO Animal debe resultar fascinante, adictivo en su afán de colección y visualmente sobresaliente, sin sacrificar jamás la veracidad científica ni la responsabilidad ecológica.
-* **100% Pet Friendly:** El respeto y el bienestar animal prevalecen sobre cualquier incentivo lúdico. La fauna no se perturba, no se captura físicamente y no se somete a explotación sensacionalista.
+> **Animal ≠ Carta**
+
+* **Animal (`AnimalProfile`):** Representa la entidad biológica y taxonómica objetiva en la base de conocimiento de WHO Animal. Puede existir en el sistema sin necesidad de haber sido emitido aún en una carta para ningún usuario.
+* **Carta (`AnimalCard`):** Representa un ejemplar coleccionable individual, acuñado y emitido en un momento histórico concreto para el álbum de un jugador, vinculado a un espécimen animal pero dotado de propiedades de colección, generación, rareza y autenticación propias.
+
+---
+
+## 5. Identificación Mediante Cámara y Visión Artificial
+
+La identificación visual es una de las puertas de entrada fundamentales:
+* **Estructura Conceptual del Resultado:**
+  * Método de identificación empleado.
+  * Predicción taxonómica sugerida.
+  * Nivel de confianza categórico.
+  * Valor cuantitativo de confianza (e.g. porcentaje o probabilidad).
+* **Naturaleza de la Confianza:** La confianza refleja la certidumbre probabilística del modelo matemático de visión, **no una garantía absoluta de verdad zoológica**.
+* **Comportamiento ante Incertidumbre:** El sistema debe contemplar flujos diferenciados para identificaciones dudosas o por debajo de los umbrales de seguridad pedagógica. *(Los umbrales matemáticos definitivos quedan pendientes de diseño).*
+
+---
+
+## 6. Identidad de la Carta, Inmutabilidad y Serial de Autenticación
+
+Cada carta coleccionable posee una identidad inmutable e intransferible:
+* **Atributos de Identidad:**
+  * `card_id` único.
+  * Relación con `animal_id`.
+  * Edición (cuando aplique).
+  * Rareza de colección asignada.
+  * Marca temporal de emisión (timestamp).
+  * Población registrada de la especie al momento de la emisión.
+  * Generación histórica.
+  * Información y anclaje de autenticación.
+
+### Inmutabilidad Post-Emisión
+* Una vez emitida una carta, **sus propiedades históricas fundamentales quedan estrictamente congeladas**.
+* Si la población global de una especie aumenta de 50 a 5.000.000 de ejemplares en los años siguientes, la carta emitida en el registro 50 conserva perpetuamente su rareza original, su generación y su registro histórico de población.
+* **La población evoluciona; la carta histórica no muta ni se devalúa retroactivamente.**
+
+### Serial Visual de Autenticación
+* Cada carta incorpora visualmente un serial/código discreto en la parte inferior.
+* **Aviso de Seguridad:** Un código visual impreso no constituye por sí mismo un sistema de autenticación seguro. La arquitectura debe permitir vincular este serial con registros verificables, identificadores únicos y mecanismos criptográficos o de validación centralizada en etapas futuras.
+
+---
+
+## 7. Criterios de Validación: Campos Obligatorios vs. Opcionales
+
+Para evitar ambigüedades arquitectónicas, no se utiliza la regla de *"obligatorio es lo que no puede calcularse"*. La norma oficial es:
+
+* **Campo Obligatorio:** Es obligatorio cuando la entidad **no puede considerarse válida ni funcionar correctamente sin ese dato** (sin importar si proviene de la cámara, IA, base de datos, backend, cálculo o entrada de usuario).
+* **Campo Opcional:** Es opcional cuando **el sistema puede operar con normalidad aunque ese dato no se encuentre disponible** de inmediato.
+
+---
+
+## 8. Manejo de Información Desconocida: Error Crítico vs. Dato Nulo
+
+Ante la ausencia de datos en el sistema, se aplica una distinción estricta:
+
+```text
+¿Falta información?
+  ├── ¿Es crítica para la identidad, validez, emisión o autenticación?
+  │     └── SÍ ──> ERROR CRÍTICO (Detener proceso. Prohibido crear entidad inválida).
+  │
+  └── ¿Es información complementaria (peso, curiosidad, detalle de distribución)?
+        └── SÍ ──> DATO DESCONOCIDO (Representar como null/desconocido. Prohibido inventar).
+```
+
+---
+
+## 9. Desacoplamiento de Rarezas: Biológica vs. Colección
+
+* **Rareza Biológica:** Refleja la abundancia poblacional, densidad y estado de conservación de una especie en el ecosistema natural real.
+* **Rareza de Colección:** Expresa el valor lúdico, la dificultad de adquisición y la exclusividad de una carta dentro del sistema de coleccionismo de WHO Animal.
+* **Ejemplo ilustrativo:** Un perro doméstico (*Canis lupus familiaris*) es biológicamente muy común y abundante en el planeta; sin embargo, una carta de perro emitida en las primeras horas de vida de la aplicación puede ser un objeto de colección de rareza colosal (*Ultra Rare / Genesis*).
+
+---
+
+## 10. Sistema de Rareza Dinámica y Generaciones Históricas (Concepto en Diseño)
+
+* **Determinación en Emisión:** La rareza de colección se calcula y fija dinámicamente en el instante exacto en que la carta es acuñada/emitida, tomando como factor la población registrada acumulada para esa especie.
+* **Generaciones Históricas:** Se introduce el concepto de generaciones (ej. **Genesis / Generación 1**). Las primeras cartas emitidas retienen un prestigio y valor histórico permanente para los pioneros de la comunidad.
+* **Ventana de Oportunidad de los Primeros Registros:** Los primeros registros de una especie (ej. primeros 100 avistamientos válidos) ofrecen una probabilidad significativamente más alta de obtener cartas raras o ultra-raras. Posteriormente, a medida que la especie se registra masivamente, las probabilidades de rareza alta disminuyen progresivamente. *(Las curvas matemáticas y fórmulas exactas quedan pendientes de simulación económica).*
+* **Regla Anti-Abuso para el Conteo Poblacional:** La población se sustenta en **observaciones válidas y distintas**, no en ráfagas de fotos de un mismo ejemplar o evento repetido. Queda pendiente diseñar la lógica que prevenga el spam o fraude de registros.
+
+---
+
+## 11. Versionado y Evolución del Esquema de Datos
+
+* **Independencia de Versiones:** El esquema JSON de datos posee su propio versionado semántico independiente (`schema_version`), completamente aislado del `versionName` de la aplicación y del `versionCode` de Android:
+  ```text
+  WHO Animal App Version:  0.0.1
+  Android versionCode:     1
+  JSON Data Schema:        1.0
+  ```
+* **Principio de Compatibilidad no Destructiva:** El esquema de datos podrá evolucionar e incorporar nuevos atributos; sin embargo, **las cartas emitidas bajo versiones anteriores del esquema deben permanecer siempre válidas, legibles e interpretables** sin sufrir mutaciones destructivas.

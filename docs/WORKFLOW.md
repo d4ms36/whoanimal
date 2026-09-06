@@ -87,5 +87,11 @@ Cada tarea u objetivo debe documentarse utilizando la siguiente ficha estructura
 
 ### WHO-004: Plan Maestro de Desarrollo y Alineación por Versión
 * **Propósito:** Crear el tablero operativo central `docs/PLANNING.md` para alinear en tiempo real al Director, Project Manager y Developer.
+* **Estado:** `APPROVED_COMPLETE`
+* **Commit:** `4e90895` (*docs(planning): establish master development planning*)
+* **Versión:** `0.0.1`
+
+### WHO-005A: Incorporación de Nuevas Decisiones al Contexto del Proyecto
+* **Propósito:** Incorporar formalmente a la memoria y gobernanza las decisiones sobre entidad Animal vs. Carta, inmutabilidad de cartas, rareza dinámica ligada a población, serial visual de autenticación y criterios de validación funcional.
 * **Estado:** `IN_PROGRESS`
 * **Versión:** `0.0.1`
