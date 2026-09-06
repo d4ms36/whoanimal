@@ -33,3 +33,14 @@ class CardRarity(str, Enum):
     RARE = "rare"
     EPIC = "epic"
     LEGENDARY = "legendary"
+
+
+class VerificationStatus(str, Enum):
+    """
+    Estados canónicos del ciclo de verificación y autenticación de una Card (DEC-034, DEC-035).
+    """
+    UNVERIFIED = "UNVERIFIED"
+    VERIFIED = "VERIFIED"
+    FLAGGED = "FLAGGED"
+    REVOKED = "REVOKED"
+

@@ -1,7 +1,8 @@
 """Módulo de Dominio de Who Animal."""
 
-from .enums import AnimalCategory, DangerLevel, CardRarity
+from .enums import AnimalCategory, DangerLevel, CardRarity, VerificationStatus
 from .models import (
+    Card,
     AnimalProfile,
     ScientificInfo,
     ConservationIndicators,
@@ -18,6 +19,8 @@ __all__ = [
     "AnimalCategory",
     "DangerLevel",
     "CardRarity",
+    "VerificationStatus",
+    "Card",
     "AnimalProfile",
     "ScientificInfo",
     "ConservationIndicators",
@@ -29,3 +32,4 @@ __all__ = [
     "CardBack",
     "CardMetadata",
 ]
+

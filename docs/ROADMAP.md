@@ -52,8 +52,9 @@
   * Formalización contractual de tipos técnicos, requiredness, nullability, defaults e inmutabilidad previa a la implementación de modelos.
 * **`WHO-006A.1` — Corrección del Contrato de Obligatoriedad, Nullability y Defaults de Card** `[APPROVED_COMPLETE]`
   * Eliminación de defaults no aprobados, distinción estricta entre Optional y Nullable, y protección histórica de `display_location`.
-* **`WHO-006B` — Modelado Formal de Esquemas (Pydantic / Dataclasses) (Planificado)** `[PLANNED]`
-  * Implementación y validación de esquemas de datos serializados para `Card` estructurados en los 6 módulos canónicos.
+* **`WHO-006B` — Implementación Formal del Modelo Card** `[APPROVED_COMPLETE]`
+  * Implementación del modelo de dominio `Card` con los 19 campos canónicos, validación técnica estricta, inmutabilidad post-emisión y cobertura de pruebas.
+
 * **`WHO-007` — Banco de Datos Inicial de Fauna (Semilla Educativa)** `[PROPOSED]`
   * Creación de un conjunto inicial de especímenes reales verificados (mamíferos, aves, reptiles) con información científica completa y Lore demarcado.
 * **`WHO-007` — Prototipo del Servicio de Generación de Cartas** `[PROPOSED]`

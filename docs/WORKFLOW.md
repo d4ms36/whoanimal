@@ -148,8 +148,15 @@ Cada tarea u objetivo debe documentarse utilizando la siguiente ficha estructura
 ### WHO-006A.1: Corrección del Contrato de Obligatoriedad, Nullability y Defaults de Card
 * **Propósito:** Auditar y corregir el contrato formal de los 19 campos canónicos de `Card` eliminando defaults no aprobados (`schema_version`, `edition`, `generation`, `issued_at`, `rank`, `owner_id`, `display_location`, `artwork`), consagrando la regla fundamental de no inventar defaults técnicos, diferenciando formalmente `Optional` (`Required = No`) de `Nullable`, protegiendo el origen histórico de `display_location` (`historical source = protected`, `presentation = evolvable`, sin GPS exacto) y manteniendo abiertas `DEC-022-PENDING` y `DEC-037-PENDING`.
 * **Estado:** `APPROVED_COMPLETE`
-* **Commit:** `34fb281` (*docs(card): correct field defaults and nullability*)
+* **Commit:** `e05a902` (*docs(card): correct field defaults and nullability*)
 * **Versión:** `0.0.1`
+
+### WHO-006B: Implementación Formal del Modelo Card
+* **Propósito:** Implementar el modelo de dominio `Card` correspondiente a los 19 campos canónicos respetando estrictamente el contrato formal aprobado en WHO-006A.1 (requiredness, nullability, tipos abiertos para rarity y rank, defaults contractuales únicos UNVERIFIED y [], inmutabilidad post-emisión y validación técnica sin dependencias externas).
+* **Estado:** `APPROVED_COMPLETE`
+* **Commit:** `a8b39d0` (*feat(card): implement formal card domain model*)
+* **Versión:** `0.0.1`
+
 
 
 

@@ -8,9 +8,10 @@ from .animal import (
     Curiosity,
 )
 from .lore import LoreProfile
-from .card import AnimalCard, CardFront, CardBack, CardMetadata
+from .card import Card, AnimalCard, CardFront, CardBack, CardMetadata
 
 __all__ = [
+    "Card",
     "AnimalProfile",
     "ScientificInfo",
     "ConservationIndicators",
@@ -22,3 +23,4 @@ __all__ = [
     "CardBack",
     "CardMetadata",
 ]
+

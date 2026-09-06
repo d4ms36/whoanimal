@@ -3,7 +3,7 @@
 **Documento:** `docs/PLANNING.md`  
 **Propósito:** Tablero operativo central de alineación entre Director Creativo, Project Manager y Developer Principal.  
 **Estado:** Activo y dinámico  
-**Última actualización:** 2026-09-06 (Actualización de ciclo WHO-006A.1)
+**Última actualización:** 2026-09-06 (Actualización de ciclo WHO-006B)
 
 ---
 
@@ -15,12 +15,12 @@
 | **Fase actual** | Alpha |
 | **Versión actual** | `0.0.1` |
 | **Estado** | Foundation |
-| **Objetivo activo** | Ninguno (Ciclo WHO-006A.1 completado; listo para revisión de PM) |
-| **Último objetivo completado** | `WHO-006A.1` — Corrección del contrato de obligatoriedad, nullability y defaults de Card |
-| **Próximo objetivo propuesto** | `WHO-006B` — Modelado formal de esquemas (Pydantic / Dataclasses) |
+| **Objetivo activo** | Ninguno (Ciclo WHO-006B completado; listo para revisión de PM) |
+| **Último objetivo completado** | `WHO-006B` — Implementación formal del modelo Card (19 campos canónicos) |
+| **Próximo objetivo propuesto** | `WHO-007` — Banco de Datos Inicial de Fauna (Semilla Educativa) |
 | **Bloqueos** | Ninguno |
 | **Decisiones pendientes** | `DEC-009` a `DEC-012`, `DEC-020` a `DEC-025`, `DEC-037-PENDING` |
-| **Último commit** | `34fb281` |
+| **Último commit** | `e05a902` |
 | **Última actualización** | 2026-09-06 |
 
 ---
@@ -63,7 +63,7 @@ $$\text{FASE} . \text{CORRECCIONES} . \text{ITERACIÓN}$$
 | **WHO-005B-E.1**| Cierre semántico de `rank` y `rarity` | `COMPLETADO` | Alta | 0.0.1 | Sí |
 | **WHO-006A**| Definición formal de tipos y obligatoriedad de los 19 campos de Card | `COMPLETADO` | Alta | 0.0.1 | Sí |
 | **WHO-006A.1**| Corrección del contrato de obligatoriedad, nullability y defaults de Card | `COMPLETADO` | Alta | 0.0.1 | Sí |
-| **WHO-006B**| Modelado formal de esquemas (Pydantic / Dataclasses) | `PROPUESTO` | Alta | 0.0.1 | No |
+| **WHO-006B**| Implementación formal del modelo Card (19 campos canónicos) | `COMPLETADO` | Alta | 0.0.1 | Sí |
 | **WHO-007** | Banco de Datos Inicial de Fauna (Semilla Educativa) | `PROPUESTO` | Media | 0.0.1 | No |
 
 ---
@@ -74,29 +74,30 @@ $$\text{FASE} . \text{CORRECCIONES} . \text{ITERACIÓN}$$
 ┌─────────────────────────────────────────────────────────────────────────────┐
 │                           OBJETIVO ACTIVO ACTUAL                            │
 ├──────────────────┬──────────────────────────────────────────────────────────┤
-│ ID               │ WHO-006A.1                                               │
-│ Nombre           │ Corrección Contrato Obligatoriedad, Nullability y Defaults│
-│ Propósito        │ Auditar y corregir el contrato formal de los 19 campos   │
-│                  │ eliminando defaults no aprobados, diferenciando Optional │
-│                  │ de Nullable y protegiendo origen histórico de ubicación  │
+│ ID               │ WHO-006B                                                 │
+│ Nombre           │ Implementación Formal del Modelo Card                    │
+│ Propósito        │ Implementar el modelo de dominio Card correspondiente a  │
+│                  │ los 19 campos canónicos, respetando strictly el contrato │
+│                  │ formal (required, nullable, defaults, inmutabilidad)     │
 │ Estado           │ COMPLETADO (Listo para revisión de PM)                   │
 │ Versión Asociada │ 0.0.1                                                    │
-│ Requisitos       │ WHO-006A completado con estado NEEDS CORRECTION          │
+│ Requisitos       │ WHO-006A.1 completado y aprobado                         │
 │ Responsable      │ Developer Principal (Antigravity)                        │
 └──────────────────┴──────────────────────────────────────────────────────────┘
 ```
 
 * **Criterios de Aceptación:**
-  1. Ningún default no aprobado presentado como contrato (`schema_version`, `edition`, `generation`, `issued_at`, `rank`, `owner_id`, `display_location`, `artwork` corregidos a `NINGUNO`).
-  2. Únicos defaults contractuales aprobados: `verification_status = UNVERIFIED` y `visual_effects = []`.
-  3. Diferenciación estricta y documentada entre `Optional` (`Required = No`) y `Nullable`.
-  4. `display_location` documentado con separación estricta: `Capture` (GPS privado exacto) vs. `Card` (representación pública generalizada), `historical source = protected`, `presentation = evolvable`, GPS exacto jamás en `Card`.
-  5. Cero código modificado en `src/` y `tests/`. Pruebas unitarias pasando al 100% (4/4).
-  6. Detención obligatoria formal tras la entrega sin avanzar a `WHO-006B`.
-* **Archivos Afectados:** `docs/CARD_SPEC.md`, `docs/PLANNING.md`, `docs/ROADMAP.md`, `docs/WORKFLOW.md`.
-* **Dependencias:** Ninguna externa.
+  1. Modelo `Card` implementado con exactamente los 19 campos canónicos (cero campos inventados ni PII).
+  2. Cumplimiento literal de obligatoriedad y nullability según WHO-006A.1 (Optional != Nullable).
+  3. Únicos defaults contractuales implementados: `verification_status = UNVERIFIED` y `visual_effects = []`.
+  4. Rarity y rank de tipo abierto sin tiers ni niveles inventados (`DEC-022-PENDING` y `DEC-037-PENDING` abiertas).
+  5. Inmutabilidad de atributos históricos protegida en el modelo; origen generalizado de `display_location` protegido sin GPS exacto.
+  6. Pruebas unitarias ampliadas y pasando al 100% (24/24). Cero dependencias externas agregadas.
+  7. Detención formal tras la entrega sin iniciar objetivos posteriores automáticamente.
+* **Archivos Afectados:** `src/whoanimal/domain/models/card.py`, `src/whoanimal/domain/enums.py`, `src/whoanimal/domain/models/__init__.py`, `src/whoanimal/domain/__init__.py`, `tests/test_models.py`, `docs/PLANNING.md`, `docs/ROADMAP.md`, `docs/WORKFLOW.md`.
+* **Dependencias:** Ninguna externa añadida (stdlib).
 * **Bloqueos:** Ninguno.
-* **Resultado Esperado:** Contrato formal de los 19 campos de Card blindado contra inferencias de producto no autorizadas.
+* **Resultado Esperado:** Entidad `Card` formalizada en el dominio como pilar central de colección.
 
 ---
 
@@ -138,7 +139,7 @@ Ordenados por prioridad técnica y estratégica.
 | **WHO-005B-E.1**| `APROBADO` | `VALIDADO` | `COMPLETADO` | `APPROVED_COMPLETE` |
 | **WHO-006A**| `APROBADO` | `VALIDADO` | `COMPLETADO` | `APPROVED_COMPLETE` |
 | **WHO-006A.1**| `APROBADO` | `VALIDADO` | `COMPLETADO` | `APPROVED_COMPLETE` |
-| **WHO-006B**| *PENDIENTE* | `PLANIFICADO` | `EN ESPERA` | `PROPOSED` |
+| **WHO-006B**| `APROBADO` | `VALIDADO` | `COMPLETADO` | `APPROVED_COMPLETE` |
 | **WHO-007** | *PENDIENTE* | *EN EVALUACIÓN* | `EN ESPERA` | `PROPOSED` |
 
 > **Regla:** El Developer no puede auto-aprobar objetivos. La autorización debe ser explícita por parte del Director Creativo y estructurada por el Project Manager.
@@ -234,6 +235,7 @@ Para prevenir el desvío del alcance (*scope creep*) y asegurar una base sólida
 | **2026-09-06** | Cierre semántico de `rank` y `rarity` (ortogonalidad y ejemplos no contractuales) | Delimitar estrictamente rank (mutable/progresión) y rarity (inmutable/emisión) | Director / PM (`WHO-005B-E.1`) |
 | **2026-09-06** | Definición formal de tipos, obligatoriedad y nullability de los 19 campos de Card | Establecer contrato tipológico vinculante previo a la implementación de esquemas | Director / PM (`WHO-006A`) |
 | **2026-09-06** | Corrección del contrato de obligatoriedad, nullability y defaults de Card (WHO-006A.1) | Eliminar defaults no aprobados, formalizar Optional vs Nullable y proteger origen histórico de display_location | Director / PM (`WHO-006A.1`) |
+| **2026-09-06** | Implementación formal del modelo de dominio `Card` (19 campos canónicos) | Modelado y validación técnica según contrato WHO-006A.1 (WHO-006B) | Director / PM (`WHO-006B`) |
 
 ---
 
