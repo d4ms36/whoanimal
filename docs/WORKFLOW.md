@@ -217,3 +217,10 @@ Cada tarea u objetivo debe documentarse utilizando la siguiente ficha estructura
 * **Commit:** (Pendiente de commit) (*feat(dataset): implement zoological dataset infrastructure*)
 * **Versión:** `0.0.1`
 
+
+### WHO-011B: Implementación del Índice Taxonómico Oficial
+* **Propósito:** Implementar el índice taxonómico oficial para organizar especies sin base de datos y validar rutas taxonómicas.
+* **Estado:** `APPROVED_COMPLETE`
+* **Commit:** (Pendiente de commit) (*feat(taxonomy): implement official taxonomy index*)
+* **Versión:** `0.0.1`
+

@@ -1,0 +1,20 @@
+{
+  "Animalia": {
+    "Chordata": {
+      "Mammalia": {
+        "Carnivora": {
+          "Canidae": {
+            "Canis": {}
+          },
+          "Felidae": {
+            "Felis": {},
+            "Panthera": {}
+          },
+          "Ursidae": {
+            "Ailuropoda": {}
+          }
+        }
+      }
+    }
+  }
+}

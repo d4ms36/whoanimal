@@ -1,5 +1,10 @@
 import json
-from typing import Dict, Any, List
+from typing import Dict, Any, List, Optional
+
+# TYPE_CHECKING used for optional type hints to avoid circular imports if any
+from typing import TYPE_CHECKING
+if TYPE_CHECKING:
+    from whoanimal.services.taxonomy_index import TaxonomyIndex
 
 class DatasetValidatorError(Exception):
     pass
@@ -14,23 +19,23 @@ class DatasetValidator:
     REQUIRED_TAXONOMY_FIELDS = {"kingdom", "phylum", "class", "order", "family", "genus", "species"}
 
     @classmethod
-    def validate_file(cls, filepath: str) -> bool:
+    def validate_file(cls, filepath: str, taxonomy_index: Optional['TaxonomyIndex'] = None) -> bool:
         with open(filepath, 'r', encoding='utf-8') as f:
             data = json.load(f)
-        return cls.validate_data(data)
+        return cls.validate_data(data, taxonomy_index)
         
     @classmethod
-    def validate_data(cls, data: List[Dict[str, Any]]) -> bool:
+    def validate_data(cls, data: List[Dict[str, Any]], taxonomy_index: Optional['TaxonomyIndex'] = None) -> bool:
         if not isinstance(data, list):
             raise DatasetValidatorError("Root must be a JSON array.")
             
         for index, item in enumerate(data):
-            cls._validate_item(item, index)
+            cls._validate_item(item, index, taxonomy_index)
             
         return True
         
     @classmethod
-    def _validate_item(cls, item: Dict[str, Any], index: int):
+    def _validate_item(cls, item: Dict[str, Any], index: int, taxonomy_index: Optional['TaxonomyIndex'] = None):
         if not isinstance(item, dict):
             raise DatasetValidatorError(f"Item at index {index} is not an object.")
             
@@ -76,3 +81,16 @@ class DatasetValidator:
         if "is_rare_species" in item:
             if not isinstance(item["is_rare_species"], bool):
                 raise DatasetValidatorError(f"Field 'is_rare_species' at index {index} must be a boolean.")
+                
+        # Optional: Validate taxonomy route using TaxonomyIndex
+        if taxonomy_index is not None:
+            route = [
+                taxonomy["kingdom"],
+                taxonomy["phylum"],
+                taxonomy["class"],
+                taxonomy["order"],
+                taxonomy["family"],
+                taxonomy["genus"]
+            ]
+            if not taxonomy_index.verify_route(route):
+                raise DatasetValidatorError(f"Taxonomic route {route} at index {index} does not exist in the official taxonomy index.")
