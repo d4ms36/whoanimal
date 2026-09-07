@@ -1017,7 +1017,7 @@ Aprobado por: [Director Creativo / Project Manager / Consenso]
 * **Descripción:** Definición del sistema de progresión y maestría del usuario asociado al campo mutable `rank` de la carta (escalas de nivel, puntos de avance, interacción formativa y aprendizaje), asegurando que no represente atributos biológicos, edad, tamaño ni estadísticas de combate.
 * **Decisión requerida de:** Director Creativo / Project Manager
 
-### DEC-054: Adopción del Pipeline Release Local con Keystore Segura
+### DEC-062: Adopción del Pipeline Release Local con Keystore Segura
 * **Tema:** Infraestructura, Seguridad y Release
 * **Fecha:** 2026-09-07
 * **Estado:** APPROVED
