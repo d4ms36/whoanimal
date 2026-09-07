@@ -701,6 +701,26 @@ Aprobado por: [Director Creativo / Project Manager / Consenso]
 
 ---
 
+### DEC-052: Captura Visual Real con CameraX y Almacenamiento Efímero de Observaciones
+* **Fecha:** 2026-09-07
+* **Estado:** `APROBADA`
+* **Objetivo:** `WHO-018B`
+* **Tema:** Cámara / Captura Visual / Flujo de Observación
+* **Resolución:**
+  1. Se adopta oficialmente **AndroidX CameraX (1.3.4)** con `PreviewView` e `ImageCapture` como el subsistema de captura visual nativa para Alpha 0.1 de WHO Animal.
+  2. La pantalla de captura (`CameraCaptureScreen`) sustituye el selector de catálogo previo por un visor de cámara en vivo con retícula de enfoque, botón de disparo circular de alto contraste y control de ciclo de vida atado a `LocalLifecycleOwner`.
+  3. Gestión estricta de permisos en tiempo de ejecución: Requiere `android.permission.CAMERA` mediante `rememberLauncherForActivityResult`. En caso de denegación, presenta explicaciones educativas sobre observación respetuosa y opción de reintento.
+  4. Almacenamiento efímero de fotografías de campo: Las capturas se guardan temporalmente en la caché local de la aplicación (`context.cacheDir/observation_<UUID>.jpg`), sirviendo exclusivamente para referenciar el campo inmutable `imagePath` de la entidad `ObservationContract`.
+  5. Preservación ontológica innegociable:
+     * La fotografía y la observación pertenecen al dominio sensorial efímero.
+     * `Observation ≠ IdentificationResult ≠ IdentificationDecision ≠ Capture ≠ Card`.
+     * La imagen capturada solo alimenta la entrada del `IdentificationService`; no se almacena en base de datos permanente ni crea cartas de manera directa ni prematura.
+  6. Resiliencia en entornos emulados o sin hardware de cámara: Se provee un mecanismo de captura simulada de respaldo que previene bloqueos o caídas imprevistas de la aplicación.
+* **Justificación / Principios:** Conexión del núcleo visual interactivo con el pipeline de dominio existente sin romper contratos ontológicos, asegurando fluidez en dispositivos reales y robustez en pruebas unitarias y de integración.
+* **Aprobado por:** Director Creativo / Project Manager
+
+---
+
 ### DEC-010: Estilo y Universo Mitológico del Lore (SUPERSEDED)
 * **Tema:** Diseño Narrativo
 * **Estado:** `SUPERSEDED`

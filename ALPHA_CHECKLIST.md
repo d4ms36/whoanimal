@@ -51,9 +51,9 @@ Una funcionalidad solo puede marcarse como completada cuando:
 | Función     | Estado |
 | ----------- | ------ |
 | Placeholder | ✅      |
-| CameraX     | ⬜      |
-| Permisos    | ⬜      |
-| Tomar foto  | ⬜      |
+| CameraX     | ✅      |
+| Permisos    | ✅      |
+| Tomar foto  | ✅      |
 
 ## Identificación
 
@@ -96,10 +96,10 @@ El siguiente recorrido debe funcionar completo para declarar Alpha terminada.
 * [x] Abrir la aplicación.
 * [x] Login local.
 * [x] Entrar al Home.
-* [ ] Abrir Captura.
-* [ ] Tomar una foto.
-* [ ] Crear Observation.
-* [ ] Obtener IdentificationResult.
+* [x] Abrir Captura.
+* [x] Tomar una foto.
+* [x] Crear Observation.
+* [x] Obtener IdentificationResult.
 * [ ] Aceptar identificación.
 * [ ] Crear Capture.
 * [ ] Generar AnimalCard.

@@ -317,3 +317,11 @@ ative_regions).
 * **Versión:** `0.0.1`
 
 
+### WHO-018B: Captura y Cámara Alpha (CameraX / Visual Input)
+* **Propósito:** Sustituir el selector placeholder por la integración de captura visual real utilizando CameraX (`PreviewView` + `ImageCapture`), gestión de permisos de cámara runtime (`android.permission.CAMERA`), captura simulada de contingencia, almacenamiento efímero de fotografías en `context.cacheDir`, instanciación de `Observation` real (`ObservationContract`) vinculada a la ruta del archivo, alimentación sin alteraciones al `IdentificationService` existente (`Observation ≠ IdentificationResult ≠ IdentificationDecision ≠ Capture ≠ Card`), navegación hacia `IdentificationResult`, 6 tests unitarios bajo Robolectric y verificación exitosa de compilación en Debug y Release (DEC-052).
+* **Estado:** `APPROVED_COMPLETE`
+* **Commit:** `f394386` (*feat(android): integrate CameraX capture*)
+* **Versión:** `0.0.1`
+
+
+
