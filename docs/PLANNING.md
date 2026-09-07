@@ -12,12 +12,12 @@
 | Campo | Estado |
 | :--- | :--- |
 | **Proyecto** | WHO Animal |
-| **Fase actual** | Alpha (Alpha 0.1 Completada y Empaquetada) |
+| **Fase actual** | Transición Alpha $\rightarrow$ Beta (Auditoría Alpha 0.1 Completada) |
 | **Versión actual** | `0.1.0-alpha` (Build 2) |
-| **Estado** | Release Alpha v0.1.0-alpha emitido y validado |
-| **Objetivo activo** | Ninguno (Ciclo WHO-019 completado; en espera de directrices del Director para siguiente fase) |
-| **Último objetivo completado** | `WHO-019` — Alpha 0.1 Release Packaging & Tagging (`v0.1.0-alpha`) |
-| **Próximo objetivo propuesto** | Pendiente de definición y priorización por el Project Manager / Director |
+| **Estado** | Auditoría Post-Release Alpha 0.1 y Hoja de Ruta Beta Consolidadas |
+| **Objetivo activo** | Ninguno (Ciclo WHO-020 completado; listo para autorización de WHO-021) |
+| **Último objetivo completado** | `WHO-020` — Alpha Post-Release Audit & Beta Readiness (`DEC-057`) |
+| **Próximo objetivo propuesto** | `WHO-021` — Ingesta y Sincronización del Catálogo JSON como Android Assets |
 | **Bloqueos** | Ninguno |
 | **Decisiones pendientes** | `DEC-009`, `DEC-011`, `DEC-021` a `DEC-025`, `DEC-037-PENDING` |
 | **Última actualización** | 2026-09-07 |
@@ -201,33 +201,32 @@ HOME → STORAGE → CONTAINER → CARD → VIEW / FLIP / BACK
 | **WHO-018E**| Grid de Colección y Reapertura de Cartas Persistidas | Selector de contenedores, grid visual en Baúl, reapertura inmutable sin regeneración, modo PERSISTED_CARD y Room v2 (DEC-056) | Alta | WHO-018D | `COMPLETADO` | **Sí** |
 | **WHO-018** | Integración del Mínimo Funcional Android (End-to-End Core Loop) | Cierre integral del flujo de 11 pasos; formalmente completado y subsumido por la serie `WHO-018A` a `WHO-018E` | Alta | WHO-018E | `COMPLETADO` | **Sí** |
 | **WHO-019** | Alpha 0.1 Release Packaging & Tagging (`v0.1.0-alpha`) | Sincronización de versión Android (versionCode 2, versionName "0.1.0-alpha"), verificación de assembleRelease, registro en RELEASES.md y creación del tag Git v0.1.0-alpha | Alta | WHO-018E | `COMPLETADO` | **Sí** |
+| **WHO-020** | Auditoría Post-Release Alpha 0.1 y Madurez Beta (Beta Readiness) | Auditoría integral por capas, comprobación de evidencia en código, plan de cierre de deuda y definición del roadmap Beta (DEC-057) | Alta | WHO-019 | `COMPLETADO` | **Sí** |
+| **WHO-021** | Ingesta y Sincronización del Catálogo JSON como Android Assets | Unificación de la fuente única de verdad biológica (`data/species/`), eliminando duplicación de especies en código Kotlin | Alta | WHO-020 | `PROPUESTO` | **Sí** |
+| **WHO-022** | Extracción y Externalización de Cadenas de UI (i18n Foundation) | Migración de cadenas hardcodeadas de Compose a `strings.xml`, preparando la internacionalización ($\text{UI} \neq \text{Ciencia} \neq \text{Lore}$) | Alta | WHO-021 | `PROPUESTO` | **Sí** |
+| **WHO-023** | Edición Interactiva de Lore (DEC-041) y Liberación en Baúl | UI de edición de Historia Personal con control de cuota de 3 ediciones y acción segura de liberar carta desde Baúl con modal | Alta | WHO-022 | `PROPUESTO` | **Sí** |
+| **WHO-024** | Accesibilidad (a11y) y Robustecimiento de Compatibilidad CameraX | Soporte TalkBack, target táctiles mínimos de 48dp y compatibilidad CameraX ante variantes de sensor y rotación | Media | WHO-023 | `PROPUESTO` | **Sí** |
+| **WHO-025** | Contrato Desacoplado `AdService` y Stubs de Infraestructura | Definición de interfaces limpias de publicidad desacoplada (`DEC-053`) y stubs locales de políticas de frecuencia | Media | WHO-024 | `PROPUESTO` | **Sí** |
+| **WHO-026** | Pipeline de Firma de Release y Google Play Internal Testing | Keystore de release, optimización R8/ProGuard y preparación del paquete de distribución interna `v0.2.0-beta.1` (versionCode 3) | Alta | WHO-025 | `PROPUESTO` | **Sí** |
 
-### 5.1 Especificación Formal del Próximo Objetivo: WHO-019
+### 5.1 Especificación Formal del Próximo Objetivo: WHO-021
 
-* **ID:** `WHO-019`
-* **Nombre Oficial:** `Alpha 0.1 Release Packaging & Tagging (v0.1.0-alpha)`
-* **Objetivo:** Formalizar la culminación técnica y documental de la fase Alpha 0.1 mediante la verificación del empaquetado de producción Android (`assembleRelease`), la actualización controlada de `versionCode` (a `2`) y `versionName` (a `"0.1.0-alpha"`), la validación de la suite de regresión completa, el registro oficial del artefacto en `docs/RELEASES.md` y la creación del tag canónico `v0.1.0-alpha`.
+* **ID:** `WHO-021`
+* **Nombre Oficial:** `Species Catalog Asset Synchronization & Android Domain Unification`
+* **Objetivo:** Establecer una única fuente de verdad zoológica para el cliente Android empaquetando los 28 archivos JSON de `data/species/` como assets nativos de Android y creando un parser/repositorio en Kotlin que los cargue dinámicamente, eliminando las especies hardcodeadas en código y asegurando paridad absoluta entre Python y Android.
 * **Alcance:**
-  1. Actualización de `versionCode` (a `2`) y `versionName` (a `"0.1.0-alpha"`) en `android/app/build.gradle.kts` según las directrices de `docs/VERSIONING.md`.
-  2. Compilación y verificación del binario de Release mediante `.\gradlew.bat assembleRelease`.
-  3. Ejecución de la suite completa de regresión (Android 63/63 tests unitarios, Python 150/150 tests de dominio).
-  4. Registro del release en `docs/RELEASES.md` con fecha, notas de entrega y hash criptográfico SHA-256 del APK de release generado.
-  5. Creación del tag Git oficial `v0.1.0-alpha` apuntando al commit de cierre.
+  1. Configuración de sincronización de `data/species/` hacia `android/app/src/main/assets/species/` (vía tarea Gradle o symlink/copy).
+  2. Implementación de un loader/parser JSON en Android que alimente el catálogo zoológico en memoria.
+  3. Refactorización de `DeterministicIdentificationProvider` para consultar el catálogo de assets en lugar del mapa hardcodeado en Kotlin.
+  4. Pruebas unitarias de integridad garantizando que las 28 especies del catálogo cargan correctamente con sus 19 campos y atributos biológicos.
 * **Fuera de Alcance:**
-  - Distribución en Google Play Store (reservada a Beta en Fase 3 y Release 1.0 en Fase 4).
-  - Implementación de nuevas pantallas o features (PvP, trading, economía, publicidad).
-  - Modificación de modelos ontológicos o esquemas de base de datos.
-* **Dependencias:** `WHO-018E` (Completado).
+  - Descarga de especies desde red / API remota (Alpha/Beta se mantienen offline en catálogo local).
+  - Modificación de los modelos ontológicos canónicos.
+* **Dependencias:** `WHO-020` (Completado).
 * **Criterios de Aceptación:**
-  1. `.\gradlew.bat assembleRelease` finaliza con estado `BUILD SUCCESSFUL`.
-  2. Todos los tests de regresión pasan al 100% (63/63 Android, 150/150 Python).
-  3. `docs/RELEASES.md` contiene el registro completo con hash SHA-256 del artefacto.
-  4. El tag Git `v0.1.0-alpha` queda creado en `origin/main`.
-* **Pruebas Requeridas:**
-  - `python -m unittest discover -s tests -p "test_*.py"` (150 tests)
-  - `.\gradlew.bat testDebugUnitTest` (63 tests)
-  - `.\gradlew.bat assembleRelease`
-  - Verificación de existencia del APK en `android/app/build/outputs/apk/release/app-release-unsigned.apk`.
+  1. Código Kotlin de Android no contiene datos taxonómicos ni fichas científicas duplicadas en texto plano.
+  2. Las 28 especies de `data/species/` son legibles y válidas desde el runtime de Android.
+  3. Batería de tests existente y nuevos tests pasan al 100%.
 
 > ⚠️ **Aviso de Gobernanza:**  
 > Que un objetivo aparezca en esta tabla **NO constituye autorización para su desarrollo**.  
@@ -285,6 +284,8 @@ HOME → STORAGE → CONTAINER → CARD → VIEW / FLIP / BACK
 | **WHO-018E**| `APROBADO` | `VALIDADO`| `COMPLETADO` | `APPROVED_COMPLETE` |
 | **WHO-018** | `APROBADO` | `VALIDADO`| `COMPLETADO` | `APPROVED_COMPLETE` |
 | **WHO-019** | `APROBADO` | `VALIDADO`| `COMPLETADO` | `APPROVED_COMPLETE` |
+| **WHO-020** | `APROBADO` | `VALIDADO`| `COMPLETADO` | `APPROVED_COMPLETE` |
+| **WHO-021** | `PENDIENTE` | `PROPUESTO` | `NO_INICIADO` | `PENDING_APPROVAL` |
 
 > **Regla:** El Developer no puede auto-aprobar objetivos. La autorización debe ser explícita por parte del Director Creativo y estructurada por el Project Manager.
 
@@ -418,6 +419,7 @@ Para prevenir el desvío del alcance (*scope creep*) y asegurar la entrega de un
 | **2026-09-07** | Grid de Colección y Reapertura de Cartas (WHO-018E) | Implementación de `CollectionScreen` con navegación por contenedores C-1 a C-10, grid de cartas de 2 columnas, reapertura inmutable sin regeneración, modo `PERSISTED_CARD` y Room v2 con `imagePath` y `personalLore` (DEC-056). | Developer (`WHO-018E`) |
 | **2026-09-07** | Rebaseline Operativo de Alpha 0.1 post-Golden Path (WHO-XXX) | Auditoría documental integral, sincronización de estado real, formalización del cierre del Golden Path, registro de ADRs DEC-054 a DEC-056 y especificación formal de `WHO-019` para packaging y tag v0.1.0-alpha. | Developer (`WHO-XXX`) |
 | **2026-09-07** | Alpha 0.1 Release Packaging & Tagging (WHO-019) | Configuración de versionCode = 2 y versionName = "0.1.0-alpha", verificación de assembleRelease, registro de hash SHA-256 en RELEASES.md y emisión del tag canónico v0.1.0-alpha. | Developer (`WHO-019`) |
+| **2026-09-07** | Auditoría Post-Release Alpha 0.1 y Madurez Beta (WHO-020) | Auditoría integral por capas (Core, Game, Social, Platform), validación de evidencia en código, plan de cierre de deuda y definición de la hoja de ruta Beta WHO-021 a WHO-026 (DEC-057). | Developer (`WHO-020`) |
 
 ---
 

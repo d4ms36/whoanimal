@@ -806,6 +806,28 @@ Aprobado por: [Director Creativo / Project Manager / Consenso]
 
 ---
 
+### DEC-057: Cierre Oficial de Alpha 0.1, Auditoría de Madurez y Hoja de Ruta de Transición a Beta
+* **Fecha:** 2026-09-07
+* **Estado:** `APROBADA`
+* **Objetivo:** `WHO-020`
+* **Tema:** Auditoría Post-Release / Definición de Beta / Cierre de Deuda Técnica
+* **Resolución:**
+  1. **Ratificación de Alpha 0.1 (`v0.1.0-alpha`):** Se valida el primer release técnico ejecutable (Build 2, hash SHA-256 verificado en `docs/RELEASES.md`), con el Golden Path completo y probado (150/150 tests Python, 63/63 tests Android).
+  2. **Definición Canónica de Fase Beta para WHO Animal:**
+     * Beta **NO** adelantará mecánicas de la Capa Game (PvP, estadísticas de combate, economía in-app) ni de la Capa Social (amigos, trading, regalos), las cuales pertenecen a Release 1.x y 2.x respectivamente.
+     * La fase Beta se focaliza estrictamente en seis pilares de estabilización y preparación para uso en el mundo real:
+       a) **Cierre de deuda Alpha:** Edición interactiva de Lore con límite de 3 ediciones (`DEC-041`) y liberación segura de cartas desde el Baúl con modal de confirmación.
+       b) **Sincronización de Catálogo Único:** Ingesta de `data/species/` como Android assets para unificar el dominio zoológico y erradicar duplicaciones hardcodeadas en código.
+       c) **Internacionalización (i18n):** Extracción sistemática de cadenas Compose a `res/values/strings.xml`, respetando la regla $\text{UI} \neq \text{Ciencia} \neq \text{Lore}$.
+       d) **Accesibilidad (a11y) y Hardware CameraX:** Soporte TalkBack, target táctiles mínimos de 48dp y compatibilidad robusta en múltiples sensores y resoluciones.
+       e) **Infraestructura Publicitaria Desacoplada (`AdService`):** Contrato limpio y stubs locales de políticas de frecuencia sin SDKs intrusivos en runtime (`DEC-053`).
+       f) **Pipeline de Distribución Interna:** Keystore de release y configuración para Google Play Internal Testing.
+  3. **Hoja de Ruta de Ejecución Beta:** Se aprueba la secuencia atómica de objetivos `WHO-021` a `WHO-026` para guiar la construcción y certificación de la Beta.
+* **Justificación / Principios:** Asegura que el salto a Beta responda a la visión oficial aprobada, manteniendo el rigor arquitectónico, la separación de capas y evitando el desvío del alcance hacia features comerciales tempranas.
+* **Aprobado por:** Director Creativo / Project Manager
+
+---
+
 ### DEC-010: Estilo y Universo Mitológico del Lore (SUPERSEDED)
 * **Tema:** Diseño Narrativo
 * **Estado:** `SUPERSEDED`

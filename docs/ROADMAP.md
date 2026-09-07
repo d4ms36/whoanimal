@@ -104,6 +104,22 @@ LOGIN → HOME → CAPTURE → CAMERA → OBSERVATION → IDENTIFICATION → RES
 * **Preparación de Infraestructura Publicitaria:** Implementación del contrato desacoplado `AdService` con stubs y pruebas de políticas de frecuencia.
 * **Distribución Controlada:** Despliegue de builds internas vía **Google Play Internal Testing** para recolección de feedback cualitativo.
 
+### Secuencia Atómica de Construcción de Beta:
+* **`WHO-020` — Auditoría Post-Release Alpha 0.1 y Madurez Beta (Beta Readiness)** `[COMPLETADO]`
+  * Auditoría integral por capas (Core, Game, Social, Platform), validación de evidencia en código, plan de cierre de deuda y definición de la hoja de ruta Beta (DEC-057).
+* **`WHO-021` — Ingesta y Sincronización del Catálogo JSON como Android Assets** `[PROPUESTO]`
+  * Unificación de la fuente única de verdad biológica (`data/species/`), eliminando datos duplicados en código Kotlin y sincronizando los 28 especímenes.
+* **`WHO-022` — Extracción y Externalización de Cadenas de UI (i18n Foundation)** `[PROPUESTO]`
+  * Migración sistemática de cadenas hardcodeadas de Compose a `res/values/strings.xml`, asegurando la separación $\text{UI} \neq \text{Ciencia} \neq \text{Lore}$.
+* **`WHO-023` — Edición Interactiva de Lore (DEC-041) y Liberación de Cartas en Baúl** `[PROPUESTO]`
+  * Cierre de deuda de UX: UI de edición de Historia Personal con límite de 3 ediciones y acción segura de liberar carta desde el grid del Baúl con diálogo modal de confirmación.
+* **`WHO-024` — Accesibilidad (a11y) y Robustecimiento de Compatibilidad CameraX** `[PROPUESTO]`
+  * Soporte TalkBack, target táctiles mínimos de 48dp y validación de CameraX ante rotación y sensores heterogéneos.
+* **`WHO-025` — Contrato Desacoplado `AdService` y Stubs de Infraestructura (DEC-053)** `[PROPUESTO]`
+  * Definición de interfaces limpias (`BannerPlacement`, `InterstitialPolicy`, `RewardedAdService`, `FrequencyPolicy`) y stubs locales sin SDKs de terceros.
+* **`WHO-026` — Pipeline de Firma de Release y Preparación para Google Play Internal Testing** `[PROPUESTO]`
+  * Configuración de keystore de release, optimización R8/ProGuard y preparación del paquete de distribución interna `v0.2.0-beta.1` (versionCode 3).
+
 ---
 
 ## 4. PHASE 4 — RELEASE 1.0 (Lanzamiento Comercial Público)
