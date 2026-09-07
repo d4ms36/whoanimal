@@ -1,0 +1,27 @@
+[
+  {
+    "animal_id": "9789e8c7-0c36-4449-b5e8-ccf16be3f310",
+    "scientific_name": "Crocodylus niloticus",
+    "common_name": "Cocodrilo del Nilo",
+    "taxonomy": {
+      "kingdom": "Animalia",
+      "phylum": "Chordata",
+      "class": "Reptilia",
+      "order": "Crocodilia",
+      "family": "Crocodylidae",
+      "genus": "Crocodylus",
+      "species": "Crocodylus niloticus"
+    },
+    "conservation_status": "LC",
+    "is_rare_species": false,
+    "habitat": "Ríos y pantanos",
+    "diet": "Carnívoro",
+    "lifespan_years": 70,
+    "size_cm": 450,
+    "weight_kg": 400.0,
+    "activity_cycle": "Nocturno",
+    "native_regions": [
+      "África"
+    ]
+  }
+]

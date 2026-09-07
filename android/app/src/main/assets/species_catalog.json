@@ -1,0 +1,711 @@
+[
+  {
+    "animal_id": "d3bac9b6-0929-45c3-b45f-fab252a34805",
+    "scientific_name": "Agalychnis callidryas",
+    "common_name": "Rana arborícola verde",
+    "taxonomy": {
+      "kingdom": "Animalia",
+      "phylum": "Chordata",
+      "class": "Amphibia",
+      "order": "Anura",
+      "family": "Phyllomedusidae",
+      "genus": "Agalychnis",
+      "species": "Agalychnis callidryas"
+    },
+    "conservation_status": "LC",
+    "is_rare_species": false,
+    "habitat": "Selvas tropicales húmedas",
+    "diet": "Carnívoro (Insectívoro)",
+    "lifespan_years": 5,
+    "size_cm": 7,
+    "weight_kg": 0.015,
+    "activity_cycle": "Nocturno",
+    "native_regions": [
+      "América Central"
+    ]
+  },
+  {
+    "animal_id": "9f44150f-c7eb-41fd-939e-466cfa372117",
+    "scientific_name": "Ailuropoda melanoleuca",
+    "common_name": "Panda gigante",
+    "taxonomy": {
+      "kingdom": "Animalia",
+      "phylum": "Chordata",
+      "class": "Mammalia",
+      "order": "Carnivora",
+      "family": "Ursidae",
+      "genus": "Ailuropoda",
+      "species": "Ailuropoda melanoleuca"
+    },
+    "conservation_status": "VU",
+    "is_rare_species": true,
+    "habitat": "Bosques templados de montaña",
+    "diet": "Herbívoro (Bambú)",
+    "lifespan_years": 20,
+    "size_cm": 150,
+    "weight_kg": 100.0,
+    "activity_cycle": "Diurno",
+    "native_regions": [
+      "Asia Central"
+    ]
+  },
+  {
+    "animal_id": "b0f4e28e-78aa-4a97-92ca-96e04e73b8b3",
+    "scientific_name": "Ambystoma mexicanum",
+    "common_name": "Ajolote",
+    "taxonomy": {
+      "kingdom": "Animalia",
+      "phylum": "Chordata",
+      "class": "Amphibia",
+      "order": "Urodela",
+      "family": "Ambystomatidae",
+      "genus": "Ambystoma",
+      "species": "Ambystoma mexicanum"
+    },
+    "conservation_status": "CR",
+    "is_rare_species": true,
+    "habitat": "Lagos de gran altitud",
+    "diet": "Carnívoro",
+    "lifespan_years": 15,
+    "size_cm": 23,
+    "weight_kg": 0.1,
+    "activity_cycle": "Nocturno",
+    "native_regions": [
+      "América del Norte (México)"
+    ]
+  },
+  {
+    "animal_id": "a8b4c309-c261-4baa-96f5-155a555e406f",
+    "scientific_name": "Amphiprion ocellaris",
+    "common_name": "Pez payaso",
+    "taxonomy": {
+      "kingdom": "Animalia",
+      "phylum": "Chordata",
+      "class": "Actinopterygii",
+      "order": "Perciformes",
+      "family": "Pomacentridae",
+      "genus": "Amphiprion",
+      "species": "Amphiprion ocellaris"
+    },
+    "conservation_status": "LC",
+    "is_rare_species": false,
+    "habitat": "Arrecifes de coral",
+    "diet": "Omnívoro",
+    "lifespan_years": 10,
+    "size_cm": 11,
+    "weight_kg": 0.05,
+    "activity_cycle": "Diurno",
+    "native_regions": [
+      "Océano Indo-Pacífico"
+    ]
+  },
+  {
+    "animal_id": "d3367de5-5d11-4840-9cd2-dd6766e440f4",
+    "scientific_name": "Apis mellifera",
+    "common_name": "Abeja melífera",
+    "taxonomy": {
+      "kingdom": "Animalia",
+      "phylum": "Arthropoda",
+      "class": "Insecta",
+      "order": "Hymenoptera",
+      "family": "Apidae",
+      "genus": "Apis",
+      "species": "Apis mellifera"
+    },
+    "conservation_status": "LC",
+    "is_rare_species": false,
+    "habitat": "Prados, bosques y jardines",
+    "diet": "Herbívoro (Néctar)",
+    "lifespan_years": 1,
+    "size_cm": 1,
+    "weight_kg": 0.0001,
+    "activity_cycle": "Diurno",
+    "native_regions": [
+      "Global"
+    ]
+  },
+  {
+    "animal_id": "5c5d17d4-1e67-48c5-9e55-406ab73baa65",
+    "scientific_name": "Ara macao",
+    "common_name": "Guacamayo rojo",
+    "taxonomy": {
+      "kingdom": "Animalia",
+      "phylum": "Chordata",
+      "class": "Aves",
+      "order": "Psittaciformes",
+      "family": "Psittacidae",
+      "genus": "Ara",
+      "species": "Ara macao"
+    },
+    "conservation_status": "LC",
+    "is_rare_species": false,
+    "habitat": "Selvas tropicales",
+    "diet": "Herbívoro",
+    "lifespan_years": 50,
+    "size_cm": 85,
+    "weight_kg": 1.0,
+    "activity_cycle": "Diurno",
+    "native_regions": [
+      "América Central",
+      "América del Sur"
+    ]
+  },
+  {
+    "animal_id": "8b40ff60-1023-4061-aafd-85b6f000f4c1",
+    "scientific_name": "Balaenoptera musculus",
+    "common_name": "Ballena azul",
+    "taxonomy": {
+      "kingdom": "Animalia",
+      "phylum": "Chordata",
+      "class": "Mammalia",
+      "order": "Cetartiodactyla",
+      "family": "Balaenopteridae",
+      "genus": "Balaenoptera",
+      "species": "Balaenoptera musculus"
+    },
+    "conservation_status": "EN",
+    "is_rare_species": true,
+    "habitat": "Océanos de todo el mundo",
+    "diet": "Carnívoro (Krill)",
+    "lifespan_years": 90,
+    "size_cm": 2400,
+    "weight_kg": 150000.0,
+    "activity_cycle": "Diurno",
+    "native_regions": [
+      "Océanos Globales"
+    ]
+  },
+  {
+    "animal_id": "10d0799d-6fba-46c4-8ca9-772358e1aff1",
+    "scientific_name": "Bubo bubo",
+    "common_name": "Búho real",
+    "taxonomy": {
+      "kingdom": "Animalia",
+      "phylum": "Chordata",
+      "class": "Aves",
+      "order": "Strigiformes",
+      "family": "Strigidae",
+      "genus": "Bubo",
+      "species": "Bubo bubo"
+    },
+    "conservation_status": "LC",
+    "is_rare_species": false,
+    "habitat": "Bosques y acantilados",
+    "diet": "Carnívoro",
+    "lifespan_years": 20,
+    "size_cm": 70,
+    "weight_kg": 2.5,
+    "activity_cycle": "Nocturno",
+    "native_regions": [
+      "Europa",
+      "Asia"
+    ]
+  },
+  {
+    "animal_id": "99fcbd5c-911d-4cee-af0c-9b5d4fb1e53f",
+    "scientific_name": "Canis lupus familiaris",
+    "common_name": "Perro doméstico",
+    "taxonomy": {
+      "kingdom": "Animalia",
+      "phylum": "Chordata",
+      "class": "Mammalia",
+      "order": "Carnivora",
+      "family": "Canidae",
+      "genus": "Canis",
+      "species": "Canis lupus familiaris"
+    },
+    "conservation_status": "NE",
+    "is_rare_species": false,
+    "habitat": "Áreas habitadas por humanos a nivel global",
+    "diet": "Omnívoro",
+    "lifespan_years": 13,
+    "size_cm": 60,
+    "weight_kg": 20.0,
+    "activity_cycle": "Diurno",
+    "native_regions": [
+      "Global"
+    ]
+  },
+  {
+    "animal_id": "9ec6f2e4-7634-4ef1-a6f3-a964863b4d6a",
+    "scientific_name": "Carcharodon carcharias",
+    "common_name": "Gran tiburón blanco",
+    "taxonomy": {
+      "kingdom": "Animalia",
+      "phylum": "Chordata",
+      "class": "Chondrichthyes",
+      "order": "Lamniformes",
+      "family": "Lamnidae",
+      "genus": "Carcharodon",
+      "species": "Carcharodon carcharias"
+    },
+    "conservation_status": "VU",
+    "is_rare_species": false,
+    "habitat": "Aguas templadas y cálidas costeras",
+    "diet": "Carnívoro",
+    "lifespan_years": 70,
+    "size_cm": 450,
+    "weight_kg": 1100.0,
+    "activity_cycle": "Diurno",
+    "native_regions": [
+      "Océanos Globales"
+    ]
+  },
+  {
+    "animal_id": "0047d67e-4dc7-40d4-aea5-00fb1c6d87cf",
+    "scientific_name": "Chelonia mydas",
+    "common_name": "Tortuga verde",
+    "taxonomy": {
+      "kingdom": "Animalia",
+      "phylum": "Chordata",
+      "class": "Reptilia",
+      "order": "Testudines",
+      "family": "Cheloniidae",
+      "genus": "Chelonia",
+      "species": "Chelonia mydas"
+    },
+    "conservation_status": "EN",
+    "is_rare_species": false,
+    "habitat": "Mares tropicales y subtropicales",
+    "diet": "Herbívoro",
+    "lifespan_years": 80,
+    "size_cm": 120,
+    "weight_kg": 150.0,
+    "activity_cycle": "Diurno",
+    "native_regions": [
+      "Océanos Globales"
+    ]
+  },
+  {
+    "animal_id": "9789e8c7-0c36-4449-b5e8-ccf16be3f310",
+    "scientific_name": "Crocodylus niloticus",
+    "common_name": "Cocodrilo del Nilo",
+    "taxonomy": {
+      "kingdom": "Animalia",
+      "phylum": "Chordata",
+      "class": "Reptilia",
+      "order": "Crocodilia",
+      "family": "Crocodylidae",
+      "genus": "Crocodylus",
+      "species": "Crocodylus niloticus"
+    },
+    "conservation_status": "LC",
+    "is_rare_species": false,
+    "habitat": "Ríos y pantanos",
+    "diet": "Carnívoro",
+    "lifespan_years": 70,
+    "size_cm": 450,
+    "weight_kg": 400.0,
+    "activity_cycle": "Nocturno",
+    "native_regions": [
+      "África"
+    ]
+  },
+  {
+    "animal_id": "6ddef620-c980-4b23-9d08-a80a4a1d4bf8",
+    "scientific_name": "Danaus plexippus",
+    "common_name": "Mariposa monarca",
+    "taxonomy": {
+      "kingdom": "Animalia",
+      "phylum": "Arthropoda",
+      "class": "Insecta",
+      "order": "Lepidoptera",
+      "family": "Nymphalidae",
+      "genus": "Danaus",
+      "species": "Danaus plexippus"
+    },
+    "conservation_status": "LC",
+    "is_rare_species": false,
+    "habitat": "Bosques, prados y jardines",
+    "diet": "Herbívoro",
+    "lifespan_years": 1,
+    "size_cm": 10,
+    "weight_kg": 0.001,
+    "activity_cycle": "Diurno",
+    "native_regions": [
+      "América del Norte",
+      "América Central"
+    ]
+  },
+  {
+    "animal_id": "cdd651fb-7f77-47b8-8786-b13ecf847f43",
+    "scientific_name": "Dendrobates tinctorius",
+    "common_name": "Rana dardo venenosa",
+    "taxonomy": {
+      "kingdom": "Animalia",
+      "phylum": "Chordata",
+      "class": "Amphibia",
+      "order": "Anura",
+      "family": "Dendrobatidae",
+      "genus": "Dendrobates",
+      "species": "Dendrobates tinctorius"
+    },
+    "conservation_status": "LC",
+    "is_rare_species": false,
+    "habitat": "Selvas tropicales húmedas",
+    "diet": "Carnívoro (Insectívoro)",
+    "lifespan_years": 10,
+    "size_cm": 5,
+    "weight_kg": 0.008,
+    "activity_cycle": "Diurno",
+    "native_regions": [
+      "América del Sur"
+    ]
+  },
+  {
+    "animal_id": "ad5217c9-c091-4d19-b3ec-2acf55224ac8",
+    "scientific_name": "Elephas maximus",
+    "common_name": "Elefante asiático",
+    "taxonomy": {
+      "kingdom": "Animalia",
+      "phylum": "Chordata",
+      "class": "Mammalia",
+      "order": "Proboscidea",
+      "family": "Elephantidae",
+      "genus": "Elephas",
+      "species": "Elephas maximus"
+    },
+    "conservation_status": "EN",
+    "is_rare_species": false,
+    "habitat": "Bosques tropicales y pastizales",
+    "diet": "Herbívoro",
+    "lifespan_years": 60,
+    "size_cm": 275,
+    "weight_kg": 4000.0,
+    "activity_cycle": "Diurno",
+    "native_regions": [
+      "Asia del Sur",
+      "Asia Sudoriental"
+    ]
+  },
+  {
+    "animal_id": "32b02707-5b6d-45d5-83d3-8f7e8be95a76",
+    "scientific_name": "Felis catus",
+    "common_name": "Gato doméstico",
+    "taxonomy": {
+      "kingdom": "Animalia",
+      "phylum": "Chordata",
+      "class": "Mammalia",
+      "order": "Carnivora",
+      "family": "Felidae",
+      "genus": "Felis",
+      "species": "Felis catus"
+    },
+    "conservation_status": "NE",
+    "is_rare_species": false,
+    "habitat": "Áreas habitadas por humanos a nivel global",
+    "diet": "Carnívoro",
+    "lifespan_years": 15,
+    "size_cm": 46,
+    "weight_kg": 4.5,
+    "activity_cycle": "Crepuscular",
+    "native_regions": [
+      "Global"
+    ]
+  },
+  {
+    "animal_id": "0e8e0359-dd28-44e0-8888-c13c3e021ac0",
+    "scientific_name": "Gorilla beringei",
+    "common_name": "Gorila oriental",
+    "taxonomy": {
+      "kingdom": "Animalia",
+      "phylum": "Chordata",
+      "class": "Mammalia",
+      "order": "Primates",
+      "family": "Hominidae",
+      "genus": "Gorilla",
+      "species": "Gorilla beringei"
+    },
+    "conservation_status": "EN",
+    "is_rare_species": true,
+    "habitat": "Bosques tropicales montanos",
+    "diet": "Herbívoro",
+    "lifespan_years": 40,
+    "size_cm": 170,
+    "weight_kg": 160.0,
+    "activity_cycle": "Diurno",
+    "native_regions": [
+      "África Oriental"
+    ]
+  },
+  {
+    "animal_id": "140c0a1c-4a78-4f67-87c6-6b6c7b0907a6",
+    "scientific_name": "Haliaeetus leucocephalus",
+    "common_name": "Águila calva",
+    "taxonomy": {
+      "kingdom": "Animalia",
+      "phylum": "Chordata",
+      "class": "Aves",
+      "order": "Accipitriformes",
+      "family": "Accipitridae",
+      "genus": "Haliaeetus",
+      "species": "Haliaeetus leucocephalus"
+    },
+    "conservation_status": "LC",
+    "is_rare_species": false,
+    "habitat": "Zonas costeras y lagos",
+    "diet": "Carnívoro",
+    "lifespan_years": 20,
+    "size_cm": 90,
+    "weight_kg": 4.5,
+    "activity_cycle": "Diurno",
+    "native_regions": [
+      "América del Norte"
+    ]
+  },
+  {
+    "animal_id": "f79e29e8-0807-4c84-8d1c-9ec7bef110a8",
+    "scientific_name": "Hippocampus kuda",
+    "common_name": "Caballito de mar",
+    "taxonomy": {
+      "kingdom": "Animalia",
+      "phylum": "Chordata",
+      "class": "Actinopterygii",
+      "order": "Syngnathiformes",
+      "family": "Syngnathidae",
+      "genus": "Hippocampus",
+      "species": "Hippocampus kuda"
+    },
+    "conservation_status": "VU",
+    "is_rare_species": false,
+    "habitat": "Arrecifes y estuarios",
+    "diet": "Carnívoro",
+    "lifespan_years": 4,
+    "size_cm": 15,
+    "weight_kg": 0.02,
+    "activity_cycle": "Diurno",
+    "native_regions": [
+      "Océano Indo-Pacífico"
+    ]
+  },
+  {
+    "animal_id": "4ef557ec-5991-4d60-8949-ca55a7bf7893",
+    "scientific_name": "Iguana iguana",
+    "common_name": "Iguana verde",
+    "taxonomy": {
+      "kingdom": "Animalia",
+      "phylum": "Chordata",
+      "class": "Reptilia",
+      "order": "Squamata",
+      "family": "Iguanidae",
+      "genus": "Iguana",
+      "species": "Iguana iguana"
+    },
+    "conservation_status": "LC",
+    "is_rare_species": false,
+    "habitat": "Selvas tropicales",
+    "diet": "Herbívoro",
+    "lifespan_years": 15,
+    "size_cm": 150,
+    "weight_kg": 4.0,
+    "activity_cycle": "Diurno",
+    "native_regions": [
+      "América Central",
+      "América del Sur"
+    ]
+  },
+  {
+    "animal_id": "bfad4353-7d4e-4066-8c3c-a9541a165dcf",
+    "scientific_name": "Loxodonta africana",
+    "common_name": "Elefante africano",
+    "taxonomy": {
+      "kingdom": "Animalia",
+      "phylum": "Chordata",
+      "class": "Mammalia",
+      "order": "Proboscidea",
+      "family": "Elephantidae",
+      "genus": "Loxodonta",
+      "species": "Loxodonta africana"
+    },
+    "conservation_status": "VU",
+    "is_rare_species": false,
+    "habitat": "Sabanas y bosques",
+    "diet": "Herbívoro",
+    "lifespan_years": 70,
+    "size_cm": 330,
+    "weight_kg": 6000.0,
+    "activity_cycle": "Diurno",
+    "native_regions": [
+      "África subsahariana"
+    ]
+  },
+  {
+    "animal_id": "92f6adcf-1870-4ad0-822c-a33cfda59cde",
+    "scientific_name": "Octopus vulgaris",
+    "common_name": "Pulpo común",
+    "taxonomy": {
+      "kingdom": "Animalia",
+      "phylum": "Mollusca",
+      "class": "Cephalopoda",
+      "order": "Octopoda",
+      "family": "Octopodidae",
+      "genus": "Octopus",
+      "species": "Octopus vulgaris"
+    },
+    "conservation_status": "LC",
+    "is_rare_species": false,
+    "habitat": "Aguas costeras marinas",
+    "diet": "Carnívoro",
+    "lifespan_years": 2,
+    "size_cm": 60,
+    "weight_kg": 3.0,
+    "activity_cycle": "Nocturno",
+    "native_regions": [
+      "Océanos Globales"
+    ]
+  },
+  {
+    "animal_id": "d83ff4e9-bcfb-4ea8-a7fa-dc29e9cf1513",
+    "scientific_name": "Ophiophagus hannah",
+    "common_name": "Cobra real",
+    "taxonomy": {
+      "kingdom": "Animalia",
+      "phylum": "Chordata",
+      "class": "Reptilia",
+      "order": "Squamata",
+      "family": "Elapidae",
+      "genus": "Ophiophagus",
+      "species": "Ophiophagus hannah"
+    },
+    "conservation_status": "VU",
+    "is_rare_species": true,
+    "habitat": "Bosques densos",
+    "diet": "Carnívoro",
+    "lifespan_years": 20,
+    "size_cm": 400,
+    "weight_kg": 6.0,
+    "activity_cycle": "Diurno",
+    "native_regions": [
+      "Asia del Sur",
+      "Asia Sudoriental"
+    ]
+  },
+  {
+    "animal_id": "d1930818-e880-4181-81e9-3bb96b13dcdb",
+    "scientific_name": "Panthera onca",
+    "common_name": "Jaguar",
+    "taxonomy": {
+      "kingdom": "Animalia",
+      "phylum": "Chordata",
+      "class": "Mammalia",
+      "order": "Carnivora",
+      "family": "Felidae",
+      "genus": "Panthera",
+      "species": "Panthera onca"
+    },
+    "conservation_status": "NT",
+    "is_rare_species": false,
+    "habitat": "Bosques tropicales y selvas",
+    "diet": "Carnívoro",
+    "lifespan_years": 15,
+    "size_cm": 170,
+    "weight_kg": 95.5,
+    "activity_cycle": "Diurno",
+    "native_regions": [
+      "América del Sur",
+      "América Central"
+    ]
+  },
+  {
+    "animal_id": "7fb3eb84-cecf-4cfa-8048-cc917d8d7a12",
+    "scientific_name": "Phoenicopterus roseus",
+    "common_name": "Flamenco común",
+    "taxonomy": {
+      "kingdom": "Animalia",
+      "phylum": "Chordata",
+      "class": "Aves",
+      "order": "Phoenicopteriformes",
+      "family": "Phoenicopteridae",
+      "genus": "Phoenicopterus",
+      "species": "Phoenicopterus roseus"
+    },
+    "conservation_status": "LC",
+    "is_rare_species": false,
+    "habitat": "Lagunas y humedales",
+    "diet": "Omnívoro",
+    "lifespan_years": 30,
+    "size_cm": 140,
+    "weight_kg": 3.0,
+    "activity_cycle": "Diurno",
+    "native_regions": [
+      "Europa",
+      "África",
+      "Asia"
+    ]
+  },
+  {
+    "animal_id": "77205823-8698-4ede-9897-90b1ec04cb54",
+    "scientific_name": "Spheniscus magellanicus",
+    "common_name": "Pingüino de Magallanes",
+    "taxonomy": {
+      "kingdom": "Animalia",
+      "phylum": "Chordata",
+      "class": "Aves",
+      "order": "Sphenisciformes",
+      "family": "Spheniscidae",
+      "genus": "Spheniscus",
+      "species": "Spheniscus magellanicus"
+    },
+    "conservation_status": "NT",
+    "is_rare_species": false,
+    "habitat": "Costas templadas",
+    "diet": "Carnívoro",
+    "lifespan_years": 25,
+    "size_cm": 70,
+    "weight_kg": 4.0,
+    "activity_cycle": "Diurno",
+    "native_regions": [
+      "América del Sur"
+    ]
+  },
+  {
+    "animal_id": "665e230f-e1ba-40f5-8b0f-b2365081832f",
+    "scientific_name": "Struthio camelus",
+    "common_name": "Avestruz",
+    "taxonomy": {
+      "kingdom": "Animalia",
+      "phylum": "Chordata",
+      "class": "Aves",
+      "order": "Struthioniformes",
+      "family": "Struthionidae",
+      "genus": "Struthio",
+      "species": "Struthio camelus"
+    },
+    "conservation_status": "LC",
+    "is_rare_species": false,
+    "habitat": "Sabanas y desiertos",
+    "diet": "Omnívoro",
+    "lifespan_years": 40,
+    "size_cm": 250,
+    "weight_kg": 100.0,
+    "activity_cycle": "Diurno",
+    "native_regions": [
+      "África"
+    ]
+  },
+  {
+    "animal_id": "f9e8108a-9bd2-40f3-8082-e0e8e7f9243c",
+    "scientific_name": "Theraphosa blondi",
+    "common_name": "Tarántula Goliat",
+    "taxonomy": {
+      "kingdom": "Animalia",
+      "phylum": "Arthropoda",
+      "class": "Arachnida",
+      "order": "Araneae",
+      "family": "Theraphosidae",
+      "genus": "Theraphosa",
+      "species": "Theraphosa blondi"
+    },
+    "conservation_status": "NE",
+    "is_rare_species": true,
+    "habitat": "Bosques tropicales y pantanos",
+    "diet": "Carnívoro",
+    "lifespan_years": 20,
+    "size_cm": 30,
+    "weight_kg": 0.17,
+    "activity_cycle": "Nocturno",
+    "native_regions": [
+      "América del Sur"
+    ]
+  }
+]

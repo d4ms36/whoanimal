@@ -1,10 +1,12 @@
 package com.whoanimal.app.domain.identification
 
+import com.whoanimal.app.data.catalog.DefaultSpeciesCatalogRepository
 import com.whoanimal.app.domain.model.AnimalProfileContract
 import com.whoanimal.app.domain.model.CandidateSpeciesContract
 import com.whoanimal.app.domain.model.IdentificationResultContract
 import com.whoanimal.app.domain.model.ObservationContract
 import com.whoanimal.app.domain.model.TaxonomyContract
+import com.whoanimal.app.domain.repository.SpeciesCatalogRepository
 import java.time.Instant
 import java.util.UUID
 
@@ -16,116 +18,58 @@ class InvalidObservationException(message: String) : IdentificationException(mes
 class IdentificationProviderException(message: String) : IdentificationException(message)
 
 /**
- * Catálogo zoológico oficial inicial embebido para Alpha 0.1.
- * Contiene especies reales verificadas procedentes de data/species/.
- * Nunca se inventan datos taxonómicos ni científicos.
+ * Catálogo zoológico oficial inicial para WHO Animal.
+ *
+ * Delega directamente en [SpeciesCatalogRepository], consumiendo la fuente única
+ * de verdad zoológica del proyecto (data/species/ sincronizado a Android assets).
+ * Nunca inventa datos taxonómicos ni científicos.
  */
 object OfficialStarterCatalog {
-    val dog = AnimalProfileContract(
-        animalId = "99fcbd5c-911d-4cee-af0c-9b5d4fb1e53f",
-        scientificName = "Canis lupus familiaris",
-        commonName = "Perro doméstico",
+    private val repository: SpeciesCatalogRepository
+        get() = DefaultSpeciesCatalogRepository.getInstance()
+
+    val allSpecies: List<AnimalProfileContract>
+        get() = repository.getAllSpecies()
+
+    fun findById(animalId: String): AnimalProfileContract? =
+        repository.findById(animalId)
+
+    fun findByScientificName(scientificName: String): AnimalProfileContract? =
+        repository.findByScientificName(scientificName)
+
+    val dog: AnimalProfileContract
+        get() = findByScientificName("Canis lupus familiaris")
+            ?: allSpecies.firstOrNull()
+            ?: fallbackProfile("Canis lupus familiaris", "Perro doméstico")
+
+    val cat: AnimalProfileContract
+        get() = findByScientificName("Felis catus")
+            ?: allSpecies.firstOrNull()
+            ?: fallbackProfile("Felis catus", "Gato doméstico")
+
+    val jaguar: AnimalProfileContract
+        get() = findByScientificName("Panthera onca")
+            ?: allSpecies.firstOrNull()
+            ?: fallbackProfile("Panthera onca", "Jaguar")
+
+    val macaw: AnimalProfileContract
+        get() = findByScientificName("Ara macao")
+            ?: allSpecies.firstOrNull()
+            ?: fallbackProfile("Ara macao", "Guacamayo rojo")
+
+    private fun fallbackProfile(scientificName: String, commonName: String) = AnimalProfileContract(
+        animalId = "fallback-$scientificName",
+        scientificName = scientificName,
+        commonName = commonName,
         taxonomy = TaxonomyContract(
-            kingdom = "Animalia",
             phylum = "Chordata",
             className = "Mammalia",
             order = "Carnivora",
             family = "Canidae",
             genus = "Canis",
-            species = "Canis lupus familiaris"
-        ),
-        conservationStatus = "NE",
-        isRareSpecies = false,
-        habitat = "Áreas habitadas por humanos a nivel global",
-        diet = "Omnívoro",
-        lifespanYears = 13,
-        sizeCm = 60,
-        weightKg = 20.0,
-        activityCycle = "Diurno",
-        nativeRegions = listOf("Global"),
-        curiosity = "Posee un sentido del olfato hasta 100.000 veces más sensible que el humano."
+            species = scientificName
+        )
     )
-
-    val cat = AnimalProfileContract(
-        animalId = "a29bebb6-c73e-4b24-a7fc-14ff4c000101",
-        scientificName = "Felis catus",
-        commonName = "Gato doméstico",
-        taxonomy = TaxonomyContract(
-            kingdom = "Animalia",
-            phylum = "Chordata",
-            className = "Mammalia",
-            order = "Carnivora",
-            family = "Felidae",
-            genus = "Felis",
-            species = "Felis catus"
-        ),
-        conservationStatus = "NE",
-        isRareSpecies = false,
-        habitat = "Áreas habitadas por humanos a nivel global",
-        diet = "Carnívoro",
-        lifespanYears = 15,
-        sizeCm = 46,
-        weightKg = 4.5,
-        activityCycle = "Crepuscular",
-        nativeRegions = listOf("Global"),
-        curiosity = "Pasan aproximadamente el 70% de su vida durmiendo y acicalándose."
-    )
-
-    val jaguar = AnimalProfileContract(
-        animalId = "b38ceaa5-b82d-4c13-a6eb-25ee3b111202",
-        scientificName = "Panthera onca",
-        commonName = "Jaguar",
-        taxonomy = TaxonomyContract(
-            kingdom = "Animalia",
-            phylum = "Chordata",
-            className = "Mammalia",
-            order = "Carnivora",
-            family = "Felidae",
-            genus = "Panthera",
-            species = "Panthera onca"
-        ),
-        conservationStatus = "NT",
-        isRareSpecies = true,
-        habitat = "Bosques tropicales y selvas",
-        diet = "Carnívoro",
-        lifespanYears = 15,
-        sizeCm = 170,
-        weightKg = 95.5,
-        activityCycle = "Diurno",
-        nativeRegions = listOf("América del Sur", "América Central"),
-        curiosity = "Posee la mordida más potente de todos los grandes felinos en relación a su tamaño.",
-        dangerLevel = "Precaución: Gran depredador carnívoro. Observar a distancia segura en hábitats naturales."
-    )
-
-    val macaw = AnimalProfileContract(
-        animalId = "c47bfaa4-a93e-4d24-b7ec-36ff2c222303",
-        scientificName = "Ara macao",
-        commonName = "Guacamayo rojo",
-        taxonomy = TaxonomyContract(
-            kingdom = "Animalia",
-            phylum = "Chordata",
-            className = "Aves",
-            order = "Psittaciformes",
-            family = "Psittacidae",
-            genus = "Ara",
-            species = "Ara macao"
-        ),
-        conservationStatus = "LC",
-        isRareSpecies = false,
-        habitat = "Selvas tropicales",
-        diet = "Herbívoro",
-        lifespanYears = 50,
-        sizeCm = 85,
-        weightKg = 1.0,
-        activityCycle = "Diurno",
-        nativeRegions = listOf("América Central", "América del Sur"),
-        curiosity = "Forma parejas monógamas de por vida y sus llamadas pueden escucharse a kilómetros."
-    )
-
-    val allSpecies = listOf(dog, cat, jaguar, macaw)
-
-    fun findById(animalId: String): AnimalProfileContract? =
-        allSpecies.firstOrNull { it.animalId == animalId }
 }
 
 /**
@@ -142,20 +86,30 @@ interface IdentificationProvider {
  * en fases posteriores por un motor de visión artificial real.
  */
 class DeterministicIdentificationProvider(
-    private val catalog: List<AnimalProfileContract> = OfficialStarterCatalog.allSpecies
+    private val catalogRepository: SpeciesCatalogRepository = DefaultSpeciesCatalogRepository.getInstance(),
+    private val catalog: List<AnimalProfileContract>? = null
 ) : IdentificationProvider {
 
+    constructor(catalog: List<AnimalProfileContract>) : this(
+        catalogRepository = DefaultSpeciesCatalogRepository.getInstance(),
+        catalog = catalog
+    )
+
+    private fun effectiveCatalog(): List<AnimalProfileContract> =
+        catalog ?: catalogRepository.getAllSpecies()
+
     override fun identify(observation: ObservationContract): List<CandidateSpeciesContract> {
-        if (catalog.isEmpty()) {
+        val speciesList = effectiveCatalog()
+        if (speciesList.isEmpty()) {
             throw IdentificationProviderException("El catálogo de especies está vacío.")
         }
 
         val imagePathLower = observation.imagePath.lowercase()
-        val matchedProfile = catalog.find { profile ->
+        val matchedProfile = speciesList.find { profile ->
             val sciSlug = profile.scientificName.lowercase().replace(" ", "_")
             val commSlug = profile.commonName.lowercase()
             imagePathLower.contains(sciSlug) || imagePathLower.contains(commSlug) || imagePathLower.contains(profile.animalId.lowercase())
-        } ?: catalog.first()
+        } ?: speciesList.first()
 
         val candidates = mutableListOf<CandidateSpeciesContract>()
 
@@ -170,7 +124,7 @@ class DeterministicIdentificationProvider(
         )
 
         // Candidato alternativo del catálogo si existe
-        val alternative = catalog.find { it.animalId != matchedProfile.animalId }
+        val alternative = speciesList.find { it.animalId != matchedProfile.animalId }
         if (alternative != null) {
             candidates.add(
                 CandidateSpeciesContract(

@@ -1,0 +1,27 @@
+[
+  {
+    "animal_id": "b0f4e28e-78aa-4a97-92ca-96e04e73b8b3",
+    "scientific_name": "Ambystoma mexicanum",
+    "common_name": "Ajolote",
+    "taxonomy": {
+      "kingdom": "Animalia",
+      "phylum": "Chordata",
+      "class": "Amphibia",
+      "order": "Urodela",
+      "family": "Ambystomatidae",
+      "genus": "Ambystoma",
+      "species": "Ambystoma mexicanum"
+    },
+    "conservation_status": "CR",
+    "is_rare_species": true,
+    "habitat": "Lagos de gran altitud",
+    "diet": "Carnívoro",
+    "lifespan_years": 15,
+    "size_cm": 23,
+    "weight_kg": 0.1,
+    "activity_cycle": "Nocturno",
+    "native_regions": [
+      "América del Norte (México)"
+    ]
+  }
+]

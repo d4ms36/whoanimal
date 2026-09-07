@@ -1,0 +1,27 @@
+[
+  {
+    "animal_id": "0e8e0359-dd28-44e0-8888-c13c3e021ac0",
+    "scientific_name": "Gorilla beringei",
+    "common_name": "Gorila oriental",
+    "taxonomy": {
+      "kingdom": "Animalia",
+      "phylum": "Chordata",
+      "class": "Mammalia",
+      "order": "Primates",
+      "family": "Hominidae",
+      "genus": "Gorilla",
+      "species": "Gorilla beringei"
+    },
+    "conservation_status": "EN",
+    "is_rare_species": true,
+    "habitat": "Bosques tropicales montanos",
+    "diet": "Herbívoro",
+    "lifespan_years": 40,
+    "size_cm": 170,
+    "weight_kg": 160.0,
+    "activity_cycle": "Diurno",
+    "native_regions": [
+      "África Oriental"
+    ]
+  }
+]

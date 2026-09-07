@@ -15,9 +15,9 @@
 | **Fase actual** | Transición Alpha $\rightarrow$ Beta (Auditoría Alpha 0.1 Completada) |
 | **Versión actual** | `0.1.0-alpha` (Build 2) |
 | **Estado** | Auditoría Post-Release Alpha 0.1 y Hoja de Ruta Beta Consolidadas |
-| **Objetivo activo** | Ninguno (Ciclo WHO-020 completado; listo para autorización de WHO-021) |
-| **Último objetivo completado** | `WHO-020` — Alpha Post-Release Audit & Beta Readiness (`DEC-057`) |
-| **Próximo objetivo propuesto** | `WHO-021` — Ingesta y Sincronización del Catálogo JSON como Android Assets |
+| **Objetivo activo** | Ninguno (Ciclo WHO-021 completado; listo para autorización de WHO-022) |
+| **Último objetivo completado** | `WHO-021` — Ingesta y Sincronización del Catálogo JSON como Android Assets (`DEC-058`) |
+| **Próximo objetivo propuesto** | `WHO-022` — Cierre de Deuda Alpha: Edición de Lore y Liberación Segura desde Baúl |
 | **Bloqueos** | Ninguno |
 | **Decisiones pendientes** | `DEC-009`, `DEC-011`, `DEC-021` a `DEC-025`, `DEC-037-PENDING` |
 | **Última actualización** | 2026-09-07 |
@@ -420,6 +420,7 @@ Para prevenir el desvío del alcance (*scope creep*) y asegurar la entrega de un
 | **2026-09-07** | Rebaseline Operativo de Alpha 0.1 post-Golden Path (WHO-XXX) | Auditoría documental integral, sincronización de estado real, formalización del cierre del Golden Path, registro de ADRs DEC-054 a DEC-056 y especificación formal de `WHO-019` para packaging y tag v0.1.0-alpha. | Developer (`WHO-XXX`) |
 | **2026-09-07** | Alpha 0.1 Release Packaging & Tagging (WHO-019) | Configuración de versionCode = 2 y versionName = "0.1.0-alpha", verificación de assembleRelease, registro de hash SHA-256 en RELEASES.md y emisión del tag canónico v0.1.0-alpha. | Developer (`WHO-019`) |
 | **2026-09-07** | Auditoría Post-Release Alpha 0.1 y Madurez Beta (WHO-020) | Auditoría integral por capas (Core, Game, Social, Platform), validación de evidencia en código, plan de cierre de deuda y definición de la hoja de ruta Beta WHO-021 a WHO-026 (DEC-057). | Developer (`WHO-020`) |
+| **2026-09-07** | Sincronización de Catálogo de Especies y Unificación de Dominio Android (WHO-021) | Unificación de la fuente única de verdad zoológica (data/species/ a Android assets), erradicación de listas hardcodeadas en Kotlin, repositorio y parser dedicados, compatibilidad con 28 especies y tests unitarios 100% PASS (DEC-058). | Developer (`WHO-021`) |
 
 ---
 

@@ -1,0 +1,28 @@
+[
+  {
+    "animal_id": "d1930818-e880-4181-81e9-3bb96b13dcdb",
+    "scientific_name": "Panthera onca",
+    "common_name": "Jaguar",
+    "taxonomy": {
+      "kingdom": "Animalia",
+      "phylum": "Chordata",
+      "class": "Mammalia",
+      "order": "Carnivora",
+      "family": "Felidae",
+      "genus": "Panthera",
+      "species": "Panthera onca"
+    },
+    "conservation_status": "NT",
+    "is_rare_species": false,
+    "habitat": "Bosques tropicales y selvas",
+    "diet": "Carnívoro",
+    "lifespan_years": 15,
+    "size_cm": 170,
+    "weight_kg": 95.5,
+    "activity_cycle": "Diurno",
+    "native_regions": [
+      "América del Sur",
+      "América Central"
+    ]
+  }
+]

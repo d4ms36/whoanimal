@@ -1,0 +1,27 @@
+[
+  {
+    "animal_id": "92f6adcf-1870-4ad0-822c-a33cfda59cde",
+    "scientific_name": "Octopus vulgaris",
+    "common_name": "Pulpo común",
+    "taxonomy": {
+      "kingdom": "Animalia",
+      "phylum": "Mollusca",
+      "class": "Cephalopoda",
+      "order": "Octopoda",
+      "family": "Octopodidae",
+      "genus": "Octopus",
+      "species": "Octopus vulgaris"
+    },
+    "conservation_status": "LC",
+    "is_rare_species": false,
+    "habitat": "Aguas costeras marinas",
+    "diet": "Carnívoro",
+    "lifespan_years": 2,
+    "size_cm": 60,
+    "weight_kg": 3.0,
+    "activity_cycle": "Nocturno",
+    "native_regions": [
+      "Océanos Globales"
+    ]
+  }
+]

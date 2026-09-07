@@ -1,0 +1,27 @@
+[
+  {
+    "animal_id": "77205823-8698-4ede-9897-90b1ec04cb54",
+    "scientific_name": "Spheniscus magellanicus",
+    "common_name": "Pingüino de Magallanes",
+    "taxonomy": {
+      "kingdom": "Animalia",
+      "phylum": "Chordata",
+      "class": "Aves",
+      "order": "Sphenisciformes",
+      "family": "Spheniscidae",
+      "genus": "Spheniscus",
+      "species": "Spheniscus magellanicus"
+    },
+    "conservation_status": "NT",
+    "is_rare_species": false,
+    "habitat": "Costas templadas",
+    "diet": "Carnívoro",
+    "lifespan_years": 25,
+    "size_cm": 70,
+    "weight_kg": 4.0,
+    "activity_cycle": "Diurno",
+    "native_regions": [
+      "América del Sur"
+    ]
+  }
+]

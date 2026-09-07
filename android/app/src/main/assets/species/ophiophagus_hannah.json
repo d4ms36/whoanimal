@@ -1,0 +1,28 @@
+[
+  {
+    "animal_id": "d83ff4e9-bcfb-4ea8-a7fa-dc29e9cf1513",
+    "scientific_name": "Ophiophagus hannah",
+    "common_name": "Cobra real",
+    "taxonomy": {
+      "kingdom": "Animalia",
+      "phylum": "Chordata",
+      "class": "Reptilia",
+      "order": "Squamata",
+      "family": "Elapidae",
+      "genus": "Ophiophagus",
+      "species": "Ophiophagus hannah"
+    },
+    "conservation_status": "VU",
+    "is_rare_species": true,
+    "habitat": "Bosques densos",
+    "diet": "Carnívoro",
+    "lifespan_years": 20,
+    "size_cm": 400,
+    "weight_kg": 6.0,
+    "activity_cycle": "Diurno",
+    "native_regions": [
+      "Asia del Sur",
+      "Asia Sudoriental"
+    ]
+  }
+]

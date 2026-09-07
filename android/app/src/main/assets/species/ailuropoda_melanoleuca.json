@@ -1,0 +1,27 @@
+[
+  {
+    "animal_id": "9f44150f-c7eb-41fd-939e-466cfa372117",
+    "scientific_name": "Ailuropoda melanoleuca",
+    "common_name": "Panda gigante",
+    "taxonomy": {
+      "kingdom": "Animalia",
+      "phylum": "Chordata",
+      "class": "Mammalia",
+      "order": "Carnivora",
+      "family": "Ursidae",
+      "genus": "Ailuropoda",
+      "species": "Ailuropoda melanoleuca"
+    },
+    "conservation_status": "VU",
+    "is_rare_species": true,
+    "habitat": "Bosques templados de montaña",
+    "diet": "Herbívoro (Bambú)",
+    "lifespan_years": 20,
+    "size_cm": 150,
+    "weight_kg": 100.0,
+    "activity_cycle": "Diurno",
+    "native_regions": [
+      "Asia Central"
+    ]
+  }
+]

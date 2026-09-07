@@ -41,11 +41,30 @@ android {
     buildFeatures {
         compose = true
     }
+    sourceSets {
+        getByName("main") {
+            assets.srcDirs("src/main/assets")
+        }
+        getByName("test") {
+            resources.srcDirs("src/main/assets")
+        }
+    }
+
     packaging {
         resources {
             excludes += "/META-INF/{AL2.0,LGPL2.1}"
         }
     }
+}
+
+val syncSpeciesAssets by tasks.registering(Sync::class) {
+    from("${rootProject.projectDir}/../data/species")
+    into("${projectDir}/src/main/assets/species")
+    include("*.json")
+}
+
+tasks.named("preBuild") {
+    dependsOn(syncSpeciesAssets)
 }
 
 dependencies {

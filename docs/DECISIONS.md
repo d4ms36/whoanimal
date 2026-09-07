@@ -826,6 +826,20 @@ Aprobado por: [Director Creativo / Project Manager / Consenso]
 * **Justificación / Principios:** Asegura que el salto a Beta responda a la visión oficial aprobada, manteniendo el rigor arquitectónico, la separación de capas y evitando el desvío del alcance hacia features comerciales tempranas.
 * **Aprobado por:** Director Creativo / Project Manager
 
+### DEC-058: Unificación del Catálogo Zoológico Oficial como Android Assets y Repositorio Desacoplado
+* **Fecha:** 2026-09-07
+* **Estado:** `APROBADA`
+* **Objetivo:** `WHO-021`
+* **Tema:** Datos Zoológicos / Sincronización Assets / Clean Architecture / Fuente Única de Verdad
+* **Resolución:**
+  1. **Fuente Única de Verdad (`data/species/*.json`):** Se establece formalmente la cadena de datos `data/species/*.json` $\rightarrow$ `src/main/assets/species/` + `species_catalog.json` $\rightarrow$ `SpeciesCatalogRepository` $\rightarrow$ `IdentificationService` / `CardGeneratorService` / UI.
+  2. **Erradicación de Duplicación:** Se elimina la lista hardcodeada de 4 especies fijas en `OfficialStarterCatalog`. `OfficialStarterCatalog` delega de forma dinámica y transparente en `DefaultSpeciesCatalogRepository.getInstance()`, garantizando acceso a las 28 especies zoológicas canónicas con sus `animal_id` UUID oficiales.
+  3. **Frontera de Dominio y Parser Dedicado:** Creación de `SpeciesCatalogRepository` en la capa de dominio y `AssetSpeciesCatalogRepository` + `SpeciesJsonParser` en la capa de datos. Utiliza `org.json` integrado (cero dependencias runtime añadidas), caching thread-safe en memoria y tolerancia a fallos/omisión segura ante datos ausentes o corruptos.
+  4. **Automatización Gradle:** Tarea `syncSpeciesAssets` registrada en `build.gradle.kts` que sincroniza automáticamente `data/species/*.json` hacia `src/main/assets/species/` durante `preBuild`.
+  5. **Compatibilidad Plena:** Preservación de compatibilidad con `CardPresentationScreen` integrando anotaciones pedagógicas objetivas (curiosidades científicas y advertencias preventivas responsables según `DEC-005` y Regla 11 de `AGENTS.md`).
+* **Justificación / Principios:** Erradica el riesgo de divergencia biológica entre plataformas, garantiza una experiencia 100% offline sin infraestructura compleja de base de datos y mantiene la separación estricta entre Ciencia, Experiencia y Lore.
+* **Aprobado por:** Director Creativo / Project Manager
+
 ---
 
 ### DEC-010: Estilo y Universo Mitológico del Lore (SUPERSEDED)

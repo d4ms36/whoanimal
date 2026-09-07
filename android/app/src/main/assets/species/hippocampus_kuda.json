@@ -1,0 +1,27 @@
+[
+  {
+    "animal_id": "f79e29e8-0807-4c84-8d1c-9ec7bef110a8",
+    "scientific_name": "Hippocampus kuda",
+    "common_name": "Caballito de mar",
+    "taxonomy": {
+      "kingdom": "Animalia",
+      "phylum": "Chordata",
+      "class": "Actinopterygii",
+      "order": "Syngnathiformes",
+      "family": "Syngnathidae",
+      "genus": "Hippocampus",
+      "species": "Hippocampus kuda"
+    },
+    "conservation_status": "VU",
+    "is_rare_species": false,
+    "habitat": "Arrecifes y estuarios",
+    "diet": "Carnívoro",
+    "lifespan_years": 4,
+    "size_cm": 15,
+    "weight_kg": 0.02,
+    "activity_cycle": "Diurno",
+    "native_regions": [
+      "Océano Indo-Pacífico"
+    ]
+  }
+]

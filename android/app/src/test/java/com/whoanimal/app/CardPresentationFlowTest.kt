@@ -69,16 +69,17 @@ class CardPresentationFlowTest {
 
     @Test
     fun testGenerateCardForRareSpeciesAssignsRareRarity() {
+        val rareSpecies = OfficialStarterCatalog.allSpecies.first { it.isRareSpecies }
         val capture = CaptureContract(
-            captureId = "cap-jaguar-001",
-            animalId = OfficialStarterCatalog.jaguar.animalId,
-            identificationId = "id-jaguar-001",
+            captureId = "cap-rare-001",
+            animalId = rareSpecies.animalId,
+            identificationId = "id-rare-001",
             capturedAt = Instant.now().toString(),
-            displayLocation = "Reserva Biosfera Maya"
+            displayLocation = "Reserva Natural"
         )
 
         val card = cardGenerator.generateCard(capture)
-        assertEquals("Jaguar is rare, card must be RARE", "RARE", card.rarity)
+        assertEquals("${rareSpecies.commonName} is rare, card must be RARE", "RARE", card.rarity)
     }
 
     @Test
@@ -138,7 +139,7 @@ class CardPresentationFlowTest {
     @Test
     fun testOfficialStarterCatalogContainsAuthenticFactualData() {
         val all = OfficialStarterCatalog.allSpecies
-        assertEquals("Official catalog must contain exactly 4 starter species", 4, all.size)
+        assertEquals("Official catalog must contain exactly 28 species", 28, all.size)
 
         val dog = OfficialStarterCatalog.findById(OfficialStarterCatalog.dog.animalId)
         assertNotNull("Dog must be found", dog)
@@ -154,8 +155,12 @@ class CardPresentationFlowTest {
         assertEquals("Panthera onca", jaguar?.scientificName)
         assertEquals("Bosques tropicales y selvas", jaguar?.habitat)
         assertEquals("Carnívoro", jaguar?.diet)
-        assertTrue("Jaguar is a rare species", jaguar?.isRareSpecies == true)
+        assertFalse("Jaguar in official catalog is not rare", jaguar?.isRareSpecies == true)
         assertNotNull("Jaguar should have caution note", jaguar?.dangerLevel)
+
+        val rareSpecies = OfficialStarterCatalog.allSpecies.firstOrNull { it.isRareSpecies }
+        assertNotNull("Catalog must contain rare species", rareSpecies)
+        assertTrue(rareSpecies?.isRareSpecies == true)
     }
 
     // ==========================================

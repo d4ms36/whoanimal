@@ -1,0 +1,27 @@
+[
+  {
+    "animal_id": "9ec6f2e4-7634-4ef1-a6f3-a964863b4d6a",
+    "scientific_name": "Carcharodon carcharias",
+    "common_name": "Gran tiburón blanco",
+    "taxonomy": {
+      "kingdom": "Animalia",
+      "phylum": "Chordata",
+      "class": "Chondrichthyes",
+      "order": "Lamniformes",
+      "family": "Lamnidae",
+      "genus": "Carcharodon",
+      "species": "Carcharodon carcharias"
+    },
+    "conservation_status": "VU",
+    "is_rare_species": false,
+    "habitat": "Aguas templadas y cálidas costeras",
+    "diet": "Carnívoro",
+    "lifespan_years": 70,
+    "size_cm": 450,
+    "weight_kg": 1100.0,
+    "activity_cycle": "Diurno",
+    "native_regions": [
+      "Océanos Globales"
+    ]
+  }
+]

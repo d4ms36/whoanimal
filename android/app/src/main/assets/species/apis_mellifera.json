@@ -1,0 +1,27 @@
+[
+  {
+    "animal_id": "d3367de5-5d11-4840-9cd2-dd6766e440f4",
+    "scientific_name": "Apis mellifera",
+    "common_name": "Abeja melífera",
+    "taxonomy": {
+      "kingdom": "Animalia",
+      "phylum": "Arthropoda",
+      "class": "Insecta",
+      "order": "Hymenoptera",
+      "family": "Apidae",
+      "genus": "Apis",
+      "species": "Apis mellifera"
+    },
+    "conservation_status": "LC",
+    "is_rare_species": false,
+    "habitat": "Prados, bosques y jardines",
+    "diet": "Herbívoro (Néctar)",
+    "lifespan_years": 1,
+    "size_cm": 1,
+    "weight_kg": 0.0001,
+    "activity_cycle": "Diurno",
+    "native_regions": [
+      "Global"
+    ]
+  }
+]

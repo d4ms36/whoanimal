@@ -1,0 +1,27 @@
+[
+  {
+    "animal_id": "0047d67e-4dc7-40d4-aea5-00fb1c6d87cf",
+    "scientific_name": "Chelonia mydas",
+    "common_name": "Tortuga verde",
+    "taxonomy": {
+      "kingdom": "Animalia",
+      "phylum": "Chordata",
+      "class": "Reptilia",
+      "order": "Testudines",
+      "family": "Cheloniidae",
+      "genus": "Chelonia",
+      "species": "Chelonia mydas"
+    },
+    "conservation_status": "EN",
+    "is_rare_species": false,
+    "habitat": "Mares tropicales y subtropicales",
+    "diet": "Herbívoro",
+    "lifespan_years": 80,
+    "size_cm": 120,
+    "weight_kg": 150.0,
+    "activity_cycle": "Diurno",
+    "native_regions": [
+      "Océanos Globales"
+    ]
+  }
+]

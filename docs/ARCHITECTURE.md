@@ -46,6 +46,7 @@ La arquitectura de WHO Animal está concebida para crecer de forma modular sin a
 │                   SERVICES & LOCAL INFRASTRUCTURE                      │
 │  • IdentificationService (Deterministic / On-Device ML)                │
 │  • CardGeneratorService (Capture → AnimalCard Assembly)                │
+│  • SpeciesCatalogRepository & Asset Loader (Unified Catalog Boundary)  │
 │  • Room Persistence (WhoAnimalDatabase, ProfileDao, CardDao, SlotDao)   │
 │  • AdService (Decoupled Banners, Interstitials & Opt-in Rewarded Ads)  │
 └───────────────────────────────────┬────────────────────────────────────┘

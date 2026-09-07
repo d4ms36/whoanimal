@@ -1,0 +1,27 @@
+[
+  {
+    "animal_id": "32b02707-5b6d-45d5-83d3-8f7e8be95a76",
+    "scientific_name": "Felis catus",
+    "common_name": "Gato doméstico",
+    "taxonomy": {
+      "kingdom": "Animalia",
+      "phylum": "Chordata",
+      "class": "Mammalia",
+      "order": "Carnivora",
+      "family": "Felidae",
+      "genus": "Felis",
+      "species": "Felis catus"
+    },
+    "conservation_status": "NE",
+    "is_rare_species": false,
+    "habitat": "Áreas habitadas por humanos a nivel global",
+    "diet": "Carnívoro",
+    "lifespan_years": 15,
+    "size_cm": 46,
+    "weight_kg": 4.5,
+    "activity_cycle": "Crepuscular",
+    "native_regions": [
+      "Global"
+    ]
+  }
+]

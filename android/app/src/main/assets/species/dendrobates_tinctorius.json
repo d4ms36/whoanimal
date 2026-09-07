@@ -1,0 +1,27 @@
+[
+  {
+    "animal_id": "cdd651fb-7f77-47b8-8786-b13ecf847f43",
+    "scientific_name": "Dendrobates tinctorius",
+    "common_name": "Rana dardo venenosa",
+    "taxonomy": {
+      "kingdom": "Animalia",
+      "phylum": "Chordata",
+      "class": "Amphibia",
+      "order": "Anura",
+      "family": "Dendrobatidae",
+      "genus": "Dendrobates",
+      "species": "Dendrobates tinctorius"
+    },
+    "conservation_status": "LC",
+    "is_rare_species": false,
+    "habitat": "Selvas tropicales húmedas",
+    "diet": "Carnívoro (Insectívoro)",
+    "lifespan_years": 10,
+    "size_cm": 5,
+    "weight_kg": 0.008,
+    "activity_cycle": "Diurno",
+    "native_regions": [
+      "América del Sur"
+    ]
+  }
+]
