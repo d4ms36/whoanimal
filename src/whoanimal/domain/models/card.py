@@ -141,6 +141,9 @@ class Card:
         verification_status: Any = _UNSET,
         **extra_kwargs: Any,
     ):
+        if "auth_serial" in extra_kwargs and serial is _UNSET:
+            serial = extra_kwargs.pop("auth_serial")
+
         if extra_kwargs:
             raise ValidationError(
                 f"Unexpected extra fields not permitted in Card: {list(extra_kwargs.keys())}"
@@ -341,6 +344,11 @@ class Card:
         """Indica si la carta posee una edición asignada en emisión (ausencia = False)."""
         return "edition" in self.__dict__
 
+    @property
+    def auth_serial(self) -> str:
+        """Alias descriptivo de serial para trazabilidad visual y autenticación (DEC-018)."""
+        return self.serial
+
     def __setattr__(self, name: str, value: Any) -> None:
         if getattr(self, "_initialized", False):
             if name in self._IMMUTABLE_FIELDS:
@@ -510,12 +518,22 @@ class CardBack:
     lore: Optional[LoreProfile] = None
 
 
-@dataclass(frozen=True)
-class AnimalCard:
+class AnimalCard(Card):
     """
     Entidad raíz de la Carta Coleccionable de Who Animal.
-    Compuesta por Metadatos, Frente visual y Reverso informativo.
+    Implementa formalmente los 19 campos canónicos del contrato Card (CARD_SPEC.md).
+    Mantiene compatibilidad retroactiva con la interfaz compuesta (metadata, front, back)
+    de los prototipos tempranos de Foundation.
     """
-    metadata: CardMetadata
-    front: CardFront
-    back: CardBack
+
+    def __init__(self, *args: Any, **kwargs: Any) -> None:
+        if "metadata" in kwargs or (args and isinstance(args[0], CardMetadata)):
+            m = kwargs.get("metadata") if "metadata" in kwargs else (args[0] if len(args) > 0 else None)
+            f = kwargs.get("front") if "front" in kwargs else (args[1] if len(args) > 1 else None)
+            b = kwargs.get("back") if "back" in kwargs else (args[2] if len(args) > 2 else None)
+            object.__setattr__(self, "metadata", m)
+            object.__setattr__(self, "front", f)
+            object.__setattr__(self, "back", b)
+            object.__setattr__(self, "_initialized", True)
+        else:
+            super().__init__(*args, **kwargs)

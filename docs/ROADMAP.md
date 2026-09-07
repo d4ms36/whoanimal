@@ -157,7 +157,7 @@ HOME → STORAGE → CONTAINER → CARD → VIEW / EDIT / DELETE
 Trading, PVP, Marketplace, economía completa, Cloud/backend, sincronización multidispositivo, cuentas avanzadas, red social, red de ilustradores, rarezas dinámicas con curvas matemáticas, gamificación profunda, cobertura mundial completa de especies, IA perfecta, publicación en Google Play y monetización operativa.
 
 ### Secuencia Inicial Propuesta (Construcción de Alpha):
-* **`WHO-014` — Servicio de Ensamblaje y Generación de Cartas (`Capture → Card`)** `[PROPUESTO]`
+* **`WHO-014` — Servicio de Ensamblaje y Generación de Cartas (`Capture → Card`)** `[COMPLETADO]`
   * Implementación del servicio de dominio `CardGeneratorService` que emite una `Card` formal a partir de una `Capture` validada.
 * **`WHO-015` — Fundación del Cliente Android y Decisión Tecnológica Móvil** `[PROPUESTO]`
   * Configuración del proyecto base Android y formalización de la tecnología de interfaz de usuario.

@@ -278,9 +278,12 @@ ative_regions).
 ### WHO-013.1: Formalización de Alpha y Horizontes Estratégicos
 * **Propósito:** Formalizar canónicamente la definición oficial de Alpha 0.1, el Golden Path y flujo alternativo, el alcance obligatorio de Alpha (Cuenta, Home, Capture, Card, Location, Storage 10x30=300, UX mínima), las exclusiones explícitas fuera de Alpha, la estructura de 4 horizontes estratégicos (Corto Plazo Alpha, Mediano Plazo Beta/Release, Largo Plazo Ecosystem y Futuro Abierto) y el registro de DEC-048.
 * **Estado:** `APPROVED_COMPLETE`
-* **Commit:** (Pendiente de commit) (*docs(planning): formalize alpha and strategic horizons*)
+* **Commit:** `cde5cfb` (*docs(planning): formalize alpha and strategic horizons*)
 * **Versión:** `0.0.1`
 
 
-
-
+### WHO-014: Servicio de Ensamblaje y Generación de Cartas (Capture → Card)
+* **Propósito:** Implementar el servicio de dominio `CardGeneratorService` y la función `create_card_from_capture` para convertir un `Capture` válido en una entidad `AnimalCard` oficial, garantizando la separación ontológica estricta (`Capture ≠ Card`), inmutabilidad de la captura, validación de `AnimalProfile` contra el catálogo zoológico, protección contra duplicación, y generación íntegra de los 19 campos canónicos (serial seguro, issued_at, population_at_issuance, UNVERIFIED).
+* **Estado:** `APPROVED_COMPLETE`
+* **Commit:** (Pendiente de commit) (*feat(domain): generate cards from captures*)
+* **Versión:** `0.0.1`
