@@ -2,7 +2,7 @@
 
 **Documento:** `docs/PROJECT_CONTEXT.md`  
 **Propósito:** Memoria y contexto fundamental de WHO Animal para asegurar coherencia transversal a lo largo de todo el ciclo de vida del producto.  
-**Última actualización:** 2026-09-07 (Consolidación de Arquitectura, Mínimo Funcional y Roadmap WHO-013 / DEC-047)
+**Última actualización:** 2026-09-07 (Formalización de Alpha 0.1, Golden Path y Horizontes Estratégicos WHO-013.1 / DEC-048)
 
 ---
 
@@ -119,23 +119,130 @@ Animal ≠ Card
 
 ---
 
-## 4.1. Mínimo Funcional (Minimum Functional Product)
+## 4.1. Producto Funcional Alpha (Alpha 0.1) y Mínimo Funcional
 
-El **Mínimo Funcional** establece el objetivo técnico y funcional que debe alcanzarse antes de introducir funcionalidades avanzadas de ecosistema. Se construye sobre la plataforma **Android** y demuestra de extremo a extremo el ciclo de 11 pasos:
+El **Producto Funcional Alpha (Alpha 0.1)** formaliza el objetivo técnico y funcional prioritario de WHO Animal: construir un producto Android funcional y demostrable en el menor tiempo razonable, erradicando el *scope creep* sin imponer una rigidez excesiva.
 
+### Definición Oficial de Alpha 0.1 (Objetivo Rector)
+> *"Un usuario nuevo debe poder entrar a WHO Animal, fotografiar un animal, obtener una identificación, generar una carta, revisarla, guardarla en su colección, cerrar la aplicación, volver a abrirla y encontrar la carta nuevamente."*
+
+### Golden Path Oficial de Alpha:
 ```text
-1. Abrir aplicación Android
-2. Tomar o seleccionar una fotografía
-3. Crear Observation
-4. Ejecutar identificación (IdentificationService)
-5. Obtener IdentificationResult
-6. Mostrar resultado al usuario
-7. Permitir decisión explícita (ACCEPT / REJECT)
-8. Crear Capture cuando la decisión sea ACCEPTED
-9. Generar/producir una Card a partir del flujo correspondiente
-10. Mostrar la Card (Frente y Reverso)
-11. Conservarla en una colección local (Collection)
+LOGIN
+  ↓
+HOME
+  ↓
+CAPTURE
+  ↓
+CAMERA
+  ↓
+OBSERVATION
+  ↓
+IDENTIFICATION
+  ↓
+RESULT
+  ↓
+DECISION
+  ↓
+CAPTURE
+  ↓
+CARD
+  ↓
+REVIEW / EDIT
+  ↓
+SAVE
+  ↓
+STORAGE
 ```
+
+### Flujo Alternativo (Gestión y Consulta de Colección):
+```text
+HOME
+  ↓
+STORAGE
+  ↓
+CONTAINER
+  ↓
+CARD
+  ↓
+VIEW / EDIT / DELETE
+```
+
+### Alcance Oficial Obligatorio de Alpha:
+
+1. **Cuenta:**
+   * Registro local de usuario.
+   * Login básico.
+   * Logout.
+2. **Home:**
+   * Menú simple de navegación.
+   * Acceso principal destacado a **Capture**.
+   * Acceso principal destacado a **Storage**.
+3. **Capture:**
+   * Solicitar y gestionar permisos de cámara en Android.
+   * Abrir la cámara del dispositivo.
+   * Tomar fotografía del espécimen.
+   * Crear la entidad efímera `Observation` (DEC-043).
+   * Ejecutar el servicio de identificación.
+   * Mostrar el `IdentificationResult` al usuario.
+   * Permitir decisión explícita: Aceptar (`ACCEPTED`) o Descartar (`REJECTED`/`CANCELLED`) (DEC-045).
+   * Mostrar mensajes de error comprensibles cuando el proceso de captura o identificación falle.
+4. **Card:**
+   * Generación automática inmediata tras una decisión válida en estado `ACCEPTED` (que formaliza `Capture`, DEC-046).
+   * Vista frontal de la carta (fotografía, marco, nombres, rareza inicial).
+   * Acción y animación interactiva de volteo (*flip*).
+   * Vista posterior con información científica contrastada del catálogo zoológico oficial y metadatos de captura.
+   * Campos personales editables únicamente cuando estén permitidos por las reglas del dominio (Historia Personal / Lore asociada a la carta, hasta 300 caracteres, respetando el límite de 3 ediciones por cuenta, DEC-041).
+   * Campos de dominio estrictamente no editables e inmutables post-emisión.
+   * Posibilidad de descartar la carta antes de guardarla.
+   * Posibilidad de guardar la carta en Storage.
+5. **Location (Ubicación):**
+   * Alpha trabaja exclusivamente con una **representación de ubicación general** (`display_location`) orientada a la experiencia del usuario y a la protección de fauna silvestre.
+   * No se introduce almacenamiento innecesario de una dirección residencial exacta como requisito funcional.
+   * La arquitectura mantiene preparada la separación desacoplada entre:
+     ```text
+     display_location    (pública/generalizada en la carta)
+     precise_location    (privada/telemetría interna si futuras políticas lo requieren)
+     ```
+6. **Storage (Almacenamiento y Colección):**
+   * Colección de cartas local y persistente.
+   * Estructura organizada en **10 containers**.
+   * Capacidad de **30 espacios por container** (capacidad total del sistema: 300 cartas).
+   * Selector ágil de container.
+   * Indicador visual claro de ocupación por container (ej. `X / 30`).
+   * Visualización del catálogo de cartas almacenadas.
+   * Apertura individual de carta para inspección y volteo.
+   * Eliminación de carta del container (con diálogo previo de confirmación).
+   * **Garantía absoluta de persistencia:** Los datos de las cartas almacenadas permanecen íntegros tras cerrar y volver a abrir la aplicación.
+7. **UX Mínima de Alpha:**
+   * Pantalla de splash / entrada sencilla.
+   * Estados visuales claros de carga (*loading states*).
+   * Estado vacío (*empty state*) informativo y estético cuando Storage no tiene cartas.
+   * Diálogo modal de confirmación antes de eliminar una carta.
+   * Animación fluida y sencilla de volteo (*flip*) de carta.
+   * Navegación clara con botones de retroceso (Back) y retorno a inicio (Home).
+   * Mensajes de error claros, comprensibles y sin códigos crudos expuestos al usuario.
+   * Diseño visual coherente, moderno y con micro-interacciones pulidas.
+
+### Fuera del Alcance de Alpha (Exclusiones Explícitas):
+Las siguientes capacidades **NO son requisitos para declarar Alpha funcional** ni deben bloquear su entrega:
+* ❌ Comercio de cartas (Trading).
+* ❌ Enfrentamientos lúdicos (PVP).
+* ❌ Mercado interno (Marketplace).
+* ❌ Economía completa in-app (monedas, gemas, tiendas).
+* ❌ Infraestructura Cloud o backend distribuido.
+* ❌ Sincronización multidispositivo en la nube.
+* ❌ Cuentas avanzadas o perfiles remotos.
+* ❌ Red social o interacción entre jugadores.
+* ❌ Red de ilustradores colaboradores.
+* ❌ Sistema completo de rarezas dinámicas con algoritmos matemáticos complejos.
+* ❌ Gamificación profunda y progresiones avanzadas de maestría.
+* ❌ Cobertura mundial completa de especies (el catálogo inicial de 28 especies validadas es suficiente).
+* ❌ Inteligencia artificial perfecta de visión.
+* ❌ Publicación pública comercial en Google Play Store.
+* ❌ Sistema de monetización publicitario operativo como requisito obligatorio de Alpha.
+
+> *Nota Arquitectónica:* La arquitectura modular prepara los puntos de extensión para estas capacidades futuras, pero ninguna de ellas puede actuar como cuello de botella o precondición para el cierre de Alpha.
 
 ---
 
@@ -244,9 +351,62 @@ En alineación estricta con el principio **100% Pet Friendly** y la protección 
 
 ---
 
-## 13. Capacidades Futuras Estratégicas (Fase 4 — Ecosystem)
+## 13. Horizontes Estratégicos de Desarrollo
 
-Las siguientes 13 capacidades han sido aprobadas a nivel de diseño conceptual para que **la arquitectura actual no cierre las puertas a su evolución**, pero **permanecen estrictamente fuera del Mínimo Funcional**:
+La planificación estratégica de WHO Animal distingue claramente entre objetivos ejecutables inmediatos y capacidades futuras, garantizando foco operativo sin restringir la evolución del producto:
+
+```text
+CORTO PLAZO
+    ↓
+ALPHA FUNCIONAL
+    ↓
+MEDIANO PLAZO
+    ↓
+BETA / RELEASE
+    ↓
+LARGO PLAZO
+    ↓
+ECOSYSTEM
+    ↓
+FUTURO ABIERTO
+```
+
+### Línea Temporal Única Oficial:
+```text
+FOUNDATION = COMPLETADA
+ALPHA = PRÓXIMO PRODUCTO FUNCIONAL (WHO-014 → WHO-018)
+BETA = SIGUIENTE HORIZONTE
+RELEASE = LANZAMIENTO PÚBLICO
+ECOSYSTEM = CAPACIDADES AVANZADAS
+```
+
+---
+
+### 13.1. CORTO PLAZO — Alpha Funcional (Alpha 0.1)
+* **Objetivo Rector:** `LOGIN → HOME → CAPTURE → IDENTIFY → CARD → STORAGE`.
+* **Prioridad Absoluta:** Construir y entregar una aplicación Android funcional y demostrable que complete el ciclo de punta a punta.
+* **Secuencia de Construcción:** Objetivos `WHO-014` a `WHO-018`.
+
+---
+
+### 13.2. MEDIANO PLAZO — Beta / Release
+Documentado a nivel estratégico para guiar la evolución una vez cerrada la Alpha:
+* Pruebas de usabilidad y feedback cualitativo con usuarios reales.
+* Mejora continua y pulido de UX y micro-interacciones.
+* Estabilidad del sistema y optimización de rendimiento.
+* Calibración y afinamiento del motor de identificación de fauna.
+* Expansión inicial controlada del catálogo zoológico.
+* Testing exhaustivo en múltiples dispositivos Android.
+* Preparación para distribución controlada (Google Play Internal Testing).
+* Auditoría y cumplimiento legal, términos de servicio y políticas de privacidad.
+* Publicación pública comercial en Google Play Store.
+
+> *Nota de Gobernanza:* Estos puntos representan dirección táctica a mediano plazo y **no se convierten en objetivos atómicos ejecutables** hasta que la Alpha esté formalmente concluida y sean aprobados por el Director.
+
+---
+
+### 13.3. LARGO PLAZO — Ecosystem (Capacidades Estratégicas Avanzadas)
+Las siguientes 13 capacidades estratégicas representan la visión de largo alcance del ecosistema de WHO Animal. La arquitectura base deja previstos sus puntos de extensión, pero **ninguna de ellas compromete ni bloquea la entrega de Alpha o Beta**:
 
 1. **Comercio de cartas (Trading):** Transferencia controlada de propiedad entre coleccionistas preservando la inmutabilidad histórica original (`card_id`, `specimen_number`, generación, rareza original, población de emisión y serial de autenticación).
 2. **Sistema de Duelos PVP:** Enfrentamientos lúdicos entre cartas, estrictamente desacoplados del conocimiento taxonómico y del core loop.
@@ -257,10 +417,29 @@ Las siguientes 13 capacidades han sido aprobadas a nivel de diseño conceptual p
 7. **Sistema completo de rarezas:** Implementación del algoritmo matemático y curvas de emisión dinámica (DEC-022-PENDING).
 8. **Sistema / Red de ilustradores colaboradores:** Encargos artísticos personalizados gestionados in-app asociados a cartas específicas.
 9. **Sincronización multidispositivo:** Persistencia remota y respaldo en la nube del inventario y álbumes.
-10. **Publicación pública en Google Play:** Despliegue comercial global de la aplicación.
+10. **Expansión pública / global:** Despliegue internacional a gran escala y soporte multirregional.
 11. **Expansión progresiva del catálogo zoológico hacia cobertura global:** Principio de crecimiento continuo y responsable de la base zoológica, sin prometer "todas las especies" de forma inmediata ni ficticia.
 12. **Evolución continua del sistema de IA de identificación:** Mejora progresiva de precisión y modelos optimizados, sin falsas garantías de "IA perfecta".
 13. **Gamificación completa:** Progresión profunda de maestría, medallas por biomas y dinámicas avanzadas de `rank` (DEC-037-PENDING).
+
+---
+
+### 13.4. FUTURO ABIERTO (Sandbox Conceptual)
+Espacio documental de reserva para ideas, conceptos e iniciativas en gestación que **aún no tienen**:
+* Alcance definido.
+* Prioridad asignada.
+* Dependencias técnicas resueltas.
+* Versión objetivo formalizada.
+* Criterios de aceptación estructurados.
+
+**Regla de Oro:** Ninguna idea contenida en el Futuro Abierto se convertirá automáticamente en un objetivo ejecutable `WHO` sin pasar por el flujo formal de gobernanza: **Director → PM → Especificación → Aprobación**.
+
+Entre las ideas del Futuro Abierto se exploran conceptualmente:
+* Desafíos comunitarios de bioacústica o sonidos de fauna.
+* Fichas de hábitat y ecosistemas como coleccionables complementarios.
+* Integración con guías locales de reservas naturales y parques nacionales.
+* Eventos estacionales basados en migraciones reales de fauna.
+* Soporte para realidad aumentada (AR) en visualización de cartas y especímenes.
 
 ---
 

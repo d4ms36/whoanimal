@@ -275,4 +275,12 @@ ative_regions).
 * **Versión:** `0.0.1`
 
 
+### WHO-013.1: Formalización de Alpha y Horizontes Estratégicos
+* **Propósito:** Formalizar canónicamente la definición oficial de Alpha 0.1, el Golden Path y flujo alternativo, el alcance obligatorio de Alpha (Cuenta, Home, Capture, Card, Location, Storage 10x30=300, UX mínima), las exclusiones explícitas fuera de Alpha, la estructura de 4 horizontes estratégicos (Corto Plazo Alpha, Mediano Plazo Beta/Release, Largo Plazo Ecosystem y Futuro Abierto) y el registro de DEC-048.
+* **Estado:** `APPROVED_COMPLETE`
+* **Commit:** (Pendiente de commit) (*docs(planning): formalize alpha and strategic horizons*)
+* **Versión:** `0.0.1`
+
+
+
 

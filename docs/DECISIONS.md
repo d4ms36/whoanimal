@@ -593,6 +593,48 @@ Aprobado por: [Director Creativo / Project Manager / Consenso]
 
 ---
 
+### DEC-048: Formalización de Alpha 0.1, Golden Path y Horizontes Estratégicos
+* **Tema:** Definición de Producto Alpha 0.1 y Horizontes Estratégicos (WHO-013.1)
+* **Fecha:** 2026-09-07
+* **Estado:** `APPROVED`
+* **Decisión:**
+  1. Se formaliza como **definición y objetivo rector de Alpha 0.1**:
+     > *"Un usuario nuevo debe poder entrar a WHO Animal, fotografiar un animal, obtener una identificación, generar una carta, revisarla, guardarla en su colección, cerrar la aplicación, volver a abrirla y encontrar la carta nuevamente."*
+  2. Se establece el **Golden Path oficial de Alpha 0.1**:
+     ```text
+     LOGIN → HOME → CAPTURE → CAMERA → OBSERVATION → IDENTIFICATION → RESULT → DECISION → CAPTURE → CARD → REVIEW / EDIT → SAVE → STORAGE
+     ```
+     y su flujo alternativo de consulta y gestión de colección:
+     ```text
+     HOME → STORAGE → CONTAINER → CARD → VIEW / EDIT / DELETE
+     ```
+  3. Se define el **alcance funcional obligatorio de Alpha 0.1**:
+     * **Cuenta:** Registro, Login, Logout locales básicos.
+     * **Home:** Menú simple con accesos principales directos a Capture y Storage.
+     * **Capture:** Gestión de permisos de cámara, disparo fotográfico, instanciación de `Observation`, ejecución de identificación, presentación de resultado, aceptación/descarte y manejo amigable de errores.
+     * **Card:** Generación automática tras decisión válida, renderizado frontal, animación de flip, reverso informativo (datos científicos del catálogo + metadatos de captura), edición restringida de campos personales (Lore/Historia Personal según reglas de dominio) y bloqueo estricto de campos de dominio inmutables, con opción de descartar o guardar.
+     * **Location:** Representación generalizada (`display_location`) para la experiencia de usuario y protección de fauna silvestre (sin almacenar dirección residencial exacta), dejando preparada la arquitectura para aislar `display_location` de `precise_location` ante futuras políticas de privacidad.
+     * **Storage:** Persistencia local robusta de la colección dividida en 10 containers de 30 espacios cada uno (capacidad de 300 cartas), selector de container, indicador visual de ocupación, visualización, apertura individual y eliminación confirmada de cartas, garantizando persistencia íntegra tras cerrar y reabrir la app.
+     * **UX mínima:** Splash/entrada sencilla, estados de carga, visualización de estado vacío (*empty state*), diálogo de confirmación antes de eliminar, animación de flip, navegación Back/Home consistente y diseño visual cohesivo.
+  4. Se establecen explícitamente las **exclusiones fuera de alcance de Alpha**: Trading, PVP, Marketplace, economía in-app completa, infraestructura Cloud/backend, sincronización multidispositivo, cuentas avanzadas, red social, red de ilustradores, rarezas dinámicas con curvas matemáticas, gamificación profunda, cobertura zoológica mundial completa, IA de precisión perfecta, publicación en Google Play y monetización operativa.
+  5. Se reestructura el horizonte de desarrollo en 4 planos:
+     * **CORTO PLAZO — Alpha:** Core loop funcional demostrable en Android (`WHO-014` a `WHO-018`).
+     * **MEDIANO PLAZO — Beta / Release:** Pruebas con usuarios reales, calibración de IA, estabilidad, rendimiento, catálogo inicial ampliado, testing Android y despliegue en Google Play Store.
+     * **LARGO PLAZO — Ecosystem:** Las 13 capacidades estratégicas avanzadas que enriquecen el ecosistema.
+     * **FUTURO ABIERTO:** Espacio conceptual para iniciativas e ideas sin alcance, versión, dependencia ni criterios asignados, sin convertirlas prematuramente en objetivos ejecutables.
+  6. Se consagra la línea temporal única del proyecto:
+     ```text
+     FOUNDATION = COMPLETADA
+     ALPHA = PRÓXIMO PRODUCTO FUNCIONAL (WHO-014 → WHO-018)
+     BETA = SIGUIENTE HORIZONTE
+     RELEASE = LANZAMIENTO PÚBLICO
+     ECOSYSTEM = CAPACIDADES AVANZADAS
+     ```
+* **Justificación / Principios:** Evitar tanto el *scope creep* como una planificación excesivamente rígida, manteniendo trazabilidad absoluta entre el core loop demostrable y las visiones de largo alcance.
+* **Aprobado por:** Director Creativo / Project Manager
+
+---
+
 ### DEC-010: Estilo y Universo Mitológico del Lore (SUPERSEDED)
 * **Tema:** Diseño Narrativo
 * **Estado:** `SUPERSEDED`

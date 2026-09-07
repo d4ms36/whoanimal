@@ -1,36 +1,54 @@
 # Hoja de Ruta del Proyecto (Roadmap) — WHO Animal
 
 **Documento:** `docs/ROADMAP.md`  
-**Propósito:** Planificación estratégica y técnica oficial por fases y objetivos atómicos (DEC-047).  
-**Principio Rector:** Separación estricta entre el Mínimo Funcional y las capacidades avanzadas del ecosistema para prevenir el desvío de alcance (*scope creep*).
+**Propósito:** Planificación estratégica y técnica oficial por fases y objetivos atómicos (DEC-047 / DEC-048).  
+**Principio Rector:** Separación estricta entre el producto funcional Alpha y las capacidades estratégicas futuras para prevenir el desvío de alcance (*scope creep*).
 
 ---
 
-## Estructura de Fases del Proyecto
+## Estructura de Horizontes y Fases del Proyecto
 
 ```text
 ┌────────────────────────────────────────────────────────────────────────┐
 │                        WHO ANIMAL ROADMAP                              │
 ├───────────────────┬───────────────────┬──────────────────┬─────────────┤
 │      PHASE 0      │      PHASE 1      │     PHASE 2      │   PHASE 3   │
-│    FOUNDATION     │MINIMUM FUNCTIONAL │       BETA       │   RELEASE   │
-│   (COMPLETADA)    │ (EN PLANIFICACIÓN)│  (PLANIFICADA)   │  (FUTURA)   │
+│    FOUNDATION     │ALPHA FUNCIONAL 0.1│       BETA       │   RELEASE   │
+│   (COMPLETADA)    │ (PRÓXIMO PRODUCTO)│(SIGUIENTE HORIZ.)│ (PUBLICACIÓN│
+│                   │                   │                  │   PÚBLICA)  │
 ├───────────────────┼───────────────────┼──────────────────┼─────────────┤
-│ Core de dominio,  │ Primer producto   │ Pruebas con      │ Lanzamiento │
-│ arquitectura,     │ Android funcional:│ usuarios reales, │ público en  │
-│ catálogo inicial, │ Foto → Captura →  │ calibración de   │ Google Play │
-│ decisiones y      │ Carta → Colección │ IA, fluidez y    │ Store.      │
-│ gobernanza.       │ local.            │ testing interno. │             │
+│ Core de dominio,  │ Primer producto   │ Pruebas reales,  │ Lanzamiento │
+│ arquitectura,     │ Android funcional:│ calibración IA,  │ comercial en│
+│ catálogo inicial, │ Login → Capture → │ fluidez, testing │ Google Play │
+│ decisiones y      │ Card → Storage    │ y legalidad.     │ Store.      │
+│ gobernanza.       │ (10x30=300 cartas)│                  │             │
 └───────────────────┴───────────────────┴──────────────────┴─────────────┘
                                   │
                                   ▼
 ┌────────────────────────────────────────────────────────────────────────┐
-│                          PHASE 4: ECOSYSTEM                            │
+│                   PHASE 4: ECOSYSTEM (LARGO PLAZO)                     │
 │                        (CAPACIDADES AVANZADAS)                         │
 ├────────────────────────────────────────────────────────────────────────┤
-│ Comercio, PVP, Cloud, Cuentas, Marketplace, Red de Ilustradores,       │
-│ Rarezas dinámicas, Sincronización multidispositivo y Gamificación.     │
+│ Comercio, PVP, Cloud, Cuentas avanzadas, Marketplace, Ilustradores,    │
+│ Rarezas dinámicas, Sincronización nube y Gamificación profunda.        │
 └────────────────────────────────────────────────────────────────────────┘
+                                  │
+                                  ▼
+┌────────────────────────────────────────────────────────────────────────┐
+│                             FUTURO ABIERTO                             │
+│                         (SANDBOX CONCEPTUAL)                           │
+├────────────────────────────────────────────────────────────────────────┤
+│ Ideas en gestación sin alcance, versión, prioridad ni criterios fijados│
+└────────────────────────────────────────────────────────────────────────┘
+```
+
+### Línea Temporal Única Oficial:
+```text
+FOUNDATION = COMPLETADA
+ALPHA = PRÓXIMO PRODUCTO FUNCIONAL (WHO-014 → WHO-018)
+BETA = SIGUIENTE HORIZONTE
+RELEASE = LANZAMIENTO PÚBLICO
+ECOSYSTEM = CAPACIDADES AVANZADAS
 ```
 
 ---
@@ -106,15 +124,39 @@
   * Formalización del puente de dominio: solo decisiones `ACCEPTED` generan `Capture` (`animal_id`, `identification_id`, `sex` inmutables) (DEC-046).
 * **`WHO-013` — Consolidación de Arquitectura, Roadmap y Definición del Mínimo Funcional** `[COMPLETADO]`
   * Auditoría maestra de objetivos, resolución de colisiones históricas, formalización del Mínimo Funcional Android y reestructuración por fases (DEC-047).
+* **`WHO-013.1` — Formalización de Alpha y Horizontes Estratégicos** `[COMPLETADO]`
+  * Formalización canónica de Alpha 0.1, Golden Path, delimitación de Storage (10x30=300), exclusiones explícitas y definición de los 4 horizontes estratégicos (DEC-048).
 
 ---
 
-## 2. PHASE 1 — MINIMUM FUNCTIONAL (En Planificación)
+## 2. CORTO PLAZO — PHASE 1: ALPHA FUNCIONAL 0.1 (Próximo Producto Funcional)
 
-**Objetivo Central:** Construir el primer producto funcional ejecutable en Android que demuestre el flujo completo de 11 pasos:
-$$\text{Foto} \longrightarrow \text{Observation} \longrightarrow \text{Identificación} \longrightarrow \text{Decisión} \longrightarrow \text{Capture} \longrightarrow \text{Card} \longrightarrow \text{Collection}$$
+**Objetivo Rector de Alpha 0.1:**
+> *"Un usuario nuevo debe poder entrar a WHO Animal, fotografiar un animal, obtener una identificación, generar una carta, revisarla, guardarla en su colección, cerrar la aplicación, volver a abrirla y encontrar la carta nuevamente."*
 
-### Secuencia Propuesta de Objetivos de la Fase 1:
+### Golden Path Oficial:
+```text
+LOGIN → HOME → CAPTURE → CAMERA → OBSERVATION → IDENTIFICATION → RESULT → DECISION → CAPTURE → CARD → REVIEW / EDIT → SAVE → STORAGE
+```
+
+### Flujo Alternativo (Gestión y Consulta):
+```text
+HOME → STORAGE → CONTAINER → CARD → VIEW / EDIT / DELETE
+```
+
+### Alcance Oficial de Alpha:
+* **Cuenta:** Registro, Login, Logout locales básicos.
+* **Home:** Menú simple con accesos destacados a Capture y Storage.
+* **Capture:** Permisos de cámara, toma de fotografía, `Observation`, identificación, `IdentificationResult`, decisión explícita (aceptar/descartar) y manejo de errores.
+* **Card:** Generación automática tras decisión válida, vista frontal, volteo (*flip*), vista posterior con datos zoológicos y captura, edición restringida de historia personal (Lore), campos de dominio inmutables, descartar/guardar.
+* **Location:** Ubicación generalizada (`display_location`), sin dirección residencial exacta, desacoplada de telemetría interna (`precise_location`).
+* **Storage:** Persistencia local robusta en 10 containers x 30 espacios (capacidad 300 cartas), selector de container, ocupación, visualización, apertura, eliminación confirmada y persistencia tras reinicio.
+* **UX Mínima:** Splash, estados de carga, *empty state*, confirmación de borrado, animación de flip, navegación Back/Home, mensajes claros y coherencia visual.
+
+### Fuera del Alcance de Alpha (Exclusiones Explícitas):
+Trading, PVP, Marketplace, economía completa, Cloud/backend, sincronización multidispositivo, cuentas avanzadas, red social, red de ilustradores, rarezas dinámicas con curvas matemáticas, gamificación profunda, cobertura mundial completa de especies, IA perfecta, publicación en Google Play y monetización operativa.
+
+### Secuencia Inicial Propuesta (Construcción de Alpha):
 * **`WHO-014` — Servicio de Ensamblaje y Generación de Cartas (`Capture → Card`)** `[PROPUESTO]`
   * Implementación del servicio de dominio `CardGeneratorService` que emite una `Card` formal a partir de una `Capture` validada.
 * **`WHO-015` — Fundación del Cliente Android y Decisión Tecnológica Móvil** `[PROPUESTO]`
@@ -122,39 +164,39 @@ $$\text{Foto} \longrightarrow \text{Observation} \longrightarrow \text{Identific
 * **`WHO-016` — Servicio de Identificación de Especies (`Observation → IdentificationResult`)** `[PROPUESTO]`
   * Implementación del servicio `IdentificationService` mediante motor local ligero/on-device.
 * **`WHO-017` — Motor de Persistencia Local y Colección (`Collection Album`)** `[PROPUESTO]`
-  * Almacenamiento local para inventario, capturas y visualización de cartas en el álbum del usuario.
+  * Almacenamiento local para inventario, capturas y visualización de cartas en el álbum del usuario (10 containers x 30 espacios).
 * **`WHO-018` — Integración del Mínimo Funcional Android (End-to-End Core Loop)** `[PROPUESTO]`
   * Cierre integral del flujo de 11 pasos ejecutable en dispositivo o emulador Android.
 
 ---
 
-## 3. PHASE 2 — BETA (Planificada)
+## 3. MEDIANO PLAZO — PHASE 2: BETA & PHASE 3: RELEASE (Siguiente Horizonte)
 
-**Objetivo Central:** Calibrar, optimizar y validar la experiencia de usuario y precisión técnica con evaluadores reales.
+Documentado a nivel estratégico para guiar la evolución tras consolidar la Alpha:
 
-* Pruebas de usabilidad del core loop con usuarios piloto.
-* Calibración de campo del modelo de visión ante diversas condiciones de iluminación y distancia.
-* Optimización de rendimiento, renderizado y animaciones de volteo de cartas en múltiples gamas de dispositivos Android.
-* Distribución controlada a través de **Google Play Internal Testing** (`versionCode` 2 en adelante).
+### Phase 2 — Beta
+* Pruebas con usuarios reales y feedback cualitativo.
+* Mejora y pulido integral de UX y micro-interacciones.
+* Estabilidad del sistema y optimización de rendimiento en múltiples gamas.
+* Calibración y afinamiento del motor de identificación de fauna.
+* Expansión inicial controlada del catálogo zoológico.
+* Testing exhaustivo en Android.
+* Preparación para distribución controlada (**Google Play Internal Testing**).
 * Auditoría formal de términos de servicio y aviso legal (`DISCLAIMER.md`).
 
----
-
-## 4. PHASE 3 — RELEASE (Futura)
-
-**Objetivo Central:** Lanzamiento público comercial y estabilización global.
-
-* Publicación oficial en Google Play Store.
+### Phase 3 — Release
+* Lanzamiento público comercial en Google Play Store.
 * Álbum de colección completo con logros éticos de descubrimiento.
-* Estabilización de infraestructura básica y soporte continuo del catálogo de especies.
+* Estabilización de infraestructura y soporte continuo del catálogo de especies.
+
+> *Nota de Gobernanza:* Los puntos de Beta y Release representan dirección táctica y **no se convierten en objetivos atómicos ejecutables** hasta que Alpha esté cerrada y aprobada.
 
 ---
 
-## 5. PHASE 4 — ECOSYSTEM (Capacidades Estratégicas Avanzadas)
+## 4. LARGO PLAZO — PHASE 4: ECOSYSTEM (Capacidades Estratégicas Avanzadas)
 
-**Objetivo Central:** Expansión del ecosistema tras la consolidación del producto base.
+Las 13 capacidades estratégicas que representan la visión integral del ecosistema. La arquitectura base prepara sus puntos de extensión, pero **ninguna bloquea ni condiciona Alpha ni Beta**:
 
-Las siguientes capacidades estratégicas permanecen deliberadamente fuera del Mínimo Funcional y se desarrollarán modularmente:
 1. **Comercio de cartas (Trading):** Intercambio seguro entre usuarios preservando inmutabilidad histórica.
 2. **Sistema de Duelos PVP:** Enfrentamientos lúdicos desacoplados de atributos zoológicos.
 3. **Cuentas avanzadas y perfiles:** Autenticación remota y respaldo de usuario.
@@ -168,3 +210,23 @@ Las siguientes capacidades estratégicas permanecen deliberadamente fuera del M�
 11. **Expansión progresiva del catálogo zoológico:** Crecimiento continuo hacia cobertura global sin promesas engañosas de "todas las especies".
 12. **Evolución continua del sistema de IA de identificación:** Mejora incremental de precisión sin prometer "IA perfecta".
 13. **Gamificación completa:** Sistema de progresión, medallas por biomas y mecánicas avanzadas de `rank` (DEC-037-PENDING).
+
+---
+
+## 5. FUTURO ABIERTO (Sandbox Conceptual)
+
+Espacio de reserva para ideas y conceptos en gestación que todavía **no tienen**:
+* Alcance definido.
+* Prioridad asignada.
+* Dependencias técnicas resueltas.
+* Versión objetivo formalizada.
+* Criterios de aceptación estructurados.
+
+**Regla de Gobernanza:** Ninguna idea contenida en esta sección se convertirá automáticamente en un objetivo ejecutable `WHO` sin la aprobación previa del Director y la formulación técnica del PM.
+
+Iniciativas en exploración conceptual:
+* Desafíos comunitarios de bioacústica (identificación por cantos o sonidos animales).
+* Fichas de hábitats y biomas como coleccionables complementarios.
+* Integración con guías de reservas naturales y parques protegidos.
+* Eventos estacionales y seguimiento de rutas migratorias reales.
+* Realidad Aumentada (AR) para observación e inspección de especímenes.

@@ -12,15 +12,14 @@
 | Campo | Estado |
 | :--- | :--- |
 | **Proyecto** | WHO Animal |
-| **Fase actual** | Alpha (Foundation Completa / Transición a Fase 1) |
+| **Fase actual** | Alpha (Foundation Completa / Preparación de Fase 1 Alpha) |
 | **Versión actual** | `0.0.1` |
-| **Estado** | Foundation Completa |
-| **Objetivo activo** | Ninguno (Ciclo WHO-013 completado; listo para revisión de PM y Director) |
-| **Último objetivo completado** | `WHO-013` — Consolidación de Arquitectura, Roadmap y Definición del Mínimo Funcional |
+| **Estado** | Foundation Completa / Definición Alpha 0.1 Consolidada |
+| **Objetivo activo** | Ninguno (Ciclo WHO-013.1 completado; listo para autorización de WHO-014) |
+| **Último objetivo completado** | `WHO-013.1` — Formalización de Alpha y Horizontes Estratégicos |
 | **Próximo objetivo propuesto** | `WHO-014` — Servicio de Ensamblaje y Generación de Cartas (`Capture → Card`) |
 | **Bloqueos** | Ninguno |
 | **Decisiones pendientes** | `DEC-009` a `DEC-012`, `DEC-021` a `DEC-025`, `DEC-037-PENDING` |
-| **Último commit** | `f223622` |
 | **Última actualización** | 2026-09-07 |
 
 ---
@@ -82,12 +81,13 @@ $$\text{FASE} . \text{CORRECCIONES} . \text{ITERACIÓN}$$
 | **WHO-012C** | Formalizar la decisión explícita sobre un IdentificationResult | `COMPLETADO` | Alta | 0.0.1 | Sí |
 | **WHO-012D** | Implementación del puente IdentificationDecision → Capture | `COMPLETADO` | Alta | 0.0.1 | Sí |
 | **WHO-013** | Consolidación de Arquitectura, Roadmap y Mínimo Funcional | `COMPLETADO` | Alta | 0.0.1 | Sí |
+| **WHO-013.1** | Formalización de Alpha y Horizontes Estratégicos | `COMPLETADO` | Alta | 0.0.1 | Sí |
 
 ---
 
 ### Tabla Maestra de Auditoría de Objetivos WHO (Fase 0 y Propuestos Históricos)
 
-Auditoría integral oficial realizada en **WHO-013** para resolver colisiones de numeración y definir la situación de cada identificador:
+Auditoría integral oficial realizada en **WHO-013** y consolidada en **WHO-013.1** para resolver colisiones de numeración y definir la situación de cada identificador:
 
 | ID | Nombre Oficial | Estado | Fase | Dependencias | Situación / Resolución |
 | :--- | :--- | :---: | :---: | :--- | :--- |
@@ -125,6 +125,7 @@ Auditoría integral oficial realizada en **WHO-013** para resolver colisiones de
 | **WHO-012C** | Formalizar la decisión explícita sobre un IdentificationResult | `COMPLETADO` | Fase 0 | WHO-012B | Modelo IdentificationDecision (DEC-045) |
 | **WHO-012D** | Implementación del puente IdentificationDecision → Capture | `COMPLETADO` | Fase 0 | WHO-012C | Creación de Capture a partir de ACCEPTED (DEC-046) |
 | **WHO-013** | Consolidación de Arquitectura, Roadmap y Mínimo Funcional | `COMPLETADO` | Fase 0 | WHO-012D | Auditoría, cierre de Fase 0 y Roadmap de 5 fases (DEC-047) |
+| **WHO-013.1** | Formalización de Alpha y Horizontes Estratégicos | `COMPLETADO` | Fase 0 | WHO-013 | Formalización canónica de Alpha 0.1, Golden Path, delimitación de Storage (10x30) y 4 horizontes estratégicos (DEC-048) |
 | **WHO-011 (Antiguo)** | Evaluación y Prototipo de Ingesta Taxonómica API | `REUBICADO` | Fase 4 | WHO-018 | Reubicado a Fase 4 (Ecosystem) para ingesta masiva externa |
 | **WHO-012 (Antiguo)** | Prototipo del Servicio de Generación de Cartas | `REUBICADO` | Fase 1 | WHO-013 | Reubicado y resecuenciado como WHO-014 en Fase 1 |
 | **WHO-013 (Antiguo)** | Prototipo del Motor de Identificación por Visión | `REUBICADO` | Fase 1 | WHO-015 | Reubicado y resecuenciado como WHO-016 en Fase 1 |
@@ -157,16 +158,30 @@ Auditoría integral oficial realizada en **WHO-013** para resolver colisiones de
 
 ---
 
-## 5. Próximos Objetivos — Fase 1: Mínimo Funcional (Minimum Functional Product)
+## 5. Próximos Objetivos — Fase 1: Alpha Funcional 0.1 (Construcción de Alpha)
 
-Secuencia técnica ordenada para construir el primer producto ejecutable en Android que complete el flujo de 11 pasos (Foto → Colección Local):
+**Definición Oficial de Alpha 0.1 (DEC-048):**
+> *"Un usuario nuevo debe poder entrar a WHO Animal, fotografiar un animal, obtener una identificación, generar una carta, revisarla, guardarla en su colección, cerrar la aplicación, volver a abrirla y encontrar la carta nuevamente."*
+
+**Golden Path Oficial:**
+```text
+LOGIN → HOME → CAPTURE → CAMERA → OBSERVATION → IDENTIFICATION → RESULT → DECISION → CAPTURE → CARD → REVIEW / EDIT → SAVE → STORAGE
+```
+
+**Flujo Alternativo (Gestión de Colección):**
+```text
+HOME → STORAGE → CONTAINER → CARD → VIEW / EDIT / DELETE
+```
+*Capacidad de Storage: 10 containers x 30 espacios (300 cartas de capacidad).*
+
+### Secuencia Técnica Inicial Propuesta (WHO-014 a WHO-018):
 
 | ID | Nombre | Propósito | Prioridad | Dependencias | Estado | Req. Aprobación Director |
 | :--- | :--- | :--- | :---: | :--- | :---: | :---: |
-| **WHO-014** | Servicio de Ensamblaje y Generación de Cartas (`Capture → Card`) | Implementación del servicio de dominio `CardGeneratorService` que emite una `Card` formal desde una `Capture` validada | Alta | WHO-013 | `PROPUESTO` | **Sí** |
+| **WHO-014** | Servicio de Ensamblaje y Generación de Cartas (`Capture → Card`) | Implementación del servicio de dominio `CardGeneratorService` que emite una `Card` formal desde una `Capture` validada | Alta | WHO-013.1 | `PROPUESTO` | **Sí** |
 | **WHO-015** | Fundación del Cliente Android y Decisión Tecnológica Móvil | Configuración del proyecto base Android y formalización de la tecnología de interfaz de usuario | Alta | WHO-014, DEC-012 | `PROPUESTO` | **Sí** |
 | **WHO-016** | Servicio de Identificación de Especies (`Observation → IdentificationResult`) | Implementación de `IdentificationService` mediante motor local ligero/on-device | Alta | WHO-015, DEC-009 | `PROPUESTO` | **Sí** |
-| **WHO-017** | Motor de Persistencia Local y Colección (`Collection Album`) | Almacenamiento local para inventario, capturas y visualización de cartas en el álbum del usuario | Media | WHO-016 | `PROPUESTO` | **Sí** |
+| **WHO-017** | Motor de Persistencia Local y Colección (`Collection Album`) | Almacenamiento local para inventario, capturas y visualización de cartas en el álbum del usuario (10 containers x 30 espacios) | Media | WHO-016 | `PROPUESTO` | **Sí** |
 | **WHO-018** | Integración del Mínimo Funcional Android (End-to-End Core Loop) | Cierre integral del flujo de 11 pasos ejecutable en dispositivo o emulador Android | Alta | WHO-017 | `PROPUESTO` | **Sí** |
 
 > ⚠️ **Aviso de Gobernanza:**  
@@ -212,6 +227,7 @@ Secuencia técnica ordenada para construir el primer producto ejecutable en Andr
 | **WHO-012C** | `APROBADO` | `VALIDADO`| `COMPLETADO` | `APPROVED_COMPLETE` |
 | **WHO-012D** | `APROBADO` | `VALIDADO`| `COMPLETADO` | `APPROVED_COMPLETE` |
 | **WHO-013** | `APROBADO` | `VALIDADO`| `COMPLETADO` | `APPROVED_COMPLETE` |
+| **WHO-013.1** | `APROBADO` | `VALIDADO`| `COMPLETADO` | `APPROVED_COMPLETE` |
 
 > **Regla:** El Developer no puede auto-aprobar objetivos. La autorización debe ser explícita por parte del Director Creativo y estructurada por el Project Manager.
 
@@ -273,20 +289,27 @@ Antes de compilar y distribuir cualquier paquete Android (APK/AAB):
 
 ---
 
-## 11. Fuera del Alcance Actual (Qué NO Estamos Haciendo)
+## 11. Fuera del Alcance de Alpha (Qué NO Estamos Haciendo en Alpha)
 
-Para prevenir el desvío del alcance (*scope creep*) y asegurar una base sólida, las siguientes áreas quedan **estrictamente fuera del alcance de la iteración actual**:
+Para prevenir el desvío del alcance (*scope creep*) y asegurar la entrega de un producto Android funcional y demostrable en el menor tiempo razonable, las siguientes capacidades quedan **explícitamente fuera del alcance de Alpha**:
 
-* ❌ **UI definitiva o componentes visuales de producción:** Aún no aprobados.
-* ❌ **Identificación visual definitiva mediante IA:** Pendiente de decisión arquitectónica (`DEC-009`).
-* ❌ **Backend definitivo o infraestructura cloud:** No autorizado en Fase 0.
-* ❌ **Bases de datos definitivas o conectores externos:** No autorizado en Fase 0.
-* ❌ **Sistema de cuentas, login o autenticación:** No contemplado para Alpha temprana.
-* ❌ **Motor de enfrentamientos PVP:** Capacidad futura aprobada (`DEC-026`), prohibida su implementación en Fase 0.
-* ❌ **Sistema de intercambio, marketplace o comercio:** Capacidad futura aprobada (`DEC-027`), prohibida su implementación en Fase 0.
-* ❌ **Gestión de ilustradores o pasarelas de pago:** Capacidad futura aprobada (`DEC-028` / `DEC-029`), prohibida su implementación en Fase 0.
-* ❌ **Publicación en Google Play Store:** No aplicable en Fase 0.
-* ❌ **Generador automático o asistido de Lore por LLM en runtime:** No autorizado.
+* ❌ **Comercio de cartas (Trading):** Capacidad futura de Fase 4.
+* ❌ **Sistema de duelos (PVP):** Capacidad futura de Fase 4 desacoplada del core loop.
+* ❌ **Mercado interno (Marketplace):** No contemplado para Alpha.
+* ❌ **Economía in-app completa:** Sin monedas virtuales, gemas, tiendas ni loot boxes.
+* ❌ **Infraestructura Cloud / Backend distribuido:** Alpha opera con persistencia local robusta.
+* ❌ **Sincronización multidispositivo en la nube:** Prevista para fases posteriores.
+* ❌ **Cuentas avanzadas / autenticación remota:** Registro y login básicos locales en Alpha.
+* ❌ **Red social o interacciones comunitarias:** Fuera de alcance.
+* ❌ **Red de ilustradores colaboradores:** Encargos artísticos reservados a Fase 4.
+* ❌ **Sistema completo de rarezas dinámicas:** Curvas matemáticas complejas reservadas a Fase 4 (DEC-022-PENDING).
+* ❌ **Gamificación profunda:** Progresión avanzada de `rank`, niveles y medallas reservada a Fase 4.
+* ❌ **Cobertura mundial completa de especies:** Catálogo inicial de 28 especies validadas suficiente para validar el flujo.
+* ❌ **IA perfecta de visión:** Evolución continua y progresiva de precisión, sin exigencias imposibles.
+* ❌ **Publicación comercial en Google Play Store:** Reservada a Fase 3 (Release).
+* ❌ **Sistema de monetización operativo como requisito:** Sin bloqueos publicitarios para declarar Alpha funcional.
+
+> *Regla Arquitectónica:* La arquitectura mantiene previstos los puntos de extensión limpios, pero ninguna de estas capacidades puede condicionar o retrasar la entrega de Alpha 0.1.
 
 ---
 
@@ -324,6 +347,7 @@ Para prevenir el desvío del alcance (*scope creep*) y asegurar una base sólida
 | **2026-09-07** | Decisión sobre Identificación (WHO-012C) | Creación de `IdentificationDecision` formalizando decisión explícita. | Developer (`WHO-012C`) |
 | **2026-09-07** | Puente Decisión a Captura (WHO-012D) | Formalización del puente IdentificationDecision ACCEPTED a Capture (DEC-046). | Developer (`WHO-012D`) |
 | **2026-09-07** | Consolidación de Arquitectura y Mínimo Funcional (WHO-013) | Auditoría maestra de objetivos, formalización del Mínimo Funcional Android (11 pasos) y Roadmap en 5 fases (DEC-047). | Developer (`WHO-013`) |
+| **2026-09-07** | Formalización de Alpha y Horizontes Estratégicos (WHO-013.1) | Formalización canónica de Alpha 0.1, Golden Path, delimitación de Storage (10x30=300), exclusiones y 4 horizontes estratégicos (DEC-048). | Developer (`WHO-013.1`) |
 
 ---
 
