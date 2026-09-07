@@ -15,9 +15,9 @@
 | **Fase actual** | Transición Alpha $\rightarrow$ Beta (Auditoría Alpha 0.1 Completada) |
 | **Versión actual** | `0.1.0-alpha` (Build 2) |
 | **Estado** | Auditoría Post-Release Alpha 0.1 y Hoja de Ruta Beta Consolidadas |
-| **Objetivo activo** | Ninguno (Ciclo WHO-024 completado; listo para autorización de WHO-025) |
+| **Objetivo activo** | Ninguno (Ciclo WHO-027 completado) |
 | **Último objetivo completado** | `WHO-024` — Accesibilidad (a11y) y Robustecimiento de Compatibilidad CameraX (`DEC-061`) |
-| **Próximo objetivo propuesto** | `WHO-025` — Contrato Desacoplado `AdService` y Stubs de Infraestructura (`DEC-053`) |
+| **Próximo objetivo propuesto** | Pendiente de definición |
 | **Bloqueos** | Ninguno |
 | **Decisiones pendientes** | `DEC-009`, `DEC-011`, `DEC-021` a `DEC-025`, `DEC-037-PENDING` |
 | **Última actualización** | 2026-09-07 |
@@ -206,13 +206,13 @@ HOME → STORAGE → CONTAINER → CARD → VIEW / FLIP / BACK
 | **WHO-022** | Extracción y Externalización de Cadenas de UI (i18n Foundation) | Migración de cadenas hardcodeadas de Compose a `strings.xml`, preparando la internacionalización ($\text{UI} \neq \text{Ciencia} \neq \text{Lore}$) | Alta | WHO-021 | `COMPLETADO` | **Sí** |
 | **WHO-023** | Edición Interactiva de Lore (DEC-041) y Liberación en Baúl | UI de edición de Historia Personal con control de cuota de 3 ediciones y acción segura de liberar carta desde Baúl con modal | Alta | WHO-022 | `COMPLETADO` | **Sí** |
 | **WHO-024** | Accesibilidad (a11y) y Robustecimiento de Compatibilidad CameraX | Soporte TalkBack, target táctiles mínimos de 48dp y compatibilidad CameraX ante variantes de sensor y rotación | Media | WHO-023 | `COMPLETADO` | **Sí** |
-| **WHO-025** | Contrato Desacoplado `AdService` y Stubs de Infraestructura | Definición de interfaces limpias de publicidad desacoplada (`DEC-053`) y stubs locales de políticas de frecuencia | Media | WHO-024 | `PROPUESTO` | **Sí** |
+| **WHO-025** | Contrato Desacoplado `AdService` y Stubs de Infraestructura | Definición de interfaces limpias de publicidad desacoplada (`DEC-053`) y stubs locales de políticas de frecuencia | Media | WHO-024 | `COMPLETADO` | **Sí** |
 | **WHO-026** | Pipeline de Firma de Release y Google Play Internal Testing | Keystore de release, optimización R8/ProGuard y preparación del paquete de distribución interna `v0.2.0-beta.1` (versionCode 3) | Alta | WHO-025 | `COMPLETADO` | **Sí** |
 | **WHO-027** | Beta Validation Protocol & Field Testing | Protocolo de test Beta (Casos manuales, compatibilidad, reporte de bugs, smoke test) para validar en dispositivos físicos la estabilidad de `v0.2.0-beta.1` | Alta | WHO-026 | `COMPLETADO` | **Sí** |
 
-### 5.1 Especificación Formal del Próximo Objetivo: WHO-025
+### 5.1 Especificación Formal del Próximo Objetivo: Pendiente
 
-* **ID:** `WHO-025`
+* **ID:** `Pendiente`
 * **Nombre Oficial:** `Decoupled AdService Contract & Infrastructure Stubs`
 * **Objetivo:** Definir e implementar el contrato desacoplado de infraestructura publicitaria (`DEC-053`) mediante interfaces puras y stubs locales con simulación de políticas de frecuencia y rewarded ads para recarga ética de slots o aceleración opcional, sin introducir dependencias invasivas de SDKs de terceros ni violar la separación de capas de Clean Architecture.
 * **Alcance:**
@@ -289,7 +289,7 @@ HOME → STORAGE → CONTAINER → CARD → VIEW / FLIP / BACK
 | **WHO-022** | `APROBADO` | `VALIDADO`| `COMPLETADO` | `APPROVED_COMPLETE` |
 | **WHO-023** | `APROBADO` | `VALIDADO`| `COMPLETADO` | `APPROVED_COMPLETE` |
 | **WHO-024** | `APROBADO` | `VALIDADO`| `COMPLETADO` | `APPROVED_COMPLETE` |
-| **WHO-025** | `PENDIENTE` | `PROPUESTO` | `NO_INICIADO` | `PENDING_APPROVAL` |
+| **WHO-025** | `APROBADO` | `VALIDADO` | `COMPLETADO` | `APPROVED_COMPLETE` |
 
 > **Regla:** El Developer no puede auto-aprobar objetivos. La autorización debe ser explícita por parte del Director Creativo y estructurada por el Project Manager.
 
