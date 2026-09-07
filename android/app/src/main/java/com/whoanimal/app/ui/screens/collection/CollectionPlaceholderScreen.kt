@@ -13,36 +13,57 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.lazy.grid.GridCells
-import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
+import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.CollectionsBookmark
+import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.Inventory2
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import com.whoanimal.app.data.local.WhoAnimalDatabase
+import com.whoanimal.app.data.local.repository.RoomCollectionStorageRepository
+import com.whoanimal.app.domain.boundary.StorageCapacityInfo
+import com.whoanimal.app.domain.identification.OfficialStarterCatalog
+import com.whoanimal.app.domain.model.AnimalCardContract
+import com.whoanimal.app.domain.model.VerificationStatus
+import com.whoanimal.app.domain.repository.StorageConstants
 import com.whoanimal.app.ui.theme.EmeraldSecondary
 import com.whoanimal.app.ui.theme.ForestGreenPrimary
-import com.whoanimal.app.ui.theme.SageAccent
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import java.time.Instant
+import java.util.UUID
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -50,6 +71,31 @@ fun CollectionPlaceholderScreen(
     onNavigateBack: () -> Unit,
     modifier: Modifier = Modifier
 ) {
+    val context = LocalContext.current
+    val scope = rememberCoroutineScope()
+
+    val database = remember { WhoAnimalDatabase.getInstance(context) }
+    val storageRepository = remember {
+        RoomCollectionStorageRepository(database.cardDao(), database.storageSlotDao())
+    }
+
+    var capacityInfo by remember {
+        mutableStateOf(StorageCapacityInfo(10, 30, 300, 0))
+    }
+    var statusMessage by remember { mutableStateOf<String?>(null) }
+    var lastInsertedCardId by remember { mutableStateOf<String?>(null) }
+
+    suspend fun refreshCapacity() {
+        val updated = withContext(Dispatchers.IO) {
+            storageRepository.getStorageCapacity()
+        }
+        capacityInfo = updated
+    }
+
+    LaunchedEffect(Unit) {
+        refreshCapacity()
+    }
+
     Scaffold(
         topBar = {
             TopAppBar(
@@ -77,7 +123,7 @@ fun CollectionPlaceholderScreen(
         ) {
             Box(
                 modifier = Modifier
-                    .size(80.dp)
+                    .size(76.dp)
                     .clip(CircleShape)
                     .background(EmeraldSecondary.copy(alpha = 0.15f)),
                 contentAlignment = Alignment.Center
@@ -86,12 +132,12 @@ fun CollectionPlaceholderScreen(
                     imageVector = Icons.Default.CollectionsBookmark,
                     contentDescription = null,
                     tint = EmeraldSecondary,
-                    modifier = Modifier.size(42.dp)
+                    modifier = Modifier.size(40.dp)
                 )
             }
 
             Text(
-                text = "Estructura de Almacenamiento",
+                text = "Persistencia Local de Colección",
                 style = MaterialTheme.typography.titleLarge.copy(
                     fontWeight = FontWeight.Bold
                 )
@@ -103,7 +149,7 @@ fun CollectionPlaceholderScreen(
                 color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7f)
             )
 
-            // Tarjeta de Estado del Inventario
+            // Tarjeta de Estado de Almacenamiento con Room
             Card(
                 colors = CardDefaults.cardColors(
                     containerColor = MaterialTheme.colorScheme.surface
@@ -127,22 +173,22 @@ fun CollectionPlaceholderScreen(
                         )
                         Spacer(modifier = Modifier.width(10.dp))
                         Text(
-                            text = "Contenedores de Álbum (0 / 300 ocupados)",
+                            text = "Ocupación: ${capacityInfo.occupiedSlots} / ${capacityInfo.totalCapacity} cartas",
                             style = MaterialTheme.typography.titleMedium.copy(
-                                fontWeight = FontWeight.SemiBold
+                                fontWeight = FontWeight.Bold
                             )
                         )
                     }
 
                     Text(
-                        text = "Cada contenedor organiza 30 cartas con sus caras Frontal y Posterior (con datos zoológicos reales y Lore personal).",
+                        text = "Persistencia activa en SQLite mediante Room. Las cartas y sus ubicaciones sobreviven al reinicio de la aplicación.",
                         style = MaterialTheme.typography.bodySmall,
                         color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7f)
                     )
 
                     Spacer(modifier = Modifier.height(6.dp))
 
-                    // Grid visual representativo de los 10 contenedores
+                    // Grid visual de los 10 contenedores
                     Column(
                         verticalArrangement = Arrangement.spacedBy(8.dp)
                     ) {
@@ -164,17 +210,95 @@ fun CollectionPlaceholderScreen(
                 }
             }
 
-            Surface(
-                shape = RoundedCornerShape(12.dp),
-                color = EmeraldSecondary.copy(alpha = 0.08f),
-                modifier = Modifier.fillMaxWidth()
+            // Mensaje de estado de operación
+            if (statusMessage != null) {
+                Surface(
+                    shape = RoundedCornerShape(12.dp),
+                    color = ForestGreenPrimary.copy(alpha = 0.08f),
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    Text(
+                        text = statusMessage!!,
+                        style = MaterialTheme.typography.bodySmall.copy(fontWeight = FontWeight.SemiBold),
+                        color = ForestGreenPrimary,
+                        modifier = Modifier.padding(12.dp)
+                    )
+                }
+            }
+
+            // Acciones de demostración de persistencia
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.spacedBy(10.dp)
             ) {
-                Text(
-                    text = "La persistencia local completa (Room/SQLite) y la gestión de cartas se implementarán en WHO-017.",
-                    style = MaterialTheme.typography.bodySmall,
-                    color = EmeraldSecondary,
-                    modifier = Modifier.padding(14.dp)
-                )
+                Button(
+                    onClick = {
+                        scope.launch {
+                            val uniqueCardId = UUID.randomUUID().toString()
+                            val uniqueCaptureId = UUID.randomUUID().toString()
+                            val species = OfficialStarterCatalog.allSpecies.random()
+
+                            val demoCard = AnimalCardContract(
+                                cardId = uniqueCardId,
+                                animalId = species.animalId,
+                                specimenNumber = capacityInfo.occupiedSlots + 1,
+                                generation = "genesis",
+                                issuedAt = Instant.now().toString(),
+                                populationAtIssuance = capacityInfo.occupiedSlots + 1,
+                                rarity = "COMMON",
+                                captureId = uniqueCaptureId,
+                                serial = "WA-${species.commonName.take(3).uppercase()}-${UUID.randomUUID().toString().take(4).uppercase()}",
+                                verificationStatus = VerificationStatus.UNVERIFIED,
+                                identificationMethod = "DETERMINISTIC_ALPHA"
+                            )
+
+                            try {
+                                val slot = withContext(Dispatchers.IO) {
+                                    storageRepository.autoAssignSlot(demoCard)
+                                }
+                                lastInsertedCardId = uniqueCardId
+                                statusMessage = "Carta guardada en Contenedor ${slot.containerIndex}, Slot ${slot.slotIndex}."
+                                refreshCapacity()
+                            } catch (e: Exception) {
+                                statusMessage = "Error al guardar: ${e.message}"
+                            }
+                        }
+                    },
+                    modifier = Modifier.weight(1f),
+                    shape = RoundedCornerShape(12.dp),
+                    colors = ButtonDefaults.buttonColors(containerColor = ForestGreenPrimary)
+                ) {
+                    Icon(imageVector = Icons.Default.Add, contentDescription = null, modifier = Modifier.size(16.dp))
+                    Spacer(modifier = Modifier.width(6.dp))
+                    Text("Guardar Carta Demo", style = MaterialTheme.typography.labelMedium)
+                }
+
+                if (lastInsertedCardId != null) {
+                    OutlinedButton(
+                        onClick = {
+                            scope.launch {
+                                try {
+                                    val deleted = withContext(Dispatchers.IO) {
+                                        storageRepository.deleteCardAndFreeSlot(lastInsertedCardId!!)
+                                    }
+                                    if (deleted) {
+                                        statusMessage = "Carta eliminada y slot liberado correctamente."
+                                        lastInsertedCardId = null
+                                        refreshCapacity()
+                                    }
+                                } catch (e: Exception) {
+                                    statusMessage = "Error al eliminar: ${e.message}"
+                                }
+                            }
+                        },
+                        modifier = Modifier.weight(1f),
+                        shape = RoundedCornerShape(12.dp)
+                    ) {
+                        Icon(imageVector = Icons.Default.Delete, contentDescription = null, modifier = Modifier.size(16.dp))
+                        Spacer(modifier = Modifier.width(6.dp))
+                        Text("Liberar Slot", style = MaterialTheme.typography.labelMedium)
+                    }
+                }
             }
 
             Button(
@@ -213,7 +337,7 @@ private fun ContainerSlotPreview(
                 color = ForestGreenPrimary
             )
             Text(
-                text = "0/30",
+                text = "Max 30",
                 style = MaterialTheme.typography.labelSmall,
                 color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f)
             )
