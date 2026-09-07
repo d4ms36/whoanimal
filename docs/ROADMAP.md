@@ -161,7 +161,7 @@ Trading, PVP, Marketplace, economía completa, Cloud/backend, sincronización mu
   * Implementación del servicio de dominio `CardGeneratorService` que emite una `Card` formal a partir de una `Capture` validada.
 * **`WHO-015` — Fundación del Cliente Android y Decisión Tecnológica Móvil** `[COMPLETADO]`
   * Configuración del proyecto base Android y formalización de la tecnología de interfaz de usuario.
-* **`WHO-016` — Servicio de Identificación de Especies (`Observation → IdentificationResult`)** `[PROPUESTO]`
+* **`WHO-016` — Servicio de Identificación de Especies (`Observation → IdentificationResult`)** `[COMPLETADO]`
   * Implementación del servicio `IdentificationService` mediante motor local ligero/on-device.
 * **`WHO-017` — Motor de Persistencia Local y Colección (`Collection Album`)** `[PROPUESTO]`
   * Almacenamiento local para inventario, capturas y visualización de cartas en el álbum del usuario (10 containers x 30 espacios).

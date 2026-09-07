@@ -1,6 +1,8 @@
 package com.whoanimal.app.ui.screens.capture
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -19,33 +21,55 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.CameraAlt
+import androidx.compose.material.icons.filled.Check
 import androidx.compose.material.icons.filled.CheckCircle
+import androidx.compose.material.icons.filled.Pets
+import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.RadioButton
+import androidx.compose.material3.RadioButtonDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import com.whoanimal.app.domain.identification.IdentificationService
+import com.whoanimal.app.domain.identification.OfficialStarterCatalog
+import com.whoanimal.app.domain.model.IdentificationResultContract
+import com.whoanimal.app.domain.model.ObservationContract
 import com.whoanimal.app.ui.theme.ForestGreenPrimary
 import com.whoanimal.app.ui.theme.SageAccent
+import java.time.Instant
+import java.util.UUID
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun CapturePlaceholderScreen(
+    onNavigateToResult: (IdentificationResultContract) -> Unit,
     onNavigateBack: () -> Unit,
     modifier: Modifier = Modifier
 ) {
+    val identificationService = remember { IdentificationService() }
+    val speciesOptions = remember { OfficialStarterCatalog.allSpecies }
+    var selectedSpeciesIndex by remember { mutableStateOf(0) }
+    var isProcessing by remember { mutableStateOf(false) }
+
     Scaffold(
         topBar = {
             TopAppBar(
@@ -73,7 +97,7 @@ fun CapturePlaceholderScreen(
         ) {
             Box(
                 modifier = Modifier
-                    .size(80.dp)
+                    .size(76.dp)
                     .clip(CircleShape)
                     .background(ForestGreenPrimary.copy(alpha = 0.12f)),
                 contentAlignment = Alignment.Center
@@ -82,23 +106,24 @@ fun CapturePlaceholderScreen(
                     imageVector = Icons.Default.CameraAlt,
                     contentDescription = null,
                     tint = ForestGreenPrimary,
-                    modifier = Modifier.size(42.dp)
+                    modifier = Modifier.size(40.dp)
                 )
             }
 
             Text(
-                text = "Tubería de Captura de Fauna",
+                text = "Tubería de Identificación de Fauna",
                 style = MaterialTheme.typography.titleLarge.copy(
                     fontWeight = FontWeight.Bold
                 )
             )
 
             Text(
-                text = "Frontera arquitectónica lista para conectar el motor de visión y cámara en WHO-016.",
+                text = "Alpha 0.1: Selección de espécimen observado para análisis zoológico determinista.",
                 style = MaterialTheme.typography.bodyMedium,
                 color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7f)
             )
 
+            // Selector de espécimen para la observación
             Card(
                 colors = CardDefaults.cardColors(
                     containerColor = MaterialTheme.colorScheme.surface
@@ -107,54 +132,96 @@ fun CapturePlaceholderScreen(
                 elevation = CardDefaults.cardElevation(defaultElevation = 2.dp),
                 modifier = Modifier.fillMaxWidth()
             ) {
-                Column(
-                    modifier = Modifier.padding(18.dp),
-                    verticalArrangement = Arrangement.spacedBy(12.dp)
-                ) {
+                Column(modifier = Modifier.padding(18.dp)) {
                     Text(
-                        text = "Secuencia Ontológica Garantizada:",
+                        text = "Espécimen en Foco (Catálogo Oficial):",
                         style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.SemiBold)
                     )
+                    Spacer(modifier = Modifier.height(10.dp))
 
-                    PipelineStep(stepNumber = "1", title = "Fotografía / Sensor Óptico", detail = "Obtención de imagen sin geolocalización invasiva")
-                    PipelineStep(stepNumber = "2", title = "Observation (Efímera)", detail = "Entidad temporal que no modifica el catálogo")
-                    PipelineStep(stepNumber = "3", title = "IdentificationResult", detail = "Evaluación de confianza separada de la decisión")
-                    PipelineStep(stepNumber = "4", title = "IdentificationDecision", detail = "Decisión explícita (ACCEPTED / REJECTED)")
-                    PipelineStep(stepNumber = "5", title = "Capture", detail = "Registro inmutable de la captura exitosa")
-                    PipelineStep(stepNumber = "6", title = "AnimalCard", detail = "Emisión formal de la carta zoológica (WHO-014)")
+                    speciesOptions.forEachIndexed { index, species ->
+                        Row(
+                            modifier = Modifier
+                                .fillMaxWidth()
+                                .clip(RoundedCornerShape(10.dp))
+                                .clickable { selectedSpeciesIndex = index }
+                                .padding(vertical = 6.dp, horizontal = 4.dp),
+                            verticalAlignment = Alignment.CenterVertically
+                        ) {
+                            RadioButton(
+                                selected = selectedSpeciesIndex == index,
+                                onClick = { selectedSpeciesIndex = index },
+                                colors = RadioButtonDefaults.colors(selectedColor = ForestGreenPrimary)
+                            )
+                            Spacer(modifier = Modifier.width(8.dp))
+                            Column {
+                                Text(
+                                    text = species.commonName,
+                                    style = MaterialTheme.typography.bodyMedium.copy(fontWeight = FontWeight.Medium)
+                                )
+                                Text(
+                                    text = species.scientificName,
+                                    style = MaterialTheme.typography.bodySmall,
+                                    color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f)
+                                )
+                            }
+                        }
+                    }
                 }
             }
 
-            Surface(
+            // Botón de acción: Iniciar Observación e Identificar
+            Button(
+                onClick = {
+                    isProcessing = true
+                    val chosenSpecies = speciesOptions[selectedSpeciesIndex]
+                    val observation = ObservationContract(
+                        observationId = UUID.randomUUID().toString(),
+                        createdAt = Instant.now().toString(),
+                        imagePath = "photos/${chosenSpecies.scientificName.lowercase().replace(" ", "_")}.jpg"
+                    )
+                    val result = identificationService.identify(observation)
+                    isProcessing = false
+                    onNavigateToResult(result)
+                },
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(50.dp),
                 shape = RoundedCornerShape(12.dp),
-                color = ForestGreenPrimary.copy(alpha = 0.08f),
+                colors = ButtonDefaults.buttonColors(containerColor = ForestGreenPrimary),
+                enabled = !isProcessing
+            ) {
+                Icon(imageVector = Icons.Default.Search, contentDescription = null, modifier = Modifier.size(20.dp))
+                Spacer(modifier = Modifier.width(8.dp))
+                Text(
+                    text = if (isProcessing) "Identificando..." else "Realizar Observación y Analizar",
+                    style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.SemiBold)
+                )
+            }
+
+            // Información ontológica
+            Card(
+                colors = CardDefaults.cardColors(
+                    containerColor = MaterialTheme.colorScheme.surface
+                ),
+                shape = RoundedCornerShape(16.dp),
+                elevation = CardDefaults.cardElevation(defaultElevation = 1.dp),
                 modifier = Modifier.fillMaxWidth()
             ) {
-                Row(
-                    modifier = Modifier.padding(14.dp),
-                    verticalAlignment = Alignment.CenterVertically
+                Column(
+                    modifier = Modifier.padding(16.dp),
+                    verticalArrangement = Arrangement.spacedBy(10.dp)
                 ) {
-                    Icon(
-                        imageVector = Icons.Default.CheckCircle,
-                        contentDescription = null,
-                        tint = ForestGreenPrimary,
-                        modifier = Modifier.size(20.dp)
-                    )
-                    Spacer(modifier = Modifier.width(10.dp))
                     Text(
-                        text = "El motor real on-device se implementará en WHO-016.",
-                        style = MaterialTheme.typography.bodySmall,
-                        color = ForestGreenPrimary
+                        text = "Flujo Ontológico Controlado:",
+                        style = MaterialTheme.typography.titleSmall.copy(fontWeight = FontWeight.SemiBold)
                     )
-                }
-            }
 
-            Button(
-                onClick = onNavigateBack,
-                modifier = Modifier.fillMaxWidth(),
-                shape = RoundedCornerShape(12.dp)
-            ) {
-                Text("Regresar a Home")
+                    PipelineStep(stepNumber = "1", title = "Observation (Efímera)", detail = "Se instancia la observación sin mutar el catálogo")
+                    PipelineStep(stepNumber = "2", title = "IdentificationService", detail = "El provider determinista analiza el espécimen")
+                    PipelineStep(stepNumber = "3", title = "IdentificationResult", detail = "Se emiten candidatos con confidence explícita")
+                    PipelineStep(stepNumber = "4", title = "Decisión Pendiente", detail = "El usuario acepta o descarta; no crea Capture automática")
+                }
             }
         }
     }
@@ -172,7 +239,7 @@ private fun PipelineStep(
     ) {
         Box(
             modifier = Modifier
-                .size(26.dp)
+                .size(24.dp)
                 .background(SageAccent.copy(alpha = 0.3f), CircleShape),
             contentAlignment = Alignment.Center
         ) {
@@ -182,7 +249,7 @@ private fun PipelineStep(
                 color = ForestGreenPrimary
             )
         }
-        Spacer(modifier = Modifier.width(12.dp))
+        Spacer(modifier = Modifier.width(10.dp))
         Column {
             Text(
                 text = title,

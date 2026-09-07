@@ -2,7 +2,6 @@ package com.whoanimal.app
 
 import com.whoanimal.app.ui.navigation.NavDestination
 import org.junit.Assert.assertEquals
-import org.junit.Assert.assertNotEquals
 import org.junit.Assert.assertTrue
 import org.junit.Test
 
@@ -14,6 +13,7 @@ class NavigationDestinationsTest {
             NavDestination.Splash.route,
             NavDestination.Home.route,
             NavDestination.Capture.route,
+            NavDestination.IdentificationResult.route,
             NavDestination.Collection.route
         )
 
@@ -32,6 +32,7 @@ class NavigationDestinationsTest {
         assertEquals("splash", NavDestination.Splash.route)
         assertEquals("home", NavDestination.Home.route)
         assertEquals("capture", NavDestination.Capture.route)
+        assertEquals("identification_result", NavDestination.IdentificationResult.route)
         assertEquals("collection", NavDestination.Collection.route)
     }
 }

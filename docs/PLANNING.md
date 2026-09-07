@@ -15,9 +15,9 @@
 | **Fase actual** | Alpha (Foundation Completa / Preparación de Fase 1 Alpha) |
 | **Versión actual** | `0.0.1` |
 | **Estado** | Foundation Completa / Definición Alpha 0.1 Consolidada |
-| **Objetivo activo** | Ninguno (Ciclo WHO-015 completado; listo para autorización de WHO-016) |
-| **Último objetivo completado** | `WHO-015` — Fundación del Cliente Android y Decisión Tecnológica Móvil |
-| **Próximo objetivo propuesto** | `WHO-016` — Servicio de Identificación de Especies (`Observation → IdentificationResult`) |
+| **Objetivo activo** | Ninguno (Ciclo WHO-016 completado; listo para autorización de WHO-017) |
+| **Último objetivo completado** | `WHO-016` — Servicio de Identificación de Especies (`Observation → IdentificationResult`) |
+| **Próximo objetivo propuesto** | `WHO-017` — Motor de Persistencia Local y Colección (`Collection Album`) |
 | **Bloqueos** | Ninguno |
 | **Decisiones pendientes** | `DEC-009`, `DEC-011`, `DEC-021` a `DEC-025`, `DEC-037-PENDING` |
 | **Última actualización** | 2026-09-07 |
@@ -180,7 +180,7 @@ HOME → STORAGE → CONTAINER → CARD → VIEW / EDIT / DELETE
 | :--- | :--- | :--- | :---: | :--- | :---: | :---: |
 | **WHO-014** | Servicio de Ensamblaje y Generación de Cartas (`Capture → Card`) | Implementación del servicio de dominio `CardGeneratorService` que emite una `Card` formal desde una `Capture` validada | Alta | WHO-013.1 | `COMPLETADO` | **Sí** |
 | **WHO-015** | Fundación del Cliente Android y Decisión Tecnológica Móvil | Configuración del proyecto base Android y formalización de la tecnología de interfaz de usuario | Alta | WHO-014, DEC-012 | `COMPLETADO` | **Sí** |
-| **WHO-016** | Servicio de Identificación de Especies (`Observation → IdentificationResult`) | Implementación de `IdentificationService` mediante motor local ligero/on-device | Alta | WHO-015, DEC-009 | `PROPUESTO` | **Sí** |
+| **WHO-016** | Servicio de Identificación de Especies (`Observation → IdentificationResult`) | Implementación de `IdentificationService` mediante motor local ligero/on-device | Alta | WHO-015, DEC-009 | `COMPLETADO` | **Sí** |
 | **WHO-017** | Motor de Persistencia Local y Colección (`Collection Album`) | Almacenamiento local para inventario, capturas y visualización de cartas en el álbum del usuario (10 containers x 30 espacios) | Media | WHO-016 | `PROPUESTO` | **Sí** |
 | **WHO-018** | Integración del Mínimo Funcional Android (End-to-End Core Loop) | Cierre integral del flujo de 11 pasos ejecutable en dispositivo o emulador Android | Alta | WHO-017 | `PROPUESTO` | **Sí** |
 
@@ -230,6 +230,7 @@ HOME → STORAGE → CONTAINER → CARD → VIEW / EDIT / DELETE
 | **WHO-013.1** | `APROBADO` | `VALIDADO`| `COMPLETADO` | `APPROVED_COMPLETE` |
 | **WHO-014** | `APROBADO` | `VALIDADO`| `COMPLETADO` | `APPROVED_COMPLETE` |
 | **WHO-015** | `APROBADO` | `VALIDADO`| `COMPLETADO` | `APPROVED_COMPLETE` |
+| **WHO-016** | `APROBADO` | `VALIDADO`| `COMPLETADO` | `APPROVED_COMPLETE` |
 
 > **Regla:** El Developer no puede auto-aprobar objetivos. La autorización debe ser explícita por parte del Director Creativo y estructurada por el Project Manager.
 
@@ -352,6 +353,7 @@ Para prevenir el desvío del alcance (*scope creep*) y asegurar la entrega de un
 | **2026-09-07** | Formalización de Alpha y Horizontes Estratégicos (WHO-013.1) | Formalización canónica de Alpha 0.1, Golden Path, delimitación de Storage (10x30=300), exclusiones y 4 horizontes estratégicos (DEC-048). | Developer (`WHO-013.1`) |
 | **2026-09-07** | Servicio de Ensamblaje y Generación de Cartas (WHO-014) | Implementación del servicio de dominio `CardGeneratorService` (Capture → AnimalCard), protección ontológica y 15 tests específicos. | Developer (`WHO-014`) |
 | **2026-09-07** | Fundación del Cliente Android (WHO-015) | Configuración de Android nativo (Kotlin, Jetpack Compose, Material 3, Navigation Compose, contratos de frontera de dominio, tests y build exitoso; DEC-049). | Developer (`WHO-015`) |
+| **2026-09-07** | Pipeline de Identificación Zoológica (WHO-016) | Implementación de `IdentificationService` y `DeterministicIdentificationProvider` (Observation → IdentificationResult) en Python y Android, UI de presentación de candidatos y tests de contrato. | Developer (`WHO-016`) |
 
 ---
 

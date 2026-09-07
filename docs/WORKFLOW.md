@@ -294,3 +294,10 @@ ative_regions).
 * **Estado:** `APPROVED_COMPLETE`
 * **Commit:** `3bb884b` (*feat(android): establish Android application foundation*)
 * **Versión:** `0.0.1`
+
+
+### WHO-016: Servicio de Identificación de Especies (Observation → IdentificationResult)
+* **Propósito:** Implementar el primer pipeline funcional de identificación zoológica (`Observation → IdentificationService → IdentificationResult`), conectando la fundación Android con un motor determinista controlado (`DeterministicIdentificationProvider`) basado exclusivamente en especies del catálogo oficial (`data/species/`), garantizando la estricta separación ontológica (`Observation ≠ IdentificationResult ≠ IdentificationDecision ≠ Capture ≠ Card`), desplegando la pantalla de resultados y decisión en Android, y protegiendo los contratos con tests unitarios en Python y Kotlin.
+* **Estado:** `APPROVED_COMPLETE`
+* **Commit:** (Pendiente de commit) (*feat(android): implement alpha identification pipeline*)
+* **Versión:** `0.0.1`

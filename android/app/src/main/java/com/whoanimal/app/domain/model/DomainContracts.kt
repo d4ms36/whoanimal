@@ -53,25 +53,41 @@ data class AnimalProfileContract(
 
 data class ObservationContract(
     val observationId: String,
-    val capturedAt: String,
-    val imageUri: String,
+    val createdAt: String,
+    val imagePath: String,
     val notes: String? = null
+) {
+    val imageUri: String get() = imagePath
+    val capturedAt: String get() = createdAt
+}
+
+data class CandidateSpeciesContract(
+    val animalId: String,
+    val scientificName: String,
+    val commonName: String,
+    val confidence: Double
 )
 
 data class IdentificationResultContract(
     val identificationId: String,
     val observationId: String,
-    val candidateAnimalId: String,
-    val candidateScientificName: String,
-    val confidence: Double
-)
+    val candidateSpecies: List<CandidateSpeciesContract>,
+    val identificationMethod: String = "DETERMINISTIC_ALPHA",
+    val createdAt: String
+) {
+    val topCandidate: CandidateSpeciesContract? get() = candidateSpecies.firstOrNull()
+    val candidateAnimalId: String get() = topCandidate?.animalId ?: ""
+    val candidateScientificName: String get() = topCandidate?.scientificName ?: ""
+    val confidence: Double get() = topCandidate?.confidence ?: 0.0
+}
 
 data class IdentificationDecisionContract(
     val decisionId: String,
     val identificationId: String,
-    val animalId: String,
-    val status: DecisionStatus,
-    val decidedAt: String
+    val animalId: String? = null,
+    val status: DecisionStatus = DecisionStatus.ACCEPTED,
+    val decidedAt: String,
+    val selectedAnimalId: String? = animalId
 )
 
 data class CaptureContract(
