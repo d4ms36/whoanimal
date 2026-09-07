@@ -18,11 +18,16 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.role
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
@@ -312,6 +317,11 @@ private fun ContainerSelectorBar(
         ) {
             for (c in 1..totalContainers) {
                 val isSelected = c == selectedContainer
+                val chipDesc = stringResource(
+                    R.string.collection_container_chip_description,
+                    c,
+                    if (isSelected) stringResource(R.string.collection_container_title, c) else ""
+                )
                 FilterChip(
                     selected = isSelected,
                     onClick = { onSelectContainer(c) },
@@ -325,7 +335,12 @@ private fun ContainerSelectorBar(
                         selectedContainerColor = ForestGreenPrimary,
                         selectedLabelColor = MaterialTheme.colorScheme.onPrimary
                     ),
-                    modifier = Modifier.testTag("container_tab_$c")
+                    modifier = Modifier
+                        .defaultMinSize(minHeight = 48.dp)
+                        .testTag("container_tab_$c")
+                        .semantics {
+                            contentDescription = chipDesc
+                        }
                 )
             }
         }
@@ -346,6 +361,15 @@ private fun CollectionCardItem(
     val commonName = profile?.commonName ?: "Espécimen #${card.specimenNumber}"
     val scientificName = profile?.scientificName ?: "Incertae sedis"
     val isRare = card.rarity.equals("RARE", ignoreCase = true) || (profile?.isRareSpecies == true)
+    val rarityText = if (isRare) stringResource(R.string.rarity_rare) else stringResource(R.string.rarity_common)
+    val cardA11yDescription = stringResource(
+        R.string.collection_card_item_description,
+        commonName,
+        scientificName,
+        card.specimenNumber,
+        slotIndex,
+        rarityText
+    )
 
     val localBitmap = remember(card.imagePath) {
         card.imagePath?.let { path ->
@@ -373,6 +397,10 @@ private fun CollectionCardItem(
                 shape = RoundedCornerShape(16.dp)
             )
             .clip(RoundedCornerShape(16.dp))
+            .semantics {
+                role = Role.Button
+                contentDescription = cardA11yDescription
+            }
             .clickable(onClick = onCardClick)
             .testTag("collection_card_${card.cardId}")
     ) {

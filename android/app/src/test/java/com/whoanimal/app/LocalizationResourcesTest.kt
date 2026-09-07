@@ -94,6 +94,18 @@ class LocalizationResourcesTest {
         assertNotNull(esStrings["action_edit_lore"])
         assertNotNull(esStrings["card_persisted_release_dialog_title"])
         assertNotNull(esStrings["card_persisted_release_dialog_body"])
+
+        // WHO-024: Accessibility & CameraX Hardening
+        assertNotNull(esStrings["camera_unavailable_title"])
+        assertNotNull(esStrings["camera_unavailable_body"])
+        assertNotNull(esStrings["camera_simulated_capture_action"])
+        assertNotNull(esStrings["camera_capturing_in_progress"])
+        assertNotNull(esStrings["card_flip_hint_front"])
+        assertNotNull(esStrings["card_flip_hint_back"])
+        assertNotNull(esStrings["collection_card_item_description"])
+        assertNotNull(esStrings["collection_container_chip_description"])
+        assertNotNull(esStrings["identification_confidence_description"])
+        assertNotNull(esStrings["identification_top_candidate_label"])
     }
 
     @Test

@@ -15,9 +15,9 @@
 | **Fase actual** | Transición Alpha $\rightarrow$ Beta (Auditoría Alpha 0.1 Completada) |
 | **Versión actual** | `0.1.0-alpha` (Build 2) |
 | **Estado** | Auditoría Post-Release Alpha 0.1 y Hoja de Ruta Beta Consolidadas |
-| **Objetivo activo** | Ninguno (Ciclo WHO-023 completado; listo para autorización de WHO-024) |
-| **Último objetivo completado** | `WHO-023` — Edición Interactiva de Lore (DEC-041) y Liberación en Baúl (`DEC-060`) |
-| **Próximo objetivo propuesto** | `WHO-024` — Accesibilidad (a11y) y Robustecimiento de Compatibilidad CameraX |
+| **Objetivo activo** | Ninguno (Ciclo WHO-024 completado; listo para autorización de WHO-025) |
+| **Último objetivo completado** | `WHO-024` — Accesibilidad (a11y) y Robustecimiento de Compatibilidad CameraX (`DEC-061`) |
+| **Próximo objetivo propuesto** | `WHO-025` — Contrato Desacoplado `AdService` y Stubs de Infraestructura (`DEC-053`) |
 | **Bloqueos** | Ninguno |
 | **Decisiones pendientes** | `DEC-009`, `DEC-011`, `DEC-021` a `DEC-025`, `DEC-037-PENDING` |
 | **Última actualización** | 2026-09-07 |
@@ -205,27 +205,26 @@ HOME → STORAGE → CONTAINER → CARD → VIEW / FLIP / BACK
 | **WHO-021** | Ingesta y Sincronización del Catálogo JSON como Android Assets | Unificación de la fuente única de verdad biológica (`data/species/`), eliminando duplicación de especies en código Kotlin | Alta | WHO-020 | `COMPLETADO` | **Sí** |
 | **WHO-022** | Extracción y Externalización de Cadenas de UI (i18n Foundation) | Migración de cadenas hardcodeadas de Compose a `strings.xml`, preparando la internacionalización ($\text{UI} \neq \text{Ciencia} \neq \text{Lore}$) | Alta | WHO-021 | `COMPLETADO` | **Sí** |
 | **WHO-023** | Edición Interactiva de Lore (DEC-041) y Liberación en Baúl | UI de edición de Historia Personal con control de cuota de 3 ediciones y acción segura de liberar carta desde Baúl con modal | Alta | WHO-022 | `COMPLETADO` | **Sí** |
-| **WHO-024** | Accesibilidad (a11y) y Robustecimiento de Compatibilidad CameraX | Soporte TalkBack, target táctiles mínimos de 48dp y compatibilidad CameraX ante variantes de sensor y rotación | Media | WHO-023 | `PROPUESTO` | **Sí** |
+| **WHO-024** | Accesibilidad (a11y) y Robustecimiento de Compatibilidad CameraX | Soporte TalkBack, target táctiles mínimos de 48dp y compatibilidad CameraX ante variantes de sensor y rotación | Media | WHO-023 | `COMPLETADO` | **Sí** |
 | **WHO-025** | Contrato Desacoplado `AdService` y Stubs de Infraestructura | Definición de interfaces limpias de publicidad desacoplada (`DEC-053`) y stubs locales de políticas de frecuencia | Media | WHO-024 | `PROPUESTO` | **Sí** |
 | **WHO-026** | Pipeline de Firma de Release y Google Play Internal Testing | Keystore de release, optimización R8/ProGuard y preparación del paquete de distribución interna `v0.2.0-beta.1` (versionCode 3) | Alta | WHO-025 | `PROPUESTO` | **Sí** |
 
-### 5.1 Especificación Formal del Próximo Objetivo: WHO-023
+### 5.1 Especificación Formal del Próximo Objetivo: WHO-025
 
-* **ID:** `WHO-023`
-* **Nombre Oficial:** `Interactive Lore Editing (DEC-041) & Safe Baúl Card Release`
-* **Objetivo:** Implementar la interfaz de edición interactiva de la Historia Personal (`personalLore`) en cartas persistidas respetando el límite inmutable de 3 ediciones por cuenta (`DEC-041`), y habilitar la acción de liberación/eliminación segura de una carta desde el Baúl con modal de confirmación, devolviendo la capacidad disponible al slot correspondiente en Room.
+* **ID:** `WHO-025`
+* **Nombre Oficial:** `Decoupled AdService Contract & Infrastructure Stubs`
+* **Objetivo:** Definir e implementar el contrato desacoplado de infraestructura publicitaria (`DEC-053`) mediante interfaces puras y stubs locales con simulación de políticas de frecuencia y rewarded ads para recarga ética de slots o aceleración opcional, sin introducir dependencias invasivas de SDKs de terceros ni violar la separación de capas de Clean Architecture.
 * **Alcance:**
-  1. Componente UI de edición de Lore con contador de caracteres (máx 300) y visualizador de ediciones restantes (3 iniciales).
-  2. Mecánica de confirmación y persistencia atómica de la nueva versión del Lore en Room.
-  3. Modal de confirmación para liberación/eliminación de carta persistida en `CollectionScreen` / `CardPresentationScreen`.
-  4. Pruebas unitarias de límite de ediciones y consistencia del almacenamiento en Room.
+  1. Contrato `AdService` y modelos de políticas (`PlacementType`, `AdPolicy`, `AdRewardResult`).
+  2. Implementación de `LocalStubAdService` con simulación determinista para pruebas y desarrollo.
+  3. Pruebas unitarias de límites de frecuencia y entrega de recompensas.
 * **Fuera de Alcance:**
-  - Modificación de datos científicos o atributos taxonómicos.
-  - Edición de cartas ajenas o sincronización cloud.
-* **Dependencias:** `WHO-022` (Completado).
+  - Integración de Google Mobile Ads SDK o redes comerciales en runtime.
+  - Pay-to-win, loot boxes o micropagos con dinero real.
+* **Dependencias:** `WHO-024` (Completado).
 * **Criterios de Aceptación:**
-  1. El usuario no puede exceder las 3 ediciones permitidas de su Historia Personal.
-  2. La liberación de una carta libera el slot en Room y actualiza el contador del Baúl.
+  1. El dominio de WHO Animal no tiene dependencias hacia librerías de anuncios.
+  2. Políticas de frecuencia y recompensas operan de forma desacoplada y predecible.
   3. Tests pasan al 100%.
 
 > ⚠️ **Aviso de Gobernanza:**  
@@ -288,7 +287,8 @@ HOME → STORAGE → CONTAINER → CARD → VIEW / FLIP / BACK
 | **WHO-021** | `APROBADO` | `VALIDADO`| `COMPLETADO` | `APPROVED_COMPLETE` |
 | **WHO-022** | `APROBADO` | `VALIDADO`| `COMPLETADO` | `APPROVED_COMPLETE` |
 | **WHO-023** | `APROBADO` | `VALIDADO`| `COMPLETADO` | `APPROVED_COMPLETE` |
-| **WHO-024** | `PENDIENTE` | `PROPUESTO` | `NO_INICIADO` | `PENDING_APPROVAL` |
+| **WHO-024** | `APROBADO` | `VALIDADO`| `COMPLETADO` | `APPROVED_COMPLETE` |
+| **WHO-025** | `PENDIENTE` | `PROPUESTO` | `NO_INICIADO` | `PENDING_APPROVAL` |
 
 > **Regla:** El Developer no puede auto-aprobar objetivos. La autorización debe ser explícita por parte del Director Creativo y estructurada por el Project Manager.
 

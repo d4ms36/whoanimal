@@ -896,6 +896,34 @@ Aprobado por: [Director Creativo / Project Manager / Consenso]
      * Todos los textos de interfaz, avisos de límite, contadores de caracteres y diálogos de confirmación se obtienen de Android Resources (`values/strings.xml` y `values-en/strings.xml`).
      * El Lore personal permanece como narrativa del usuario no traducida por el sistema ni confundida con información científica.
 * **Justificación / Principios:** Cumple estrictamente la visión de `DEC-041` y las reglas fundamentales de arquitectura (Clean Architecture, persistencia atómica en Room, inmutabilidad de la ciencia e integridad de almacenamiento).
+### DEC-061: Accesibilidad Integral del Core Loop y Resiliencia de Hardware en CameraX
+* **Fecha:** 2026-09-07
+* **Estado:** `APROBADA`
+* **Objetivo:** `WHO-024`
+* **Tema:** Accesibilidad (a11y) / WCAG / Semantics TalkBack / CameraX Lifecycle / Resiliencia de Hardware
+* **Resolución:**
+  1. **Semántica de Accesibilidad Integral y TalkBack:**
+     * Todos los controles interactivos y componentes del Core Loop (`CameraCaptureScreen`, `IdentificationResultScreen`, `CardPresentationScreen`, `CollectionPlaceholderScreen`) incorporan `Role` semántico explícito (`Role.Button`), `contentDescription` descriptivo y anuncios dinámicos de estado.
+     * El contenedor tridimensional de la carta expone `Role.Button` y `contentDescription` contextual según su cara activa (`card_flip_hint_front` / `card_flip_hint_back`), anunciando el nombre de la especie y la acción de voltear.
+     * En el Baúl, cada carta expone una descripción compuesta accesible (`collection_card_item_description`: nombre común, nombre científico, número de espécimen, slot y rareza).
+     * Los chips de selector de contenedor exponen su estado seleccionado/deseleccionado y el título del baúl accesible.
+     * Las barras de progreso de confianza zoológica anuncian el porcentaje mediante semantics (`identification_confidence_description`).
+  2. **Regla Estricta de Touch Targets:**
+     * Todos los controles interactivos poseen un área táctil mínima de 48dp (`.defaultMinSize(minHeight = 48.dp)` o `.size(48.dp)` mínimo), cumpliendo con las pautas WCAG 2.5.5 y Material Design.
+  3. **Estados Reactivos y Anuncios LiveRegion:**
+     * Los estados de error y fallos de captura utilizan `LiveRegionMode.Assertive` para notificación inmediata por lectores de pantalla.
+     * La superficie de decisión de identificación y los estados informativos usan `LiveRegionMode.Polite` para evitar saturación auditiva.
+     * Los elementos puramente decorativos (retícula de enfoque visual, puntos de estado estéticos) no emiten información ruidosa a TalkBack.
+  4. **Endurecimiento del Ciclo de Vida de CameraX:**
+     * `DisposableEffect(lifecycleOwner)` garantiza `activeCameraProvider?.unbindAll()` y el desregistro del listener de orientación al abandonar la pantalla o recomponer.
+     * Detección dinámica de rotación de hardware mediante `OrientationEventListener`, actualizando `imageCapture?.targetRotation` en tiempo real con respecto a la rotación de superficie de la pantalla.
+     * Verificación proactiva de presencia de sensor (`hasCamera(DEFAULT_BACK_CAMERA)` y `hasCamera(DEFAULT_FRONT_CAMERA)`).
+     * Fallback automático a cámara frontal si no existe sensor trasero; transición segura a `CameraUnavailableView` con acción accesible de "Simular Captura" si el dispositivo carece de cámaras o falla la inicialización de CameraX.
+  5. **Protección Contra Doble Acción (Idempotencia de Captura):**
+     * Se implementa un flag atómico `isCapturing` que deshabilita el disparador e ignora llamadas concurrentes mientras una captura o procesamiento esté en vuelo, evitando callbacks duplicados y archivos huérfanos.
+  6. **Separación Ontológica y Paridad i18n:**
+     * Se añadieron y validaron las 10 claves simétricas en `values/strings.xml` y `values-en/strings.xml`, preservando la regla $\text{UI} \neq \text{Ciencia} \neq \text{Lore}$.
+* **Justificación / Principios:** Prepara el producto para uso universal en la vida real, asegurando inclusión conforme a estándares internacionales y robustez en la diversidad del ecosistema de hardware Android.
 * **Aprobado por:** Director Creativo / Project Manager
 
 ---

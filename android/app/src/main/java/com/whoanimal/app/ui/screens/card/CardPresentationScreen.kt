@@ -23,9 +23,14 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.role
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.Archive
@@ -328,6 +333,12 @@ fun CardPresentationScreen(
                             )
                         }
 
+                        val flipContentDescription = if (isFlipped) {
+                            stringResource(R.string.card_flip_hint_back, effectiveProfile?.commonName.orEmpty())
+                        } else {
+                            stringResource(R.string.card_flip_hint_front, effectiveProfile?.commonName.orEmpty())
+                        }
+
                         // Caja de la carta con proyección 3D
                         Box(
                             modifier = Modifier
@@ -338,6 +349,10 @@ fun CardPresentationScreen(
                                     cameraDistance = 14f * density
                                 }
                                 .testTag("card_flip_container")
+                                .semantics {
+                                    role = Role.Button
+                                    contentDescription = flipContentDescription
+                                }
                                 .clickable(
                                     interactionSource = remember { MutableInteractionSource() },
                                     indication = null
@@ -1017,7 +1032,9 @@ fun CardBackFace(
                                         TextButton(
                                             onClick = onOpenLoreEditor,
                                             contentPadding = PaddingValues(horizontal = 6.dp, vertical = 0.dp),
-                                            modifier = Modifier.testTag("action_card_back_edit_lore_button")
+                                            modifier = Modifier
+                                                .defaultMinSize(minHeight = 48.dp)
+                                                .testTag("action_card_back_edit_lore_button")
                                         ) {
                                             Icon(
                                                 imageVector = Icons.Default.Edit,
@@ -1137,6 +1154,7 @@ private fun CardActionBar(
                 ),
                 modifier = Modifier
                     .weight(0.9f)
+                    .defaultMinSize(minHeight = 48.dp)
                     .testTag("action_release_button")
             ) {
                 Icon(
@@ -1155,6 +1173,7 @@ private fun CardActionBar(
                 shape = RoundedCornerShape(12.dp),
                 modifier = Modifier
                     .weight(1f)
+                    .defaultMinSize(minHeight = 48.dp)
                     .testTag("action_flip_button")
             ) {
                 Icon(
@@ -1174,6 +1193,7 @@ private fun CardActionBar(
                 colors = ButtonDefaults.buttonColors(containerColor = ForestGreenPrimary),
                 modifier = Modifier
                     .weight(1.3f)
+                    .defaultMinSize(minHeight = 48.dp)
                     .testTag("action_save_button")
             ) {
                 if (isProcessing) {
@@ -1233,6 +1253,7 @@ private fun PersistedCardActionBar(
                     shape = RoundedCornerShape(12.dp),
                     modifier = Modifier
                         .weight(1f)
+                        .defaultMinSize(minHeight = 48.dp)
                         .testTag("action_edit_lore_button")
                 ) {
                     Icon(
@@ -1256,6 +1277,7 @@ private fun PersistedCardActionBar(
                     ),
                     modifier = Modifier
                         .weight(1f)
+                        .defaultMinSize(minHeight = 48.dp)
                         .testTag("action_release_persisted_button")
                 ) {
                     Icon(
@@ -1283,6 +1305,7 @@ private fun PersistedCardActionBar(
                     shape = RoundedCornerShape(12.dp),
                     modifier = Modifier
                         .weight(1f)
+                        .defaultMinSize(minHeight = 48.dp)
                         .testTag("action_back_to_collection_button")
                 ) {
                     Icon(
@@ -1300,6 +1323,7 @@ private fun PersistedCardActionBar(
                     colors = ButtonDefaults.buttonColors(containerColor = ForestGreenPrimary),
                     modifier = Modifier
                         .weight(1f)
+                        .defaultMinSize(minHeight = 48.dp)
                         .testTag("action_flip_button")
                 ) {
                     Icon(

@@ -178,4 +178,16 @@
     <string name="card_lore_empty_placeholder">No Personal Lore recorded. Tap Edit Lore to write your chronicle!</string>
     <string name="error_saving_lore">Error saving Personal Lore.</string>
     <string name="error_releasing_card">Error releasing card.</string>
+
+    <!-- Accessibility & CameraX Hardening (WHO-024) -->
+    <string name="camera_unavailable_title">Camera Unavailable</string>
+    <string name="camera_unavailable_body">No compatible camera sensor was detected on this device. You can use simulated capture to continue.</string>
+    <string name="camera_simulated_capture_action">Simulate Capture</string>
+    <string name="camera_capturing_in_progress">Capturing and analyzing specimen…</string>
+    <string name="card_flip_hint_front">Card of %1$s. Showing visual front. Double tap to flip and view zoological data and lore.</string>
+    <string name="card_flip_hint_back">Card of %1$s. Showing zoological back. Double tap to flip to front.</string>
+    <string name="collection_card_item_description">%1$s, %2$s. Specimen number %3$d in slot %4$d. %5$s. Double tap to open card.</string>
+    <string name="collection_container_chip_description">Container %1$d. %2$s.</string>
+    <string name="identification_confidence_description">Identification confidence level: %1$d percent</string>
+    <string name="identification_top_candidate_label">Primary zoological candidate</string>
 </resources>

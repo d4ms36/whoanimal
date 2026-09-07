@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -14,6 +15,10 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
+import androidx.compose.ui.semantics.LiveRegionMode
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.liveRegion
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
@@ -103,7 +108,9 @@ fun IdentificationResultScreen(
                         containerColor = MaterialTheme.colorScheme.errorContainer
                     ),
                     shape = RoundedCornerShape(16.dp),
-                    modifier = Modifier.fillMaxWidth()
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .semantics { liveRegion = LiveRegionMode.Assertive }
                 ) {
                     Row(
                         modifier = Modifier.padding(18.dp),
@@ -136,7 +143,9 @@ fun IdentificationResultScreen(
 
                 Button(
                     onClick = onNavigateBack,
-                    modifier = Modifier.fillMaxWidth(),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .defaultMinSize(minHeight = 48.dp),
                     shape = RoundedCornerShape(12.dp)
                 ) {
                     Text(stringResource(R.string.identification_retry_action))
@@ -230,12 +239,16 @@ fun IdentificationResultScreen(
 
                         Spacer(modifier = Modifier.height(6.dp))
 
+                        val confidenceA11y = stringResource(R.string.identification_confidence_description, confidencePercent)
                         LinearProgressIndicator(
                             progress = { top.confidence.toFloat() },
                             modifier = Modifier
                                 .fillMaxWidth()
                                 .height(8.dp)
-                                .clip(RoundedCornerShape(4.dp)),
+                                .clip(RoundedCornerShape(4.dp))
+                                .semantics {
+                                    contentDescription = confidenceA11y
+                                },
                             color = ForestGreenPrimary,
                             trackColor = SageAccent.copy(alpha = 0.2f)
                         )
@@ -275,12 +288,14 @@ fun IdentificationResultScreen(
                 }
             }
 
-            // Mensaje de estado de decisión si ya fue tomada
+            // Mensaje de estado de decisión si ya fue tomada (con liveRegion para lectura accesible)
             if (decisionMadeText != null) {
                 Surface(
                     shape = RoundedCornerShape(14.dp),
                     color = ForestGreenPrimary.copy(alpha = 0.1f),
-                    modifier = Modifier.fillMaxWidth()
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .semantics { liveRegion = LiveRegionMode.Polite }
                 ) {
                     Row(
                         modifier = Modifier.padding(16.dp),
@@ -340,7 +355,9 @@ fun IdentificationResultScreen(
                         decisionMadeText = acceptedMsg
                         onAcceptDecision(result)
                     },
-                    modifier = Modifier.fillMaxWidth(),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .defaultMinSize(minHeight = 48.dp),
                     shape = RoundedCornerShape(12.dp),
                     colors = ButtonDefaults.buttonColors(containerColor = ForestGreenPrimary)
                 ) {
@@ -354,7 +371,9 @@ fun IdentificationResultScreen(
                         decisionMadeText = rejectedMsg
                         onDiscardDecision()
                     },
-                    modifier = Modifier.fillMaxWidth(),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .defaultMinSize(minHeight = 48.dp),
                     shape = RoundedCornerShape(12.dp)
                 ) {
                     Icon(imageVector = Icons.Default.Close, contentDescription = null, modifier = Modifier.size(18.dp))
@@ -364,7 +383,9 @@ fun IdentificationResultScreen(
             } else {
                 Button(
                     onClick = onNavigateBack,
-                    modifier = Modifier.fillMaxWidth(),
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .defaultMinSize(minHeight = 48.dp),
                     shape = RoundedCornerShape(12.dp)
                 ) {
                     Text(stringResource(R.string.action_return))

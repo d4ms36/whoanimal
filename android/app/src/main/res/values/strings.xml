@@ -178,4 +178,16 @@
     <string name="card_lore_empty_placeholder">Sin Historia Personal registrada. ¡Toca Editar Lore para escribir tu crónica!</string>
     <string name="error_saving_lore">Error al guardar la Historia Personal.</string>
     <string name="error_releasing_card">Error al liberar la carta.</string>
+
+    <!-- Accessibility & CameraX Hardening (WHO-024) -->
+    <string name="camera_unavailable_title">Cámara no disponible</string>
+    <string name="camera_unavailable_body">No se detectó un sensor de cámara compatible en este dispositivo. Puedes utilizar la captura simulada para continuar.</string>
+    <string name="camera_simulated_capture_action">Simular Captura</string>
+    <string name="camera_capturing_in_progress">Capturando y analizando espécimen…</string>
+    <string name="card_flip_hint_front">Carta de %1$s. Mostrando frente visual. Toca dos veces para voltear y ver datos zoológicos y lore.</string>
+    <string name="card_flip_hint_back">Carta de %1$s. Mostrando reverso zoológico. Toca dos veces para voltear al frente.</string>
+    <string name="collection_card_item_description">%1$s, %2$s. Espécimen número %3$d en ranura %4$d. %5$s. Toca dos veces para abrir la carta.</string>
+    <string name="collection_container_chip_description">Contenedor %1$d. %2$s.</string>
+    <string name="identification_confidence_description">Nivel de certeza de identificación: %1$d por ciento</string>
+    <string name="identification_top_candidate_label">Candidato zoológico principal</string>
 </resources>

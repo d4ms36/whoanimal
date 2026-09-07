@@ -113,8 +113,8 @@ LOGIN → HOME → CAPTURE → CAMERA → OBSERVATION → IDENTIFICATION → RES
   * Migración sistemática de cadenas hardcodeadas de Compose a `res/values/strings.xml`, asegurando la separación $\text{UI} \neq \text{Ciencia} \neq \text{Lore}$ y proveyendo fundación inicial en inglés (`values-en/strings.xml`).
 * **`WHO-023` — Edición Interactiva de Lore (DEC-041) y Liberación de Cartas en Baúl** `[COMPLETADO]`
   * Cierre de deuda de UX: UI de edición de Historia Personal con límite de 3 ediciones por cuenta persistido en Profile (DEC-041/DEC-060) y acción segura de liberar carta desde Baúl con diálogo modal de confirmación y recuperación íntegra de slots en Room.
-* **`WHO-024` — Accesibilidad (a11y) y Robustecimiento de Compatibilidad CameraX** `[PROPUESTO]`
-  * Soporte TalkBack, target táctiles mínimos de 48dp y validación de CameraX ante rotación y sensores heterogéneos.
+* **`WHO-024` — Accesibilidad (a11y) y Robustecimiento de Compatibilidad CameraX** `[COMPLETADO]`
+  * Soporte TalkBack, roles y semantics explícitos, target táctiles mínimos de 48dp, anuncios en liveRegion, unbind limpio en lifecycle de CameraX, fallback con sensor check y listener dinámico de rotación (DEC-061).
 * **`WHO-025` — Contrato Desacoplado `AdService` y Stubs de Infraestructura (DEC-053)** `[PROPUESTO]`
   * Definición de interfaces limpias (`BannerPlacement`, `InterstitialPolicy`, `RewardedAdService`, `FrequencyPolicy`) y stubs locales sin SDKs de terceros.
 * **`WHO-026` — Pipeline de Firma de Release y Preparación para Google Play Internal Testing** `[PROPUESTO]`
