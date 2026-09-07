@@ -20,7 +20,7 @@
 | **Próximo objetivo propuesto** | Pendiente de aprobación |
 | **Bloqueos** | Ninguno |
 | **Decisiones pendientes** | `DEC-009` a `DEC-012`, `DEC-020` a `DEC-025`, `DEC-037-PENDING` |
-| **Último commit** | `f4762df` |
+| **Último commit** | `60b67bf` |
 | **Última actualización** | 2026-09-06 |
 
 ---
