@@ -264,7 +264,7 @@ ative_regions).
 ### WHO-012D: Implementación del puente IdentificationDecision → Capture
 * **Propósito:** Formalizar en el dominio la creación de `Capture` a partir de una `IdentificationDecision` en estado `ACCEPTED`, vinculando `animal_id` e `identification_id` con inmutabilidad estricta y manteniendo el contrato de `sex` (DEC-039).
 * **Estado:** `APPROVED_COMPLETE`
-* **Commit:** (Pendiente de commit) (*feat(domain): implement identification decision to capture bridge*)
+* **Commit:** `5bb14dc`
 * **Versión:** `0.0.1`
 
 
