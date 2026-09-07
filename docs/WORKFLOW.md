@@ -309,3 +309,11 @@ ative_regions).
 * **Commit:** `c021b71` (*feat(android): implement alpha local persistence*)
 * **Versión:** `0.0.1`
 
+
+### WHO-018A: Login Alpha Local (Perfil y Sesión Offline)
+* **Propósito:** Implementar el flujo de bienvenida, registro y sesión de usuario 100% local para Alpha 0.1 (DEC-051), permitiendo al usuario crear su perfil de explorador (`ExplorerProfile`), almacenarlo de forma persistente con Room (`ProfileEntity`, `ProfileDao`, `RoomProfileRepository`), validar el nombre ingresado (2..30 caracteres, no vacío), asegurar la existencia de un único perfil activo y automatizar el enrutamiento condicional (`Splash → Welcome → CreateProfile → Home` en primera apertura; `Splash → Home` en reaperturas), con tests Robolectric completos y builds Debug y Release verificados.
+* **Estado:** `APPROVED_COMPLETE`
+* **Commit:** `7873852` (*feat(android): implement alpha local login*)
+* **Versión:** `0.0.1`
+
+

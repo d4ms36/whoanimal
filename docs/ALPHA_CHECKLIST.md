@@ -34,9 +34,9 @@ Una funcionalidad solo puede marcarse como completada cuando:
 
 | Función          | Estado |
 | ---------------- | ------ |
-| Login local      | ⬜      |
-| Crear perfil     | ⬜      |
-| Recordar usuario | ⬜      |
+| Login local      | ✅      |
+| Crear perfil     | ✅      |
+| Recordar usuario | ✅      |
 
 ## Home
 
@@ -93,9 +93,9 @@ Una funcionalidad solo puede marcarse como completada cuando:
 
 El siguiente recorrido debe funcionar completo para declarar Alpha terminada.
 
-* [ ] Abrir la aplicación.
-* [ ] Login local.
-* [ ] Entrar al Home.
+* [x] Abrir la aplicación.
+* [x] Login local.
+* [x] Entrar al Home.
 * [ ] Abrir Captura.
 * [ ] Tomar una foto.
 * [ ] Crear Observation.

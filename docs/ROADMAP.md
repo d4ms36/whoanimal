@@ -165,6 +165,10 @@ Trading, PVP, Marketplace, economía completa, Cloud/backend, sincronización mu
   * Implementación del servicio `IdentificationService` mediante motor local ligero/on-device.
 * **`WHO-017` — Motor de Persistencia Local y Colección (`Collection Album`)** `[COMPLETADO]`
   * Almacenamiento local para inventario, capturas y visualización de cartas en el álbum del usuario (10 containers x 30 espacios).
+* **`WHO-018A` — Login Alpha Local (Perfil y Sesión Offline)** `[COMPLETADO]`
+  * Pantalla de bienvenida, creación de perfil local de explorador con Room, validación de nombre y navegación automática condicional.
+* **`WHO-018B` — Captura y Cámara Alpha (CameraX / Visual Input)** `[PROPUESTO]`
+  * Integración de CameraX y toma de fotografía zoológica con gestión de permisos.
 * **`WHO-018` — Integración del Mínimo Funcional Android (End-to-End Core Loop)** `[PROPUESTO]`
   * Cierre integral del flujo de 11 pasos ejecutable en dispositivo o emulador Android.
 

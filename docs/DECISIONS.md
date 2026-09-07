@@ -682,6 +682,25 @@ Aprobado por: [Director Creativo / Project Manager / Consenso]
 
 ---
 
+### DEC-051: Perfil de Explorador Local y Sesión Offline sin Backend
+* **Fecha:** 2026-09-07
+* **Estado:** `APROBADA`
+* **Objetivo:** `WHO-018A`
+* **Tema:** Identidad Local / Sesión de Usuario / Arquitectura Android
+* **Resolución:**
+  1. Se establece el modelo `ExplorerProfile` como la representación canónica de identidad del usuario en Alpha 0.1 (`profile_id`, `explorer_name`, `created_at`, `last_opened_at`, `is_active`).
+  2. La sesión y perfil son 100% locales y residen en la base de datos Room (`ProfileEntity`, `ProfileDao`, `RoomProfileRepository`). Queda prohibida la introducción de autenticación remota, correos, contraseñas, OAuth (Google/Apple) o backend en Alpha.
+  3. Regla de sesión única en Alpha: Solo puede existir un único perfil activo en el dispositivo (`is_active = 1`). La activación de un perfil desactiva de forma atómica y transaccional cualquier registro previo.
+  4. Flujo de navegación condicional automático:
+     * Primera apertura: `Splash → Welcome → CreateProfile → Home`.
+     * Reaperturas subsiguientes: `Splash → Home` (detecta el perfil activo y actualiza `last_opened_at` de forma no bloqueante).
+     * El backstack de navegación elimina las pantallas de bienvenida y creación de perfil tras la entrada a `Home` para evitar navegación inversa redundante.
+  5. Reglas de validación de identidad en campo: El nombre de explorador debe ser no vacío, no componerse únicamente de espacios en blanco y tener una longitud estrictamente entre 2 y 30 caracteres.
+* **Justificación / Principios:** Permite una experiencia de usuario fluida y persistente desde la primera apertura, garantiza privacidad total (sin recolección ni transmisión de datos personales) y prepara la arquitectura para futura edición o exportación sin acoplarse a servicios externos.
+* **Aprobado por:** Director Creativo / Project Manager
+
+---
+
 ### DEC-010: Estilo y Universo Mitológico del Lore (SUPERSEDED)
 * **Tema:** Diseño Narrativo
 * **Estado:** `SUPERSEDED`

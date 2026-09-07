@@ -15,9 +15,9 @@
 | **Fase actual** | Alpha (Foundation Completa / Preparación de Fase 1 Alpha) |
 | **Versión actual** | `0.0.1` |
 | **Estado** | Foundation Completa / Definición Alpha 0.1 Consolidada |
-| **Objetivo activo** | Ninguno (Ciclo WHO-017 completado; listo para autorización de WHO-018) |
-| **Último objetivo completado** | `WHO-017` — Motor de Persistencia Local y Colección (`Collection Album`) |
-| **Próximo objetivo propuesto** | `WHO-018` — Integración del Mínimo Funcional Android (End-to-End Core Loop) |
+| **Objetivo activo** | Ninguno (Ciclo WHO-018A completado; listo para autorización de WHO-018B) |
+| **Último objetivo completado** | `WHO-018A` — Login Alpha Local (Perfil y Sesión Offline) |
+| **Próximo objetivo propuesto** | `WHO-018B` — Captura y Cámara Alpha (CameraX / Visual Input) |
 | **Bloqueos** | Ninguno |
 | **Decisiones pendientes** | `DEC-009`, `DEC-011`, `DEC-021` a `DEC-025`, `DEC-037-PENDING` |
 | **Última actualización** | 2026-09-07 |
@@ -182,7 +182,9 @@ HOME → STORAGE → CONTAINER → CARD → VIEW / EDIT / DELETE
 | **WHO-015** | Fundación del Cliente Android y Decisión Tecnológica Móvil | Configuración del proyecto base Android y formalización de la tecnología de interfaz de usuario | Alta | WHO-014, DEC-012 | `COMPLETADO` | **Sí** |
 | **WHO-016** | Servicio de Identificación de Especies (`Observation → IdentificationResult`) | Implementación de `IdentificationService` mediante motor local ligero/on-device | Alta | WHO-015, DEC-009 | `COMPLETADO` | **Sí** |
 | **WHO-017** | Motor de Persistencia Local y Colección (`Collection Album`) | Almacenamiento local para inventario, capturas y visualización de cartas en el álbum del usuario (10 containers x 30 espacios) | Media | WHO-016 | `COMPLETADO` | **Sí** |
-| **WHO-018** | Integración del Mínimo Funcional Android (End-to-End Core Loop) | Cierre integral del flujo de 11 pasos ejecutable en dispositivo o emulador Android | Alta | WHO-017 | `PROPUESTO` | **Sí** |
+| **WHO-018A**| Login Alpha Local (Perfil y Sesión Offline) | Pantalla de bienvenida, creación de perfil de explorador local, persistencia con Room y navegación automática condicional | Alta | WHO-017 | `COMPLETADO` | **Sí** |
+| **WHO-018B**| Captura y Cámara Alpha (CameraX / Visual Input) | Integración de CameraX y toma de fotografía zoológica con gestión de permisos | Alta | WHO-018A | `PROPUESTO` | **Sí** |
+| **WHO-018** | Integración del Mínimo Funcional Android (End-to-End Core Loop) | Cierre integral del flujo de 11 pasos ejecutable en dispositivo o emulador Android | Alta | WHO-018B | `PROPUESTO` | **Sí** |
 
 > ⚠️ **Aviso de Gobernanza:**  
 > Que un objetivo aparezca en esta tabla **NO constituye autorización para su desarrollo**.  
@@ -232,6 +234,7 @@ HOME → STORAGE → CONTAINER → CARD → VIEW / EDIT / DELETE
 | **WHO-015** | `APROBADO` | `VALIDADO`| `COMPLETADO` | `APPROVED_COMPLETE` |
 | **WHO-016** | `APROBADO` | `VALIDADO`| `COMPLETADO` | `APPROVED_COMPLETE` |
 | **WHO-017** | `APROBADO` | `VALIDADO`| `COMPLETADO` | `APPROVED_COMPLETE` |
+| **WHO-018A**| `APROBADO` | `VALIDADO`| `COMPLETADO` | `APPROVED_COMPLETE` |
 
 > **Regla:** El Developer no puede auto-aprobar objetivos. La autorización debe ser explícita por parte del Director Creativo y estructurada por el Project Manager.
 
@@ -356,6 +359,7 @@ Para prevenir el desvío del alcance (*scope creep*) y asegurar la entrega de un
 | **2026-09-07** | Fundación del Cliente Android (WHO-015) | Configuración de Android nativo (Kotlin, Jetpack Compose, Material 3, Navigation Compose, contratos de frontera de dominio, tests y build exitoso; DEC-049). | Developer (`WHO-015`) |
 | **2026-09-07** | Pipeline de Identificación Zoológica (WHO-016) | Implementación de `IdentificationService` y `DeterministicIdentificationProvider` (Observation → IdentificationResult) en Python y Android, UI de presentación de candidatos y tests de contrato. | Developer (`WHO-016`) |
 | **2026-09-07** | Persistencia Local Alpha (WHO-017) | Implementación de persistencia local offline con Room + SQLite para cartas y colección (10x30=300), validaciones de integridad, tests unitarios Robolectric y simulación de reinicio (DEC-050). | Developer (`WHO-017`) |
+| **2026-09-07** | Login Alpha Local (WHO-018A) | Implementación de perfil de explorador local (ExplorerProfile), Room DAO/Entity, validación de nombre, pantallas Welcome y CreateProfile, navegación condicional Splash → Home/Welcome y tests Robolectric (DEC-051). | Developer (`WHO-018A`) |
 
 ---
 
