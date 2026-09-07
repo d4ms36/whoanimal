@@ -86,8 +86,10 @@ fun CameraCaptureScreen(
     onNavigateToResult: (IdentificationResultContract) -> Unit,
     onNavigateBack: () -> Unit,
     modifier: Modifier = Modifier,
-    identificationService: IdentificationService = remember { IdentificationService() }
+    identificationService: IdentificationService = remember { IdentificationService() },
+    onNavigateToResultWithPhoto: ((IdentificationResultContract, String) -> Unit)? = null
 ) {
+
     val context = LocalContext.current
     val lifecycleOwner = LocalLifecycleOwner.current
     val coroutineScope = rememberCoroutineScope()
@@ -283,9 +285,13 @@ fun CameraCaptureScreen(
                                                     processCapturedPhoto(
                                                         photoFile = photoFile,
                                                         identificationService = identificationService,
-                                                        onSuccess = { result ->
+                                                        onSuccess = { result, photoPath ->
                                                             isProcessingCapture = false
-                                                            onNavigateToResult(result)
+                                                            if (onNavigateToResultWithPhoto != null) {
+                                                                onNavigateToResultWithPhoto(result, photoPath)
+                                                            } else {
+                                                                onNavigateToResult(result)
+                                                            }
                                                         },
                                                         onError = { err ->
                                                             isProcessingCapture = false
@@ -307,9 +313,13 @@ fun CameraCaptureScreen(
                                         executeSimulatedCapture(
                                             context = context,
                                             identificationService = identificationService,
-                                            onSuccess = { result ->
+                                            onSuccess = { result, photoPath ->
                                                 isProcessingCapture = false
-                                                onNavigateToResult(result)
+                                                if (onNavigateToResultWithPhoto != null) {
+                                                    onNavigateToResultWithPhoto(result, photoPath)
+                                                } else {
+                                                    onNavigateToResult(result)
+                                                }
                                             },
                                             onError = { err ->
                                                 isProcessingCapture = false
@@ -325,6 +335,7 @@ fun CameraCaptureScreen(
                             .fillMaxSize()
                             .background(ForestGreenPrimary, CircleShape)
                     ) {
+
                         if (isProcessingCapture) {
                             CircularProgressIndicator(
                                 color = Color.White,
@@ -456,7 +467,7 @@ fun CameraCaptureScreen(
 private suspend fun processCapturedPhoto(
     photoFile: File,
     identificationService: IdentificationService,
-    onSuccess: (IdentificationResultContract) -> Unit,
+    onSuccess: (IdentificationResultContract, String) -> Unit,
     onError: (String) -> Unit
 ) {
     withContext(Dispatchers.IO) {
@@ -474,7 +485,7 @@ private suspend fun processCapturedPhoto(
 
             val result = identificationService.identify(observation)
             withContext(Dispatchers.Main) {
-                onSuccess(result)
+                onSuccess(result, photoFile.absolutePath)
             }
         } catch (e: Exception) {
             withContext(Dispatchers.Main) {
@@ -490,7 +501,7 @@ private suspend fun processCapturedPhoto(
 private suspend fun executeSimulatedCapture(
     context: Context,
     identificationService: IdentificationService,
-    onSuccess: (IdentificationResultContract) -> Unit,
+    onSuccess: (IdentificationResultContract, String) -> Unit,
     onError: (String) -> Unit
 ) {
     withContext(Dispatchers.IO) {
@@ -508,11 +519,12 @@ private suspend fun executeSimulatedCapture(
 
             val result = identificationService.identify(observation)
             withContext(Dispatchers.Main) {
-                onSuccess(result)
+                onSuccess(result, fallbackFile.absolutePath)
             }
         } catch (e: Exception) {
             withContext(Dispatchers.Main) {
                 onError(e.message ?: "Error al procesar la captura simulada.")
+
             }
         }
     }

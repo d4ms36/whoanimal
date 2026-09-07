@@ -60,6 +60,7 @@ fun AppNavHost(
     val effectiveCardGenerator = cardGenerator ?: remember { CardGeneratorService() }
 
     var currentIdentificationResult by remember { mutableStateOf<IdentificationResultContract?>(null) }
+    var currentCapturedImagePath by remember { mutableStateOf<String?>(null) }
     var currentCardToReview by remember { mutableStateOf<AnimalCardContract?>(null) }
 
     NavHost(
@@ -120,6 +121,11 @@ fun AppNavHost(
                     currentIdentificationResult = result
                     navController.navigate(NavDestination.IdentificationResult.route)
                 },
+                onNavigateToResultWithPhoto = { result, photoPath ->
+                    currentIdentificationResult = result
+                    currentCapturedImagePath = photoPath
+                    navController.navigate(NavDestination.IdentificationResult.route)
+                },
                 onNavigateBack = {
                     navController.popBackStack()
                 }
@@ -144,7 +150,7 @@ fun AppNavHost(
                             observation = ObservationContract(
                                 observationId = result.observationId,
                                 createdAt = result.createdAt,
-                                imagePath = ""
+                                imagePath = currentCapturedImagePath ?: ""
                             ),
                             confidence = topCandidate.confidence,
                             displayLocation = "Reserva Natural Protegida"
@@ -155,6 +161,7 @@ fun AppNavHost(
                 },
                 onDiscardDecision = {
                     currentIdentificationResult = null
+                    currentCapturedImagePath = null
                     navController.popBackStack(NavDestination.Home.route, inclusive = false)
                 },
                 onNavigateBack = {
@@ -173,6 +180,9 @@ fun AppNavHost(
                         } catch (_: Exception) {
                             // Si ya existe o hay error, la navegación continúa de forma segura
                         }
+                        currentCardToReview = null
+                        currentIdentificationResult = null
+                        currentCapturedImagePath = null
                         navController.navigate(NavDestination.Collection.route) {
                             popUpTo(NavDestination.Home.route) { inclusive = false }
                         }
@@ -180,6 +190,8 @@ fun AppNavHost(
                 },
                 onReleaseCard = {
                     currentCardToReview = null
+                    currentIdentificationResult = null
+                    currentCapturedImagePath = null
                     navController.popBackStack(NavDestination.Home.route, inclusive = false)
                 },
                 onNavigateBack = {
@@ -187,6 +199,7 @@ fun AppNavHost(
                 }
             )
         }
+
 
         composable(NavDestination.Collection.route) {
             CollectionPlaceholderScreen(
