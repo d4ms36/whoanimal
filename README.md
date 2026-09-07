@@ -1,38 +1,44 @@
 # WHO Animal 🐾
 
 > *"Descubre. Identifica. Colecciona."*
+> 
+> $$\text{WHO Animal} = \text{Identificación} + \text{Cartas Coleccionables} + \text{Enciclopedia Personal} + \text{Juego Ligero} + \text{Capa Social}$$
 
-**WHO Animal** es una experiencia interactiva de descubrimiento, aprendizaje y colección de fauna. Combina la identificación visual de animales con un sistema de **cartas coleccionables de doble cara**, complementadas con información científica rigurosa y una Historia Personal escrita por el usuario (*Lore*), todo bajo un principio transversal e innegociable: **100% Pet Friendly**.
+**WHO Animal** es una experiencia interactiva de descubrimiento, aprendizaje y colección de fauna silvestre mediante un sistema visual de **cartas coleccionables de doble cara**, complementadas con información biológica rigurosa y una Historia Personal escrita por el usuario (*Lore*). Todo bajo un principio transversal e innegociable: **100% Pet Friendly** y un modelo **Free-to-Play por diseño**.
 
 ---
 
 ## 📌 Estado Actual del Proyecto
 
-El proyecto se encuentra en la **Fase 0 — Fundación y Diseño de Producto**.
+El proyecto ha completado la **Fase 1 — Foundation** y se encuentra actualmente en la **Fase 2 — Alpha (Alpha Funcional 0.1 en Android)**:
 
-* El diseño conceptual, las mecánicas de colección y las reglas de contenido están siendo coordinados entre el Director Creativo (Usuario), el Project Manager (ChatGPT) y el Desarrollador Principal.
-* La base arquitectónica inicial se ha diseñado en **Python 3.10+** bajo principios de código limpio y desacoplado, lista para evolucionar hacia servicios de visión por computadora, APIs y aplicaciones cliente.
-* **No se han implementado mecánicas de juego definitivas, IA final ni bases de datos de producción todavía**, asegurando una base limpia y modular.
-* El modelo de negocio inicial se ha formalizado formalmente (DEC-038): el núcleo de la aplicación es 100% gratuito (Free-to-Play) en todo el mundo, sustentado inicialmente en publicidad no intrusiva gestionada como infraestructura externa estricta, sin mecanismos prematuros de tienda o monedas in-app.
-* Las extensiones futuras aprobadas (PVP desacoplado, intercambio/comercio de cartas y arte exclusivo con red de ilustradores) se encuentran formalmente registradas en la memoria técnica para garantizar una arquitectura evolutiva sin anticipar código innecesario.
+* **Foundation completada:** Modelos de dominio inmutables, catálogo oficial inicial de 28 especies zoológicas validadas, arquitectura limpia, contratos desacoplados y suite completa de tests unitarios (Python).
+* **Alpha 0.1 en marcha:** Aplicación Android nativa con Jetpack Compose, Material 3, captura visual con CameraX, almacenamiento efímero en caché, pipeline de identificación determinista y persistencia local de colección y perfiles offline con Room (SQLite).
+* **Visión Rebaselinada (DEC-053):** Formalización de las tres capas de producto (**CORE**, **GAME**, **SOCIAL**), arquitectura publicitaria desacoplada (`AdService`), economía ética sin Pay-to-Win con moneda gratuita y tienda de cosméticos, duelos PvP ligeros (equipos de 10 cartas) y roadmap estratégico de 7 fases.
 
----
-
-## 🧭 Pilares de Producto
-
-1. **INFORMACIÓN REAL:** Datos científicos rigurosos, verificables y educativos (hábitat, dieta, comportamiento, etc.).
-2. **EXPERIENCIA:** Estética visual atractiva, mecánica de cartas coleccionables de doble cara e interacción fluida.
-3. **LORE (Historia Personal):** Capa de contenido personal escrita por el usuario, asociada a una carta específica, que refleja su experiencia individual (sometida a reglas de edición y sin mezclarse jamás con la realidad biológica).
-4. **100% PET FRIENDLY:** Todo el producto promueve la protección, respeto y observación responsable de los animales y la naturaleza, prohibiendo mecánicas de acoso, captura física o maltrato.
+Consulta el documento maestro de visión: [docs/PRODUCT_VISION.md](docs/PRODUCT_VISION.md).
 
 ---
 
-## 🛠️ Tecnología y Arquitectura
+## 🧭 Las Tres Capas de Producto
 
-* **Lenguaje Principal:** Python 3.10+ (probado con Python 3.14).
-* **Diseño Arquitectónico:** Clean Architecture modular (`domain`, `core`, `services`).
-* **Dependencias Actuales:** 0 dependencias externas en runtime (uso puro de la biblioteca estándar para máxima portabilidad).
-* **Testing:** `pytest` para verificación de modelos y contratos.
+1. **CAPA CORE (Irrenunciable):** Identificar fauna mediante cámara o imagen, generar la carta correspondiente, voltearla en 3D para explorar la ciencia vs. Lore personal y guardarla de forma persistente en el Baúl.
+2. **CAPA GAME (Juego Ligero):** Rareza de colección, estadísticas lúdicas ficticias (HP/ATK/DEF/SPD/TYPE/SPECIAL), duelos PvP con mazos de 10 cartas configurables semanalmente, progresión, moneda gratuita y tienda cosmética.
+3. **CAPA SOCIAL (Comunidad):** Perfiles públicos, amigos, regalos, intercambio de cartas (*trading* con metadatos de emisión congelados), contenido generado por usuario (UGC) y herramientas de moderación.
+
+---
+
+## 🛠️ Realidad Tecnológica Dual
+
+* **Python 3.10+ (`src/`, `tests/`):**
+  * Dominio biológico y ontológico de referencia.
+  * Catálogo de especies y validación de esquemas JSON.
+  * Servicio `TaxonomyIndex` y suite de verificación de contratos (150+ tests).
+* **Android Nativo (`android/`):**
+  * Kotlin 2.0+, Jetpack Compose, Material 3, Navigation Compose.
+  * Captura fotográfica nativa con AndroidX CameraX y retícula de fauna.
+  * Persistencia local offline de alto rendimiento mediante Room / SQLite (Perfiles y Cartas).
+  * Pruebas unitarias con JUnit 4 y Robolectric.
 
 Para más detalles, consulta [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md).
 
@@ -42,102 +48,78 @@ Para más detalles, consulta [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md).
 
 ```text
 whoanimal/
-├── .github/
-│   ├── workflows/
-│   │   └── ci.yml               # Pipeline de Integración Continua (GitHub Actions)
-│   └── PULL_REQUEST_TEMPLATE.md # Guía y checklist de contribución
+├── android/                     # Aplicación móvil nativa Android
+│   ├── app/src/main/            # Código Kotlin (UI, Compose, Room, CameraX)
+│   └── app/src/test/            # Tests unitarios Robolectric
+├── data/
+│   └── species/                 # Catálogo oficial zoológico en JSON
 ├── docs/
-│   ├── ARCHITECTURE.md          # Especificación de capas y roadmap técnico
-│   ├── CARD_SPEC.md             # Especificación técnica y campos de las cartas
+│   ├── PRODUCT_VISION.md        # Visión integral y marco estratégico del producto
+│   ├── ARCHITECTURE.md          # Arquitectura técnica dual y capas
+│   ├── CARD_SPEC.md             # Especificación técnica y 19 campos de cartas
 │   ├── DECISIONS.md             # Registro formal de decisiones (ADR)
 │   ├── DISCLAIMER.md            # Aviso de responsabilidad educativa y de seguridad
 │   ├── GDD.md                   # Game Design Document (visión, cartas, core loop)
 │   ├── GOVERNANCE.md            # Modelo de roles (Director, PM, Developer) y flujo
 │   ├── PLANNING.md              # Plan Maestro de desarrollo y alineación de versión
-│   ├── PRODUCT_RULES.md         # Reglas éticas y de separación Ciencia/Lore
-│   ├── PROJECT_CONTEXT.md       # Memoria oficial y los 8 pilares del producto
+│   ├── PRODUCT_RULES.md         # Reglas éticas, F2P, AdService y no Pay-to-Win
+│   ├── PROJECT_CONTEXT.md       # Memoria oficial y principios transversales
 │   ├── RELEASES.md              # Registro histórico de versiones y builds Android
-│   ├── ROADMAP.md               # Planificación estratégica por fases y objetivos
+│   ├── ROADMAP.md               # Planificación estratégica oficial en 7 fases
 │   └── VERSIONING.md            # Esquema semántico y control de versionCode
 ├── src/
-│   └── whoanimal/
-│       ├── core/                # Configuración global y excepciones base
-│       ├── domain/              # Modelos de datos inmutables y enumeraciones
-│       │   └── models/          # Entidades: AnimalProfile, Card, Lore
-│       └── services/            # Protocolos e interfaces para IA, cartas y colección
-├── tests/                       # Pruebas unitarias de contratos y separación de dominio
+│   └── whoanimal/               # Dominio Python, catálogo y servicios taxonómicos
+├── tests/                       # Pruebas unitarias de dominio en Python
 ├── AGENTS.md                    # Manual normativo obligatorio para agentes de desarrollo
-├── .gitignore                   # Exclusiones estándar para Python y sistemas operativos
-├── pyproject.toml               # Configuración estándar PEP 621 y dependencias por fases
-├── requirements.txt             # Dependencias de producción (fase actual: stdlib)
-├── requirements-dev.txt         # Dependencias de desarrollo y test
-└── README.md                    # Documento raíz de presentación
+├── ALPHA_CHECKLIST.md           # Criterios de aceptación y checklist de Alpha 0.1
+├── pyproject.toml               # Configuración estándar PEP 621
+└── README.md                    # Presentación general del proyecto
 ```
 
 ---
 
-## 🚀 Preparación del Entorno de Desarrollo
+## 🧪 Verificación y Pruebas
 
-### 1. Prerrequisitos
-* Python 3.10 o superior instalado en el sistema.
-* Git instalado.
+### 1. Pruebas de Dominio Python
+```bash
+pytest -v tests
+```
 
-### 2. Crear y activar el entorno virtual
+### 2. Pruebas Unitarias Android
 En Windows (PowerShell):
 ```powershell
-python -m venv .venv
-.\.venv\Scripts\Activate.ps1
+cd android
+.\gradlew.bat testDebugUnitTest
 ```
 
-En macOS / Linux:
-```bash
-python3 -m venv .venv
-source .venv/bin/activate
+### 3. Compilación de APKs Android
+```powershell
+cd android
+.\gradlew.bat assembleDebug
+.\gradlew.bat assembleRelease
 ```
-
-### 3. Instalar herramientas de desarrollo
-```bash
-pip install -r requirements-dev.txt
-```
-
----
-
-## 🧪 Ejecutar Pruebas
-
-Para comprobar la integridad de los modelos de dominio y las especificaciones de separación de datos:
-
-```bash
-pytest
-```
-*(O con la biblioteca estándar: `python -m unittest discover -s tests -p "test_*.py"` configurando `PYTHONPATH=src`).*
 
 ---
 
 ## 📚 Documentación de Referencia
 
+* **Visión y Estrategia:**
+  * [Visión de Producto (PRODUCT_VISION.md)](docs/PRODUCT_VISION.md)
+  * [Game Design Document (GDD)](docs/GDD.md)
+  * [Hoja de Ruta (Roadmap)](docs/ROADMAP.md)
+  * [Memoria del Proyecto](docs/PROJECT_CONTEXT.md)
 * **Gobernanza y Operación:**
   * [Manual para Agentes (AGENTS.md)](AGENTS.md)
   * [Plan Maestro de Desarrollo](docs/PLANNING.md)
   * [Modelo de Gobernanza](docs/GOVERNANCE.md)
   * [Flujo de Trabajo por Objetivos](docs/WORKFLOW.md)
   * [Registro de Decisiones (ADR)](docs/DECISIONS.md)
-* **Producto y Diseño de Juego:**
-  * [Memoria del Proyecto](docs/PROJECT_CONTEXT.md)
-  * [Game Design Document (GDD)](docs/GDD.md)
-  * [Especificación de la Carta](docs/CARD_SPEC.md)
-  * [Reglas de Producto (100% Pet Friendly)](docs/PRODUCT_RULES.md)
+* **Reglas y Ética:**
+  * [Reglas de Producto (100% Pet Friendly, F2P, Ética)](docs/PRODUCT_RULES.md)
   * [Aviso de Responsabilidad](docs/DISCLAIMER.md)
-* **Arquitectura y Versionado:**
+  * [Especificación de la Carta](docs/CARD_SPEC.md)
+* **Arquitectura y Builds:**
   * [Arquitectura Técnica](docs/ARCHITECTURE.md)
-  * [Sistema de Versionado y Android versionCode](docs/VERSIONING.md)
+  * [Checklist Oficial de Alpha](docs/ALPHA_CHECKLIST.md)
+  * [Sistema de Versionado](docs/VERSIONING.md)
   * [Registro de Releases](docs/RELEASES.md)
-  * [Hoja de Ruta (Roadmap)](docs/ROADMAP.md)
-
----
-
-## 🗺️ Próximos Pasos
-
-1. **Aprobación del GDD v0.2:** Revisión conjunta con el Director y Project Manager.
-2. **Definición de Esquemas de Validación:** Adopción de Pydantic para serialización JSON estricta de las cartas.
-3. **Módulo de Ingesta Taxonómica:** Conectores de prueba con APIs biológicas abiertas (GBIF / iNaturalist).
-4. **Prototipo de Visión Artificial:** Evaluación de modelos base de clasificación animal (MobileNet / ViT).

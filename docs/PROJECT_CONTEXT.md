@@ -2,46 +2,55 @@
 
 **Documento:** `docs/PROJECT_CONTEXT.md`  
 **Propósito:** Memoria y contexto fundamental de WHO Animal para asegurar coherencia transversal a lo largo de todo el ciclo de vida del producto.  
-**Última actualización:** 2026-09-07 (Formalización de Alpha 0.1, Golden Path y Horizontes Estratégicos WHO-013.1 / DEC-048)
+**Última actualización:** 2026-09-07 (Rebaseline Oficial de Visión y Roadmap — WHO-DOC-001 / DEC-053)
 
 ---
 
 ## 1. ¿Qué es WHO Animal?
 
-**WHO Animal** es una **aplicación móvil** centrada en el **descubrimiento, identificación, aprendizaje y coleccionismo de fauna mediante cartas coleccionables**.
+> **WHO Animal = Identificación de Animales + Cartas Coleccionables + Enciclopedia Personal + Juego Ligero + Capa Social.**
+> 
+> *"Descubre. Identifica. Colecciona."*
 
-Trasciende el concepto de una simple herramienta utilitaria de escaneo o identificación visual de especies. La identificación mediante cámara o imagen es una puerta de entrada al producto, no el producto completo.
+**WHO Animal** es una **experiencia interactiva integral** que conecta el mundo natural con el coleccionismo lúdico y el aprendizaje zoológico. Trasciende el concepto de una simple herramienta utilitaria de escaneo o identificación visual de especies: la identificación mediante cámara o imagen es la puerta de entrada a un universo estructurado en tres capas (*Core*, *Game*, *Social*) y diseñado como un producto **Free-to-Play por diseño**.
 
 El ciclo conceptual oficial se estructura como:
 
 ```text
-IDENTIFICAR
-    ↓
-DESCUBRIR
-    ↓
-OBTENER CARTA
-    ↓
-EXPLORAR INFORMACIÓN
-    ↓
-ESCRIBIR LORE
-    ↓
-COLECCIONAR
-    ↓
-SEGUIR DESCUBRIENDO
+IDENTIFICAR → DESCUBRIR → OBTENER CARTA → EXPLORAR INFORMACIÓN → ESCRIBIR LORE → COLECCIONAR → SEGUIR DESCUBRIENDO
 ```
+
+### Realidad Tecnológica Dual
+* **Python (3.10+):** Dominio de referencia zoológico, servicios taxonómicos (`TaxonomyIndex`), validación de contratos de esquemas JSON y tooling de testing.
+* **Android Nativo (Kotlin 2.0+):** Aplicación móvil interactiva para el usuario final, interfaz declarativa moderna con Jetpack Compose y Material 3, captura nativa con CameraX y persistencia local de alto rendimiento con Room / SQLite.
 
 ---
 
-## 2. Los Ocho Pilares de la Experiencia
+## 2. Las Tres Capas de Producto
 
-1. **Identificación:** Tecnología de visión artificial que orienta al usuario reconociendo la fauna de su entorno o de archivos gráficos.
-2. **Descubrimiento:** Sensación de revelación y asombro ante la riqueza de la biodiversidad planetaria.
-3. **Educación:** Transmisión de conocimientos biológicos rigurosos, hábitos zoológicos, hábitats y ecología.
-4. **Cartas:** Formato visual de dos caras (Frente estético y atrayente; Reverso estructurado y formativo) que materializa cada avistamiento.
-5. **Colección:** Mecánica de progresión que permite organizar especímenes en álbumes temáticos, biomas o categorías taxonómicas.
-6. **Exploración:** Invitación a prestar atención a la naturaleza circundante, desde aves urbanas e insectos hasta fauna silvestre protegida.
-7. **Historia Personal (Lore):** Capa de contenido personal escrita por el usuario, asociada a una carta específica, que refleja su experiencia individual (hasta 300 caracteres, sujeta a reglas de edición controlada).
-8. **Experiencia Visual:** Diseño de interfaces moderno, limpio, con micro-interacciones de alta fidelidad, dinámico y respetuoso de la fauna.
+```text
+┌────────────────────────────────────────────────────────────────────────┐
+│                        WHO ANIMAL ECOSYSTEM                            │
+├────────────────────────────────────────────────────────────────────────┤
+│  CAPA SOCIAL                                                           │
+│  • Perfiles públicos  • Amigos  • Regalos  • Intercambio (Trading)     │
+│  • Colecciones compartidas  • UGC  • Moderación, Reporte y Bloqueo     │
+├────────────────────────────────────────────────────────────────────────┤
+│  CAPA GAME                                                             │
+│  • Rarezas de colección  • Estadísticas de juego (HP/ATK/DEF/SPD...)   │
+│  • Duelos PvP (equipos de 10)  • Progresión y Logros  • Moneda y Shop  │
+│  • Temporadas y Eventos  • Desafíos de avistamiento                    │
+├────────────────────────────────────────────────────────────────────────┤
+│  CAPA CORE (Irrenunciable)                                             │
+│  Capture → Observation → IdentificationResult → IdentificationDecision │
+│       ↓                                                                │
+│    Capture → Card → Review / Flip → Persistence → Collection (Baúl)    │
+└────────────────────────────────────────────────────────────────────────┘
+```
+
+1. **CAPA CORE:** Núcleo irrenunciable. Si se retiran Game o Social, WHO Animal sigue siendo plenamente operativa como guía de campo y álbum coleccionable.
+2. **CAPA GAME:** Mecánicas de juego ligero, rarezas de cartas, atributos lúdicos (HP/ATK/DEF/SPD/TYPE/SPECIAL), duelos PvP con mazos de 10 cartas configurables semanalmente, progresión, moneda gratuita y tienda cosmética.
+3. **CAPA SOCIAL:** Amigos, regalos diarios, intercambio seguro preservando inmutable la identidad histórica original, vitrinas públicas y moderación activa.
 
 ---
 
@@ -204,10 +213,10 @@ VIEW / EDIT / DELETE
      display_location    (pública/generalizada en la carta)
      precise_location    (privada/telemetría interna si futuras políticas lo requieren)
      ```
-6. **Storage (Almacenamiento y Colección):**
+6. **Storage (Almacenamiento y Colección — Baúl):**
    * Colección de cartas local y persistente.
    * Estructura organizada en **10 containers**.
-   * Capacidad de **30 espacios por container** (capacidad total del sistema: 300 cartas).
+   * Capacidad de **30 espacios por container** (capacidad inicial de la fase Alpha/Foundation: 300 cartas). Se mantiene como línea base operativa de optimización local y **no constituye un límite conceptual permanente del producto final**, el cual contemplará ampliaciones en fases posteriores.
    * Selector ágil de container.
    * Indicador visual claro de ocupación por container (ej. `X / 30`).
    * Visualización del catálogo de cartas almacenadas.
@@ -351,105 +360,51 @@ En alineación estricta con el principio **100% Pet Friendly** y la protección 
 
 ---
 
-## 13. Horizontes Estratégicos de Desarrollo
+## 13. Hoja de Ruta Estratégica Oficial (7 Fases)
 
-La planificación estratégica de WHO Animal distingue claramente entre objetivos ejecutables inmediatos y capacidades futuras, garantizando foco operativo sin restringir la evolución del producto:
+La planificación estratégica de WHO Animal se estructura oficialmente en siete fases consecutivas (DEC-053), garantizando foco operativo sin restringir la evolución del producto:
 
 ```text
-CORTO PLAZO
-    ↓
-ALPHA FUNCIONAL
-    ↓
-MEDIANO PLAZO
-    ↓
-BETA / RELEASE
-    ↓
-LARGO PLAZO
-    ↓
-ECOSYSTEM
-    ↓
-FUTURO ABIERTO
+1. FOUNDATION (Completada)
+       ↓
+2. ALPHA (Alpha Funcional 0.1 — En Curso)
+       ↓
+3. BETA (Estabilidad, UX y Compatibilidad)
+       ↓
+4. RELEASE 1.0 (Lanzamiento Público Comercial)
+       ↓
+5. RELEASE 1.x — GAME (PvP, Equipos de 10, Temporadas)
+       ↓
+6. RELEASE 2.x — SOCIAL (Amigos, Trading, Vitrinas, UGC)
+       ↓
+7. RELEASE 3.x — WORLD (Biomas Globales, Cloud Multi-Device)
 ```
 
-### Línea Temporal Única Oficial:
-```text
-FOUNDATION = COMPLETADA
-ALPHA = PRÓXIMO PRODUCTO FUNCIONAL (WHO-014 → WHO-018)
-BETA = SIGUIENTE HORIZONTE
-RELEASE = LANZAMIENTO PÚBLICO
-ECOSYSTEM = CAPACIDADES AVANZADAS
-```
+* **1. FOUNDATION (Completada):** Modelos de dominio inmutables, catálogo de 28 especies JSON, arquitectura limpia, contratos de frontera y suite de pruebas.
+* **2. ALPHA (En Curso):** Core Loop end-to-end (`Login → Home → Capture → Identify → Card → Flip → Storage`). Prioridad: estabilidad local.
+* **3. BETA:** Pulido de UX, compatibilidad de dispositivos reales con CameraX, accesibilidad, internacionalización de interfaz, pre-AdService y distribución controlada vía Google Play Internal Testing.
+* **4. RELEASE 1.0:** Lanzamiento público en Google Play Store con Core Loop completo, enciclopedia zoológica, Baúl personal, temas básicos, moneda gratuita, tienda cosmética y publicidad desacoplada (`AdService`). El PvP no bloquea Release 1.0.
+* **5. RELEASE 1.x (GAME):** Capa Game: duelos PvP sencillos tipo RPG de cartas, equipos activos de 10 cartas configurables semanalmente, temporadas y logros.
+* **6. RELEASE 2.x (SOCIAL):** Capa Social: amigos, regalos, intercambio (*trading* con metadatos históricos congelados), colecciones públicas, contenido generado por usuario (*Lore*) y herramientas de moderación.
+* **7. RELEASE 3.x (WORLD):** Cobertura zoológica global, sincronización en la nube multidispositivo, eventos migratorios reales y experiencias de exploración avanzada.
 
 ---
 
-### 13.1. CORTO PLAZO — Alpha Funcional (Alpha 0.1)
-* **Objetivo Rector:** `LOGIN → HOME → CAPTURE → IDENTIFY → CARD → STORAGE`.
-* **Prioridad Absoluta:** Construir y entregar una aplicación Android funcional y demostrable que complete el ciclo de punta a punta.
-* **Secuencia de Construcción:** Objetivos `WHO-014` a `WHO-018`.
+## 14. Modelo Comercial: Free-to-Play por Diseño y Publicidad Desacoplada
 
----
+En alineación formal con las decisiones **DEC-038** y **DEC-053**, el modelo comercial se rige por los siguientes principios normativos:
 
-### 13.2. MEDIANO PLAZO — Beta / Release
-Documentado a nivel estratégico para guiar la evolución una vez cerrada la Alpha:
-* Pruebas de usabilidad y feedback cualitativo con usuarios reales.
-* Mejora continua y pulido de UX y micro-interacciones.
-* Estabilidad del sistema y optimización de rendimiento.
-* Calibración y afinamiento del motor de identificación de fauna.
-* Expansión inicial controlada del catálogo zoológico.
-* Testing exhaustivo en múltiples dispositivos Android.
-* Preparación para distribución controlada (Google Play Internal Testing).
-* Auditoría y cumplimiento legal, términos de servicio y políticas de privacidad.
-* Publicación pública comercial en Google Play Store.
-
-> *Nota de Gobernanza:* Estos puntos representan dirección táctica a mediano plazo y **no se convierten en objetivos atómicos ejecutables** hasta que la Alpha esté formalmente concluida y sean aprobados por el Director.
-
----
-
-### 13.3. LARGO PLAZO — Ecosystem (Capacidades Estratégicas Avanzadas)
-Las siguientes 13 capacidades estratégicas representan la visión de largo alcance del ecosistema de WHO Animal. La arquitectura base deja previstos sus puntos de extensión, pero **ninguna de ellas compromete ni bloquea la entrega de Alpha o Beta**:
-
-1. **Comercio de cartas (Trading):** Transferencia controlada de propiedad entre coleccionistas preservando la inmutabilidad histórica original (`card_id`, `specimen_number`, generación, rareza original, población de emisión y serial de autenticación).
-2. **Sistema de Duelos PVP:** Enfrentamientos lúdicos entre cartas, estrictamente desacoplados del conocimiento taxonómico y del core loop.
-3. **Cuentas avanzadas / multiusuario:** Autenticación remota, perfiles de usuario y gestión segura de sesiones.
-4. **Infraestructura Cloud:** Backend distribuido y APIs escalables para soporte de red.
-5. **Economía del ecosistema:** Sistema balanceado de progresión y recompensas in-app.
-6. **Marketplace:** Mercado in-app para intercambio y adquisición controlada de cartas.
-7. **Sistema completo de rarezas:** Implementación del algoritmo matemático y curvas de emisión dinámica (DEC-022-PENDING).
-8. **Sistema / Red de ilustradores colaboradores:** Encargos artísticos personalizados gestionados in-app asociados a cartas específicas.
-9. **Sincronización multidispositivo:** Persistencia remota y respaldo en la nube del inventario y álbumes.
-10. **Expansión pública / global:** Despliegue internacional a gran escala y soporte multirregional.
-11. **Expansión progresiva del catálogo zoológico hacia cobertura global:** Principio de crecimiento continuo y responsable de la base zoológica, sin prometer "todas las especies" de forma inmediata ni ficticia.
-12. **Evolución continua del sistema de IA de identificación:** Mejora progresiva de precisión y modelos optimizados, sin falsas garantías de "IA perfecta".
-13. **Gamificación completa:** Progresión profunda de maestría, medallas por biomas y dinámicas avanzadas de `rank` (DEC-037-PENDING).
-
----
-
-### 13.4. FUTURO ABIERTO (Sandbox Conceptual)
-Espacio documental de reserva para ideas, conceptos e iniciativas en gestación que **aún no tienen**:
-* Alcance definido.
-* Prioridad asignada.
-* Dependencias técnicas resueltas.
-* Versión objetivo formalizada.
-* Criterios de aceptación estructurados.
-
-**Regla de Oro:** Ninguna idea contenida en el Futuro Abierto se convertirá automáticamente en un objetivo ejecutable `WHO` sin pasar por el flujo formal de gobernanza: **Director → PM → Especificación → Aprobación**.
-
-Entre las ideas del Futuro Abierto se exploran conceptualmente:
-* Desafíos comunitarios de bioacústica o sonidos de fauna.
-* Fichas de hábitat y ecosistemas como coleccionables complementarios.
-* Integración con guías locales de reservas naturales y parques nacionales.
-* Eventos estacionales basados en migraciones reales de fauna.
-* Soporte para realidad aumentada (AR) en visualización de cartas y especímenes.
-
----
-
-## 14. Modelo Inicial de Monetización (Gratuito y Publicidad)
-
-En alineación formal con la decisión **DEC-038**, el modelo comercial inicial y su relación con la arquitectura del sistema se rigen por los siguientes principios:
-
-* **Núcleo 100% Gratuito (Free-to-Play):** WHO Animal es un producto de alcance **internacional y global**. Las funcionalidades fundamentales (identificación, información zoológica, fichas, colección, descubrimiento y lore) serán accesibles sin coste.
-* **Monetización Publicitaria:** La principal fuente de monetización en esta etapa inicial será la publicidad.
-* **Desacoplamiento Arquitectónico Estricto:** Los proveedores de publicidad (como Google AdMob u otros) operan estrictamente en la capa de **Infraestructura Externa**. Ninguna entidad inmutable del Dominio (`Animal`, `Capture`, `Card`, `Lore`) debe depender ni conocer de SDKs publicitarios.
-* **Prioridad UX: Rewarded Ads:** La publicidad no debe destruir el flujo de descubrimiento ni la experiencia interactiva mediante interrupciones constantes. Se prioriza conceptualmente el uso de **Anuncios Recompensados** (*Rewarded Ads*), donde el usuario interactúa de forma voluntaria a cambio de beneficios en la capa de experiencia.
-* **Respeto Biológico e Identidad Histórica:** **Está terminantemente prohibido monetizar, falsificar o alterar información biológica real**. La monetización pertenece a la capa de experiencia de producto, jamás a la verdad zoológica. Igualmente, la identidad histórica de una carta (`card_id`, población en la emisión, rareza original) no puede comprarse ni modificarse retroactivamente.
-* **Ausencia de Economía In-App:** Durante la fase actual de fundación, **no se implementarán** sistemas de economía interna, monedas, "WHO Coins", "Gems", tiendas, loot boxes, sistemas de pago directo, suscripciones ni funcionalidades de "pay-to-win".
+* **Núcleo 100% Gratuito (Free-to-Play):** WHO Animal es un producto global. Las funcionalidades fundamentales (identificar, aprender sobre fauna, acuñar cartas, explorar enciclopedia y coleccionar en el Baúl) son y serán 100% gratuitas de por vida.
+* **Cero Pay-to-Win (No P2W):** Ningún pago con dinero real podrá otorgar ventajas biológicas ficticias ni superioridad competitiva injusta en duelos PvP.
+* **Protección Absoluta de la Verdad Científica:**
+  * Prohibido comercializar mejor precisión o "puntería" en la identificación visual.
+  * Prohibido permitir la compra de modificaciones zoológicas o taxonómicas.
+  * Prohibido adquirir retroactivamente la rareza de emisión o la población histórica (`population_at_issuance`).
+* **Arquitectura Publicitaria Desacoplada (`AdService`):**
+  * La infraestructura publicitaria opera en la capa externa desacoplada (`BannerPlacement`, `InterstitialPolicy`, `RewardedAdService`, `FrequencyPolicy`), sin contaminar el dominio biológico.
+  * **Zonas Libres de Publicidad:** Visor de cámara, momento del disparo, carga de identificación, revelación y primer volteo de la carta, lectura de enciclopedia y combates.
+  * **Rewarded Ads Voluntarios:** Anuncios por recompensa transparente con opción explícita y respetuosa de declinar (*"No, gracias"*).
+* **Economía Ética y Tienda Cosmética (Shop):**
+  * Moneda gratuita de juego obtenida mediante avistamientos, descubrimientos y completitud de grupos taxonómicos.
+  * Tienda de personalización estética: marcos de cartas, fondos de Baúl, efectos visuales, temas, avatares y comodidades no competitivas de almacenamiento.
+  * Posible moneda premium reservada para cosméticos en fases avanzadas, sin condicionar el lanzamiento temprano.

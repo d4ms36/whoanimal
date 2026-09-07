@@ -324,4 +324,12 @@ ative_regions).
 * **Versión:** `0.0.1`
 
 
+### WHO-DOC-001: Product Vision & Roadmap Rebaseline
+* **Propósito:** Ejecutar la actualización documental integral y rebaseline estratégico de WHO Animal según la visión aprobada por el Director y el Project Manager (DEC-053): creación del documento maestro `docs/PRODUCT_VISION.md`, formalización de las tres capas de arquitectura de producto (CORE irrenunciable, GAME ligero, SOCIAL comunidad), definición de WHO Animal como Free-to-Play por diseño con prohibición absoluta de Pay-to-Win o monetización biológica, diseño de la arquitectura publicitaria desacoplada `AdService` con zonas libres de anuncios y Rewarded Ads opt-in ("No, gracias"), economía transparente con moneda gratuita y tienda de cosméticos, duelos PvP con mazos de 10 cartas configurables semanalmente, clarificación de la capacidad del Baúl (10x30=300 como línea base de Alpha y no techo conceptual), rebaseline del Roadmap oficial en 7 fases consecutivas y reconocimiento de la sinergia tecnológica dual (Python para dominio y tooling + Android Kotlin para la aplicación móvil nativa).
+* **Estado:** `APPROVED_COMPLETE`
+* **Commit:** *docs: rebaseline product vision and roadmap*
+* **Versión:** `0.0.1`
+
+
+
 

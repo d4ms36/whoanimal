@@ -445,10 +445,10 @@ Aprobado por: [Director Creativo / Project Manager / Consenso]
 ### DEC-038: Modelo Inicial de Monetización Gratuito y Basado en Publicidad
 * **Tema:** Modelo de Negocio, Producto y Arquitectura
 * **Fecha:** 2026-09-06
-* **Estado:** `APPROVED`
+* **Estado:** `APPROVED` (Ampliación y rebaseline formal en `DEC-053`)
 * **Decisión:** WHO Animal será un producto internacional y global 100% gratuito para el usuario en sus funcionalidades fundamentales (identificación, información zoológica, fichas, colección, descubrimiento y lore). La monetización principal inicial se basará en publicidad (como Google AdMob).
 * **Motivo:** Asegurar accesibilidad sin crear barreras de pago en el núcleo del producto, definiendo una base de monetización viable que respete el principio de no alterar ni vender verdades biológicas.
-* **Impacto:** La publicidad (`AdMob` o similar) se define estrictamente como **Infraestructura Externa** y NO debe formar parte del `Domain`. Entidades inmutables (`Animal`, `Capture`, `Card`, `Lore`) no deben depender de la publicidad. Queda prohibido implementar economía in-app (tienda, monedas, loot boxes, sistemas de pago) en la fase actual.
+* **Impacto:** La publicidad (`AdMob` o similar) se define estrictamente como **Infraestructura Externa** y NO debe formar parte del `Domain`. Entidades inmutables (`Animal`, `Capture`, `Card`, `Lore`) no deben depender de la publicidad. Queda prohibido implementar economía in-app (tienda, monedas, loot boxes, sistemas de pago) en la fase inicial de fundación. *(Nota evolutiva: DEC-053 rebaselina la visión de producto formalizando la arquitectura AdService desacoplada y una economía Free-to-Play ética sin pay-to-win, con moneda gratuita y tienda de cosméticos prevista a partir de Release 1.0)*.
 * **Aprobado por:** Director Creativo / Project Manager
 
 ---
@@ -717,6 +717,42 @@ Aprobado por: [Director Creativo / Project Manager / Consenso]
      * La imagen capturada solo alimenta la entrada del `IdentificationService`; no se almacena en base de datos permanente ni crea cartas de manera directa ni prematura.
   6. Resiliencia en entornos emulados o sin hardware de cámara: Se provee un mecanismo de captura simulada de respaldo que previene bloqueos o caídas imprevistas de la aplicación.
 * **Justificación / Principios:** Conexión del núcleo visual interactivo con el pipeline de dominio existente sin romper contratos ontológicos, asegurando fluidez en dispositivos reales y robustez en pruebas unitarias y de integración.
+* **Aprobado por:** Director Creativo / Project Manager
+
+---
+
+### DEC-053: Rebaseline de Visión de Producto, Capas Core/Game/Social y Roadmap Estratégico
+* **Fecha:** 2026-09-07
+* **Estado:** `APROBADA`
+* **Objetivo:** `WHO-DOC-001`
+* **Tema:** Visión de Producto / Arquitectura de Capas / Roadmap / Free-to-Play
+* **Resolución:**
+  1. **Definición Oficial de la Visión:** Se establece formalmente la fórmula rectora del producto:
+     $$\text{WHO Animal} = \text{Identificación} + \text{Cartas Coleccionables} + \text{Enciclopedia Personal} + \text{Juego Ligero} + \text{Capa Social}$$
+  2. **Arquitectura Tripartita de Producto:**
+     * **CORE (Irrenunciable):** $\text{Capture} \rightarrow \text{Observation} \rightarrow \text{IdentificationResult} \rightarrow \text{IdentificationDecision} \rightarrow \text{Capture} \rightarrow \text{Card} \rightarrow \text{Persistence} \rightarrow \text{Collection}$. Funciona de forma autónoma sin Game ni Social.
+     * **GAME (Juego Ligero):** Rareza de colección, estadísticas ficticias de combate (HP/ATK/DEF/SPD/TYPE/SPECIAL), duelos PvP con equipos de 10 cartas configurables semanalmente, progresión, monedas gratuitas, tienda cosmética, temporadas y logros.
+     * **SOCIAL (Comunidad):** Perfiles, amigos, regalos, intercambio (*trading* con metadatos históricos congelados), colecciones públicas, UGC, moderación, reporte y bloqueo.
+  3. **Filosofía Free-to-Play por Diseño y Cero Pay-to-Win:**
+     * El núcleo de identificación, aprendizaje y colección es y será siempre 100% gratuito.
+     * Prohibición absoluta de comercializar ventajas zoológicas ficticias, mejor identificación, alteración de datos biológicos o superioridad competitiva derivada de pagar.
+  4. **Arquitectura Publicitaria Desacoplada (`AdService`):**
+     * Desacoplamiento estricto entre dominio zoológico y proveedores de anuncios.
+     * Separación de placements y políticas (`BannerPlacement`, `InterstitialPolicy`, `RewardedAdService`, `FrequencyPolicy`).
+     * Zonas libres de publicidad intrusiva: cámara, captura, identificación, carga crítica, revelación de carta, lectura científica y combates PvP.
+     * Anuncios recompensados voluntarios (*opt-in*) con opción explícita "No, gracias".
+  5. **Economía Ética y Tienda:**
+     * Moneda gratuita obtenida mediante el juego y recompensas de descubrimiento.
+     * Tienda centrada en personalización cosmética (marcos, temas, fondos, avatares, efectos visuales y utilidades no competitivas).
+  6. **Rebaseline del Roadmap en 7 Fases:**
+     * `FOUNDATION` $\rightarrow$ `ALPHA` (Core Loop) $\rightarrow$ `BETA` (Estabilidad/UX) $\rightarrow$ `RELEASE 1.0` (Público con Core, Baúl, Enciclopedia, Shop cosmética, Ads desacoplados) $\rightarrow$ `RELEASE 1.x (GAME)` (PvP, equipos de 10, temporadas) $\rightarrow$ `RELEASE 2.x (SOCIAL)` (Amigos, trading, UGC) $\rightarrow$ `RELEASE 3.x (WORLD)` (Biomas globales, cloud/multidispositivo).
+  7. **Capacidad de Almacenamiento:**
+     * La persistencia de 10 containers × 30 espacios = 300 cartas se ratifica como la capacidad oficial de la fase *Alpha / Foundation*, no como una limitación conceptual permanente del producto.
+  8. **Internacionalización Transversal:**
+     * Aislamiento estricto: $\text{Traducciones UI} \neq \text{Contenido Científico} \neq \text{Lore Personal}$.
+  9. **Realidad Tecnológica:**
+     * Reconocimiento explícito de la sinergia entre Python (dominio, servicios taxonómicos, tooling) y Android + Kotlin (aplicación nativa, UI con Jetpack Compose, CameraX, Room).
+* **Justificación / Principios:** Unificar la visión de producto hacia el mercado masivo y el largo plazo sin comprometer la ética pedagógica, el rigor científico ni el foco operativo de las fases tempranas.
 * **Aprobado por:** Director Creativo / Project Manager
 
 ---

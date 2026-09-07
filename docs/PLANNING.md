@@ -15,8 +15,8 @@
 | **Fase actual** | Alpha (Foundation Completa / Preparación de Fase 1 Alpha) |
 | **Versión actual** | `0.0.1` |
 | **Estado** | Foundation Completa / Definición Alpha 0.1 Consolidada |
-| **Objetivo activo** | Ninguno (Ciclo WHO-018B completado; listo para autorización de WHO-018C) |
-| **Último objetivo completado** | `WHO-018B` — Captura y Cámara Alpha (CameraX / Visual Input) |
+| **Objetivo activo** | Ninguno (Ciclo WHO-DOC-001 completado; listo para autorización de WHO-018C) |
+| **Último objetivo completado** | `WHO-DOC-001` — Product Vision & Roadmap Rebaseline (DEC-053) |
 | **Próximo objetivo propuesto** | `WHO-018C` — Visualización y Giro 3D de Carta (Card View & Flip) |
 | **Bloqueos** | Ninguno |
 | **Decisiones pendientes** | `DEC-009`, `DEC-011`, `DEC-021` a `DEC-025`, `DEC-037-PENDING` |
@@ -184,7 +184,8 @@ HOME → STORAGE → CONTAINER → CARD → VIEW / EDIT / DELETE
 | **WHO-017** | Motor de Persistencia Local y Colección (`Collection Album`) | Almacenamiento local para inventario, capturas y visualización de cartas en el álbum del usuario (10 containers x 30 espacios) | Media | WHO-016 | `COMPLETADO` | **Sí** |
 | **WHO-018A**| Login Alpha Local (Perfil y Sesión Offline) | Pantalla de bienvenida, creación de perfil de explorador local, persistencia con Room y navegación automática condicional | Alta | WHO-017 | `COMPLETADO` | **Sí** |
 | **WHO-018B**| Captura y Cámara Alpha (CameraX / Visual Input) | Integración de CameraX y toma de fotografía zoológica con gestión de permisos | Alta | WHO-018A | `COMPLETADO` | **Sí** |
-| **WHO-018C**| Visualización y Giro 3D de Carta (Card View & Flip) | Visualización frontal/trasera de carta, animación de volteo y persistencia | Alta | WHO-018B | `PROPUESTO` | **Sí** |
+| **WHO-DOC-001**| Product Vision & Roadmap Rebaseline | Rebaseline integral de visión (Core/Game/Social), F2P por diseño, AdService, economía y roadmap oficial en 7 fases (DEC-053) | Alta | WHO-018B | `COMPLETADO` | **Sí** |
+| **WHO-018C**| Visualización y Giro 3D de Carta (Card View & Flip) | Visualización frontal/trasera de carta, animación de volteo y persistencia | Alta | WHO-DOC-001 | `PROPUESTO` | **Sí** |
 | **WHO-018** | Integración del Mínimo Funcional Android (End-to-End Core Loop) | Cierre integral del flujo de 11 pasos ejecutable en dispositivo o emulador Android | Alta | WHO-018C | `PROPUESTO` | **Sí** |
 
 > ⚠️ **Aviso de Gobernanza:**  
@@ -237,6 +238,7 @@ HOME → STORAGE → CONTAINER → CARD → VIEW / EDIT / DELETE
 | **WHO-017** | `APROBADO` | `VALIDADO`| `COMPLETADO` | `APPROVED_COMPLETE` |
 | **WHO-018A**| `APROBADO` | `VALIDADO`| `COMPLETADO` | `APPROVED_COMPLETE` |
 | **WHO-018B**| `APROBADO` | `VALIDADO`| `COMPLETADO` | `APPROVED_COMPLETE` |
+| **WHO-DOC-001**| `APROBADO` | `VALIDADO`| `COMPLETADO` | `APPROVED_COMPLETE` |
 
 > **Regla:** El Developer no puede auto-aprobar objetivos. La autorización debe ser explícita por parte del Director Creativo y estructurada por el Project Manager.
 
@@ -363,6 +365,7 @@ Para prevenir el desvío del alcance (*scope creep*) y asegurar la entrega de un
 | **2026-09-07** | Persistencia Local Alpha (WHO-017) | Implementación de persistencia local offline con Room + SQLite para cartas y colección (10x30=300), validaciones de integridad, tests unitarios Robolectric y simulación de reinicio (DEC-050). | Developer (`WHO-017`) |
 | **2026-09-07** | Login Alpha Local (WHO-018A) | Implementación de perfil de explorador local (ExplorerProfile), Room DAO/Entity, validación de nombre, pantallas Welcome y CreateProfile, navegación condicional Splash → Home/Welcome y tests Robolectric (DEC-051). | Developer (`WHO-018A`) |
 | **2026-09-07** | Captura y Cámara Alpha con CameraX (WHO-018B) | Integración de CameraX (PreviewView, ImageCapture), permisos de cámara runtime, almacenamiento efímero de foto en cacheDir, creación de Observation real que alimenta IdentificationService sin modificar contratos, tests Robolectric y builds Debug y Release exitosos (DEC-052). | Developer (`WHO-018B`) |
+| **2026-09-07** | Product Vision & Roadmap Rebaseline (WHO-DOC-001) | Rebaseline integral de documentación: creación de `PRODUCT_VISION.md`, formalización de 3 capas (Core, Game, Social), Free-to-Play por diseño, arquitectura AdService desacoplada, economía ética no-P2W, duelos PvP (10 cartas), rebaseline del Roadmap a 7 fases y sincronización transversal (DEC-053). | Developer (`WHO-DOC-001`) |
 
 ---
 

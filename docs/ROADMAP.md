@@ -1,238 +1,152 @@
-# Hoja de Ruta del Proyecto (Roadmap) — WHO Animal
+# Hoja de Ruta Oficial (Roadmap) — WHO Animal
 
 **Documento:** `docs/ROADMAP.md`  
-**Propósito:** Planificación estratégica y técnica oficial por fases y objetivos atómicos (DEC-047 / DEC-048).  
-**Principio Rector:** Separación estricta entre el producto funcional Alpha y las capacidades estratégicas futuras para prevenir el desvío de alcance (*scope creep*).
+**Versión:** 1.0 (Rebaseline Oficial — WHO-DOC-001 / DEC-053)  
+**Propósito:** Planificación estratégica y técnica oficial del proyecto estructurada en 7 fases consecutivas para asegurar el crecimiento ordenado del producto sin comprometer su núcleo ético ni su rigor pedagógico.
 
 ---
 
-## Estructura de Horizontes y Fases del Proyecto
+## Estructura Estratégica del Roadmap (7 Fases)
 
 ```text
 ┌────────────────────────────────────────────────────────────────────────┐
 │                        WHO ANIMAL ROADMAP                              │
-├───────────────────┬───────────────────┬──────────────────┬─────────────┤
-│      PHASE 0      │      PHASE 1      │     PHASE 2      │   PHASE 3   │
-│    FOUNDATION     │ALPHA FUNCIONAL 0.1│       BETA       │   RELEASE   │
-│   (COMPLETADA)    │ (PRÓXIMO PRODUCTO)│(SIGUIENTE HORIZ.)│ (PUBLICACIÓN│
-│                   │                   │                  │   PÚBLICA)  │
-├───────────────────┼───────────────────┼──────────────────┼─────────────┤
-│ Core de dominio,  │ Primer producto   │ Pruebas reales,  │ Lanzamiento │
-│ arquitectura,     │ Android funcional:│ calibración IA,  │ comercial en│
-│ catálogo inicial, │ Login → Capture → │ fluidez, testing │ Google Play │
-│ decisiones y      │ Card → Storage    │ y legalidad.     │ Store.      │
-│ gobernanza.       │ (10x30=300 cartas)│                  │             │
-└───────────────────┴───────────────────┴──────────────────┴─────────────┘
-                                  │
-                                  ▼
-┌────────────────────────────────────────────────────────────────────────┐
-│                   PHASE 4: ECOSYSTEM (LARGO PLAZO)                     │
-│                        (CAPACIDADES AVANZADAS)                         │
 ├────────────────────────────────────────────────────────────────────────┤
-│ Comercio, PVP, Cloud, Cuentas avanzadas, Marketplace, Ilustradores,    │
-│ Rarezas dinámicas, Sincronización nube y Gamificación profunda.        │
-└────────────────────────────────────────────────────────────────────────┘
-                                  │
-                                  ▼
-┌────────────────────────────────────────────────────────────────────────┐
-│                             FUTURO ABIERTO                             │
-│                         (SANDBOX CONCEPTUAL)                           │
+│  1. FOUNDATION (Completada)                                            │
+│     Core de dominio, arquitectura, catálogo zoológico, decisiones.     │
 ├────────────────────────────────────────────────────────────────────────┤
-│ Ideas en gestación sin alcance, versión, prioridad ni criterios fijados│
+│  2. ALPHA (Alpha Funcional 0.1 — En Curso)                             │
+│     Core Loop end-to-end: Login → Capture → Identify → Card → Storage  │
+├────────────────────────────────────────────────────────────────────────┤
+│  3. BETA (Estabilidad y Pulido)                                        │
+│     Pruebas en dispositivos reales, UX, a11y, i18n, pre-AdService.    │
+├────────────────────────────────────────────────────────────────────────┤
+│  4. RELEASE 1.0 (Lanzamiento Comercial Público)                        │
+│     Core Loop + Baúl + Enciclopedia + Free Currency + Shop + Ads       │
+├────────────────────────────────────────────────────────────────────────┤
+│  5. RELEASE 1.x — GAME                                                 │
+│     Duelos PvP, equipos de 10 cartas, temporadas, eventos, logros.     │
+├────────────────────────────────────────────────────────────────────────┤
+│  6. RELEASE 2.x — SOCIAL                                               │
+│     Amigos, regalos, intercambio (Trading), perfiles públicos, UGC.    │
+├────────────────────────────────────────────────────────────────────────┤
+│  7. RELEASE 3.x — WORLD                                                │
+│     Biomas globales, países, enciclopedia ampliada, cloud multi-device.│
 └────────────────────────────────────────────────────────────────────────┘
-```
-
-### Línea Temporal Única Oficial:
-```text
-FOUNDATION = COMPLETADA
-ALPHA = PRÓXIMO PRODUCTO FUNCIONAL (WHO-014 → WHO-018)
-BETA = SIGUIENTE HORIZONTE
-RELEASE = LANZAMIENTO PÚBLICO
-ECOSYSTEM = CAPACIDADES AVANZADAS
 ```
 
 ---
 
-## 1. PHASE 0 — FOUNDATION (Completada)
+## 1. PHASE 1 — FOUNDATION (Completada)
 
-**Objetivo Central:** Construir, blindar y validar el núcleo conceptual, arquitectónico, taxonómico y lógico de WHO Animal.
+**Objetivo:** Construir, blindar y validar el núcleo conceptual, arquitectónico, taxonómico y lógico de WHO Animal.
 
-### Objetivos Atómicos de la Fase Foundation
-* **`WHO-001` — Evaluación de Requisitos y Estado Cero** `[COMPLETADO]`
-  * Inspección del espacio de trabajo, verificación de no-código y alineación inicial.
-* **`WHO-002` — Arquitectura Base y Especificación de Cartas** `[COMPLETADO]`
-  * Creación de modelos de dominio inmutables en Python (`ScientificInfo`, `AnimalProfile`, `LoreProfile`, `AnimalCard`), Clean Architecture y primera suite de pruebas.
-* **`WHO-003` — Gobernanza, Memoria del Proyecto y Versionado** `[COMPLETADO]`
-  * Creación de `AGENTS.md`, `PROJECT_CONTEXT.md`, gobernanza de 3 roles, esquema de versionado y registro formal de decisiones ADR.
-* **`WHO-004` — Plan Maestro de Desarrollo y Alineación por Versión** `[COMPLETADO]`
-  * Creación del tablero operativo central (`docs/PLANNING.md`) para sincronización entre Director, PM y Developer.
-* **`WHO-005A` — Incorporación de Nuevas Decisiones al Contexto** `[COMPLETADO]`
-  * Consolidación en memoria de la frontera Animal vs. Carta, inmutabilidad, rareza dinámica y autenticación.
-* **`WHO-005B-A` — Actualización Documental de Capacidades Futuras** `[COMPLETADO]`
-  * Blindaje arquitectónico documental de extensiones: PVP, comercio, ilustradores y privacidad de ubicación.
-* **`WHO-005B-C` — Semántica de population_at_issuance** `[COMPLETADO]`
-  * Definición formal, inmutabilidad y desacoplamiento estricto de censos biológicos reales (DEC-033).
-* **`WHO-005B-D` — Auditoría y Resolución de verification** `[COMPLETADO]`
-  * Formalización canónica de `verification_status` como estado actual mutable desacoplado del serial (DEC-034).
-* **`WHO-005B-D.1` — Canonicalización de verification_status y null vs UNVERIFIED** `[COMPLETADO]`
-  * Estado inicial obligatorio `UNVERIFIED` y reserva de `null` para esquemas históricos (DEC-035).
-* **`WHO-005C.1` — Definición Conceptual de sex en Animal/Capture** `[COMPLETADO]`
-  * Delimitación ontológica del sexo biológico en Capture/Specimen y exclusión del modelo Animal (DEC-036).
-* **`WHO-005B-E` — Auditoría Semántica Final de la Estructura Card** `[COMPLETADO]`
-  * Auditoría y cierre conceptual de los 19 campos canónicos de `Card` distribuidos en 6 módulos funcionales.
-* **`WHO-005B-E.1` — Cierre Semántico de rank y rarity** `[COMPLETADO]`
-  * Ortogonalidad absoluta entre `rank` (mutable/progresión) y `rarity` (inmutable/emisión) (DEC-032).
-* **`WHO-006A` — Definición Formal de Tipos y Obligatoriedad de Card** `[COMPLETADO]`
-  * Formalización contractual de tipos técnicos, requiredness, nullability e inmutabilidad previa a código.
-* **`WHO-006A.1` — Corrección del Contrato de Obligatoriedad y Defaults de Card** `[COMPLETADO]`
-  * Eliminación de defaults no aprobados, formalización de Optional vs. Nullable y protección anti-GPS.
-* **`WHO-006B` — Implementación Formal del Modelo Card** `[COMPLETADO]`
-  * Implementación del modelo de dominio `Card` con los 19 campos canónicos y validación estricta.
-* **`WHO-006B.1` — Corrección de Contrato Técnico del Modelo Card** `[COMPLETADO]`
-  * Alineación estricta: UUIDv4 canónico, ausencia vs. null en `edition`, `artwork` como tipo abierto, `rank` int/str y 30 tests unitarios.
-* **`WHO-006C` — Formalizar Dominio Capture/Specimen** `[COMPLETADO]`
-  * Entidad `Capture` con `capture_id` UUIDv4 y `sex ∈ {MALE, FEMALE, UNKNOWN}` (DEC-036).
-* **`WHO-006C.2` — Cierre Técnico de Capture/Specimen y sex** `[COMPLETADO]`
-  * Corrección para establecer `Capture.sex` como `OPTIONAL`, `NULLABLE` y sin valor default (DEC-039).
-* **`WHO-006D` — Formalizar Modelo de Monetización Gratuito + Publicidad** `[COMPLETADO]`
-  * Producto 100% gratuito, desacoplamiento arquitectónico de AdMob y prioridad de Rewarded Ads sin economía in-app (DEC-038).
-* **`WHO-007` — Banco de Datos Inicial de Fauna (Semilla Educativa)** `[COMPLETADO]`
-  * Implementación del modelo formal `AnimalProfile` como fuente única de verdad zoológica.
-* **`WHO-008A` — Formalizar Historia Personal de la Carta (Personal Lore)** `[COMPLETADO]`
-  * Definición del Lore como Historia Personal del usuario (hasta 300 caracteres) asociada a una carta.
-* **`WHO-008B` — Definir reglas de edición de la Historia Personal (Lore)** `[COMPLETADO]`
-  * Límite global de 3 ediciones por cuenta y procedimiento oficial para cambios excepcionales (DEC-041).
-* **`WHO-010` — Conexión y publicación inicial del repositorio** `[COMPLETADO]`
-  * Configuración de infraestructura Git/GitHub y sincronización remota.
-* **`WHO-010A` — Auditoría y Sincronización Integral de Documentación** `[COMPLETADO]`
-  * Revisión exhaustiva y consolidación de directrices técnicas de gobernanza y planificación.
-* **`WHO-011A` — Infraestructura del Banco de Datos Zoológico** `[COMPLETADO]`
-  * Esquemas y validador de datasets estáticos en JSON dentro de `data/species/`.
-* **`WHO-011B` — Implementación del Índice Taxonómico Oficial** `[COMPLETADO]`
-  * Servicio `TaxonomyIndex` para validación y búsqueda de jerarquías taxonómicas en memoria sin base de datos.
-* **`WHO-011C` — Implementación del Catálogo Zoológico Oficial Inicial** `[COMPLETADO]`
-  * Catálogo oficial de 28 especies zoológicas reales validadas estrictamente.
-* **`WHO-011D` — Enriquecimiento Científico del Catálogo Zoológico** `[COMPLETADO]`
-  * Enriquecimiento con datos de hábitat, dieta, peso, esperanza de vida, tamaño y ciclo de actividad (DEC-042).
-* **`WHO-012A` — Implementación del Motor de Observaciones** `[COMPLETADO]`
-  * Modelo `Observation` como puente efímero entre captura de imagen y registro (DEC-043).
-* **`WHO-012B` — Implementación del Resultado de Identificación Zoológica** `[COMPLETADO]`
-  * Modelo `IdentificationResult` desacoplando formalmente confianza cuantitativa de aceptación (DEC-044).
-* **`WHO-012C` — Formalizar la decisión explícita sobre un IdentificationResult** `[COMPLETADO]`
-  * Modelo `IdentificationDecision` (`ACCEPTED`, `REJECTED`, `CANCELLED`) con validación estricta de candidatos (DEC-045).
-* **`WHO-012D` — Implementación del puente IdentificationDecision → Capture** `[COMPLETADO]`
-  * Formalización del puente de dominio: solo decisiones `ACCEPTED` generan `Capture` (`animal_id`, `identification_id`, `sex` inmutables) (DEC-046).
-* **`WHO-013` — Consolidación de Arquitectura, Roadmap y Definición del Mínimo Funcional** `[COMPLETADO]`
-  * Auditoría maestra de objetivos, resolución de colisiones históricas, formalización del Mínimo Funcional Android y reestructuración por fases (DEC-047).
-* **`WHO-013.1` — Formalización de Alpha y Horizontes Estratégicos** `[COMPLETADO]`
-  * Formalización canónica de Alpha 0.1, Golden Path, delimitación de Storage (10x30=300), exclusiones explícitas y definición de los 4 horizontes estratégicos (DEC-048).
+### Resumen de Objetivos Atómicos Completados en Foundation
+* **`WHO-001` a `WHO-004`:** Estado cero, arquitectura base, manual `AGENTS.md`, gobernanza y tablero `PLANNING.md`.
+* **`WHO-005A` a `WHO-006D`:** Formalización de la inmutabilidad de cartas, ancla poblacional (`population_at_issuance`, DEC-033), estado de verificación (`verification_status`, DEC-034/035), sexo biológico a nivel captura (`Capture.sex`, DEC-036/039), modelo de monetización ético (DEC-038), ortogonalidad `rank` vs. `rarity` (DEC-032), contrato e implementación de los 19 campos canónicos de `Card` (WHO-006B.1).
+* **`WHO-007` a `WHO-008B`:** Modelo formal `AnimalProfile`, definición del Lore como Historia Personal (DEC-040) y reglas de edición limitada (DEC-041).
+* **`WHO-010` a `WHO-011D`:** Repositorio remoto, esquemas JSON de especies, servicio `TaxonomyIndex` y catálogo oficial de 28 especies validadas con enriquecimiento científico (DEC-042).
+* **`WHO-012A` a `WHO-012D`:** Motor de observaciones efímeras (`Observation`, DEC-043), resultado de identificación (`IdentificationResult`, DEC-044), decisión explícita (`IdentificationDecision`, DEC-045) y puente formal `IdentificationDecision(ACCEPTED) → Capture` (DEC-046).
+* **`WHO-013` a `WHO-013.1`:** Consolidación de arquitectura, definición del Mínimo Funcional (DEC-047) y formalización de Alpha 0.1 y horizontes estratégicos (DEC-048).
 
 ---
 
-## 2. CORTO PLAZO — PHASE 1: ALPHA FUNCIONAL 0.1 (Próximo Producto Funcional)
+## 2. PHASE 2 — ALPHA (Alpha Funcional 0.1 — En Curso)
 
 **Objetivo Rector de Alpha 0.1:**
 > *"Un usuario nuevo debe poder entrar a WHO Animal, fotografiar un animal, obtener una identificación, generar una carta, revisarla, guardarla en su colección, cerrar la aplicación, volver a abrirla y encontrar la carta nuevamente."*
 
-### Golden Path Oficial:
+### Golden Path Oficial de Alpha:
 ```text
-LOGIN → HOME → CAPTURE → CAMERA → OBSERVATION → IDENTIFICATION → RESULT → DECISION → CAPTURE → CARD → REVIEW / EDIT → SAVE → STORAGE
-```
-
-### Flujo Alternativo (Gestión y Consulta):
-```text
-HOME → STORAGE → CONTAINER → CARD → VIEW / EDIT / DELETE
+LOGIN → HOME → CAPTURE → CAMERA → OBSERVATION → IDENTIFICATION → RESULT → DECISION → CAPTURE → CARD → REVIEW / FLIP → SAVE → STORAGE
 ```
 
 ### Alcance Oficial de Alpha:
-* **Cuenta:** Registro, Login, Logout locales básicos.
-* **Home:** Menú simple con accesos destacados a Capture y Storage.
-* **Capture:** Permisos de cámara, toma de fotografía, `Observation`, identificación, `IdentificationResult`, decisión explícita (aceptar/descartar) y manejo de errores.
-* **Card:** Generación automática tras decisión válida, vista frontal, volteo (*flip*), vista posterior con datos zoológicos y captura, edición restringida de historia personal (Lore), campos de dominio inmutables, descartar/guardar.
-* **Location:** Ubicación generalizada (`display_location`), sin dirección residencial exacta, desacoplada de telemetría interna (`precise_location`).
-* **Storage:** Persistencia local robusta en 10 containers x 30 espacios (capacidad 300 cartas), selector de container, ocupación, visualización, apertura, eliminación confirmada y persistencia tras reinicio.
-* **UX Mínima:** Splash, estados de carga, *empty state*, confirmación de borrado, animación de flip, navegación Back/Home, mensajes claros y coherencia visual.
+* **Cuenta:** Perfil de explorador local y sesión offline (Room).
+* **Home:** Menú principal con accesos destacados a Capture y Storage.
+* **Capture:** Permisos en runtime, cámara en vivo con CameraX, retícula de fauna, almacenamiento efímero en `cacheDir`, `Observation`, identificación determinista, `IdentificationResult`, decisión explícita y manejo de errores.
+* **Card:** Generación automática tras decisión `ACCEPTED`, vista frontal, animación interactiva de volteo 3D (*flip*), vista posterior con datos zoológicos contrastados y Lore personal, inmutabilidad de campos canónicos y guardado/descarte.
+* **Location:** Ubicación generalizada (`display_location`), sin dirección residencial exacta, protegiendo a la fauna silvestre.
+* **Storage (Baúl):** Persistencia local robusta en 10 containers x 30 espacios (capacidad de 300 cartas de la fase Alpha/Foundation), selector de contenedor, visualización, inspección y supervivencia garantizada tras reinicio de la app.
+* **UX Mínima:** Splash, estados de carga pedagógicos, *empty state*, diálogo de confirmación de borrado, navegación Back/Home y micro-interacciones pulidas.
 
-### Fuera del Alcance de Alpha (Exclusiones Explícitas):
-Trading, PVP, Marketplace, economía completa, Cloud/backend, sincronización multidispositivo, cuentas avanzadas, red social, red de ilustradores, rarezas dinámicas con curvas matemáticas, gamificación profunda, cobertura mundial completa de especies, IA perfecta, publicación en Google Play y monetización operativa.
-
-### Secuencia Inicial Propuesta (Construcción de Alpha):
+### Secuencia Atómica de Construcción de Alpha:
 * **`WHO-014` — Servicio de Ensamblaje y Generación de Cartas (`Capture → Card`)** `[COMPLETADO]`
-  * Implementación del servicio de dominio `CardGeneratorService` que emite una `Card` formal a partir de una `Capture` validada.
 * **`WHO-015` — Fundación del Cliente Android y Decisión Tecnológica Móvil** `[COMPLETADO]`
-  * Configuración del proyecto base Android y formalización de la tecnología de interfaz de usuario.
 * **`WHO-016` — Servicio de Identificación de Especies (`Observation → IdentificationResult`)** `[COMPLETADO]`
-  * Implementación del servicio `IdentificationService` mediante motor local ligero/on-device.
 * **`WHO-017` — Motor de Persistencia Local y Colección (`Collection Album`)** `[COMPLETADO]`
-  * Almacenamiento local para inventario, capturas y visualización de cartas en el álbum del usuario (10 containers x 30 espacios).
 * **`WHO-018A` — Login Alpha Local (Perfil y Sesión Offline)** `[COMPLETADO]`
-  * Pantalla de bienvenida, creación de perfil local de explorador con Room, validación de nombre y navegación automática condicional.
 * **`WHO-018B` — Captura y Cámara Alpha (CameraX / Visual Input)** `[COMPLETADO]`
-  * Integración de CameraX y toma de fotografía zoológica con gestión de permisos y almacenamiento efímero en cacheDir.
 * **`WHO-018C` — Visualización y Giro 3D de Carta (Card View & Flip)** `[PROPUESTO]`
-  * Visualización frontal y trasera de carta, animación de volteo (*flip*), revisión de campos canónicos y guardado en almacenamiento local.
+  * Pantalla de visualización interactiva de carta con ambas caras, animación de giro tridimensional táctil, revisión de atributos zoológicos y guardado en la colección persistente.
 * **`WHO-018` — Integración del Mínimo Funcional Android (End-to-End Core Loop)** `[PROPUESTO]`
   * Cierre integral del flujo de 11 pasos ejecutable en dispositivo o emulador Android.
 
 ---
 
-## 3. MEDIANO PLAZO — PHASE 2: BETA & PHASE 3: RELEASE (Siguiente Horizonte)
+## 3. PHASE 3 — BETA (Estabilidad y Pulido Integral)
 
-Documentado a nivel estratégico para guiar la evolución tras consolidar la Alpha:
+**Enfoque:** Preparar el producto para el uso intensivo en el mundo real antes de su distribución comercial masiva.
 
-### Phase 2 — Beta
-* Pruebas con usuarios reales y feedback cualitativo.
-* Mejora y pulido integral de UX y micro-interacciones.
-* Estabilidad del sistema y optimización de rendimiento en múltiples gamas.
-* Calibración y afinamiento del motor de identificación de fauna.
-* Expansión inicial controlada del catálogo zoológico.
-* Testing exhaustivo en Android.
-* Preparación para distribución controlada (**Google Play Internal Testing**).
-* Auditoría formal de términos de servicio y aviso legal (`DISCLAIMER.md`).
-
-### Phase 3 — Release
-* Lanzamiento público comercial en Google Play Store.
-* Álbum de colección completo con logros éticos de descubrimiento.
-* Estabilización de infraestructura y soporte continuo del catálogo de especies.
-
-> *Nota de Gobernanza:* Los puntos de Beta y Release representan dirección táctica y **no se convierten en objetivos atómicos ejecutables** hasta que Alpha esté cerrada y aprobada.
+* **Experiencia de Usuario (UX):** Pulido fino de animaciones, fluidez de interfaz, micro-interacciones y transiciones naturales.
+* **Estabilidad y Rendimiento:** Detección de fugas de memoria, optimización del renderizado de cartas y pruebas de rendimiento en terminales Android de gama de entrada, media y alta.
+* **Compatibilidad de Dispositivos:** Pruebas exhaustivas de CameraX en múltiples fabricantes, formatos de pantalla y sensores de cámara.
+* **Accesibilidad (a11y):** Soporte para lectores de pantalla (TalkBack), contraste tipográfico y tamaños dinámicos de texto.
+* **Internacionalización Básica (i18n):** Extracción de cadenas de interfaz a recursos localizados (`strings.xml`), asegurando la regla $\text{UI} \neq \text{Ciencia} \neq \text{Lore}$.
+* **Privacidad y Cumplimiento:** Auditoría legal de políticas de privacidad, términos de servicio y aviso legal ([DISCLAIMER.md](DISCLAIMER.md)).
+* **Telemetría y Analytics Mínimos:** Registro no invasivo de estabilidad y caídas (*crash analytics*) sin recolectar datos personales sensibles.
+* **Preparación de Infraestructura Publicitaria:** Implementación del contrato desacoplado `AdService` con stubs y pruebas de políticas de frecuencia.
+* **Distribución Controlada:** Despliegue de builds internas vía **Google Play Internal Testing** para recolección de feedback cualitativo.
 
 ---
 
-## 4. LARGO PLAZO — PHASE 4: ECOSYSTEM (Capacidades Estratégicas Avanzadas)
+## 4. PHASE 4 — RELEASE 1.0 (Lanzamiento Comercial Público)
 
-Las 13 capacidades estratégicas que representan la visión integral del ecosistema. La arquitectura base prepara sus puntos de extensión, pero **ninguna bloquea ni condiciona Alpha ni Beta**:
+**Enfoque:** Lanzamiento oficial de WHO Animal en Google Play Store con el Core Loop maduro y la base del modelo Free-to-Play.
 
-1. **Comercio de cartas (Trading):** Intercambio seguro entre usuarios preservando inmutabilidad histórica.
-2. **Sistema de Duelos PVP:** Enfrentamientos lúdicos desacoplados de atributos zoológicos.
-3. **Cuentas avanzadas y perfiles:** Autenticación remota y respaldo de usuario.
-4. **Infraestructura Cloud:** Backend escalable y APIs seguras.
-5. **Economía del ecosistema:** Progresión balanceada y recompensas in-app.
-6. **Marketplace:** Mercado in-app para adquisición controlada de cartas.
-7. **Sistema completo de rarezas:** Algoritmo dinámico y curvas de probabilidad basadas en emisión (`population_at_issuance`, DEC-022-PENDING).
-8. **Red de Ilustradores:** Encargos y soporte de arte personalizado para cartas.
-9. **Sincronización multidispositivo:** Persistencia en la nube cruzada.
-10. **Publicación pública global:** Expansión territorial multirregión.
-11. **Expansión progresiva del catálogo zoológico:** Crecimiento continuo hacia cobertura global sin promesas engañosas de "todas las especies".
-12. **Evolución continua del sistema de IA de identificación:** Mejora incremental de precisión sin prometer "IA perfecta".
-13. **Gamificación completa:** Sistema de progresión, medallas por biomas y mecánicas avanzadas de `rank` (DEC-037-PENDING).
+* **Núcleo Completo:** Flujo de registro, captura en vivo, identificación zoológica, acuñación de cartas, lectura de enciclopedia y gestión completa del Baúl/Corral.
+* **Enciclopedia y Catálogo Zoológico:** Catálogo enriquecido y accesible para consulta de fauna descubierta.
+* **Personalización y Temas Básicos:** Marcos visuales de cartas y temas de colección seleccionables.
+* **Economía F2P y Moneda Gratuita:** Recompensas por descubrimientos y nuevas especies avistadas.
+* **Tienda Cosmética Básica (Shop):** Adquisición de temas visuales, avatares y estilos de contenedor mediante moneda gratuita del juego.
+* **Publicidad Desacoplada (`AdService`):** Integración operativa de AdMob (Banners no intrusivos en pantallas secundarias e Interstitials controlados por frecuencia; Rewarded Ads voluntarios para beneficios lúdicos).
+* **Gestión de Perfil:** Estadísticas personales de avistamiento y medallas de explorador.
+* **Regla de Lanzamiento:** *El sistema de combate PvP no bloquea el Release 1.0; la prioridad absoluta es la estabilidad y la magia del Core Loop.*
 
 ---
 
-## 5. FUTURO ABIERTO (Sandbox Conceptual)
+## 5. PHASE 5 — RELEASE 1.x: GAME (Juego Ligero y Duelos)
 
-Espacio de reserva para ideas y conceptos en gestación que todavía **no tienen**:
-* Alcance definido.
-* Prioridad asignada.
-* Dependencias técnicas resueltas.
-* Versión objetivo formalizada.
-* Criterios de aceptación estructurados.
+**Enfoque:** Desplegar la Capa Game para dotar de profundidad lúdica y rejugabilidad competitiva sana al coleccionismo de cartas.
 
-**Regla de Gobernanza:** Ninguna idea contenida en esta sección se convertirá automáticamente en un objetivo ejecutable `WHO` sin la aprobación previa del Director y la formulación técnica del PM.
+* **Sistema de Duelos PvP:** Combates por turnos sencillos, ágiles y estratégicos inspirados en mecánicas RPG livianas.
+* **Equipo de Exploración (Mazo de 10 Cartas):** Cada explorador selecciona y entrena un mazo de 10 cartas.
+* **Ventana Semanal de Configuración:** El mazo activo solo puede modificarse dentro de un período semanal determinado, premiando la planificación sobre el cambio compulsivo.
+* **Estadísticas de Juego Ficticias:** Atributos numéricos de combate (HP, ATK, DEF, SPD, TYPE, SPECIAL) puramente lúdicos y desacoplados de la biología real.
+* **Temporadas y Eventos Especiales:** Temporadas competitivas de exploración, tablas de clasificación (*Rankings*) éticas y eventos estacionales.
+* **Misiones y Desafíos de Avistamiento:** Retos temáticos por biomas, familias y estaciones climáticas.
+* **Ampliación de Tienda:** Nuevos cosméticos avanzados, animaciones de cartas y efectos holográficos.
 
-Iniciativas en exploración conceptual:
-* Desafíos comunitarios de bioacústica (identificación por cantos o sonidos animales).
-* Fichas de hábitats y biomas como coleccionables complementarios.
-* Integración con guías de reservas naturales y parques protegidos.
-* Eventos estacionales y seguimiento de rutas migratorias reales.
-* Realidad Aumentada (AR) para observación e inspección de especímenes.
+---
+
+## 6. PHASE 6 — RELEASE 2.x: SOCIAL (Comunidad y Conexión)
+
+**Enfoque:** Conectar a la comunidad global de naturalistas mediante dinámicas sociales constructivas y respetuosas.
+
+* **Perfiles Públicos de Explorador:** Vitrinas virtuales donde compartir colecciones y avistamientos destacados.
+* **Amigos y Regalos:** Sistema de contactos para enviar paquetes diarios de exploración.
+* **Intercambio Seguro de Cartas (Trading):** Transferencia formal de propiedad entre coleccionistas manteniendo estrictamente congelada la identidad histórica original (`card_id`, espécimen, generación, rareza y serial de emisión).
+* **Contenido Generado por Usuarios (UGC):** Historias Personales (*Lore*) compartidas públicamente en la comunidad.
+* **Seguridad, Moderación y Protección de Menores:** Herramientas completas de reporte de abusos, bloqueo de usuarios, filtros de lenguaje y cumplimiento de normativas de privacidad infantil.
+
+---
+
+## 7. PHASE 7 — RELEASE 3.x: WORLD (Ecosistema Global y Nube)
+
+**Enfoque:** Expansión del producto a escala planetaria con soporte multi-dispositivo y experiencias inmersivas.
+
+* **Expansión Global del Catálogo Zoológico:** Crecimiento continuo de la base zoológica cubriendo biomas mundiales, fauna endémica y especies protegidas globales.
+* **Sincronización Multidispositivo en la Nube:** Respaldo y sincronización en tiempo real de cuentas, colecciones y mazos en cualquier dispositivo.
+* **Eventos Biogeográficos Mundiales:** Dinámicas sincronizadas con eventos naturales reales (migraciones globales, solsticios, semanas de la biodiversidad).
+* **Experiencias Comunitarias:** Retos colaborativos globales para registrar y proteger la biodiversidad.
+* **Futuro Abierto:** Espacio para exploración de Realidad Aumentada (AR), bioacústica animal y alianzas con reservas naturales.
