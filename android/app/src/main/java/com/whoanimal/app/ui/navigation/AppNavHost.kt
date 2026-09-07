@@ -23,19 +23,44 @@ import com.whoanimal.app.ui.screens.profile.CreateProfileScreen
 import com.whoanimal.app.ui.screens.splash.SplashScreen
 import com.whoanimal.app.ui.screens.welcome.WelcomeScreen
 
+import androidx.compose.runtime.rememberCoroutineScope
+import com.whoanimal.app.data.local.repository.RoomCollectionStorageRepository
+import com.whoanimal.app.domain.model.AnimalCardContract
+import com.whoanimal.app.domain.model.DecisionStatus
+import com.whoanimal.app.domain.model.IdentificationDecisionContract
+import com.whoanimal.app.domain.model.ObservationContract
+import com.whoanimal.app.domain.repository.CollectionStorageRepository
+import com.whoanimal.app.domain.service.CardGeneratorService
+import com.whoanimal.app.ui.screens.card.CardPresentationScreen
+import kotlinx.coroutines.launch
+import java.time.Instant
+import java.util.UUID
+
 @Composable
 fun AppNavHost(
     modifier: Modifier = Modifier,
     navController: NavHostController = rememberNavController(),
     startDestination: String = NavDestination.Splash.route,
-    profileRepository: ProfileRepository? = null
+    profileRepository: ProfileRepository? = null,
+    storageRepository: CollectionStorageRepository? = null,
+    cardGenerator: CardGeneratorService? = null
 ) {
     val context = LocalContext.current
+    val scope = rememberCoroutineScope()
+
     val effectiveProfileRepository = profileRepository ?: remember(context) {
         RoomProfileRepository(WhoAnimalDatabase.getInstance(context).profileDao())
     }
 
+    val effectiveStorageRepository = storageRepository ?: remember(context) {
+        val db = WhoAnimalDatabase.getInstance(context)
+        RoomCollectionStorageRepository(db.cardDao(), db.storageSlotDao())
+    }
+
+    val effectiveCardGenerator = cardGenerator ?: remember { CardGeneratorService() }
+
     var currentIdentificationResult by remember { mutableStateOf<IdentificationResultContract?>(null) }
+    var currentCardToReview by remember { mutableStateOf<AnimalCardContract?>(null) }
 
     NavHost(
         navController = navController,
@@ -104,11 +129,57 @@ fun AppNavHost(
         composable(NavDestination.IdentificationResult.route) {
             IdentificationResultScreen(
                 result = currentIdentificationResult,
-                onAcceptDecision = {
-                    // En Alpha 0.1, registrar la decisión aceptada sin generar Capture persistente
+                onAcceptDecision = { result ->
+                    val topCandidate = result.topCandidate
+                    if (topCandidate != null) {
+                        val decision = IdentificationDecisionContract(
+                            decisionId = UUID.randomUUID().toString(),
+                            identificationId = result.identificationId,
+                            animalId = topCandidate.animalId,
+                            status = DecisionStatus.ACCEPTED,
+                            decidedAt = Instant.now().toString()
+                        )
+                        val (_, generatedCard) = effectiveCardGenerator.assembleFromDecision(
+                            decision = decision,
+                            observation = ObservationContract(
+                                observationId = result.observationId,
+                                createdAt = result.createdAt,
+                                imagePath = ""
+                            ),
+                            confidence = topCandidate.confidence,
+                            displayLocation = "Reserva Natural Protegida"
+                        )
+                        currentCardToReview = generatedCard
+                        navController.navigate(NavDestination.CardReview.route)
+                    }
                 },
                 onDiscardDecision = {
                     currentIdentificationResult = null
+                    navController.popBackStack(NavDestination.Home.route, inclusive = false)
+                },
+                onNavigateBack = {
+                    navController.popBackStack()
+                }
+            )
+        }
+
+        composable(NavDestination.CardReview.route) {
+            CardPresentationScreen(
+                card = currentCardToReview,
+                onSaveCard = { cardToSave ->
+                    scope.launch {
+                        try {
+                            effectiveStorageRepository.autoAssignSlot(cardToSave)
+                        } catch (_: Exception) {
+                            // Si ya existe o hay error, la navegación continúa de forma segura
+                        }
+                        navController.navigate(NavDestination.Collection.route) {
+                            popUpTo(NavDestination.Home.route) { inclusive = false }
+                        }
+                    }
+                },
+                onReleaseCard = {
+                    currentCardToReview = null
                     navController.popBackStack(NavDestination.Home.route, inclusive = false)
                 },
                 onNavigateBack = {
@@ -126,3 +197,4 @@ fun AppNavHost(
         }
     }
 }
+

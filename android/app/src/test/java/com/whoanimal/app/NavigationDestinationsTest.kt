@@ -16,6 +16,7 @@ class NavigationDestinationsTest {
             NavDestination.Home.route,
             NavDestination.Capture.route,
             NavDestination.IdentificationResult.route,
+            NavDestination.CardReview.route,
             NavDestination.Collection.route
         )
 
@@ -37,6 +38,8 @@ class NavigationDestinationsTest {
         assertEquals("home", NavDestination.Home.route)
         assertEquals("capture", NavDestination.Capture.route)
         assertEquals("identification_result", NavDestination.IdentificationResult.route)
+        assertEquals("card_review", NavDestination.CardReview.route)
         assertEquals("collection", NavDestination.Collection.route)
     }
 }
+

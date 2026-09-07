@@ -48,7 +48,16 @@ data class AnimalProfileContract(
     val commonName: String,
     val taxonomy: TaxonomyContract,
     val conservationStatus: String = "LC",
-    val isRareSpecies: Boolean = false
+    val isRareSpecies: Boolean = false,
+    val habitat: String? = null,
+    val diet: String? = null,
+    val lifespanYears: Int? = null,
+    val sizeCm: Int? = null,
+    val weightKg: Double? = null,
+    val activityCycle: String? = null,
+    val nativeRegions: List<String> = emptyList(),
+    val curiosity: String? = null,
+    val dangerLevel: String? = null
 )
 
 data class ObservationContract(
@@ -116,5 +125,8 @@ data class AnimalCardContract(
     val rank: Int = 1,
     val displayLocation: String = "General Location",
     val ownerId: String? = null,
-    val edition: String? = null
+    val edition: String? = null,
+    val imagePath: String? = null,
+    val personalLore: String? = null
 )
+

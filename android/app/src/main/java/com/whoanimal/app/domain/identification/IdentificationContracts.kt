@@ -35,7 +35,15 @@ object OfficialStarterCatalog {
             species = "Canis lupus familiaris"
         ),
         conservationStatus = "NE",
-        isRareSpecies = false
+        isRareSpecies = false,
+        habitat = "Áreas habitadas por humanos a nivel global",
+        diet = "Omnívoro",
+        lifespanYears = 13,
+        sizeCm = 60,
+        weightKg = 20.0,
+        activityCycle = "Diurno",
+        nativeRegions = listOf("Global"),
+        curiosity = "Posee un sentido del olfato hasta 100.000 veces más sensible que el humano."
     )
 
     val cat = AnimalProfileContract(
@@ -52,7 +60,15 @@ object OfficialStarterCatalog {
             species = "Felis catus"
         ),
         conservationStatus = "NE",
-        isRareSpecies = false
+        isRareSpecies = false,
+        habitat = "Áreas habitadas por humanos a nivel global",
+        diet = "Carnívoro",
+        lifespanYears = 15,
+        sizeCm = 46,
+        weightKg = 4.5,
+        activityCycle = "Crepuscular",
+        nativeRegions = listOf("Global"),
+        curiosity = "Pasan aproximadamente el 70% de su vida durmiendo y acicalándose."
     )
 
     val jaguar = AnimalProfileContract(
@@ -69,7 +85,16 @@ object OfficialStarterCatalog {
             species = "Panthera onca"
         ),
         conservationStatus = "NT",
-        isRareSpecies = true
+        isRareSpecies = true,
+        habitat = "Bosques tropicales y selvas",
+        diet = "Carnívoro",
+        lifespanYears = 15,
+        sizeCm = 170,
+        weightKg = 95.5,
+        activityCycle = "Diurno",
+        nativeRegions = listOf("América del Sur", "América Central"),
+        curiosity = "Posee la mordida más potente de todos los grandes felinos en relación a su tamaño.",
+        dangerLevel = "Precaución: Gran depredador carnívoro. Observar a distancia segura en hábitats naturales."
     )
 
     val macaw = AnimalProfileContract(
@@ -86,10 +111,21 @@ object OfficialStarterCatalog {
             species = "Ara macao"
         ),
         conservationStatus = "LC",
-        isRareSpecies = false
+        isRareSpecies = false,
+        habitat = "Selvas tropicales",
+        diet = "Herbívoro",
+        lifespanYears = 50,
+        sizeCm = 85,
+        weightKg = 1.0,
+        activityCycle = "Diurno",
+        nativeRegions = listOf("América Central", "América del Sur"),
+        curiosity = "Forma parejas monógamas de por vida y sus llamadas pueden escucharse a kilómetros."
     )
 
     val allSpecies = listOf(dog, cat, jaguar, macaw)
+
+    fun findById(animalId: String): AnimalProfileContract? =
+        allSpecies.firstOrNull { it.animalId == animalId }
 }
 
 /**

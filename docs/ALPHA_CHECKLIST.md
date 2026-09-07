@@ -72,9 +72,9 @@ Una funcionalidad solo puede marcarse como completada cuando:
 | Generación   | ✅      |
 | Guardar      | ✅      |
 | Persistencia | ✅      |
-| Giro 3D      | ⬜      |
-| Frente       | 🟡     |
-| Reverso      | 🟡     |
+| Giro 3D      | ✅      |
+| Frente       | ✅      |
+| Reverso      | ✅      |
 
 ## Colección
 
@@ -100,12 +100,13 @@ El siguiente recorrido debe funcionar completo para declarar Alpha terminada.
 * [x] Tomar una foto.
 * [x] Crear Observation.
 * [x] Obtener IdentificationResult.
-* [ ] Aceptar identificación.
-* [ ] Crear Capture.
-* [ ] Generar AnimalCard.
-* [ ] Revisar la carta.
-* [ ] Guardarla.
+* [x] Aceptar identificación.
+* [x] Crear Capture.
+* [x] Generar AnimalCard.
+* [x] Revisar la carta.
+* [x] Guardarla.
 * [ ] Verla en Collection.
+
 * [ ] Cerrar la aplicación.
 * [ ] Volver a abrirla.
 * [ ] Recuperar la carta.
