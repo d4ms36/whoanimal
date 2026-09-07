@@ -208,6 +208,7 @@ HOME → STORAGE → CONTAINER → CARD → VIEW / FLIP / BACK
 | **WHO-024** | Accesibilidad (a11y) y Robustecimiento de Compatibilidad CameraX | Soporte TalkBack, target táctiles mínimos de 48dp y compatibilidad CameraX ante variantes de sensor y rotación | Media | WHO-023 | `COMPLETADO` | **Sí** |
 | **WHO-025** | Contrato Desacoplado `AdService` y Stubs de Infraestructura | Definición de interfaces limpias de publicidad desacoplada (`DEC-053`) y stubs locales de políticas de frecuencia | Media | WHO-024 | `PROPUESTO` | **Sí** |
 | **WHO-026** | Pipeline de Firma de Release y Google Play Internal Testing | Keystore de release, optimización R8/ProGuard y preparación del paquete de distribución interna `v0.2.0-beta.1` (versionCode 3) | Alta | WHO-025 | `COMPLETADO` | **Sí** |
+| **WHO-027** | Beta Validation Protocol & Field Testing | Protocolo de test Beta (Casos manuales, compatibilidad, reporte de bugs, smoke test) para validar en dispositivos físicos la estabilidad de `v0.2.0-beta.1` | Alta | WHO-026 | `COMPLETADO` | **Sí** |
 
 ### 5.1 Especificación Formal del Próximo Objetivo: WHO-025
 

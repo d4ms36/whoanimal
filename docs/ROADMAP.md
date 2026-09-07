@@ -119,6 +119,8 @@ LOGIN → HOME → CAPTURE → CAMERA → OBSERVATION → IDENTIFICATION → RES
   * Definición de interfaces limpias (`BannerPlacement`, `InterstitialPolicy`, `RewardedAdService`, `FrequencyPolicy`) y stubs locales sin SDKs de terceros.
 * **`WHO-026` — Pipeline de Firma de Release y Preparación para Google Play Internal Testing** `[COMPLETADO]`
   * Configuración de keystore de release, optimización R8/ProGuard y preparación del paquete de distribución interna `v0.2.0-beta.1` (versionCode 3).
+* **`WHO-027` — Beta Validation Protocol & Field Testing** `[COMPLETADO]`
+  * Creación del protocolo de pruebas, matrices de compatibilidad (Android 8-15) y Smoke Tests para la validación física en dispositivos reales.
 
 ---
 
