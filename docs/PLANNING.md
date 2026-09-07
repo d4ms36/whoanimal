@@ -15,8 +15,8 @@
 | **Fase actual** | Alpha |
 | **Versión actual** | `0.0.1` |
 | **Estado** | Foundation |
-| **Objetivo activo** | Ninguno (Ciclo WHO-012C completado; listo para revisión de PM) |
-| **Último objetivo completado** | `WHO-012C` — Formalizar la decisión explícita sobre un IdentificationResult |
+| **Objetivo activo** | Ninguno (Ciclo WHO-012D completado; listo para revisión de PM) |
+| **Último objetivo completado** | `WHO-012D` — Implementación del puente IdentificationDecision → Capture |
 | **Próximo objetivo propuesto** | Pendiente de aprobación |
 | **Bloqueos** | Ninguno |
 | **Decisiones pendientes** | `DEC-009` a `DEC-012`, `DEC-020` a `DEC-025`, `DEC-037-PENDING` |
@@ -80,6 +80,7 @@ $$\text{FASE} . \text{CORRECCIONES} . \text{ITERACIÓN}$$
 | **WHO-012A** | Implementación del Motor de Observaciones | `COMPLETADO` | Alta | 0.0.1 | Sí |
 | **WHO-012B** | Implementación del Resultado de Identificación Zoológica | `COMPLETADO` | Alta | 0.0.1 | Sí |
 | **WHO-012C** | Formalizar la decisión explícita sobre un IdentificationResult | `COMPLETADO` | Alta | 0.0.1 | Sí |
+| **WHO-012D** | Implementación del puente IdentificationDecision → Capture | `COMPLETADO` | Alta | 0.0.1 | Sí |
 
 ---
 
@@ -161,6 +162,7 @@ Ordenados por prioridad técnica y estratégica.
 | **WHO-012A** | `APROBADO` | `VALIDADO`| `COMPLETADO` | `APPROVED_COMPLETE` |
 | **WHO-012B** | `APROBADO` | `VALIDADO`| `COMPLETADO` | `APPROVED_COMPLETE` |
 | **WHO-012C** | `APROBADO` | `VALIDADO`| `COMPLETADO` | `APPROVED_COMPLETE` |
+| **WHO-012D** | `APROBADO` | `VALIDADO`| `COMPLETADO` | `APPROVED_COMPLETE` |
 
 > **Regla:** El Developer no puede auto-aprobar objetivos. La autorización debe ser explícita por parte del Director Creativo y estructurada por el Project Manager.
 
@@ -271,6 +273,7 @@ Para prevenir el desvío del alcance (*scope creep*) y asegurar una base sólida
 | **2026-09-07** | Implementación del Motor de Observaciones (WHO-012A) | Creación del modelo `Observation` como puente efímero. | Developer (`WHO-012A`) |
 | **2026-09-07** | Resultado de Identificación Zoológica (WHO-012B) | Creación de `IdentificationResult` separando confianza y aceptación. | Developer (`WHO-012B`) |
 | **2026-09-07** | Decisión sobre Identificación (WHO-012C) | Creación de `IdentificationDecision` formalizando decisión explícita. | Developer (`WHO-012C`) |
+| **2026-09-07** | Puente Decisión a Captura (WHO-012D) | Formalización del puente IdentificationDecision ACCEPTED a Capture (DEC-046). | Developer (`WHO-012D`) |
 
 ---
 

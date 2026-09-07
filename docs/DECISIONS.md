@@ -552,6 +552,22 @@ Aprobado por: [Director Creativo / Project Manager / Consenso]
 
 ---
 
+### DEC-046: Puente IdentificationDecision ACCEPTED → Capture
+* **Tema:** Arquitectura de Dominio (Motor de Observaciones y Capturas)
+* **Fecha:** 2026-09-07
+* **Estado:** `APPROVED`
+* **Decisión:** Una `Capture` únicamente puede crearse como consecuencia de una `IdentificationDecision` explícitamente en estado `ACCEPTED`. Se incorporan formalmente a `Capture` los campos obligatorios e inmutables `animal_id` (proveniente del `selected_animal_id` validado contra los candidatos) e `identification_id` (trazabilidad al `IdentificationResult`).
+* **Justificación / Principios:**
+  * Queda estrictamente prohibido crear `Capture` a partir de un umbral de confianza, directamente desde `IdentificationResult` o desde `Observation`.
+  * La decisión debe ser explícita y pertenecer al `IdentificationResult` referenciado (`identification_id` coincidente).
+  * Las decisiones `REJECTED` o `CANCELLED` nunca crean una `Capture`.
+  * Se mantiene intacto el contrato de `sex` (DEC-036 / DEC-039): opcional, nullable, sin valor por defecto, sin inferencia visual.
+  * Una `Capture` no genera automáticamente una `Card` (la emisión de cartas permanece como fase posterior).
+  * Todos los atributos de `Capture` (`capture_id`, `animal_id`, `identification_id`, `sex`) son estrictamente inmutables tras su creación.
+* **Aprobado por:** Director Creativo / Project Manager
+
+---
+
 ### DEC-010: Estilo y Universo Mitológico del Lore (SUPERSEDED)
 * **Tema:** Diseño Narrativo
 * **Estado:** `SUPERSEDED`

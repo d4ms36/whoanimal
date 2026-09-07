@@ -86,6 +86,8 @@
   * Creación de `IdentificationResult` separando confianza de la decisión de aceptación.
 * **`WHO-012C` — Formalizar la decisión explícita sobre un IdentificationResult** `[APPROVED_COMPLETE]`
   * Creación de `IdentificationDecision` formalizando la decisión explícita sobre un resultado y su desacople de confianza.
+* **`WHO-012D` — Implementación del puente IdentificationDecision → Capture** `[APPROVED_COMPLETE]`
+  * Formalización del puente de dominio entre la decisión aceptada y la entidad Capture con inmutabilidad estricta.
 * **`WHO-011` — Evaluación y Prototipo de Ingesta Taxonómica** `[PROPOSED]`
   * Conector experimental con APIs de biodiversidad abiertas (GBIF / iNaturalist) para validación de datos.
 * **`WHO-012` — Prototipo del Servicio de Generación de Cartas** `[PROPOSED]`
