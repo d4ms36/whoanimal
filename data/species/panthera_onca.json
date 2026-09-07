@@ -13,6 +13,16 @@
       "species": "Panthera onca"
     },
     "conservation_status": "NT",
-    "is_rare_species": false
+    "is_rare_species": false,
+    "habitat": "Bosques tropicales y selvas",
+    "diet": "Carnívoro",
+    "lifespan_years": 15,
+    "size_cm": 170,
+    "weight_kg": 95.5,
+    "activity_cycle": "Diurno",
+    "native_regions": [
+      "América del Sur",
+      "América Central"
+    ]
   }
 ]

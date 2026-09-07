@@ -19,11 +19,21 @@ Cada entrada de especie en el array de datos debe cumplir con la siguiente estru
 * `common_name` (String): Nombre común descriptivo (no vacío).
 * `taxonomy` (Objeto): Clasificación taxonómica (debe contener obligatoriamente `kingdom`, `phylum`, `class`, `order`, `family`, `genus`, `species`, sin campos extra, strings no vacíos).
 
-### Campos Opcionales
+### Campos Opcionales Originales
 * `conservation_status` (String): Estado de conservación en texto (ej. "LC", "VU", "EN").
 * `is_rare_species` (Boolean): Indica si la especie se considera biológicamente rara en la naturaleza. (Valor booleano estricto, no string).
 
-Cualquier campo adicional que no esté presente en esta lista será **RECHAZADO**.
+### Campos Científicos Opcionales (DEC-042)
+Estos campos enriquecen el catálogo con información científica estable de la especie:
+* `habitat` (String): Descripción del hábitat natural.
+* `diet` (String): Tipo de dieta (ej. "Carnívoro", "Herbívoro").
+* `lifespan_years` (Integer): Esperanza de vida típica en años.
+* `size_cm` (Integer): Tamaño corporal promedio en centímetros.
+* `weight_kg` (Number): Peso promedio en kilogramos (entero o flotante).
+* `activity_cycle` (String): Ciclo de actividad (ej. "Diurno", "Nocturno").
+* `native_regions` (Array of Strings): Lista de regiones geográficas nativas.
+
+Cualquier campo adicional que no esté presente en estas listas será **RECHAZADO**.
 
 ## 3. Ejemplo de Documento JSON Válido
 
@@ -43,7 +53,17 @@ Cualquier campo adicional que no esté presente en esta lista será **RECHAZADO*
       "species": "Panthera onca"
     },
     "conservation_status": "NT",
-    "is_rare_species": false
+    "is_rare_species": false,
+    "habitat": "Bosques tropicales",
+    "diet": "Carnívoro",
+    "lifespan_years": 15,
+    "size_cm": 170,
+    "weight_kg": 95.5,
+    "activity_cycle": "Diurno",
+    "native_regions": [
+      "América del Sur",
+      "América Central"
+    ]
   }
 ]
 ```

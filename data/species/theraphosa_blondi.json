@@ -13,6 +13,15 @@
       "species": "Theraphosa blondi"
     },
     "conservation_status": "NE",
-    "is_rare_species": true
+    "is_rare_species": true,
+    "habitat": "Bosques tropicales y pantanos",
+    "diet": "Carnívoro",
+    "lifespan_years": 20,
+    "size_cm": 30,
+    "weight_kg": 0.17,
+    "activity_cycle": "Nocturno",
+    "native_regions": [
+      "América del Sur"
+    ]
   }
 ]

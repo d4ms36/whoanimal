@@ -13,6 +13,15 @@
       "species": "Chelonia mydas"
     },
     "conservation_status": "EN",
-    "is_rare_species": false
+    "is_rare_species": false,
+    "habitat": "Mares tropicales y subtropicales",
+    "diet": "Herbívoro",
+    "lifespan_years": 80,
+    "size_cm": 120,
+    "weight_kg": 150.0,
+    "activity_cycle": "Diurno",
+    "native_regions": [
+      "Océanos Globales"
+    ]
   }
 ]

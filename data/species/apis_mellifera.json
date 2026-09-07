@@ -13,6 +13,15 @@
       "species": "Apis mellifera"
     },
     "conservation_status": "LC",
-    "is_rare_species": false
+    "is_rare_species": false,
+    "habitat": "Prados, bosques y jardines",
+    "diet": "Herbívoro (Néctar)",
+    "lifespan_years": 1,
+    "size_cm": 1,
+    "weight_kg": 0.0001,
+    "activity_cycle": "Diurno",
+    "native_regions": [
+      "Global"
+    ]
   }
 ]

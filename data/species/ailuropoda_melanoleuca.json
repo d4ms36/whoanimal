@@ -13,6 +13,15 @@
       "species": "Ailuropoda melanoleuca"
     },
     "conservation_status": "VU",
-    "is_rare_species": true
+    "is_rare_species": true,
+    "habitat": "Bosques templados de montaña",
+    "diet": "Herbívoro (Bambú)",
+    "lifespan_years": 20,
+    "size_cm": 150,
+    "weight_kg": 100.0,
+    "activity_cycle": "Diurno",
+    "native_regions": [
+      "Asia Central"
+    ]
   }
 ]

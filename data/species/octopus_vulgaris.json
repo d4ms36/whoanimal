@@ -13,6 +13,15 @@
       "species": "Octopus vulgaris"
     },
     "conservation_status": "LC",
-    "is_rare_species": false
+    "is_rare_species": false,
+    "habitat": "Aguas costeras marinas",
+    "diet": "Carnívoro",
+    "lifespan_years": 2,
+    "size_cm": 60,
+    "weight_kg": 3.0,
+    "activity_cycle": "Nocturno",
+    "native_regions": [
+      "Océanos Globales"
+    ]
   }
 ]

@@ -13,7 +13,11 @@ class DatasetValidator:
     """Validates zoological dataset JSON files according to DATASET_SPEC.md"""
     
     REQUIRED_FIELDS = {"animal_id", "scientific_name", "common_name", "taxonomy"}
-    OPTIONAL_FIELDS = {"conservation_status", "is_rare_species"}
+    OPTIONAL_FIELDS = {
+        "conservation_status", "is_rare_species",
+        "habitat", "diet", "lifespan_years", 
+        "size_cm", "weight_kg", "activity_cycle", "native_regions"
+    }
     ALLOWED_FIELDS = REQUIRED_FIELDS | OPTIONAL_FIELDS
     
     REQUIRED_TAXONOMY_FIELDS = {"kingdom", "phylum", "class", "order", "family", "genus", "species"}
@@ -81,6 +85,31 @@ class DatasetValidator:
         if "is_rare_species" in item:
             if not isinstance(item["is_rare_species"], bool):
                 raise DatasetValidatorError(f"Field 'is_rare_species' at index {index} must be a boolean.")
+                
+        # Scientific optional fields validation
+        for str_field in ["habitat", "diet", "activity_cycle"]:
+            if str_field in item:
+                if not isinstance(item[str_field], str):
+                    raise DatasetValidatorError(f"Field '{str_field}' at index {index} must be a string.")
+                    
+        for int_field in ["lifespan_years", "size_cm"]:
+            if int_field in item:
+                val = item[int_field]
+                if not isinstance(val, int) or isinstance(val, bool): # bool is subclass of int in python
+                    raise DatasetValidatorError(f"Field '{int_field}' at index {index} must be an integer.")
+                    
+        if "weight_kg" in item:
+            val = item["weight_kg"]
+            if not isinstance(val, (int, float)) or isinstance(val, bool):
+                raise DatasetValidatorError(f"Field 'weight_kg' at index {index} must be a number (int or float).")
+                
+        if "native_regions" in item:
+            val = item["native_regions"]
+            if not isinstance(val, list):
+                raise DatasetValidatorError(f"Field 'native_regions' at index {index} must be a list of strings.")
+            for i, region in enumerate(val):
+                if not isinstance(region, str):
+                    raise DatasetValidatorError(f"Field 'native_regions' at index {index} contains a non-string element at position {i}.")
                 
         # Optional: Validate taxonomy route using TaxonomyIndex
         if taxonomy_index is not None:

@@ -489,6 +489,20 @@ Aprobado por: [Director Creativo / Project Manager / Consenso]
   7. El mantenimiento de un historial/versionado completo queda fuera del alcance inicial.
 * **Motivo:** Mantener la simplicidad técnica al mismo tiempo que se permite evolucionar la experiencia de usuario de manera controlada y evitar el spam de contenido, preservando intactos los 19 campos inmutables de la Card.
 * **Impacto:** Define la lógica de negocio para la futura API de edición y establece el límite a nivel de cuenta (global) y no por Card. No requiere implementar versionado complejo inicialmente.
+
+---
+
+### DEC-042: Enriquecimiento Científico del Catálogo
+* **Tema:** Arquitectura de Datos y Dominio Biológico
+* **Fecha:** 2026-09-06
+* **Estado:** `APPROVED`
+* **Decisión:** Las especies del catálogo zoológico se enriquecerán con información científica estable (`habitat`, `diet`, `lifespan_years`, `size_cm`, `weight_kg`, `activity_cycle`, `native_regions`). 
+* **Justificación / Principios:**
+  * Los atributos pertenecen exclusivamente a `AnimalProfile`.
+  * No representan individuos concretos.
+  * No contienen datos personales.
+  * No contienen coordenadas de captura.
+  * Permanecen compatibles con futuras integraciones científicas (ej. GBIF, IUCN).
 * **Aprobado por:** Director Creativo / Project Manager
 
 ---

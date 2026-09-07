@@ -231,3 +231,11 @@ Cada tarea u objetivo debe documentarse utilizando la siguiente ficha estructura
 * **Commit:** (Pendiente de commit) (*feat(dataset): build official starter species catalog*)
 * **Versión:** `0.0.1`
 
+
+### WHO-011D: Enriquecimiento Científico del Catálogo Zoológico
+* **Propósito:** Enriquecer las 28 especies del catálogo con información científica estable (habitat, diet, lifespan_years, size_cm, weight_kg, ctivity_cycle, 
+ative_regions).
+* **Estado:** `APPROVED_COMPLETE`
+* **Commit:** (Pendiente de commit) (*feat(dataset): enrich official species catalog*)
+* **Versión:** `0.0.1`
+

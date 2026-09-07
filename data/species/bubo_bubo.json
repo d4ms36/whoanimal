@@ -13,6 +13,16 @@
       "species": "Bubo bubo"
     },
     "conservation_status": "LC",
-    "is_rare_species": false
+    "is_rare_species": false,
+    "habitat": "Bosques y acantilados",
+    "diet": "Carnívoro",
+    "lifespan_years": 20,
+    "size_cm": 70,
+    "weight_kg": 2.5,
+    "activity_cycle": "Nocturno",
+    "native_regions": [
+      "Europa",
+      "Asia"
+    ]
   }
 ]

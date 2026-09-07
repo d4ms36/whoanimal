@@ -13,6 +13,17 @@
       "species": "Phoenicopterus roseus"
     },
     "conservation_status": "LC",
-    "is_rare_species": false
+    "is_rare_species": false,
+    "habitat": "Lagunas y humedales",
+    "diet": "Omnívoro",
+    "lifespan_years": 30,
+    "size_cm": 140,
+    "weight_kg": 3.0,
+    "activity_cycle": "Diurno",
+    "native_regions": [
+      "Europa",
+      "África",
+      "Asia"
+    ]
   }
 ]

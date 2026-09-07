@@ -13,6 +13,15 @@
       "species": "Gorilla beringei"
     },
     "conservation_status": "EN",
-    "is_rare_species": true
+    "is_rare_species": true,
+    "habitat": "Bosques tropicales montanos",
+    "diet": "Herbívoro",
+    "lifespan_years": 40,
+    "size_cm": 170,
+    "weight_kg": 160.0,
+    "activity_cycle": "Diurno",
+    "native_regions": [
+      "África Oriental"
+    ]
   }
 ]

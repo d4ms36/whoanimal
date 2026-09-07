@@ -13,6 +13,15 @@
       "species": "Dendrobates tinctorius"
     },
     "conservation_status": "LC",
-    "is_rare_species": false
+    "is_rare_species": false,
+    "habitat": "Selvas tropicales húmedas",
+    "diet": "Carnívoro (Insectívoro)",
+    "lifespan_years": 10,
+    "size_cm": 5,
+    "weight_kg": 0.008,
+    "activity_cycle": "Diurno",
+    "native_regions": [
+      "América del Sur"
+    ]
   }
 ]

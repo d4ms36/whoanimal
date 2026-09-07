@@ -13,6 +13,15 @@
       "species": "Spheniscus magellanicus"
     },
     "conservation_status": "NT",
-    "is_rare_species": false
+    "is_rare_species": false,
+    "habitat": "Costas templadas",
+    "diet": "Carnívoro",
+    "lifespan_years": 25,
+    "size_cm": 70,
+    "weight_kg": 4.0,
+    "activity_cycle": "Diurno",
+    "native_regions": [
+      "América del Sur"
+    ]
   }
 ]

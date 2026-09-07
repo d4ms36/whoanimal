@@ -13,6 +13,15 @@
       "species": "Balaenoptera musculus"
     },
     "conservation_status": "EN",
-    "is_rare_species": true
+    "is_rare_species": true,
+    "habitat": "Océanos de todo el mundo",
+    "diet": "Carnívoro (Krill)",
+    "lifespan_years": 90,
+    "size_cm": 2400,
+    "weight_kg": 150000.0,
+    "activity_cycle": "Diurno",
+    "native_regions": [
+      "Océanos Globales"
+    ]
   }
 ]

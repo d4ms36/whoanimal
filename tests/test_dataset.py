@@ -61,5 +61,44 @@ class TestDatasetValidator(unittest.TestCase):
         loaded = json.loads(json_str)
         self.assertTrue(DatasetValidator.validate_data(loaded))
 
+    def test_scientific_fields_valid(self):
+        data = [self.valid_species.copy()]
+        data[0].update({
+            "habitat": "Bosques tropicales",
+            "diet": "Carnívoro",
+            "lifespan_years": 15,
+            "size_cm": 170,
+            "weight_kg": 95.5,
+            "activity_cycle": "Diurno",
+            "native_regions": ["América del Sur", "América Central"]
+        })
+        self.assertTrue(DatasetValidator.validate_data(data))
+
+    def test_scientific_fields_invalid_types(self):
+        data = [self.valid_species.copy()]
+        data[0]["lifespan_years"] = "15"  # Should be int
+        with self.assertRaisesRegex(DatasetValidatorError, "must be an integer"):
+            DatasetValidator.validate_data(data)
+            
+        data[0]["lifespan_years"] = 15
+        data[0]["weight_kg"] = "heavy"
+        with self.assertRaisesRegex(DatasetValidatorError, "must be a number"):
+            DatasetValidator.validate_data(data)
+
+    def test_native_regions_malformed(self):
+        data = [self.valid_species.copy()]
+        data[0]["native_regions"] = "América del Sur"  # Should be a list
+        with self.assertRaisesRegex(DatasetValidatorError, "must be a list of strings"):
+            DatasetValidator.validate_data(data)
+            
+        data[0]["native_regions"] = ["América del Sur", 123]  # Contains non-string
+        with self.assertRaisesRegex(DatasetValidatorError, "contains a non-string element"):
+            DatasetValidator.validate_data(data)
+
+    def test_backward_compatibility(self):
+        # Original species without new fields should still pass
+        data = [self.valid_species]
+        self.assertTrue(DatasetValidator.validate_data(data))
+
 if __name__ == '__main__':
     unittest.main()

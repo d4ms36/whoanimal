@@ -13,6 +13,16 @@
       "species": "Elephas maximus"
     },
     "conservation_status": "EN",
-    "is_rare_species": false
+    "is_rare_species": false,
+    "habitat": "Bosques tropicales y pastizales",
+    "diet": "Herbívoro",
+    "lifespan_years": 60,
+    "size_cm": 275,
+    "weight_kg": 4000.0,
+    "activity_cycle": "Diurno",
+    "native_regions": [
+      "Asia del Sur",
+      "Asia Sudoriental"
+    ]
   }
 ]

@@ -13,6 +13,16 @@
       "species": "Ophiophagus hannah"
     },
     "conservation_status": "VU",
-    "is_rare_species": true
+    "is_rare_species": true,
+    "habitat": "Bosques densos",
+    "diet": "Carnívoro",
+    "lifespan_years": 20,
+    "size_cm": 400,
+    "weight_kg": 6.0,
+    "activity_cycle": "Diurno",
+    "native_regions": [
+      "Asia del Sur",
+      "Asia Sudoriental"
+    ]
   }
 ]

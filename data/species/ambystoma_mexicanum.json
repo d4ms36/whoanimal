@@ -13,6 +13,15 @@
       "species": "Ambystoma mexicanum"
     },
     "conservation_status": "CR",
-    "is_rare_species": true
+    "is_rare_species": true,
+    "habitat": "Lagos de gran altitud",
+    "diet": "Carnívoro",
+    "lifespan_years": 15,
+    "size_cm": 23,
+    "weight_kg": 0.1,
+    "activity_cycle": "Nocturno",
+    "native_regions": [
+      "América del Norte (México)"
+    ]
   }
 ]
