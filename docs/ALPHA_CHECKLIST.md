@@ -135,8 +135,8 @@ Se crea el tag:
 únicamente cuando:
 
 * todas las casillas críticas del Golden Path estén completas (✅ COMPLETADO);
-* Android compile en Release (Pendiente de ejecución en `WHO-019`);
+* Android compile en Release (✅ assembleRelease BUILD SUCCESSFUL en WHO-019);
 * la suite Python continúe pasando (✅ 150/150 PASS);
 * no existan bloqueos críticos abiertos (✅ CERO BLOQUEOS).
 
-*Estado:* Requisitos funcionales y de testing satisfechos. Listo para ejecución del objetivo de empaquetado y release `WHO-019`.
+*Estado:* ✅ RELEASE v0.1.0-alpha COMPLETADO. Binario `app-release-unsigned.apk` (SHA-256 verificado en `docs/RELEASES.md`) generado y tag `v0.1.0-alpha` creado.

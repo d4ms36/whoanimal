@@ -12,12 +12,12 @@
 | Campo | Estado |
 | :--- | :--- |
 | **Proyecto** | WHO Animal |
-| **Fase actual** | Alpha (Golden Path 0.1 Completado / Rebaseline Operativo) |
-| **Versión actual** | `0.0.1` (Transición a `0.1.0-alpha` en WHO-019) |
-| **Estado** | Golden Path End-to-End Operativo / Core Loop Verificado |
-| **Objetivo activo** | Ninguno (Ciclo WHO-018E completado; listo para autorización de WHO-019) |
-| **Último objetivo completado** | `WHO-018E` — Grid de Colección y Reapertura de Cartas Persistidas (DEC-056) |
-| **Próximo objetivo propuesto** | `WHO-019` — Alpha 0.1 Release Packaging & Tagging (`v0.1.0-alpha`) |
+| **Fase actual** | Alpha (Alpha 0.1 Completada y Empaquetada) |
+| **Versión actual** | `0.1.0-alpha` (Build 2) |
+| **Estado** | Release Alpha v0.1.0-alpha emitido y validado |
+| **Objetivo activo** | Ninguno (Ciclo WHO-019 completado; en espera de directrices del Director para siguiente fase) |
+| **Último objetivo completado** | `WHO-019` — Alpha 0.1 Release Packaging & Tagging (`v0.1.0-alpha`) |
+| **Próximo objetivo propuesto** | Pendiente de definición y priorización por el Project Manager / Director |
 | **Bloqueos** | Ninguno |
 | **Decisiones pendientes** | `DEC-009`, `DEC-011`, `DEC-021` a `DEC-025`, `DEC-037-PENDING` |
 | **Última actualización** | 2026-09-07 |
@@ -200,7 +200,7 @@ HOME → STORAGE → CONTAINER → CARD → VIEW / FLIP / BACK
 | **WHO-018D**| Auditoría de Integración del Golden Path y UX | Auditoría funcional end-to-end de 11 pasos y detección de gaps (DEC-055) | Alta | WHO-018C | `COMPLETADO` | **Sí** |
 | **WHO-018E**| Grid de Colección y Reapertura de Cartas Persistidas | Selector de contenedores, grid visual en Baúl, reapertura inmutable sin regeneración, modo PERSISTED_CARD y Room v2 (DEC-056) | Alta | WHO-018D | `COMPLETADO` | **Sí** |
 | **WHO-018** | Integración del Mínimo Funcional Android (End-to-End Core Loop) | Cierre integral del flujo de 11 pasos; formalmente completado y subsumido por la serie `WHO-018A` a `WHO-018E` | Alta | WHO-018E | `COMPLETADO` | **Sí** |
-| **WHO-019** | Alpha 0.1 Release Packaging & Tagging (`v0.1.0-alpha`) | Sincronización de versión Android (versionCode 2, versionName "0.1.0-alpha"), verificación de assembleRelease, registro en RELEASES.md y creación del tag Git v0.1.0-alpha | Alta | WHO-018E | `PROPUESTO` | **Sí** |
+| **WHO-019** | Alpha 0.1 Release Packaging & Tagging (`v0.1.0-alpha`) | Sincronización de versión Android (versionCode 2, versionName "0.1.0-alpha"), verificación de assembleRelease, registro en RELEASES.md y creación del tag Git v0.1.0-alpha | Alta | WHO-018E | `COMPLETADO` | **Sí** |
 
 ### 5.1 Especificación Formal del Próximo Objetivo: WHO-019
 
@@ -284,7 +284,7 @@ HOME → STORAGE → CONTAINER → CARD → VIEW / FLIP / BACK
 | **WHO-018D**| `APROBADO` | `VALIDADO`| `COMPLETADO` | `APPROVED_COMPLETE` |
 | **WHO-018E**| `APROBADO` | `VALIDADO`| `COMPLETADO` | `APPROVED_COMPLETE` |
 | **WHO-018** | `APROBADO` | `VALIDADO`| `COMPLETADO` | `APPROVED_COMPLETE` |
-| **WHO-019** | `PENDIENTE` | `PROPUESTO` | `NO_INICIADO` | `PENDING_APPROVAL` |
+| **WHO-019** | `APROBADO` | `VALIDADO`| `COMPLETADO` | `APPROVED_COMPLETE` |
 
 > **Regla:** El Developer no puede auto-aprobar objetivos. La autorización debe ser explícita por parte del Director Creativo y estructurada por el Project Manager.
 
@@ -324,8 +324,9 @@ Vista operativa de las decisiones pendientes documentadas oficialmente en [docs/
 | Versión | Fase | Estado | Objetivos Asociados | VersionCode | Tipo |
 | :--- | :--- | :--- | :--- | :---: | :--- |
 | **0.0.1** | Alpha | Foundation | WHO-001 a WHO-005B-A | **1\*** | Internal / Foundation |
+| **0.1.0-alpha** | Alpha | Released | WHO-001 a WHO-019 | **2** | Internal Alpha Release |
 
-*\*Nota: El `versionCode` 1 es de carácter lógico y documental en la fundación del repositorio. Todavía no se ha generado ningún binario físico APK o AAB.*  
+*\*Nota: El `versionCode` 1 fue de carácter lógico en la fundación del repositorio. El `versionCode` 2 corresponde al primer binario físico APK release generado (`app-release-unsigned.apk`, SHA-256 verificado en [docs/RELEASES.md](RELEASES.md)).*  
 *La fuente histórica y vinculante completa reside en [docs/RELEASES.md](RELEASES.md).*
 
 ---
@@ -416,6 +417,7 @@ Para prevenir el desvío del alcance (*scope creep*) y asegurar la entrega de un
 | **2026-09-07** | Auditoría de Integración del Golden Path y UX (WHO-018D) | Auditoría funcional end-to-end de 11 pasos del Core Loop, verificación de flujo continuo y detección de la brecha funcional de reapertura en Baúl (DEC-055). | Developer (`WHO-018D`) |
 | **2026-09-07** | Grid de Colección y Reapertura de Cartas (WHO-018E) | Implementación de `CollectionScreen` con navegación por contenedores C-1 a C-10, grid de cartas de 2 columnas, reapertura inmutable sin regeneración, modo `PERSISTED_CARD` y Room v2 con `imagePath` y `personalLore` (DEC-056). | Developer (`WHO-018E`) |
 | **2026-09-07** | Rebaseline Operativo de Alpha 0.1 post-Golden Path (WHO-XXX) | Auditoría documental integral, sincronización de estado real, formalización del cierre del Golden Path, registro de ADRs DEC-054 a DEC-056 y especificación formal de `WHO-019` para packaging y tag v0.1.0-alpha. | Developer (`WHO-XXX`) |
+| **2026-09-07** | Alpha 0.1 Release Packaging & Tagging (WHO-019) | Configuración de versionCode = 2 y versionName = "0.1.0-alpha", verificación de assembleRelease, registro de hash SHA-256 en RELEASES.md y emisión del tag canónico v0.1.0-alpha. | Developer (`WHO-019`) |
 
 ---
 

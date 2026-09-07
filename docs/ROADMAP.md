@@ -85,8 +85,8 @@ LOGIN → HOME → CAPTURE → CAMERA → OBSERVATION → IDENTIFICATION → RES
   * Grid de 2 columnas en Baúl, selector de contenedores C-1 a C-10, reapertura inmutable sin regeneración de carta, modo `PERSISTED_CARD` y Room versión 2 con `imagePath` y `personalLore` (DEC-056).
 * **`WHO-018` — Integración del Mínimo Funcional Android (End-to-End Core Loop)** `[COMPLETADO]`
   * Consolidado y completado exitosamente a través de la secuencia atómica `WHO-018A` a `WHO-018E`.
-* **`WHO-019` — Alpha 0.1 Release Packaging & Tagging (`v0.1.0-alpha`)** `[PROPUESTO]`
-  * Verificación formal de empaquetado de Release Android (`assembleRelease`), verificación de `versionCode`/`versionName` según gobernanza, suite de regresión y creación del tag de lanzamiento `v0.1.0-alpha`.
+* **`WHO-019` — Alpha 0.1 Release Packaging & Tagging (`v0.1.0-alpha`)** `[COMPLETADO]`
+  * Verificación formal de empaquetado de Release Android (`assembleRelease`), sincronización de `versionCode = 2` y `versionName = "0.1.0-alpha"`, registro de artefacto con hash SHA-256 en `docs/RELEASES.md` y creación del tag canónico `v0.1.0-alpha`.
 
 ---
 
