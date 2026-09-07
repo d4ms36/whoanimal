@@ -210,3 +210,10 @@ Cada tarea u objetivo debe documentarse utilizando la siguiente ficha estructura
 * **Estado:** `APPROVED_COMPLETE`
 * **Commit:** `2472cc9` (*docs(WHO-010A): synchronize project planning and governance*)
 * **VersiÃ³n:** `0.0.1`
+
+### WHO-011A: Infraestructura del Banco de Datos Zoológico
+* **Propósito:** Crear la estructura base y el validador JSON de las especies.
+* **Estado:** `APPROVED_COMPLETE`
+* **Commit:** (Pendiente de commit) (*feat(dataset): implement zoological dataset infrastructure*)
+* **Versión:** `0.0.1`
+

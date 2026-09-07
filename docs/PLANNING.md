@@ -15,12 +15,12 @@
 | **Fase actual** | Alpha |
 | **Versión actual** | `0.0.1` |
 | **Estado** | Foundation |
-| **Objetivo activo** | Ninguno (Ciclo WHO-010A completado; listo para revisión de PM) |
-| **Último objetivo completado** | `WHO-010A` — Auditoría y Sincronización Integral de Documentación |
+| **Objetivo activo** | Ninguno (Ciclo WHO-011A completado; listo para revisión de PM) |
+| **Último objetivo completado** | `WHO-011A` — Infraestructura del Banco de Datos Zoológico |
 | **Próximo objetivo propuesto** | Pendiente de aprobación |
 | **Bloqueos** | Ninguno |
 | **Decisiones pendientes** | `DEC-009` a `DEC-012`, `DEC-020` a `DEC-025`, `DEC-037-PENDING` |
-| **Último commit** | `2472cc9` |
+| **Último commit** | `2db2689` |
 | **Última actualización** | 2026-09-06 |
 
 ---
@@ -73,6 +73,7 @@ $$\text{FASE} . \text{CORRECCIONES} . \text{ITERACIÓN}$$
 | **WHO-008B** | Definir reglas de edición de la Historia Personal (Lore) | `COMPLETADO` | Media | 0.0.1 | Sí |
 | **WHO-010** | Conexión y publicación inicial del repositorio | `COMPLETADO` | Alta | 0.0.1 | Sí |
 | **WHO-010A** | Auditoría y Sincronización Integral de Documentación | `COMPLETADO` | Alta | 0.0.1 | Sí |
+| **WHO-011A** | Infraestructura del Banco de Datos Zoológico | `COMPLETADO` | Alta | 0.0.1 | Sí |
 
 ---
 
@@ -147,6 +148,7 @@ Ordenados por prioridad técnica y estratégica.
 | **WHO-008B** | `APROBADO` | `VALIDADO` | `COMPLETADO` | `APPROVED_COMPLETE` |
 | **WHO-010** | `APROBADO` | `VALIDADO` | `COMPLETADO` | `APPROVED_COMPLETE` |
 | **WHO-010A** | `APROBADO` | `VALIDADO`| `COMPLETADO` | `APPROVED_COMPLETE` |
+| **WHO-011A** | `APROBADO` | `VALIDADO`| `COMPLETADO` | `APPROVED_COMPLETE` |
 
 > **Regla:** El Developer no puede auto-aprobar objetivos. La autorización debe ser explícita por parte del Director Creativo y estructurada por el Project Manager.
 
@@ -250,6 +252,7 @@ Para prevenir el desvío del alcance (*scope creep*) y asegurar una base sólida
 | **2026-09-06** | Reglas Edición Historia Personal (WHO-008B) | Formalización documental de los límites de edición del Lore: 3 ediciones por cuenta y solicitud oficial. | Developer (`WHO-008B`) |
 | **2026-09-06** | Conexión y publicación inicial (WHO-010) | Configuración de infraestructura Git/GitHub y sincronización. | Developer (`WHO-010`) |
 | **2026-09-06** | Auditoría y Sincronización Integral (WHO-010A) | Consolidación y validación de la documentación del proyecto, corrección de IDs duplicados. | Developer (`WHO-010A`) |
+| **2026-09-06** | Infraestructura del Banco de Datos Zoológico (WHO-011A) | Creación de esquemas, JSON validador y estructura de directorios. | Developer (`WHO-011A`) |
 
 ---
 

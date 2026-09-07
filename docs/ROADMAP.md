@@ -72,6 +72,8 @@
   * Configuración de infraestructura Git/GitHub y publicación del código inicial.
 * **`WHO-010A` — Auditoría y Sincronización Integral de Documentación** `[APPROVED_COMPLETE]`
   * Revisión exhaustiva y consolidación de documentación técnica y directrices del proyecto.
+* **`WHO-011A` — Infraestructura del Banco de Datos Zoológico** `[APPROVED_COMPLETE]`
+  * Infraestructura base para almacenar y validar el dataset estático de especies en JSON.
 * **`WHO-011` — Evaluación y Prototipo de Ingesta Taxonómica** `[PROPOSED]`
   * Conector experimental con APIs de biodiversidad abiertas (GBIF / iNaturalist) para validación de datos.
 * **`WHO-012` — Prototipo del Servicio de Generación de Cartas** `[PROPOSED]`
