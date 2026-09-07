@@ -271,7 +271,7 @@ ative_regions).
 ### WHO-013: Consolidación de Arquitectura, Roadmap y Definición del Mínimo Funcional
 * **Propósito:** Auditoría maestra de objetivos WHO, resolución de colisiones históricas, formalización del Mínimo Funcional Android (11 pasos), reorganización del Roadmap en 5 fases estancas y aislamiento de las 13 capacidades futuras (DEC-047).
 * **Estado:** `APPROVED_COMPLETE`
-* **Commit:** (Pendiente de commit) (*docs(governance): consolidate architecture roadmap and minimum functional product*)
+* **Commit:** `f223622`
 * **Versión:** `0.0.1`
 
 

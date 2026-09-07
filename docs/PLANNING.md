@@ -20,7 +20,7 @@
 | **Próximo objetivo propuesto** | `WHO-014` — Servicio de Ensamblaje y Generación de Cartas (`Capture → Card`) |
 | **Bloqueos** | Ninguno |
 | **Decisiones pendientes** | `DEC-009` a `DEC-012`, `DEC-021` a `DEC-025`, `DEC-037-PENDING` |
-| **Último commit** | `5bb14dc` |
+| **Último commit** | `f223622` |
 | **Última actualización** | 2026-09-07 |
 
 ---
