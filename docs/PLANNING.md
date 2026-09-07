@@ -15,12 +15,12 @@
 | **Fase actual** | Alpha |
 | **Versión actual** | `0.0.1` |
 | **Estado** | Foundation |
-| **Objetivo activo** | Ninguno (Ciclo WHO-012A completado; listo para revisión de PM) |
-| **Último objetivo completado** | `WHO-012A` — Implementación del Motor de Observaciones |
+| **Objetivo activo** | Ninguno (Ciclo WHO-012B completado; listo para revisión de PM) |
+| **Último objetivo completado** | `WHO-012B` — Implementación del Resultado de Identificación Zoológica |
 | **Próximo objetivo propuesto** | Pendiente de aprobación |
 | **Bloqueos** | Ninguno |
 | **Decisiones pendientes** | `DEC-009` a `DEC-012`, `DEC-020` a `DEC-025`, `DEC-037-PENDING` |
-| **Último commit** | `dea8041` |
+| **Último commit** | `f4762df` |
 | **Última actualización** | 2026-09-06 |
 
 ---
@@ -78,6 +78,7 @@ $$\text{FASE} . \text{CORRECCIONES} . \text{ITERACIÓN}$$
 | **WHO-011C** | Implementación del Catálogo Zoológico Oficial Inicial | `COMPLETADO` | Alta | 0.0.1 | Sí |
 | **WHO-011D** | Enriquecimiento Científico del Catálogo Zoológico | `COMPLETADO` | Alta | 0.0.1 | Sí |
 | **WHO-012A** | Implementación del Motor de Observaciones | `COMPLETADO` | Alta | 0.0.1 | Sí |
+| **WHO-012B** | Implementación del Resultado de Identificación Zoológica | `COMPLETADO` | Alta | 0.0.1 | Sí |
 
 ---
 
@@ -157,6 +158,7 @@ Ordenados por prioridad técnica y estratégica.
 | **WHO-011C** | `APROBADO` | `VALIDADO`| `COMPLETADO` | `APPROVED_COMPLETE` |
 | **WHO-011D** | `APROBADO` | `VALIDADO`| `COMPLETADO` | `APPROVED_COMPLETE` |
 | **WHO-012A** | `APROBADO` | `VALIDADO`| `COMPLETADO` | `APPROVED_COMPLETE` |
+| **WHO-012B** | `APROBADO` | `VALIDADO`| `COMPLETADO` | `APPROVED_COMPLETE` |
 
 > **Regla:** El Developer no puede auto-aprobar objetivos. La autorización debe ser explícita por parte del Director Creativo y estructurada por el Project Manager.
 
@@ -265,6 +267,7 @@ Para prevenir el desvío del alcance (*scope creep*) y asegurar una base sólida
 | **2026-09-06** | Catálogo Zoológico Oficial Inicial (WHO-011C) | Implementación de las primeras 28 especies JSON validadas estrictamente. | Developer (`WHO-011C`) |
 | **2026-09-06** | Enriquecimiento Científico del Catálogo Zoológico (WHO-011D) | Incorporación de campos científicos (hábitat, dieta, peso, etc.). | Developer (`WHO-011D`) |
 | **2026-09-07** | Implementación del Motor de Observaciones (WHO-012A) | Creación del modelo `Observation` como puente efímero. | Developer (`WHO-012A`) |
+| **2026-09-07** | Resultado de Identificación Zoológica (WHO-012B) | Creación de `IdentificationResult` separando confianza y aceptación. | Developer (`WHO-012B`) |
 
 ---
 

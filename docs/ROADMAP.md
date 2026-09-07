@@ -82,6 +82,8 @@
   * Incorporación de información científica estable (hábitat, dieta, peso, etc.) a las especies iniciales respetando Clean Architecture.
 * **`WHO-012A` — Implementación del Motor de Observaciones** `[APPROVED_COMPLETE]`
   * Creación de la entidad de dominio `Observation` como puente efímero entre fotografía y captura.
+* **`WHO-012B` — Implementación del Resultado de Identificación Zoológica** `[APPROVED_COMPLETE]`
+  * Creación de `IdentificationResult` separando confianza de la decisión de aceptación.
 * **`WHO-011` — Evaluación y Prototipo de Ingesta Taxonómica** `[PROPOSED]`
   * Conector experimental con APIs de biodiversidad abiertas (GBIF / iNaturalist) para validación de datos.
 * **`WHO-012` — Prototipo del Servicio de Generación de Cartas** `[PROPOSED]`

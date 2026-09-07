@@ -523,6 +523,19 @@ Aprobado por: [Director Creativo / Project Manager / Consenso]
 
 ---
 
+### DEC-044: Resultados de Identificación
+* **Tema:** Arquitectura de Dominio (Motor de Observaciones)
+* **Fecha:** 2026-09-07
+* **Estado:** `APPROVED`
+* **Decisión:** Se crea `IdentificationResult` para aislar el resultado de un motor de identificación sobre una `Observation`. Se separa explícitamente el valor de confianza (`confidence`) de la decisión de aceptación (acceptance).
+* **Justificación / Principios:**
+  * Un valor numérico de confianza no debe automatizar la verdad. La aceptación debe estar desacoplada del resultado.
+  * Los resultados conservan el orden exacto devuelto por el motor (no se auto-ordenan).
+  * No se incluyen conceptos de `accepted`, `verified`, ni conversiones a `Capture` en esta fase.
+* **Aprobado por:** Director Creativo / Project Manager
+
+---
+
 ### DEC-010: Estilo y Universo Mitológico del Lore (SUPERSEDED)
 * **Tema:** Diseño Narrativo
 * **Estado:** `SUPERSEDED`

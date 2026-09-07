@@ -246,3 +246,10 @@ ative_regions).
 * **Commit:** (Pendiente de commit) (*feat(domain): implement observation pipeline foundation*)
 * **Versión:** `0.0.1`
 
+
+### WHO-012B: Implementación del Resultado de Identificación Zoológica
+* **Propósito:** Crear la entidad de dominio `IdentificationResult` separando el valor de confianza de la decisión de aceptación.
+* **Estado:** `APPROVED_COMPLETE`
+* **Commit:** (Pendiente de commit) (*feat(domain): implement identification result*)
+* **Versión:** `0.0.1`
+
