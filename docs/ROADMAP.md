@@ -70,7 +70,7 @@
   * Documentar reglas de edición: límite global de 3 ediciones por cuenta y Solicitud Oficial excepcional.
 * **`WHO-010` — Conexión y publicación inicial del repositorio** `[APPROVED_COMPLETE]`
   * Configuración de infraestructura Git/GitHub y publicación del código inicial.
-* **`WHO-010A` — Auditoría y Sincronización Integral de Documentación** `[CURRENT]`
+* **`WHO-010A` — Auditoría y Sincronización Integral de Documentación** `[APPROVED_COMPLETE]`
   * Revisión exhaustiva y consolidación de documentación técnica y directrices del proyecto.
 * **`WHO-011` — Evaluación y Prototipo de Ingesta Taxonómica** `[PROPOSED]`
   * Conector experimental con APIs de biodiversidad abiertas (GBIF / iNaturalist) para validación de datos.
