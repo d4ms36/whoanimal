@@ -265,31 +265,42 @@ class GoldenPathIntegrationTest {
     }
 
     // =========================================================================
-    // 5. AUDITORÍA DE BRECHA (GAP): REAPERTURA INTERACTIVA DESDE BAÚL
+    // 5. AUDITORÍA DE REAPERTURA INTERACTIVA DESDE BAÚL (WHO-018E COMPLETADO)
     // =========================================================================
 
     @Test
-    fun testAuditCollectionReopenCapabilitiesAndDocumentGap() = runBlocking {
-        // 1. En la capa de dominio y persistencia: getCardsInContainer ya recupera la carta completa con su identidad
+    fun testCollectionGridAndCardReopeningFromStorage() = runBlocking {
+        // 1. Persistir una carta con datos completos
         val card = cardGenerator.generateCard(
             CaptureContract(
-                captureId = "cap-gap-test",
+                captureId = "cap-reopen-test",
                 animalId = OfficialStarterCatalog.macaw.animalId,
-                identificationId = "id-gap-test",
-                capturedAt = Instant.now().toString()
+                identificationId = "id-reopen-test",
+                capturedAt = Instant.now().toString(),
+                displayLocation = "Reserva Biosfera Maya"
             )
+        ).copy(
+            imagePath = "/cache/macaw.jpg",
+            personalLore = "Avistamiento sobrevolando el dosel selvático."
         )
         val slot = storageRepository.autoAssignSlot(card)
-        val retrievedCards = storageRepository.getCardsInContainer(slot.containerIndex)
-        assertTrue("La capa de datos soporta recuperar cartas de un contenedor", retrievedCards.isNotEmpty())
 
-        // 2. Comprobación de GAP: En la capa UI (CollectionPlaceholderScreen),
-        // no existe actualmente un composable de grid interactivo con onClick = { onSelectCard(card) -> navigate(CardReview) }.
-        // Se clasifica estrictamente como GAP — FUTURE TASK conforme a la directriz WHO-018D.
-        val isUiCardClickToReopenImplemented = false
-        assertFalse(
-            "GAP DOCUMENTADO: La reapertura visual interactiva de carta desde la pantalla de colección es una tarea futura del roadmap",
-            isUiCardClickToReopenImplemented
-        )
+        // 2. Recuperar la carta desde el contenedor
+        val retrievedCards = storageRepository.getCardsInContainer(slot.containerIndex)
+        assertTrue("La capa de datos recupera las cartas del contenedor", retrievedCards.isNotEmpty())
+
+        val (slotIndex, retrievedCard) = retrievedCards.first { it.second.cardId == card.cardId }
+        assertEquals(slot.slotIndex, slotIndex)
+
+        // 3. Verificación de identidad estricta al reabrir (sin regeneración)
+        assertEquals("cardId debe ser idéntico", card.cardId, retrievedCard.cardId)
+        assertEquals("captureId debe ser idéntico", card.captureId, retrievedCard.captureId)
+        assertEquals("animalId debe ser idéntico", card.animalId, retrievedCard.animalId)
+        assertEquals("rarity debe ser idéntica", card.rarity, retrievedCard.rarity)
+        assertEquals("serial debe ser idéntico", card.serial, retrievedCard.serial)
+        assertEquals("imagePath debe ser idéntico", card.imagePath, retrievedCard.imagePath)
+        assertEquals("personalLore debe ser idéntico", card.personalLore, retrievedCard.personalLore)
+        assertEquals("displayLocation debe ser idéntica", card.displayLocation, retrievedCard.displayLocation)
     }
 }
+

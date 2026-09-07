@@ -24,7 +24,7 @@ Una funcionalidad solo puede marcarse como completada cuando:
 | Card Generator     | ✅      |
 | Identification     | ✅      |
 | Persistence        | ✅      |
-| Alpha E2E          | ⏳      |
+| Alpha E2E          | ✅      |
 
 ---
 
@@ -83,7 +83,7 @@ Una funcionalidad solo puede marcarse como completada cuando:
 | Persistencia     | ✅      |
 | 10 contenedores  | ✅      |
 | 30 slots         | ✅      |
-| Mostrar cartas   | 🟡     |
+| Mostrar cartas   | ✅      |
 | Eliminar         | 🟡     |
 | Editar permitido | ⬜      |
 
@@ -105,11 +105,11 @@ El siguiente recorrido debe funcionar completo para declarar Alpha terminada.
 * [x] Generar AnimalCard.
 * [x] Revisar la carta.
 * [x] Guardarla.
-* [ ] Verla en Collection.
+* [x] Verla en Collection.
+* [x] Cerrar la aplicación.
+* [x] Volver a abrirla.
+* [x] Recuperar la carta.
 
-* [ ] Cerrar la aplicación.
-* [ ] Volver a abrirla.
-* [ ] Recuperar la carta.
 
 ---
 

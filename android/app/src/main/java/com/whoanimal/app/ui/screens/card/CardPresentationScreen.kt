@@ -83,12 +83,18 @@ import com.whoanimal.app.ui.theme.SageAccent
 import com.whoanimal.app.ui.theme.SoftCardBorder
 import java.io.File
 
+enum class CardPresentationMode {
+    NEW_CARD_REVIEW,
+    PERSISTED_CARD
+}
+
 /**
- * WHO-018C — Card Presentation & Interactive Review.
+ * WHO-018C & WHO-018E — Card Presentation & Interactive Review / Reopening.
  *
  * Presentación interactiva de la carta de animal con giro 3D (Front <-> Back).
- * Separa de manera estricta la información zoológica científica del Lore/observación personal.
- * Consume exclusivamente contratos inmutables existentes.
+ * Soporta dos modos operacionales:
+ * - NEW_CARD_REVIEW: Muestra acciones de decisión (Guardar / Liberar) tras una captura.
+ * - PERSISTED_CARD: Muestra inspección de carta reabierta desde el Baúl sin duplicar guardados.
  */
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -97,8 +103,9 @@ fun CardPresentationScreen(
     profile: AnimalProfileContract? = null,
     isLoading: Boolean = false,
     errorMessage: String? = null,
-    onSaveCard: (AnimalCardContract) -> Unit,
-    onReleaseCard: () -> Unit,
+    mode: CardPresentationMode = CardPresentationMode.NEW_CARD_REVIEW,
+    onSaveCard: (AnimalCardContract) -> Unit = {},
+    onReleaseCard: () -> Unit = {},
     onNavigateBack: () -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -122,7 +129,7 @@ fun CardPresentationScreen(
                 title = {
                     Column {
                         Text(
-                            text = "Inspección de Carta",
+                            text = if (mode == CardPresentationMode.PERSISTED_CARD) "Colección • Ficha de Ejemplar" else "Inspección de Carta",
                             style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold)
                         )
                         Text(
@@ -159,26 +166,35 @@ fun CardPresentationScreen(
         },
         bottomBar = {
             if (card != null && errorMessage == null && !isLoading) {
-                CardActionBar(
-                    isFlipped = isFlipped,
-                    isProcessing = isProcessingAction,
-                    onToggleFlip = { isFlipped = !isFlipped },
-                    onSave = {
-                        if (!isProcessingAction) {
-                            isProcessingAction = true
-                            onSaveCard(card)
+                if (mode == CardPresentationMode.NEW_CARD_REVIEW) {
+                    CardActionBar(
+                        isFlipped = isFlipped,
+                        isProcessing = isProcessingAction,
+                        onToggleFlip = { isFlipped = !isFlipped },
+                        onSave = {
+                            if (!isProcessingAction) {
+                                isProcessingAction = true
+                                onSaveCard(card)
+                            }
+                        },
+                        onOpenReleaseDialog = {
+                            if (!isProcessingAction) {
+                                showReleaseDialog = true
+                            }
                         }
-                    },
-                    onOpenReleaseDialog = {
-                        if (!isProcessingAction) {
-                            showReleaseDialog = true
-                        }
-                    }
-                )
+                    )
+                } else {
+                    PersistedCardActionBar(
+                        isFlipped = isFlipped,
+                        onToggleFlip = { isFlipped = !isFlipped },
+                        onNavigateBack = onNavigateBack
+                    )
+                }
             }
         },
         modifier = modifier
     ) { innerPadding ->
+
         Box(
             modifier = Modifier
                 .fillMaxSize()
@@ -1021,3 +1037,62 @@ private fun CardActionBar(
         }
     }
 }
+
+/**
+ * Barra de inspección para cartas ya persistidas reabiertas desde el Baúl.
+ * No contiene acciones que puedan desencadenar un guardado duplicado accidental.
+ */
+@Composable
+private fun PersistedCardActionBar(
+    isFlipped: Boolean,
+    onToggleFlip: () -> Unit,
+    onNavigateBack: () -> Unit
+) {
+    Surface(
+        tonalElevation = 6.dp,
+        shadowElevation = 8.dp,
+        modifier = Modifier.fillMaxWidth()
+    ) {
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 16.dp, vertical = 12.dp),
+            horizontalArrangement = Arrangement.spacedBy(10.dp),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            OutlinedButton(
+                onClick = onNavigateBack,
+                shape = RoundedCornerShape(12.dp),
+                modifier = Modifier
+                    .weight(1f)
+                    .testTag("action_back_to_collection_button")
+            ) {
+                Icon(
+                    imageVector = Icons.AutoMirrored.Filled.ArrowBack,
+                    contentDescription = null,
+                    modifier = Modifier.size(16.dp)
+                )
+                Spacer(modifier = Modifier.width(6.dp))
+                Text("Volver al Baúl", maxLines = 1)
+            }
+
+            Button(
+                onClick = onToggleFlip,
+                shape = RoundedCornerShape(12.dp),
+                colors = ButtonDefaults.buttonColors(containerColor = ForestGreenPrimary),
+                modifier = Modifier
+                    .weight(1f)
+                    .testTag("action_flip_button")
+            ) {
+                Icon(
+                    imageVector = Icons.Default.FlipCameraAndroid,
+                    contentDescription = null,
+                    modifier = Modifier.size(16.dp)
+                )
+                Spacer(modifier = Modifier.width(6.dp))
+                Text(if (isFlipped) "Ver Anverso" else "Ver Reverso", maxLines = 1, fontWeight = FontWeight.Bold)
+            }
+        }
+    }
+}
+

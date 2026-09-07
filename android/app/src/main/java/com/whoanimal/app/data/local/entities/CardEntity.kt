@@ -40,7 +40,9 @@ data class CardEntity(
     val rank: Int = 1,
     val displayLocation: String = "General Location",
     val ownerId: String? = null,
-    val edition: String? = null
+    val edition: String? = null,
+    val imagePath: String? = null,
+    val personalLore: String? = null
 ) {
     fun toContract(): AnimalCardContract {
         val status = try {
@@ -66,7 +68,9 @@ data class CardEntity(
             rank = rank,
             displayLocation = displayLocation,
             ownerId = ownerId,
-            edition = edition
+            edition = edition,
+            imagePath = imagePath,
+            personalLore = personalLore
         )
     }
 
@@ -89,8 +93,11 @@ data class CardEntity(
                 rank = contract.rank,
                 displayLocation = contract.displayLocation,
                 ownerId = contract.ownerId,
-                edition = contract.edition
+                edition = contract.edition,
+                imagePath = contract.imagePath,
+                personalLore = contract.personalLore
             )
         }
     }
 }
+

@@ -31,7 +31,9 @@ import com.whoanimal.app.domain.model.IdentificationDecisionContract
 import com.whoanimal.app.domain.model.ObservationContract
 import com.whoanimal.app.domain.repository.CollectionStorageRepository
 import com.whoanimal.app.domain.service.CardGeneratorService
+import com.whoanimal.app.ui.screens.card.CardPresentationMode
 import com.whoanimal.app.ui.screens.card.CardPresentationScreen
+import com.whoanimal.app.ui.screens.collection.CollectionScreen
 import kotlinx.coroutines.launch
 import java.time.Instant
 import java.util.UUID
@@ -62,6 +64,7 @@ fun AppNavHost(
     var currentIdentificationResult by remember { mutableStateOf<IdentificationResultContract?>(null) }
     var currentCapturedImagePath by remember { mutableStateOf<String?>(null) }
     var currentCardToReview by remember { mutableStateOf<AnimalCardContract?>(null) }
+    var currentPresentationMode by remember { mutableStateOf(CardPresentationMode.NEW_CARD_REVIEW) }
 
     NavHost(
         navController = navController,
@@ -156,6 +159,7 @@ fun AppNavHost(
                             displayLocation = "Reserva Natural Protegida"
                         )
                         currentCardToReview = generatedCard
+                        currentPresentationMode = CardPresentationMode.NEW_CARD_REVIEW
                         navController.navigate(NavDestination.CardReview.route)
                     }
                 },
@@ -173,6 +177,7 @@ fun AppNavHost(
         composable(NavDestination.CardReview.route) {
             CardPresentationScreen(
                 card = currentCardToReview,
+                mode = currentPresentationMode,
                 onSaveCard = { cardToSave ->
                     scope.launch {
                         try {
@@ -200,9 +205,14 @@ fun AppNavHost(
             )
         }
 
-
         composable(NavDestination.Collection.route) {
-            CollectionPlaceholderScreen(
+            CollectionScreen(
+                storageRepository = effectiveStorageRepository,
+                onSelectCard = { card ->
+                    currentCardToReview = card
+                    currentPresentationMode = CardPresentationMode.PERSISTED_CARD
+                    navController.navigate(NavDestination.CardReview.route)
+                },
                 onNavigateBack = {
                     navController.popBackStack()
                 }
@@ -210,4 +220,5 @@ fun AppNavHost(
         }
     }
 }
+
 

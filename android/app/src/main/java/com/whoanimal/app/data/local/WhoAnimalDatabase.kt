@@ -17,9 +17,10 @@ import com.whoanimal.app.data.local.entities.StorageSlotEntity
         StorageSlotEntity::class,
         ProfileEntity::class
     ],
-    version = 1,
+    version = 2,
     exportSchema = false
 )
+
 abstract class WhoAnimalDatabase : RoomDatabase() {
 
     abstract fun cardDao(): CardDao
