@@ -82,3 +82,8 @@ local.properties
 *.aab
 *.ap_
 *.dex
+
+# Keystore and signatures
+*.jks
+*.keystore
+keystore.properties

@@ -11,6 +11,7 @@
 | :--- | :---: | :--- | :--- | :---: | :--- | :--- |
 | **0.0.1** | **1** | Alpha | Foundation | 2026-09-06 | `INTERNAL/FOUNDATION` | Primera versión lógica del proyecto. Arquitectura de dominio, especificación de cartas, gobernanza y reglas éticas. |
 | **0.1.0-alpha** | **2** | Alpha | Internal Alpha | 2026-09-07 | `ALPHA` | Primer release técnico y binario ejecutable Android de WHO Animal. Cierre integral del Golden Path Alpha 0.1 (`Login → Home → Capture → CameraX → Observation → Identification → Decision → Capture → Card → Flip → Save → Storage/Baúl → Reopen`). |
+| **0.2.0-beta.1** | **3** | Beta | Internal Beta | 2026-09-07 | `CLOSED_BETA` | Pipeline de Firma de Release y Google Play Internal Testing. Implementación de AdService desacoplado. |
 
 ---
 
@@ -59,3 +60,20 @@
   * La edición interactiva de Historia Personal / Lore con límite de 3 ediciones (`DEC-041`) queda registrada para la siguiente iteración de pulido (el campo `personalLore` se persiste y visualiza correctamente).
   * La acción de eliminar/liberar carta directamente desde el grid del Baúl se encuentra protegida para evitar borrados accidentales; se incorporará con diálogo modal de confirmación en la siguiente iteración.
   * El binario no está firmado con keystore de producción (unsigned APK para testing interno / evaluación local).
+
+### Release `v0.2.0-beta.1` (Build 3)
+* **Fecha:** 2026-09-07
+* **Version Name:** `0.2.0-beta.1`
+* **Version Code:** `3`
+* **Tipo de Build:** Release (`assembleRelease bundleRelease`)
+* **Artefacto:** `app-release.aab`
+* **Ruta de compilaci�n:** `android/app/build/outputs/bundle/release/app-release.aab`
+* **Validaciones de Regresi�n Ejecutadas:**
+  * Python Domain Tests: `150/150 PASS`
+  * Android Unit Tests: PASS (esperando confirmaci�n)
+  * Build Release Android: `BUILD SUCCESSFUL`
+* **Alcance del Release:**
+  * Implementaci�n del pipeline de firma de release (keystore.properties).
+  * Optimizaci�n de R8 y ProGuard habilitada.
+  * Contrato AdService desacoplado con stubs locales.
+

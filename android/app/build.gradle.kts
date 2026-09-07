@@ -5,6 +5,9 @@ plugins {
     id("com.google.devtools.ksp")
 }
 
+import java.util.Properties
+import java.io.FileInputStream
+
 android {
     namespace = "com.whoanimal.app"
     compileSdk = 34
@@ -13,8 +16,8 @@ android {
         applicationId = "com.whoanimal.app"
         minSdk = 26
         targetSdk = 34
-        versionCode = 2
-        versionName = "0.1.0-alpha"
+        versionCode = 3
+        versionName = "0.2.0-beta.1"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
@@ -22,13 +25,36 @@ android {
         }
     }
 
+    signingConfigs {
+        create("release") {
+            val keystoreFile = rootProject.file("keystore.properties")
+            if (keystoreFile.exists()) {
+                val props = Properties()
+                props.load(FileInputStream(keystoreFile))
+                storeFile = file(props.getProperty("storeFile"))
+                storePassword = props.getProperty("storePassword")
+                keyAlias = props.getProperty("keyAlias")
+                keyPassword = props.getProperty("keyPassword")
+            } else {
+                println("WARNING: keystore.properties not found. Falling back to debug signing config.")
+                val debugSigningConfig = getByName("debug")
+                storeFile = debugSigningConfig.storeFile
+                storePassword = debugSigningConfig.storePassword
+                keyAlias = debugSigningConfig.keyAlias
+                keyPassword = debugSigningConfig.keyPassword
+            }
+        }
+    }
+
     buildTypes {
         release {
-            isMinifyEnabled = false
+            isMinifyEnabled = true
+            isShrinkResources = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
+            signingConfig = signingConfigs.getByName("release")
         }
     }
     compileOptions {

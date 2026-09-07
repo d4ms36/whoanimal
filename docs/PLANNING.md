@@ -207,7 +207,7 @@ HOME → STORAGE → CONTAINER → CARD → VIEW / FLIP / BACK
 | **WHO-023** | Edición Interactiva de Lore (DEC-041) y Liberación en Baúl | UI de edición de Historia Personal con control de cuota de 3 ediciones y acción segura de liberar carta desde Baúl con modal | Alta | WHO-022 | `COMPLETADO` | **Sí** |
 | **WHO-024** | Accesibilidad (a11y) y Robustecimiento de Compatibilidad CameraX | Soporte TalkBack, target táctiles mínimos de 48dp y compatibilidad CameraX ante variantes de sensor y rotación | Media | WHO-023 | `COMPLETADO` | **Sí** |
 | **WHO-025** | Contrato Desacoplado `AdService` y Stubs de Infraestructura | Definición de interfaces limpias de publicidad desacoplada (`DEC-053`) y stubs locales de políticas de frecuencia | Media | WHO-024 | `PROPUESTO` | **Sí** |
-| **WHO-026** | Pipeline de Firma de Release y Google Play Internal Testing | Keystore de release, optimización R8/ProGuard y preparación del paquete de distribución interna `v0.2.0-beta.1` (versionCode 3) | Alta | WHO-025 | `PROPUESTO` | **Sí** |
+| **WHO-026** | Pipeline de Firma de Release y Google Play Internal Testing | Keystore de release, optimización R8/ProGuard y preparación del paquete de distribución interna `v0.2.0-beta.1` (versionCode 3) | Alta | WHO-025 | `COMPLETADO` | **Sí** |
 
 ### 5.1 Especificación Formal del Próximo Objetivo: WHO-025
 

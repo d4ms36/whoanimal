@@ -1016,3 +1016,13 @@ Aprobado por: [Director Creativo / Project Manager / Consenso]
 * **Estado:** `PENDING`
 * **Descripción:** Definición del sistema de progresión y maestría del usuario asociado al campo mutable `rank` de la carta (escalas de nivel, puntos de avance, interacción formativa y aprendizaje), asegurando que no represente atributos biológicos, edad, tamaño ni estadísticas de combate.
 * **Decisión requerida de:** Director Creativo / Project Manager
+
+### DEC-054: Adopción del Pipeline Release Local con Keystore Segura
+* **Tema:** Infraestructura, Seguridad y Release
+* **Fecha:** 2026-09-07
+* **Estado:** APPROVED
+* **Decisión:** La generación de builds Release se realizará utilizando un archivo keystore.properties excluido del repositorio. Gradle leerá este archivo para firmar el AAB. Si no existe, se hará un fallback automático a la configuración de firma debug para evitar fallos de build en entornos locales que solo compilan el código fuente sin la clave privada.
+* **Motivo:** Asegurar que los desarrolladores puedan seguir compilando y verificando localmente sin necesidad de tener acceso a las claves de producción, protegiendo las credenciales oficiales.
+* **Impacto:** Los binarios oficiales de Play Console solo pueden ser generados por el equipo autorizado con el archivo keystore real; R8 y ProGuard quedan activos en release.
+* **Aprobado por:** Project Manager / Developer
+

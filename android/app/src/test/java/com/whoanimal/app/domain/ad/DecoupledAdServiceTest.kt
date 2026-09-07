@@ -43,7 +43,7 @@ class DecoupledAdServiceTest {
     @Test
     fun `showInterstitial success updates frequency policy timestamp`() {
         stubAdService.showInterstitial(AdPlacement.HOME)
-        val timestamp = stubAdService.getFrequencyPolicy().getLastInterstitialTime()
+        val timestamp = stubAdService.getFrequencyPolicy().getLastImpressionTimestamp()
         assertTrue(timestamp > 0)
     }
 

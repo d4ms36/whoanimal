@@ -187,7 +187,11 @@
     <string name="card_flip_hint_front">Card of %1$s. Showing visual front. Double tap to flip and view zoological data and lore.</string>
     <string name="card_flip_hint_back">Card of %1$s. Showing zoological back. Double tap to flip to front.</string>
     <string name="collection_card_item_description">%1$s, %2$s. Specimen number %3$d in slot %4$d. %5$s. Double tap to open card.</string>
-    <string name="collection_container_chip_description">Container %1$d. %2$s.</string>
+    <string name="collection_container_chip_description">Container %1$s</string>
     <string name="identification_confidence_description">Identification confidence level: %1$d percent</string>
     <string name="identification_top_candidate_label">Primary zoological candidate</string>
+    
+    <!-- Ads (WHO-025) -->
+    <string name="ad_stub_banner_label">AD STUB (%1$s)</string>
+    <string name="ad_banner_a11y_description">Test ad banner</string>
 </resources>

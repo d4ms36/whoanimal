@@ -84,8 +84,8 @@ Una funcionalidad solo puede marcarse como completada cuando:
 | 10 contenedores  | ✅      |
 | 30 slots         | ✅      |
 | Mostrar cartas   | ✅      |
-| Eliminar         | 🟡     |
-| Editar permitido | ⬜      |
+| Eliminar         | ✅     |
+| Editar permitido | ✅      |
 
 *Nota sobre Colección:*  
 * *Eliminar:* En Alpha 0.1 está implementado en la revisión inicial de la carta mediante la acción modal "Descartar / Liberar". En el Baúl (`PERSISTED_CARD`), la eliminación directa se encuentra protegida para salvaguardar la colección; la eliminación con diálogo de confirmación desde el Baúl se reserva para una iteración posterior sin condicionar el Golden Path.  

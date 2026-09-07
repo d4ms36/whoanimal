@@ -117,7 +117,7 @@ LOGIN → HOME → CAPTURE → CAMERA → OBSERVATION → IDENTIFICATION → RES
   * Soporte TalkBack, roles y semantics explícitos, target táctiles mínimos de 48dp, anuncios en liveRegion, unbind limpio en lifecycle de CameraX, fallback con sensor check y listener dinámico de rotación (DEC-061).
 * **`WHO-025` — Contrato Desacoplado `AdService` y Stubs de Infraestructura (DEC-053)** `[PROPUESTO]`
   * Definición de interfaces limpias (`BannerPlacement`, `InterstitialPolicy`, `RewardedAdService`, `FrequencyPolicy`) y stubs locales sin SDKs de terceros.
-* **`WHO-026` — Pipeline de Firma de Release y Preparación para Google Play Internal Testing** `[PROPUESTO]`
+* **`WHO-026` — Pipeline de Firma de Release y Preparación para Google Play Internal Testing** `[COMPLETADO]`
   * Configuración de keystore de release, optimización R8/ProGuard y preparación del paquete de distribución interna `v0.2.0-beta.1` (versionCode 3).
 
 ---
