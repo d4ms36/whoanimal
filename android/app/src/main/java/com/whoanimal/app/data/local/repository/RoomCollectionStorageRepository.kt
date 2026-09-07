@@ -159,4 +159,14 @@ class RoomCollectionStorageRepository(
         val deletedRows = cardDao.deleteById(cardId)
         return deletedRows > 0
     }
+
+    override suspend fun updateCardLore(cardId: String, newLore: String?): Boolean {
+        if (cardId.isBlank()) return false
+        return cardDao.updatePersonalLore(cardId, newLore) > 0
+    }
+
+    override suspend fun getCard(cardId: String): AnimalCardContract? {
+        if (cardId.isBlank()) return null
+        return cardDao.getById(cardId)?.toContract()
+    }
 }

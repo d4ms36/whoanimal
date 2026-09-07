@@ -113,9 +113,23 @@ fun CollectionScreen(
         mutableStateOf<List<Pair<Int, AnimalCardContract>>>(emptyList())
     }
     var isLoadingContainer by remember { mutableStateOf(true) }
+    var refreshKey by remember { mutableIntStateOf(0) }
+    val lifecycleOwner = androidx.compose.ui.platform.LocalLifecycleOwner.current
+
+    androidx.compose.runtime.DisposableEffect(lifecycleOwner) {
+        val observer = androidx.lifecycle.LifecycleEventObserver { _, event ->
+            if (event == androidx.lifecycle.Lifecycle.Event.ON_RESUME) {
+                refreshKey++
+            }
+        }
+        lifecycleOwner.lifecycle.addObserver(observer)
+        onDispose {
+            lifecycleOwner.lifecycle.removeObserver(observer)
+        }
+    }
 
     // Carga la información de capacidad general y las cartas del contenedor seleccionado
-    LaunchedEffect(selectedContainerIndex) {
+    LaunchedEffect(selectedContainerIndex, refreshKey) {
         isLoadingContainer = true
         withContext(Dispatchers.IO) {
             try {

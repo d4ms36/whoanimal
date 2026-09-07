@@ -40,4 +40,30 @@ interface ProfileRepository {
      * Valida si un nombre de explorador cumple con los criterios mínimos de Alpha.
      */
     fun validateName(name: String): ProfileValidationResult
+
+    /**
+     * Devuelve el número de ediciones de Lore utilizadas por la cuenta activa (DEC-041).
+     */
+    suspend fun getLoreEditsUsed(): Int
+
+    /**
+     * Devuelve las ediciones de Lore restantes para la cuenta activa (máximo 3 según DEC-041).
+     */
+    suspend fun getRemainingLoreEdits(): Int
+
+    /**
+     * Determina si la cuenta activa aún puede editar el Lore de una carta.
+     */
+    suspend fun canEditLore(): Boolean
+
+    /**
+     * Consume una edición de Lore de la cuenta activa.
+     * Devuelve true si la edición fue consumida con éxito, o false si se alcanzó el límite de 3.
+     */
+    suspend fun consumeLoreEdit(): Boolean
+}
+
+object LoreConstants {
+    const val MAX_EDITS_PER_ACCOUNT = 3
+    const val MAX_LORE_LENGTH = 300
 }

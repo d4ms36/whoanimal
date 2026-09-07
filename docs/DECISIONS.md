@@ -861,6 +861,45 @@ Aprobado por: [Director Creativo / Project Manager / Consenso]
 
 ---
 
+### DEC-060: Edición Interactiva de Lore, Gestión de Cuota por Cuenta (DEC-041) y Liberación de Cartas desde el Baúl
+* **Fecha:** 2026-09-07
+* **Estado:** `APROBADA`
+* **Objetivo:** `WHO-023`
+* **Tema:** Lore Personal / Persistencia Room / Cuota de Edición por Cuenta / Liberación de Almacenamiento
+* **Resolución:**
+  1. **Ubicación Canónica del Contador de Edición de Lore (`DEC-041`):**
+     * El límite de 3 ediciones de Lore es estrictamente **por cuenta/usuario**, no por carta, por sesión ni por instalación.
+     * Se persiste atómicamente en `ProfileEntity.lore_edits_used` (`profiles` en Room, migración canónica `MIGRATION_2_3`), asociado al perfil activo (`ExplorerProfile`).
+     * `ProfileDao` implementa la mutación atómica condicional `UPDATE profiles SET lore_edits_used = lore_edits_used + 1 WHERE profile_id = :profileId AND lore_edits_used < 3`.
+  2. **Regla Estricta de Consumo de Cuota:**
+     * Una edición se computa **únicamente** cuando el usuario confirma y guarda un cambio real y diferente respecto al Lore existente (`newLore.trim() != originalLore.trim()`).
+     * Abrir el editor, cancelar o guardar sin cambios reales **no consume cuota**.
+     * Una cuarta edición es bloqueada categóricamente tanto a nivel UI (aviso visible y acción inhabilitada) como a nivel repositorio/Room.
+     * La UI muestra permanentemente las ediciones restantes (`X restantes / remaining`) y notifica cuando la cuota está agotada mediante recursos externalizados.
+  3. **Editor de Lore y Límites de Longitud:**
+     * Se incorpora `LoreEditDialog` en modo `PERSISTED_CARD`.
+     * Límite estricto de 300 caracteres (`LoreConstants.MAX_LORE_LENGTH`), con contador interactivo en vivo `X/300`.
+     * El botón Guardar se deshabilita si el texto supera 300 caracteres o si no hay ediciones disponibles. Se permite guardar Lore vacío (limpiar lore personal).
+  4. **Invarianza Histórica y Reopening tras Edición:**
+     * Modificar el Lore ejecuta un `UPDATE cards SET personal_lore = :lore WHERE card_id = :cardId`.
+     * **No se regenera la carta:** `cardId`, `captureId`, datos científicos taxonómicos, serial de colección, rareza, imagen y fecha de captura permanecen 100% inmutables.
+     * No se reinvoca ningún servicio de identificación ni generación de cartas.
+  5. **Liberación Segura de Cartas y Recuperación de Slots del Baúl:**
+     * Se implementa `PersistedCardReleaseDialog` requiriendo confirmación explícita del usuario antes de cualquier eliminación destructiva.
+     * Al confirmar, se invoca `deleteCardAndFreeSlot(cardId)` en `CollectionStorageRepository`, ejecutando una transacción Room que:
+       a) Elimina la fila en `storage_slots` vinculada a la carta.
+       b) Elimina la fila en `cards`.
+       c) Actualiza de forma reactiva la ocupación (`occupancy`) del Baúl.
+       d) Deja el slot libre (`is_occupied = 0`, `card_id = NULL`) disponible para futuras asignaciones (`autoAssignSlot`).
+       e) Garantiza que no queden registros huérfanos ni referencias rotas.
+  6. **Separación Ontológica y Paridad i18n:**
+     * Todos los textos de interfaz, avisos de límite, contadores de caracteres y diálogos de confirmación se obtienen de Android Resources (`values/strings.xml` y `values-en/strings.xml`).
+     * El Lore personal permanece como narrativa del usuario no traducida por el sistema ni confundida con información científica.
+* **Justificación / Principios:** Cumple estrictamente la visión de `DEC-041` y las reglas fundamentales de arquitectura (Clean Architecture, persistencia atómica en Room, inmutabilidad de la ciencia e integridad de almacenamiento).
+* **Aprobado por:** Director Creativo / Project Manager
+
+---
+
 ### DEC-010: Estilo y Universo Mitológico del Lore (SUPERSEDED)
 * **Tema:** Diseño Narrativo
 * **Estado:** `SUPERSEDED`

@@ -16,4 +16,5 @@ interface CardRepository {
     suspend fun deleteCard(cardId: String): Boolean
     suspend fun exists(cardId: String): Boolean
     suspend fun existsByCaptureId(captureId: String): Boolean
+    suspend fun updatePersonalLore(cardId: String, personalLore: String?): Boolean
 }

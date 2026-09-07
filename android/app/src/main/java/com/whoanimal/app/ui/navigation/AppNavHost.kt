@@ -1,7 +1,9 @@
 package com.whoanimal.app.ui.navigation
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -175,9 +177,34 @@ fun AppNavHost(
         }
 
         composable(NavDestination.CardReview.route) {
+            var remainingEdits by remember { mutableIntStateOf(3) }
+
+            LaunchedEffect(Unit) {
+                remainingEdits = effectiveProfileRepository.getRemainingLoreEdits()
+            }
+
             CardPresentationScreen(
                 card = currentCardToReview,
                 mode = currentPresentationMode,
+                remainingLoreEdits = remainingEdits,
+                onUpdateLore = { cardId, newLore ->
+                    var success = false
+                    if (effectiveProfileRepository.canEditLore()) {
+                        val updated = effectiveStorageRepository.updateCardLore(cardId, newLore)
+                        if (updated) {
+                            effectiveProfileRepository.consumeLoreEdit()
+                            remainingEdits = effectiveProfileRepository.getRemainingLoreEdits()
+                            currentCardToReview = currentCardToReview?.copy(personalLore = newLore)
+                            success = true
+                        }
+                    }
+                    success
+                },
+                onReleasePersistedCard = { cardId ->
+                    effectiveStorageRepository.deleteCardAndFreeSlot(cardId)
+                    currentCardToReview = null
+                    navController.popBackStack()
+                },
                 onSaveCard = { cardToSave ->
                     scope.launch {
                         try {

@@ -33,14 +33,18 @@ data class ProfileEntity(
     val lastOpenedAt: Long,
 
     @ColumnInfo(name = "is_active")
-    val isActive: Boolean
+    val isActive: Boolean,
+
+    @ColumnInfo(name = "lore_edits_used", defaultValue = "0")
+    val loreEditsUsed: Int = 0
 ) {
     fun toDomain(): ExplorerProfile = ExplorerProfile(
         profileId = profileId,
         explorerName = explorerName,
         createdAt = createdAt,
         lastOpenedAt = lastOpenedAt,
-        isActive = isActive
+        isActive = isActive,
+        loreEditsUsed = loreEditsUsed
     )
 
     companion object {
@@ -49,7 +53,8 @@ data class ProfileEntity(
             explorerName = profile.explorerName,
             createdAt = profile.createdAt,
             lastOpenedAt = profile.lastOpenedAt,
-            isActive = profile.isActive
+            isActive = profile.isActive,
+            loreEditsUsed = profile.loreEditsUsed
         )
     }
 }

@@ -4,6 +4,8 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import androidx.room.migration.Migration
+import androidx.sqlite.db.SupportSQLiteDatabase
 import com.whoanimal.app.data.local.dao.CardDao
 import com.whoanimal.app.data.local.dao.ProfileDao
 import com.whoanimal.app.data.local.dao.StorageSlotDao
@@ -17,7 +19,7 @@ import com.whoanimal.app.data.local.entities.StorageSlotEntity
         StorageSlotEntity::class,
         ProfileEntity::class
     ],
-    version = 2,
+    version = 3,
     exportSchema = false
 )
 
@@ -31,6 +33,12 @@ abstract class WhoAnimalDatabase : RoomDatabase() {
         @Volatile
         private var INSTANCE: WhoAnimalDatabase? = null
 
+        val MIGRATION_2_3 = object : Migration(2, 3) {
+            override fun migrate(db: SupportSQLiteDatabase) {
+                db.execSQL("ALTER TABLE profiles ADD COLUMN lore_edits_used INTEGER NOT NULL DEFAULT 0")
+            }
+        }
+
         fun getInstance(context: Context, databaseName: String = "whoanimal.db"): WhoAnimalDatabase {
             return INSTANCE ?: synchronized(this) {
                 val instance = Room.databaseBuilder(
@@ -38,6 +46,7 @@ abstract class WhoAnimalDatabase : RoomDatabase() {
                     WhoAnimalDatabase::class.java,
                     databaseName
                 )
+                    .addMigrations(MIGRATION_2_3)
                     .fallbackToDestructiveMigration()
                     .build()
                 INSTANCE = instance
@@ -61,6 +70,7 @@ abstract class WhoAnimalDatabase : RoomDatabase() {
                 databaseName
             )
                 .allowMainThreadQueries()
+                .addMigrations(MIGRATION_2_3)
                 .fallbackToDestructiveMigration()
                 .build()
         }

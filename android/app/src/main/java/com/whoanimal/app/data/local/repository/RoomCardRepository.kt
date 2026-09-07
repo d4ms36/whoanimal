@@ -54,4 +54,9 @@ class RoomCardRepository(
         if (captureId.isBlank()) return false
         return cardDao.countByCaptureId(captureId) > 0
     }
+
+    override suspend fun updatePersonalLore(cardId: String, personalLore: String?): Boolean {
+        if (cardId.isBlank()) return false
+        return cardDao.updatePersonalLore(cardId, personalLore) > 0
+    }
 }

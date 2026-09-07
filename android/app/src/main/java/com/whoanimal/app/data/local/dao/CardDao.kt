@@ -32,4 +32,7 @@ interface CardDao {
 
     @Query("SELECT COUNT(*) FROM cards")
     suspend fun countAll(): Int
+
+    @Query("UPDATE cards SET personalLore = :lore WHERE cardId = :cardId")
+    suspend fun updatePersonalLore(cardId: String, lore: String?): Int
 }

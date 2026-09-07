@@ -31,6 +31,12 @@ interface ProfileDao {
     @Query("DELETE FROM profiles")
     suspend fun deleteAllProfiles()
 
+    @Query("UPDATE profiles SET lore_edits_used = lore_edits_used + 1 WHERE profile_id = :profileId AND lore_edits_used < 3")
+    suspend fun incrementLoreEdits(profileId: String): Int
+
+    @Query("SELECT lore_edits_used FROM profiles WHERE is_active = 1 LIMIT 1")
+    suspend fun getActiveProfileLoreEditsUsed(): Int?
+
     /**
      * Garantiza de forma atómica que solo un perfil esté activo a la vez.
      */

@@ -84,6 +84,16 @@ class LocalizationResourcesTest {
         assertNotNull(esStrings["identification_screen_title"])
         assertNotNull(esStrings["card_mode_review_title"])
         assertNotNull(esStrings["collection_title"])
+
+        // WHO-023: Lore Editor & Release
+        assertNotNull(esStrings["lore_editor_title"])
+        assertNotNull(esStrings["lore_editor_hint"])
+        assertNotNull(esStrings["lore_char_counter"])
+        assertNotNull(esStrings["lore_edits_remaining"])
+        assertNotNull(esStrings["lore_limit_reached"])
+        assertNotNull(esStrings["action_edit_lore"])
+        assertNotNull(esStrings["card_persisted_release_dialog_title"])
+        assertNotNull(esStrings["card_persisted_release_dialog_body"])
     }
 
     @Test

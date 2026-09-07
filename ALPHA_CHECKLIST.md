@@ -72,9 +72,9 @@ Una funcionalidad solo puede marcarse como completada cuando:
 | Generación   | ✅      |
 | Guardar      | ✅      |
 | Persistencia | ✅      |
-| Giro 3D      | ⬜      |
-| Frente       | 🟡     |
-| Reverso      | 🟡     |
+| Giro 3D      | ✅      |
+| Frente       | ✅      |
+| Reverso      | ✅      |
 
 ## Colección
 
@@ -83,9 +83,9 @@ Una funcionalidad solo puede marcarse como completada cuando:
 | Persistencia     | ✅      |
 | 10 contenedores  | ✅      |
 | 30 slots         | ✅      |
-| Mostrar cartas   | 🟡     |
-| Eliminar         | 🟡     |
-| Editar permitido | ⬜      |
+| Mostrar cartas   | ✅      |
+| Eliminar         | ✅      |
+| Editar permitido | ✅      |
 
 ---
 

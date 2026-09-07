@@ -161,4 +161,21 @@
     <string name="conservation_ew">Extinta en Estado Silvestre (EW)</string>
     <string name="conservation_ex">Extinta (EX)</string>
     <string name="conservation_ne">No Evaluada (NE)</string>
+
+    <!-- Lore Editor & Baúl Card Release (WHO-023 / DEC-041) -->
+    <string name="lore_editor_title">Editar Historia Personal</string>
+    <string name="lore_editor_hint">Escribe tu crónica o encuentro con este ejemplar...</string>
+    <string name="lore_char_counter">%1$d/300 caracteres</string>
+    <string name="lore_edits_remaining">Ediciones restantes: %1$d</string>
+    <string name="lore_limit_reached">Límite alcanzado (0 ediciones restantes)</string>
+    <string name="lore_limit_reached_message">Has alcanzado el límite máximo de 3 ediciones de Lore por cuenta según las reglas de colección (DEC-041).</string>
+    <string name="lore_no_changes">No se realizaron cambios en la Historia Personal.</string>
+    <string name="lore_save_success">Historia Personal actualizada correctamente.</string>
+    <string name="action_edit_lore">Editar Lore</string>
+    <string name="card_persisted_release_dialog_title">¿Liberar carta del Baúl?</string>
+    <string name="card_persisted_release_dialog_body">¿Estás seguro de que deseas liberar esta carta? Su espacio en el contenedor quedará disponible para una nueva especie.</string>
+    <string name="card_released_success">Carta liberada correctamente.</string>
+    <string name="card_lore_empty_placeholder">Sin Historia Personal registrada. ¡Toca Editar Lore para escribir tu crónica!</string>
+    <string name="error_saving_lore">Error al guardar la Historia Personal.</string>
+    <string name="error_releasing_card">Error al liberar la carta.</string>
 </resources>

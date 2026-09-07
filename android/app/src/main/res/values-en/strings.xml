@@ -161,4 +161,21 @@
     <string name="conservation_ew">Extinct in the Wild (EW)</string>
     <string name="conservation_ex">Extinct (EX)</string>
     <string name="conservation_ne">Not Evaluated (NE)</string>
+
+    <!-- Lore Editor & Baúl Card Release (WHO-023 / DEC-041) -->
+    <string name="lore_editor_title">Edit Personal Lore</string>
+    <string name="lore_editor_hint">Write your personal encounter or observation with this specimen...</string>
+    <string name="lore_char_counter">%1$d/300 characters</string>
+    <string name="lore_edits_remaining">Remaining edits: %1$d</string>
+    <string name="lore_limit_reached">Limit reached (0 edits remaining)</string>
+    <string name="lore_limit_reached_message">You have reached the maximum limit of 3 Lore edits per account under collection rules (DEC-041).</string>
+    <string name="lore_no_changes">No changes were made to Personal Lore.</string>
+    <string name="lore_save_success">Personal Lore updated successfully.</string>
+    <string name="action_edit_lore">Edit Lore</string>
+    <string name="card_persisted_release_dialog_title">Release card from Collection?</string>
+    <string name="card_persisted_release_dialog_body">Are you sure you want to release this card? Its slot in the container will become available for a new specimen.</string>
+    <string name="card_released_success">Card released successfully.</string>
+    <string name="card_lore_empty_placeholder">No Personal Lore recorded. Tap Edit Lore to write your chronicle!</string>
+    <string name="error_saving_lore">Error saving Personal Lore.</string>
+    <string name="error_releasing_card">Error releasing card.</string>
 </resources>

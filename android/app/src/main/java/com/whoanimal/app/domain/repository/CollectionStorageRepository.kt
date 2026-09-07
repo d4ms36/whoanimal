@@ -44,4 +44,6 @@ interface CollectionStorageRepository {
     suspend fun autoAssignSlot(card: AnimalCardContract): StorageSlotRecord
     suspend fun getStorageCapacity(): StorageCapacityInfo
     suspend fun deleteCardAndFreeSlot(cardId: String): Boolean
+    suspend fun updateCardLore(cardId: String, newLore: String?): Boolean
+    suspend fun getCard(cardId: String): AnimalCardContract?
 }

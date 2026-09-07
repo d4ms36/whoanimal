@@ -15,9 +15,9 @@
 | **Fase actual** | Transición Alpha $\rightarrow$ Beta (Auditoría Alpha 0.1 Completada) |
 | **Versión actual** | `0.1.0-alpha` (Build 2) |
 | **Estado** | Auditoría Post-Release Alpha 0.1 y Hoja de Ruta Beta Consolidadas |
-| **Objetivo activo** | Ninguno (Ciclo WHO-022 completado; listo para autorización de WHO-023) |
-| **Último objetivo completado** | `WHO-022` — Extracción y Externalización de Cadenas de UI (i18n Foundation) (`DEC-059`) |
-| **Próximo objetivo propuesto** | `WHO-023` — Edición Interactiva de Lore (DEC-041) y Liberación en Baúl |
+| **Objetivo activo** | Ninguno (Ciclo WHO-023 completado; listo para autorización de WHO-024) |
+| **Último objetivo completado** | `WHO-023` — Edición Interactiva de Lore (DEC-041) y Liberación en Baúl (`DEC-060`) |
+| **Próximo objetivo propuesto** | `WHO-024` — Accesibilidad (a11y) y Robustecimiento de Compatibilidad CameraX |
 | **Bloqueos** | Ninguno |
 | **Decisiones pendientes** | `DEC-009`, `DEC-011`, `DEC-021` a `DEC-025`, `DEC-037-PENDING` |
 | **Última actualización** | 2026-09-07 |
@@ -204,7 +204,7 @@ HOME → STORAGE → CONTAINER → CARD → VIEW / FLIP / BACK
 | **WHO-020** | Auditoría Post-Release Alpha 0.1 y Madurez Beta (Beta Readiness) | Auditoría integral por capas, comprobación de evidencia en código, plan de cierre de deuda y definición del roadmap Beta (DEC-057) | Alta | WHO-019 | `COMPLETADO` | **Sí** |
 | **WHO-021** | Ingesta y Sincronización del Catálogo JSON como Android Assets | Unificación de la fuente única de verdad biológica (`data/species/`), eliminando duplicación de especies en código Kotlin | Alta | WHO-020 | `COMPLETADO` | **Sí** |
 | **WHO-022** | Extracción y Externalización de Cadenas de UI (i18n Foundation) | Migración de cadenas hardcodeadas de Compose a `strings.xml`, preparando la internacionalización ($\text{UI} \neq \text{Ciencia} \neq \text{Lore}$) | Alta | WHO-021 | `COMPLETADO` | **Sí** |
-| **WHO-023** | Edición Interactiva de Lore (DEC-041) y Liberación en Baúl | UI de edición de Historia Personal con control de cuota de 3 ediciones y acción segura de liberar carta desde Baúl con modal | Alta | WHO-022 | `PROPUESTO` | **Sí** |
+| **WHO-023** | Edición Interactiva de Lore (DEC-041) y Liberación en Baúl | UI de edición de Historia Personal con control de cuota de 3 ediciones y acción segura de liberar carta desde Baúl con modal | Alta | WHO-022 | `COMPLETADO` | **Sí** |
 | **WHO-024** | Accesibilidad (a11y) y Robustecimiento de Compatibilidad CameraX | Soporte TalkBack, target táctiles mínimos de 48dp y compatibilidad CameraX ante variantes de sensor y rotación | Media | WHO-023 | `PROPUESTO` | **Sí** |
 | **WHO-025** | Contrato Desacoplado `AdService` y Stubs de Infraestructura | Definición de interfaces limpias de publicidad desacoplada (`DEC-053`) y stubs locales de políticas de frecuencia | Media | WHO-024 | `PROPUESTO` | **Sí** |
 | **WHO-026** | Pipeline de Firma de Release y Google Play Internal Testing | Keystore de release, optimización R8/ProGuard y preparación del paquete de distribución interna `v0.2.0-beta.1` (versionCode 3) | Alta | WHO-025 | `PROPUESTO` | **Sí** |
@@ -287,7 +287,8 @@ HOME → STORAGE → CONTAINER → CARD → VIEW / FLIP / BACK
 | **WHO-020** | `APROBADO` | `VALIDADO`| `COMPLETADO` | `APPROVED_COMPLETE` |
 | **WHO-021** | `APROBADO` | `VALIDADO`| `COMPLETADO` | `APPROVED_COMPLETE` |
 | **WHO-022** | `APROBADO` | `VALIDADO`| `COMPLETADO` | `APPROVED_COMPLETE` |
-| **WHO-023** | `PENDIENTE` | `PROPUESTO` | `NO_INICIADO` | `PENDING_APPROVAL` |
+| **WHO-023** | `APROBADO` | `VALIDADO`| `COMPLETADO` | `APPROVED_COMPLETE` |
+| **WHO-024** | `PENDIENTE` | `PROPUESTO` | `NO_INICIADO` | `PENDING_APPROVAL` |
 
 > **Regla:** El Developer no puede auto-aprobar objetivos. La autorización debe ser explícita por parte del Director Creativo y estructurada por el Project Manager.
 
@@ -423,6 +424,8 @@ Para prevenir el desvío del alcance (*scope creep*) y asegurar la entrega de un
 | **2026-09-07** | Alpha 0.1 Release Packaging & Tagging (WHO-019) | Configuración de versionCode = 2 y versionName = "0.1.0-alpha", verificación de assembleRelease, registro de hash SHA-256 en RELEASES.md y emisión del tag canónico v0.1.0-alpha. | Developer (`WHO-019`) |
 | **2026-09-07** | Auditoría Post-Release Alpha 0.1 y Madurez Beta (WHO-020) | Auditoría integral por capas (Core, Game, Social, Platform), validación de evidencia en código, plan de cierre de deuda y definición de la hoja de ruta Beta WHO-021 a WHO-026 (DEC-057). | Developer (`WHO-020`) |
 | **2026-09-07** | Sincronización de Catálogo de Especies y Unificación de Dominio Android (WHO-021) | Unificación de la fuente única de verdad zoológica (data/species/ a Android assets), erradicación de listas hardcodeadas en Kotlin, repositorio y parser dedicados, compatibilidad con 28 especies y tests unitarios 100% PASS (DEC-058). | Developer (`WHO-021`) |
+| **2026-09-07** | Externalización de Textos de UI y Fundación i18n (WHO-022) | Extracción de strings de interfaz en Android Resources con paridad español/inglés, preservación ontológica UI ≠ Ciencia ≠ Lore y tests de recursos (DEC-059). | Developer (`WHO-022`) |
+| **2026-09-07** | Edición Interactiva de Lore y Liberación de Cartas desde el Baúl (WHO-023) | Lore personal editable (máx 300 caracteres), cuota atómica de 3 ediciones por cuenta persistida en Profile (DEC-041), liberación segura con modal y recuperación íntegra de slots en Room (DEC-060). | Developer (`WHO-023`) |
 
 ---
 

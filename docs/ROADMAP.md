@@ -111,8 +111,8 @@ LOGIN → HOME → CAPTURE → CAMERA → OBSERVATION → IDENTIFICATION → RES
   * Unificación de la fuente única de verdad biológica (`data/species/`), eliminando datos duplicados en código Kotlin y sincronizando los 28 especímenes.
 * **`WHO-022` — Extracción y Externalización de Cadenas de UI (i18n Foundation)** `[COMPLETADO]`
   * Migración sistemática de cadenas hardcodeadas de Compose a `res/values/strings.xml`, asegurando la separación $\text{UI} \neq \text{Ciencia} \neq \text{Lore}$ y proveyendo fundación inicial en inglés (`values-en/strings.xml`).
-* **`WHO-023` — Edición Interactiva de Lore (DEC-041) y Liberación de Cartas en Baúl** `[PROPUESTO]`
-  * Cierre de deuda de UX: UI de edición de Historia Personal con límite de 3 ediciones y acción segura de liberar carta desde el grid del Baúl con diálogo modal de confirmación.
+* **`WHO-023` — Edición Interactiva de Lore (DEC-041) y Liberación de Cartas en Baúl** `[COMPLETADO]`
+  * Cierre de deuda de UX: UI de edición de Historia Personal con límite de 3 ediciones por cuenta persistido en Profile (DEC-041/DEC-060) y acción segura de liberar carta desde Baúl con diálogo modal de confirmación y recuperación íntegra de slots en Room.
 * **`WHO-024` — Accesibilidad (a11y) y Robustecimiento de Compatibilidad CameraX** `[PROPUESTO]`
   * Soporte TalkBack, target táctiles mínimos de 48dp y validación de CameraX ante rotación y sensores heterogéneos.
 * **`WHO-025` — Contrato Desacoplado `AdService` y Stubs de Infraestructura (DEC-053)** `[PROPUESTO]`

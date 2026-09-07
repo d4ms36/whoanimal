@@ -11,5 +11,6 @@ data class ExplorerProfile(
     val explorerName: String,
     val createdAt: Long,
     val lastOpenedAt: Long,
-    val isActive: Boolean = true
+    val isActive: Boolean = true,
+    val loreEditsUsed: Int = 0
 )
