@@ -1,0 +1,70 @@
+package com.whoanimal.app.data.local.repository
+
+import com.whoanimal.app.data.local.dao.ProfileDao
+import com.whoanimal.app.data.local.entities.ProfileEntity
+import com.whoanimal.app.domain.model.ExplorerProfile
+import com.whoanimal.app.domain.repository.InvalidProfileException
+import com.whoanimal.app.domain.repository.ProfileRepository
+import com.whoanimal.app.domain.repository.ProfileValidationResult
+import java.util.UUID
+
+/**
+ * Implementación de [ProfileRepository] respaldada por Room / SQLite.
+ *
+ * Aplica reglas de negocio:
+ * - Validación estricta del nombre (no vacío, sin solo espacios, 2..30 caracteres).
+ * - Garantía de un único perfil activo en Alpha 0.1.
+ * - Registro de timestamps de creación y última apertura.
+ */
+class RoomProfileRepository(
+    private val profileDao: ProfileDao
+) : ProfileRepository {
+
+    override suspend fun getActiveProfile(): ExplorerProfile? {
+        return profileDao.getActiveProfile()?.toDomain()
+    }
+
+    override suspend fun hasActiveProfile(): Boolean {
+        return profileDao.countActiveProfiles() > 0
+    }
+
+    override suspend fun createProfile(name: String): ExplorerProfile {
+        val validation = validateName(name)
+        if (validation is ProfileValidationResult.Invalid) {
+            throw InvalidProfileException(validation.reason)
+        }
+
+        val trimmedName = name.trim()
+        val now = System.currentTimeMillis()
+        val profile = ExplorerProfile(
+            profileId = UUID.randomUUID().toString(),
+            explorerName = trimmedName,
+            createdAt = now,
+            lastOpenedAt = now,
+            isActive = true
+        )
+
+        val entity = ProfileEntity.fromDomain(profile)
+        profileDao.setActiveProfile(entity)
+        return profile
+    }
+
+    override suspend fun updateLastOpened(profileId: String) {
+        val now = System.currentTimeMillis()
+        profileDao.updateLastOpened(profileId, now)
+    }
+
+    override fun validateName(name: String): ProfileValidationResult {
+        val trimmed = name.trim()
+        if (trimmed.isEmpty()) {
+            return ProfileValidationResult.Invalid("El nombre de explorador no puede estar vacío.")
+        }
+        if (trimmed.length < 2) {
+            return ProfileValidationResult.Invalid("El nombre debe tener al menos 2 caracteres.")
+        }
+        if (trimmed.length > 30) {
+            return ProfileValidationResult.Invalid("El nombre no puede superar los 30 caracteres.")
+        }
+        return ProfileValidationResult.Valid
+    }
+}

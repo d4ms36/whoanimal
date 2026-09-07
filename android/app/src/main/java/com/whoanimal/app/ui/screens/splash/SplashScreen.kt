@@ -16,25 +16,64 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Pets
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.whoanimal.app.domain.repository.ProfileRepository
 import com.whoanimal.app.ui.theme.ForestGreenPrimary
-import com.whoanimal.app.ui.theme.SageAccent
+import kotlinx.coroutines.delay
 
+/**
+ * Pantalla de inicio (Splash) encargada de comprobar de forma asíncrona la sesión local:
+ * - Si existe un perfil activo -> navega directamente al Home.
+ * - Si no existe perfil activo -> navega a la pantalla de bienvenida (Welcome).
+ */
 @Composable
 fun SplashScreen(
+    profileRepository: ProfileRepository,
     onNavigateToHome: () -> Unit,
+    onNavigateToWelcome: () -> Unit,
     modifier: Modifier = Modifier
 ) {
+    var isChecking by remember { mutableStateOf(true) }
+    var checkError by remember { mutableStateOf<String?>(null) }
+
+    val verifySession: suspend () -> Unit = {
+        isChecking = true
+        checkError = null
+        try {
+            delay(500) // Breve pausa estética para la presentación del emblema
+            val active = profileRepository.getActiveProfile()
+            if (active != null) {
+                profileRepository.updateLastOpened(active.profileId)
+                onNavigateToHome()
+            } else {
+                onNavigateToWelcome()
+            }
+        } catch (e: Exception) {
+            checkError = e.message ?: "No se pudo comprobar la sesión local."
+            isChecking = false
+        }
+    }
+
+    LaunchedEffect(Unit) {
+        verifySession()
+    }
+
     Surface(
         modifier = modifier.fillMaxSize(),
         color = MaterialTheme.colorScheme.background
@@ -49,7 +88,7 @@ fun SplashScreen(
             // Emblema visual de expedición zoológica
             Box(
                 modifier = Modifier
-                    .size(96.dp)
+                    .size(104.dp)
                     .background(
                         color = ForestGreenPrimary.copy(alpha = 0.12f),
                         shape = CircleShape
@@ -59,7 +98,7 @@ fun SplashScreen(
                 Icon(
                     imageVector = Icons.Default.Pets,
                     contentDescription = "WHO Animal Logo",
-                    modifier = Modifier.size(54.dp),
+                    modifier = Modifier.size(58.dp),
                     tint = ForestGreenPrimary
                 )
             }
@@ -100,24 +139,40 @@ fun SplashScreen(
                 )
             }
 
-            Spacer(modifier = Modifier.height(48.dp))
+            Spacer(modifier = Modifier.height(56.dp))
 
-            Button(
-                onClick = onNavigateToHome,
-                modifier = Modifier
-                    .fillMaxWidth(0.75f)
-                    .height(52.dp),
-                shape = RoundedCornerShape(26.dp),
-                colors = ButtonDefaults.buttonColors(
-                    containerColor = ForestGreenPrimary
+            if (isChecking) {
+                CircularProgressIndicator(
+                    modifier = Modifier.size(36.dp),
+                    color = ForestGreenPrimary,
+                    strokeWidth = 3.dp
                 )
-            ) {
+                Spacer(modifier = Modifier.height(16.dp))
                 Text(
-                    text = "Entrar a la Expedición",
-                    style = MaterialTheme.typography.titleMedium.copy(
-                        fontWeight = FontWeight.SemiBold
-                    )
+                    text = "Iniciando expedición...",
+                    style = MaterialTheme.typography.bodySmall,
+                    color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.6f)
                 )
+            } else if (checkError != null) {
+                Text(
+                    text = checkError ?: "",
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = MaterialTheme.colorScheme.error,
+                    textAlign = TextAlign.Center,
+                    modifier = Modifier.padding(horizontal = 24.dp)
+                )
+                Spacer(modifier = Modifier.height(16.dp))
+                Button(
+                    onClick = {
+                        isChecking = true
+                        checkError = null
+                    },
+                    colors = ButtonDefaults.buttonColors(
+                        containerColor = ForestGreenPrimary
+                    )
+                ) {
+                    Text("Reintentar")
+                }
             }
         }
     }

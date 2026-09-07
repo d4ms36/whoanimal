@@ -5,14 +5,17 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.whoanimal.app.data.local.dao.CardDao
+import com.whoanimal.app.data.local.dao.ProfileDao
 import com.whoanimal.app.data.local.dao.StorageSlotDao
 import com.whoanimal.app.data.local.entities.CardEntity
+import com.whoanimal.app.data.local.entities.ProfileEntity
 import com.whoanimal.app.data.local.entities.StorageSlotEntity
 
 @Database(
     entities = [
         CardEntity::class,
-        StorageSlotEntity::class
+        StorageSlotEntity::class,
+        ProfileEntity::class
     ],
     version = 1,
     exportSchema = false
@@ -21,6 +24,7 @@ abstract class WhoAnimalDatabase : RoomDatabase() {
 
     abstract fun cardDao(): CardDao
     abstract fun storageSlotDao(): StorageSlotDao
+    abstract fun profileDao(): ProfileDao
 
     companion object {
         @Volatile

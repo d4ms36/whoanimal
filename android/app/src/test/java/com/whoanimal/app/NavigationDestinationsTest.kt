@@ -11,6 +11,8 @@ class NavigationDestinationsTest {
     fun testNavigationDestinationsAreUniqueAndNonEmpty() {
         val destinations = listOf(
             NavDestination.Splash.route,
+            NavDestination.Welcome.route,
+            NavDestination.CreateProfile.route,
             NavDestination.Home.route,
             NavDestination.Capture.route,
             NavDestination.IdentificationResult.route,
@@ -30,6 +32,8 @@ class NavigationDestinationsTest {
     @Test
     fun testStandardDestinationNames() {
         assertEquals("splash", NavDestination.Splash.route)
+        assertEquals("welcome", NavDestination.Welcome.route)
+        assertEquals("create_profile", NavDestination.CreateProfile.route)
         assertEquals("home", NavDestination.Home.route)
         assertEquals("capture", NavDestination.Capture.route)
         assertEquals("identification_result", NavDestination.IdentificationResult.route)

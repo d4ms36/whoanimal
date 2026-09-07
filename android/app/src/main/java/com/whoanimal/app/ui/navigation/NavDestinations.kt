@@ -8,6 +8,8 @@ package com.whoanimal.app.ui.navigation
  */
 sealed class NavDestination(val route: String) {
     object Splash : NavDestination("splash")
+    object Welcome : NavDestination("welcome")
+    object CreateProfile : NavDestination("create_profile")
     object Home : NavDestination("home")
     object Capture : NavDestination("capture")
     object IdentificationResult : NavDestination("identification_result")

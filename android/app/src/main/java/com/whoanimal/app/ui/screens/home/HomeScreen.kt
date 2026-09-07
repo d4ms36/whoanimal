@@ -46,13 +46,27 @@ import com.whoanimal.app.ui.theme.EmeraldSecondary
 import com.whoanimal.app.ui.theme.ForestGreenPrimary
 import com.whoanimal.app.ui.theme.SageAccent
 
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import com.whoanimal.app.domain.repository.ProfileRepository
+
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen(
     onNavigateToCapture: () -> Unit,
     onNavigateToCollection: () -> Unit,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    profileRepository: ProfileRepository? = null
 ) {
+    var explorerName by remember { mutableStateOf<String?>(null) }
+
+    LaunchedEffect(profileRepository) {
+        explorerName = profileRepository?.getActiveProfile()?.explorerName
+    }
+
     Scaffold(
         topBar = {
             TopAppBar(
@@ -117,6 +131,16 @@ fun HomeScreen(
                                 color = SageAccent
                             ),
                             modifier = Modifier.padding(horizontal = 10.dp, vertical = 4.dp)
+                        )
+                    }
+                    if (explorerName != null) {
+                        Spacer(modifier = Modifier.height(6.dp))
+                        Text(
+                            text = "¡Hola, $explorerName!",
+                            style = MaterialTheme.typography.titleMedium.copy(
+                                color = SageAccent,
+                                fontWeight = FontWeight.SemiBold
+                            )
                         )
                     }
                     Spacer(modifier = Modifier.height(10.dp))
