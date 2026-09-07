@@ -285,5 +285,5 @@ ative_regions).
 ### WHO-014: Servicio de Ensamblaje y Generación de Cartas (Capture → Card)
 * **Propósito:** Implementar el servicio de dominio `CardGeneratorService` y la función `create_card_from_capture` para convertir un `Capture` válido en una entidad `AnimalCard` oficial, garantizando la separación ontológica estricta (`Capture ≠ Card`), inmutabilidad de la captura, validación de `AnimalProfile` contra el catálogo zoológico, protección contra duplicación, y generación íntegra de los 19 campos canónicos (serial seguro, issued_at, population_at_issuance, UNVERIFIED).
 * **Estado:** `APPROVED_COMPLETE`
-* **Commit:** (Pendiente de commit) (*feat(domain): generate cards from captures*)
+* **Commit:** `6a64c17` (*feat(domain): generate cards from captures*)
 * **Versión:** `0.0.1`
