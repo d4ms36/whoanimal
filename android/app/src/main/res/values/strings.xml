@@ -187,7 +187,11 @@
     <string name="card_flip_hint_front">Carta de %1$s. Mostrando frente visual. Toca dos veces para voltear y ver datos zoológicos y lore.</string>
     <string name="card_flip_hint_back">Carta de %1$s. Mostrando reverso zoológico. Toca dos veces para voltear al frente.</string>
     <string name="collection_card_item_description">%1$s, %2$s. Espécimen número %3$d en ranura %4$d. %5$s. Toca dos veces para abrir la carta.</string>
-    <string name="collection_container_chip_description">Contenedor %1$d. %2$s.</string>
     <string name="identification_confidence_description">Nivel de certeza de identificación: %1$d por ciento</string>
     <string name="identification_top_candidate_label">Candidato zoológico principal</string>
+    <string name="collection_container_chip_description">Contenedor %1$s</string>
+
+    <!-- Decoupled Advertising (WHO-025) -->
+    <string name="ad_stub_banner_label">WHO Animal • Anuncio de Prueba (%1$s)</string>
+    <string name="ad_banner_a11y_description">Espacio publicitario de prueba</string>
 </resources>

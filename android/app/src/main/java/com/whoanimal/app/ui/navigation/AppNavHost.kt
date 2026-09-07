@@ -32,6 +32,8 @@ import com.whoanimal.app.domain.model.DecisionStatus
 import com.whoanimal.app.domain.model.IdentificationDecisionContract
 import com.whoanimal.app.domain.model.ObservationContract
 import com.whoanimal.app.domain.repository.CollectionStorageRepository
+import com.whoanimal.app.data.ad.StubAdService
+import com.whoanimal.app.domain.ad.AdService
 import com.whoanimal.app.domain.service.CardGeneratorService
 import com.whoanimal.app.ui.screens.card.CardPresentationMode
 import com.whoanimal.app.ui.screens.card.CardPresentationScreen
@@ -47,7 +49,8 @@ fun AppNavHost(
     startDestination: String = NavDestination.Splash.route,
     profileRepository: ProfileRepository? = null,
     storageRepository: CollectionStorageRepository? = null,
-    cardGenerator: CardGeneratorService? = null
+    cardGenerator: CardGeneratorService? = null,
+    adService: AdService? = null
 ) {
     val context = LocalContext.current
     val scope = rememberCoroutineScope()
@@ -62,6 +65,8 @@ fun AppNavHost(
     }
 
     val effectiveCardGenerator = cardGenerator ?: remember { CardGeneratorService() }
+
+    val effectiveAdService = adService ?: remember { StubAdService() }
 
     var currentIdentificationResult by remember { mutableStateOf<IdentificationResultContract?>(null) }
     var currentCapturedImagePath by remember { mutableStateOf<String?>(null) }
@@ -116,7 +121,8 @@ fun AppNavHost(
                 onNavigateToCollection = {
                     navController.navigate(NavDestination.Collection.route)
                 },
-                profileRepository = effectiveProfileRepository
+                profileRepository = effectiveProfileRepository,
+                adService = effectiveAdService
             )
         }
 

@@ -54,6 +54,10 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import com.whoanimal.app.domain.repository.ProfileRepository
+import com.whoanimal.app.data.ad.StubAdService
+import com.whoanimal.app.domain.ad.AdPlacement
+import com.whoanimal.app.domain.ad.AdService
+import com.whoanimal.app.ui.components.ad.AdBannerSlot
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -61,9 +65,11 @@ fun HomeScreen(
     onNavigateToCapture: () -> Unit,
     onNavigateToCollection: () -> Unit,
     modifier: Modifier = Modifier,
-    profileRepository: ProfileRepository? = null
+    profileRepository: ProfileRepository? = null,
+    adService: AdService? = null
 ) {
     var explorerName by remember { mutableStateOf<String?>(null) }
+    val effectiveAdService = adService ?: remember { StubAdService() }
 
     LaunchedEffect(profileRepository) {
         explorerName = profileRepository?.getActiveProfile()?.explorerName
@@ -305,6 +311,15 @@ fun HomeScreen(
                     )
                 }
             }
+
+            Spacer(modifier = Modifier.height(16.dp))
+
+            // Ad Slot (Bottom of Home)
+            AdBannerSlot(
+                placement = AdPlacement.HOME,
+                adService = effectiveAdService,
+                modifier = Modifier.fillMaxWidth()
+            )
         }
     }
 }
