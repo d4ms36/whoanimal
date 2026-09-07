@@ -301,3 +301,11 @@ ative_regions).
 * **Estado:** `APPROVED_COMPLETE`
 * **Commit:** `00d5c8d` (*feat(android): implement alpha identification pipeline*)
 * **Versión:** `0.0.1`
+
+
+### WHO-017: Motor de Persistencia Local y Colección (Collection Album)
+* **Propósito:** Implementar la capa de persistencia local offline para Android Alpha 0.1 utilizando Room y SQLite (DEC-050), permitiendo guardar y recuperar cartas de la colección (`AnimalCard`) y su disposición física en el almacenamiento Alpha (10 contenedores × 30 espacios = 300 ranuras de capacidad total). Garantizar la estricta separación de capas (UI → Domain → Data → Room/SQLite), integridad de contratos (`1 Capture → <= 1 Card` protegido por índice único, `card_id != capture_id`, liberación inmediata de ranuras al eliminar cartas), simetría en la serialización de los 19 campos canónicos, tests unitarios exhaustivos bajo Robolectric y verificación realista de supervivencia de cartas tras la simulación de reinicio de la aplicación (`db.close()` y reapertura).
+* **Estado:** `APPROVED_COMPLETE`
+* **Commit:** `c021b71` (*feat(android): implement alpha local persistence*)
+* **Versión:** `0.0.1`
+

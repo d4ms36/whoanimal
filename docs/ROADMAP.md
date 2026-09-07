@@ -163,7 +163,7 @@ Trading, PVP, Marketplace, economía completa, Cloud/backend, sincronización mu
   * Configuración del proyecto base Android y formalización de la tecnología de interfaz de usuario.
 * **`WHO-016` — Servicio de Identificación de Especies (`Observation → IdentificationResult`)** `[COMPLETADO]`
   * Implementación del servicio `IdentificationService` mediante motor local ligero/on-device.
-* **`WHO-017` — Motor de Persistencia Local y Colección (`Collection Album`)** `[PROPUESTO]`
+* **`WHO-017` — Motor de Persistencia Local y Colección (`Collection Album`)** `[COMPLETADO]`
   * Almacenamiento local para inventario, capturas y visualización de cartas en el álbum del usuario (10 containers x 30 espacios).
 * **`WHO-018` — Integración del Mínimo Funcional Android (End-to-End Core Loop)** `[PROPUESTO]`
   * Cierre integral del flujo de 11 pasos ejecutable en dispositivo o emulador Android.

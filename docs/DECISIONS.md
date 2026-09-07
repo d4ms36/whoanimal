@@ -657,6 +657,31 @@ Aprobado por: [Director Creativo / Project Manager / Consenso]
 
 ---
 
+### DEC-050: Persistencia Local Alpha con Room y Arquitectura de Storage (10x30=300)
+* **Fecha:** 2026-09-07
+* **Estado:** `APROBADA`
+* **Objetivo:** `WHO-017`
+* **Tema:** Persistencia Local / Almacenamiento / Arquitectura de Datos
+* **Resolución:**
+  1. Se adopta oficialmente **Room + SQLite** (Room 2.6.1 + KSP 2.0.0-1.0.21) como la solución de persistencia local offline para Android Alpha 0.1 de WHO Animal.
+  2. Queda terminantemente prohibido introducir base de datos remota, Firebase, nube, autenticación externa o sincronización multidispositivo en Alpha 0.1.
+  3. Se mantiene una rigurosa separación de capas arquitectónicas:
+     * `UI`: Consume exclusivamente casos de uso o repositorios de dominio. Sin acceso directo a DAOs ni entidades de base de datos.
+     * `Domain`: Define interfaces agnósticas `CardRepository` y `CollectionStorageRepository`, así como las invariantes de almacenamiento físico (`StorageConstants`) y excepciones específicas (`StorageFullException`, `InvalidSlotException`, `DuplicateSlotException`, `DuplicateCardException`).
+     * `Data Layer`: Implementa las interfaces mediante `RoomCardRepository` y `RoomCollectionStorageRepository`, operando sobre entidades Room (`CardEntity`, `StorageSlotEntity`), DAOs transaccionales (`CardDao`, `StorageSlotDao`) y la base de datos `WhoAnimalDatabase`.
+  4. Invariantes de almacenamiento físico de colección Alpha:
+     * Estructura fija: 10 contenedores × 30 espacios = 300 ranuras de capacidad total (`1..10` y `1..30`).
+     * Cada ranura solo puede alojar una carta. Inserciones fuera de rango, duplicadas o cuando la capacidad esté completa son rechazadas a nivel de dominio y base de datos con índice único compuesto `(container_index, slot_index)`.
+  5. Integridad relacional y ontológica estricta:
+     * `1 Capture → <= 1 Card`: Protegido por índice único en `cards(capture_id)`.
+     * `card_id != capture_id`: Validado rigurosamente en la capa de repositorio antes de persistir.
+     * Integridad transaccional en borrado: La eliminación de una carta libera inmediatamente su ranura de almacenamiento en la misma transacción (`CASCADE`), garantizando que no existan registros huérfanos.
+     * Serialización simétrica de los 19 campos canónicos de `AnimalCardContract` preservando valores nulos, enums y tipos canónicos.
+* **Justificación / Principios:** Asegura la supervivencia del estado de la colección tras el cierre y reapertura de la app, garantiza robustez offline en campo sin depender de red, permite tests unitarios deterministas sobre JVM con Robolectric, y previene cualquier acoplamiento entre el dominio biológico y librerías de persistencia.
+* **Aprobado por:** Director Creativo / Project Manager
+
+---
+
 ### DEC-010: Estilo y Universo Mitológico del Lore (SUPERSEDED)
 * **Tema:** Diseño Narrativo
 * **Estado:** `SUPERSEDED`
