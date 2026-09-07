@@ -1,0 +1,18 @@
+[
+  {
+    "animal_id": "d3367de5-5d11-4840-9cd2-dd6766e440f4",
+    "scientific_name": "Apis mellifera",
+    "common_name": "Abeja melífera",
+    "taxonomy": {
+      "kingdom": "Animalia",
+      "phylum": "Arthropoda",
+      "class": "Insecta",
+      "order": "Hymenoptera",
+      "family": "Apidae",
+      "genus": "Apis",
+      "species": "Apis mellifera"
+    },
+    "conservation_status": "LC",
+    "is_rare_species": false
+  }
+]

@@ -1,0 +1,18 @@
+[
+  {
+    "animal_id": "bfad4353-7d4e-4066-8c3c-a9541a165dcf",
+    "scientific_name": "Loxodonta africana",
+    "common_name": "Elefante africano",
+    "taxonomy": {
+      "kingdom": "Animalia",
+      "phylum": "Chordata",
+      "class": "Mammalia",
+      "order": "Proboscidea",
+      "family": "Elephantidae",
+      "genus": "Loxodonta",
+      "species": "Loxodonta africana"
+    },
+    "conservation_status": "VU",
+    "is_rare_species": false
+  }
+]

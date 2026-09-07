@@ -1,0 +1,18 @@
+[
+  {
+    "animal_id": "8b40ff60-1023-4061-aafd-85b6f000f4c1",
+    "scientific_name": "Balaenoptera musculus",
+    "common_name": "Ballena azul",
+    "taxonomy": {
+      "kingdom": "Animalia",
+      "phylum": "Chordata",
+      "class": "Mammalia",
+      "order": "Cetartiodactyla",
+      "family": "Balaenopteridae",
+      "genus": "Balaenoptera",
+      "species": "Balaenoptera musculus"
+    },
+    "conservation_status": "EN",
+    "is_rare_species": true
+  }
+]

@@ -1,0 +1,18 @@
+[
+  {
+    "animal_id": "4ef557ec-5991-4d60-8949-ca55a7bf7893",
+    "scientific_name": "Iguana iguana",
+    "common_name": "Iguana verde",
+    "taxonomy": {
+      "kingdom": "Animalia",
+      "phylum": "Chordata",
+      "class": "Reptilia",
+      "order": "Squamata",
+      "family": "Iguanidae",
+      "genus": "Iguana",
+      "species": "Iguana iguana"
+    },
+    "conservation_status": "LC",
+    "is_rare_species": false
+  }
+]

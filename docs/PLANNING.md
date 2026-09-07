@@ -15,12 +15,12 @@
 | **Fase actual** | Alpha |
 | **Versión actual** | `0.0.1` |
 | **Estado** | Foundation |
-| **Objetivo activo** | Ninguno (Ciclo WHO-011B completado; listo para revisión de PM) |
-| **Último objetivo completado** | `WHO-011B` — Implementación del Índice Taxonómico Oficial |
+| **Objetivo activo** | Ninguno (Ciclo WHO-011C completado; listo para revisión de PM) |
+| **Último objetivo completado** | `WHO-011C` — Implementación del Catálogo Zoológico Oficial Inicial |
 | **Próximo objetivo propuesto** | Pendiente de aprobación |
 | **Bloqueos** | Ninguno |
 | **Decisiones pendientes** | `DEC-009` a `DEC-012`, `DEC-020` a `DEC-025`, `DEC-037-PENDING` |
-| **Último commit** | `fe6ac4c` |
+| **Último commit** | `1fa87b6` |
 | **Última actualización** | 2026-09-06 |
 
 ---
@@ -75,6 +75,7 @@ $$\text{FASE} . \text{CORRECCIONES} . \text{ITERACIÓN}$$
 | **WHO-010A** | Auditoría y Sincronización Integral de Documentación | `COMPLETADO` | Alta | 0.0.1 | Sí |
 | **WHO-011A** | Infraestructura del Banco de Datos Zoológico | `COMPLETADO` | Alta | 0.0.1 | Sí |
 | **WHO-011B** | Implementación del Índice Taxonómico Oficial | `COMPLETADO` | Alta | 0.0.1 | Sí |
+| **WHO-011C** | Implementación del Catálogo Zoológico Oficial Inicial | `COMPLETADO` | Alta | 0.0.1 | Sí |
 
 ---
 
@@ -151,6 +152,7 @@ Ordenados por prioridad técnica y estratégica.
 | **WHO-010A** | `APROBADO` | `VALIDADO`| `COMPLETADO` | `APPROVED_COMPLETE` |
 | **WHO-011A** | `APROBADO` | `VALIDADO`| `COMPLETADO` | `APPROVED_COMPLETE` |
 | **WHO-011B** | `APROBADO` | `VALIDADO`| `COMPLETADO` | `APPROVED_COMPLETE` |
+| **WHO-011C** | `APROBADO` | `VALIDADO`| `COMPLETADO` | `APPROVED_COMPLETE` |
 
 > **Regla:** El Developer no puede auto-aprobar objetivos. La autorización debe ser explícita por parte del Director Creativo y estructurada por el Project Manager.
 
@@ -256,6 +258,7 @@ Para prevenir el desvío del alcance (*scope creep*) y asegurar una base sólida
 | **2026-09-06** | Auditoría y Sincronización Integral (WHO-010A) | Consolidación y validación de la documentación del proyecto, corrección de IDs duplicados. | Developer (`WHO-010A`) |
 | **2026-09-06** | Infraestructura del Banco de Datos Zoológico (WHO-011A) | Creación de esquemas, JSON validador y estructura de directorios. | Developer (`WHO-011A`) |
 | **2026-09-06** | Índice Taxonómico Oficial (WHO-011B) | Implementación de `TaxonomyIndex` para validar rutas biológicas sin BD. | Developer (`WHO-011B`) |
+| **2026-09-06** | Catálogo Zoológico Oficial Inicial (WHO-011C) | Implementación de las primeras 28 especies JSON validadas estrictamente. | Developer (`WHO-011C`) |
 
 ---
 

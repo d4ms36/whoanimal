@@ -1,0 +1,18 @@
+[
+  {
+    "animal_id": "d1930818-e880-4181-81e9-3bb96b13dcdb",
+    "scientific_name": "Panthera onca",
+    "common_name": "Jaguar",
+    "taxonomy": {
+      "kingdom": "Animalia",
+      "phylum": "Chordata",
+      "class": "Mammalia",
+      "order": "Carnivora",
+      "family": "Felidae",
+      "genus": "Panthera",
+      "species": "Panthera onca"
+    },
+    "conservation_status": "NT",
+    "is_rare_species": false
+  }
+]

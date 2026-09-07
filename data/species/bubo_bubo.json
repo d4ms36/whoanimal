@@ -1,0 +1,18 @@
+[
+  {
+    "animal_id": "10d0799d-6fba-46c4-8ca9-772358e1aff1",
+    "scientific_name": "Bubo bubo",
+    "common_name": "Búho real",
+    "taxonomy": {
+      "kingdom": "Animalia",
+      "phylum": "Chordata",
+      "class": "Aves",
+      "order": "Strigiformes",
+      "family": "Strigidae",
+      "genus": "Bubo",
+      "species": "Bubo bubo"
+    },
+    "conservation_status": "LC",
+    "is_rare_species": false
+  }
+]

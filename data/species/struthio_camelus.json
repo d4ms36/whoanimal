@@ -1,0 +1,18 @@
+[
+  {
+    "animal_id": "665e230f-e1ba-40f5-8b0f-b2365081832f",
+    "scientific_name": "Struthio camelus",
+    "common_name": "Avestruz",
+    "taxonomy": {
+      "kingdom": "Animalia",
+      "phylum": "Chordata",
+      "class": "Aves",
+      "order": "Struthioniformes",
+      "family": "Struthionidae",
+      "genus": "Struthio",
+      "species": "Struthio camelus"
+    },
+    "conservation_status": "LC",
+    "is_rare_species": false
+  }
+]

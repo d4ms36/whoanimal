@@ -13,6 +13,138 @@
           "Ursidae": {
             "Ailuropoda": {}
           }
+        },
+        "Proboscidea": {
+          "Elephantidae": {
+            "Elephas": {},
+            "Loxodonta": {}
+          }
+        },
+        "Primates": {
+          "Hominidae": {
+            "Gorilla": {}
+          }
+        },
+        "Cetartiodactyla": {
+          "Balaenopteridae": {
+            "Balaenoptera": {}
+          }
+        }
+      },
+      "Aves": {
+        "Accipitriformes": {
+          "Accipitridae": {
+            "Haliaeetus": {}
+          }
+        },
+        "Psittaciformes": {
+          "Psittacidae": {
+            "Ara": {}
+          }
+        },
+        "Sphenisciformes": {
+          "Spheniscidae": {
+            "Spheniscus": {}
+          }
+        },
+        "Struthioniformes": {
+          "Struthionidae": {
+            "Struthio": {}
+          }
+        },
+        "Phoenicopteriformes": {
+          "Phoenicopteridae": {
+            "Phoenicopterus": {}
+          }
+        },
+        "Strigiformes": {
+          "Strigidae": {
+            "Bubo": {}
+          }
+        }
+      },
+      "Reptilia": {
+        "Squamata": {
+          "Iguanidae": {
+            "Iguana": {}
+          },
+          "Elapidae": {
+            "Ophiophagus": {}
+          }
+        },
+        "Crocodilia": {
+          "Crocodylidae": {
+            "Crocodylus": {}
+          }
+        },
+        "Testudines": {
+          "Cheloniidae": {
+            "Chelonia": {}
+          }
+        }
+      },
+      "Amphibia": {
+        "Anura": {
+          "Phyllomedusidae": {
+            "Agalychnis": {}
+          },
+          "Dendrobatidae": {
+            "Dendrobates": {}
+          }
+        },
+        "Urodela": {
+          "Ambystomatidae": {
+            "Ambystoma": {}
+          }
+        }
+      },
+      "Chondrichthyes": {
+        "Lamniformes": {
+          "Lamnidae": {
+            "Carcharodon": {}
+          }
+        }
+      },
+      "Actinopterygii": {
+        "Perciformes": {
+          "Pomacentridae": {
+            "Amphiprion": {}
+          }
+        },
+        "Syngnathiformes": {
+          "Syngnathidae": {
+            "Hippocampus": {}
+          }
+        }
+      }
+    },
+    "Arthropoda": {
+      "Insecta": {
+        "Lepidoptera": {
+          "Nymphalidae": {
+            "Danaus": {}
+          }
+        },
+        "Hymenoptera": {
+          "Apidae": {
+            "Apis": {}
+          }
+        }
+      },
+      "Arachnida": {
+        "Araneae": {
+          "Theraphosidae": {
+            "Theraphosa": {}
+          }
+        }
+      }
+    },
+    "Mollusca": {
+      "Cephalopoda": {
+        "Octopoda": {
+          "Octopodidae": {
+            "Octopus": {}
+          }
         }
       }
     }

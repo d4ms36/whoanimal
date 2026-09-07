@@ -1,0 +1,18 @@
+[
+  {
+    "animal_id": "d3bac9b6-0929-45c3-b45f-fab252a34805",
+    "scientific_name": "Agalychnis callidryas",
+    "common_name": "Rana arborícola verde",
+    "taxonomy": {
+      "kingdom": "Animalia",
+      "phylum": "Chordata",
+      "class": "Amphibia",
+      "order": "Anura",
+      "family": "Phyllomedusidae",
+      "genus": "Agalychnis",
+      "species": "Agalychnis callidryas"
+    },
+    "conservation_status": "LC",
+    "is_rare_species": false
+  }
+]

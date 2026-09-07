@@ -1,0 +1,18 @@
+[
+  {
+    "animal_id": "d83ff4e9-bcfb-4ea8-a7fa-dc29e9cf1513",
+    "scientific_name": "Ophiophagus hannah",
+    "common_name": "Cobra real",
+    "taxonomy": {
+      "kingdom": "Animalia",
+      "phylum": "Chordata",
+      "class": "Reptilia",
+      "order": "Squamata",
+      "family": "Elapidae",
+      "genus": "Ophiophagus",
+      "species": "Ophiophagus hannah"
+    },
+    "conservation_status": "VU",
+    "is_rare_species": true
+  }
+]

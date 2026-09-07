@@ -1,0 +1,18 @@
+[
+  {
+    "animal_id": "92f6adcf-1870-4ad0-822c-a33cfda59cde",
+    "scientific_name": "Octopus vulgaris",
+    "common_name": "Pulpo común",
+    "taxonomy": {
+      "kingdom": "Animalia",
+      "phylum": "Mollusca",
+      "class": "Cephalopoda",
+      "order": "Octopoda",
+      "family": "Octopodidae",
+      "genus": "Octopus",
+      "species": "Octopus vulgaris"
+    },
+    "conservation_status": "LC",
+    "is_rare_species": false
+  }
+]

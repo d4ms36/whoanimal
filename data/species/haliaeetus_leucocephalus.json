@@ -1,0 +1,18 @@
+[
+  {
+    "animal_id": "140c0a1c-4a78-4f67-87c6-6b6c7b0907a6",
+    "scientific_name": "Haliaeetus leucocephalus",
+    "common_name": "Águila calva",
+    "taxonomy": {
+      "kingdom": "Animalia",
+      "phylum": "Chordata",
+      "class": "Aves",
+      "order": "Accipitriformes",
+      "family": "Accipitridae",
+      "genus": "Haliaeetus",
+      "species": "Haliaeetus leucocephalus"
+    },
+    "conservation_status": "LC",
+    "is_rare_species": false
+  }
+]

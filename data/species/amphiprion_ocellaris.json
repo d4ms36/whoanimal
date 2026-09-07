@@ -1,0 +1,18 @@
+[
+  {
+    "animal_id": "a8b4c309-c261-4baa-96f5-155a555e406f",
+    "scientific_name": "Amphiprion ocellaris",
+    "common_name": "Pez payaso",
+    "taxonomy": {
+      "kingdom": "Animalia",
+      "phylum": "Chordata",
+      "class": "Actinopterygii",
+      "order": "Perciformes",
+      "family": "Pomacentridae",
+      "genus": "Amphiprion",
+      "species": "Amphiprion ocellaris"
+    },
+    "conservation_status": "LC",
+    "is_rare_species": false
+  }
+]

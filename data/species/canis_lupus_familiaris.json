@@ -1,0 +1,18 @@
+[
+  {
+    "animal_id": "99fcbd5c-911d-4cee-af0c-9b5d4fb1e53f",
+    "scientific_name": "Canis lupus familiaris",
+    "common_name": "Perro doméstico",
+    "taxonomy": {
+      "kingdom": "Animalia",
+      "phylum": "Chordata",
+      "class": "Mammalia",
+      "order": "Carnivora",
+      "family": "Canidae",
+      "genus": "Canis",
+      "species": "Canis lupus familiaris"
+    },
+    "conservation_status": "NE",
+    "is_rare_species": false
+  }
+]

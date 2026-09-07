@@ -1,0 +1,18 @@
+[
+  {
+    "animal_id": "f9e8108a-9bd2-40f3-8082-e0e8e7f9243c",
+    "scientific_name": "Theraphosa blondi",
+    "common_name": "Tarántula Goliat",
+    "taxonomy": {
+      "kingdom": "Animalia",
+      "phylum": "Arthropoda",
+      "class": "Arachnida",
+      "order": "Araneae",
+      "family": "Theraphosidae",
+      "genus": "Theraphosa",
+      "species": "Theraphosa blondi"
+    },
+    "conservation_status": "NE",
+    "is_rare_species": true
+  }
+]

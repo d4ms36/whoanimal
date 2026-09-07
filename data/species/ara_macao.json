@@ -1,0 +1,18 @@
+[
+  {
+    "animal_id": "5c5d17d4-1e67-48c5-9e55-406ab73baa65",
+    "scientific_name": "Ara macao",
+    "common_name": "Guacamayo rojo",
+    "taxonomy": {
+      "kingdom": "Animalia",
+      "phylum": "Chordata",
+      "class": "Aves",
+      "order": "Psittaciformes",
+      "family": "Psittacidae",
+      "genus": "Ara",
+      "species": "Ara macao"
+    },
+    "conservation_status": "LC",
+    "is_rare_species": false
+  }
+]

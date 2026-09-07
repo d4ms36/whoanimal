@@ -1,0 +1,18 @@
+[
+  {
+    "animal_id": "7fb3eb84-cecf-4cfa-8048-cc917d8d7a12",
+    "scientific_name": "Phoenicopterus roseus",
+    "common_name": "Flamenco común",
+    "taxonomy": {
+      "kingdom": "Animalia",
+      "phylum": "Chordata",
+      "class": "Aves",
+      "order": "Phoenicopteriformes",
+      "family": "Phoenicopteridae",
+      "genus": "Phoenicopterus",
+      "species": "Phoenicopterus roseus"
+    },
+    "conservation_status": "LC",
+    "is_rare_species": false
+  }
+]

@@ -1,0 +1,18 @@
+[
+  {
+    "animal_id": "ad5217c9-c091-4d19-b3ec-2acf55224ac8",
+    "scientific_name": "Elephas maximus",
+    "common_name": "Elefante asiático",
+    "taxonomy": {
+      "kingdom": "Animalia",
+      "phylum": "Chordata",
+      "class": "Mammalia",
+      "order": "Proboscidea",
+      "family": "Elephantidae",
+      "genus": "Elephas",
+      "species": "Elephas maximus"
+    },
+    "conservation_status": "EN",
+    "is_rare_species": false
+  }
+]

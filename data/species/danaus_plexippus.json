@@ -1,0 +1,18 @@
+[
+  {
+    "animal_id": "6ddef620-c980-4b23-9d08-a80a4a1d4bf8",
+    "scientific_name": "Danaus plexippus",
+    "common_name": "Mariposa monarca",
+    "taxonomy": {
+      "kingdom": "Animalia",
+      "phylum": "Arthropoda",
+      "class": "Insecta",
+      "order": "Lepidoptera",
+      "family": "Nymphalidae",
+      "genus": "Danaus",
+      "species": "Danaus plexippus"
+    },
+    "conservation_status": "LC",
+    "is_rare_species": false
+  }
+]

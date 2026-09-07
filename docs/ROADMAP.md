@@ -76,6 +76,8 @@
   * Infraestructura base para almacenar y validar el dataset estático de especies en JSON.
 * **`WHO-011B` — Implementación del Índice Taxonómico Oficial** `[APPROVED_COMPLETE]`
   * Servicio de dominio y archivo JSON para validar y buscar rutas taxonómicas de especies.
+* **`WHO-011C` — Implementación del Catálogo Zoológico Oficial Inicial** `[APPROVED_COMPLETE]`
+  * Primera ingesta formal de 28 especies JSON, validadas estrictamente sin motor de base de datos.
 * **`WHO-011` — Evaluación y Prototipo de Ingesta Taxonómica** `[PROPOSED]`
   * Conector experimental con APIs de biodiversidad abiertas (GBIF / iNaturalist) para validación de datos.
 * **`WHO-012` — Prototipo del Servicio de Generación de Cartas** `[PROPOSED]`

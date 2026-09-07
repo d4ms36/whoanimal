@@ -224,3 +224,10 @@ Cada tarea u objetivo debe documentarse utilizando la siguiente ficha estructura
 * **Commit:** (Pendiente de commit) (*feat(taxonomy): implement official taxonomy index*)
 * **Versión:** `0.0.1`
 
+
+### WHO-011C: Implementación del Catálogo Zoológico Oficial Inicial
+* **Propósito:** Construir y validar el primer lote de 28 especies para poblar el catálogo base.
+* **Estado:** `APPROVED_COMPLETE`
+* **Commit:** (Pendiente de commit) (*feat(dataset): build official starter species catalog*)
+* **Versión:** `0.0.1`
+
