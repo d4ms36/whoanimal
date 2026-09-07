@@ -15,7 +15,7 @@ import com.whoanimal.app.data.local.WhoAnimalDatabase
 import com.whoanimal.app.data.local.repository.RoomProfileRepository
 import com.whoanimal.app.domain.model.IdentificationResultContract
 import com.whoanimal.app.domain.repository.ProfileRepository
-import com.whoanimal.app.ui.screens.capture.CapturePlaceholderScreen
+import com.whoanimal.app.ui.screens.capture.CameraCaptureScreen
 import com.whoanimal.app.ui.screens.capture.IdentificationResultScreen
 import com.whoanimal.app.ui.screens.collection.CollectionPlaceholderScreen
 import com.whoanimal.app.ui.screens.home.HomeScreen
@@ -90,7 +90,7 @@ fun AppNavHost(
         }
 
         composable(NavDestination.Capture.route) {
-            CapturePlaceholderScreen(
+            CameraCaptureScreen(
                 onNavigateToResult = { result ->
                     currentIdentificationResult = result
                     navController.navigate(NavDestination.IdentificationResult.route)
