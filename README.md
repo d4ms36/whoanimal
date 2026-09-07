@@ -10,11 +10,12 @@
 
 ## 📌 Estado Actual del Proyecto
 
-El proyecto ha completado la **Fase 1 — Foundation** y se encuentra actualmente en la **Fase 2 — Alpha (Alpha Funcional 0.1 en Android)**:
+El proyecto ha completado la **Fase 1 — Foundation** y el **Golden Path de la Fase 2 — Alpha (Alpha Funcional 0.1 en Android)**:
 
-* **Foundation completada:** Modelos de dominio inmutables, catálogo oficial inicial de 28 especies zoológicas validadas, arquitectura limpia, contratos desacoplados y suite completa de tests unitarios (Python).
-* **Alpha 0.1 en marcha:** Aplicación Android nativa con Jetpack Compose, Material 3, captura visual con CameraX, almacenamiento efímero en caché, pipeline de identificación determinista y persistencia local de colección y perfiles offline con Room (SQLite).
+* **Foundation completada:** Modelos de dominio inmutables, catálogo oficial inicial de 28 especies zoológicas validadas, arquitectura limpia, contratos desacoplados y suite completa de tests unitarios (Python 150/150 PASS).
+* **Alpha 0.1 Golden Path completado:** Aplicación Android nativa con Jetpack Compose, Material 3, captura nativa con CameraX, pipeline de identificación determinista, presentación y volteo 3D de cartas, y persistencia local offline en Baúl (10 contenedores × 30 slots = 300 cartas) con reapertura inmutable garantizada (Android 63/63 PASS).
 * **Visión Rebaselinada (DEC-053):** Formalización de las tres capas de producto (**CORE**, **GAME**, **SOCIAL**), arquitectura publicitaria desacoplada (`AdService`), economía ética sin Pay-to-Win con moneda gratuita y tienda de cosméticos, duelos PvP ligeros (equipos de 10 cartas) y roadmap estratégico de 7 fases.
+* **Próximo Paso:** Preparación de release y creación del tag `v0.1.0-alpha` (`WHO-019`).
 
 Consulta el documento maestro de visión: [docs/PRODUCT_VISION.md](docs/PRODUCT_VISION.md).
 

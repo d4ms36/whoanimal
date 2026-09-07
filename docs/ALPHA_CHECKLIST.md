@@ -87,11 +87,15 @@ Una funcionalidad solo puede marcarse como completada cuando:
 | Eliminar         | 🟡     |
 | Editar permitido | ⬜      |
 
+*Nota sobre Colección:*  
+* *Eliminar:* En Alpha 0.1 está implementado en la revisión inicial de la carta mediante la acción modal "Descartar / Liberar". En el Baúl (`PERSISTED_CARD`), la eliminación directa se encuentra protegida para salvaguardar la colección; la eliminación con diálogo de confirmación desde el Baúl se reserva para una iteración posterior sin condicionar el Golden Path.  
+* *Editar permitido:* El campo de Lore personal (`personalLore`) se almacena y recupera íntegramente en la base de datos local (Room v2); la pantalla de edición interactiva de Lore con el límite de 3 ediciones (DEC-041) se incorporará en el pulido de personalización sin bloquear el hito Alpha 0.1.
+
 ---
 
 # Golden Path Alpha
 
-El siguiente recorrido debe funcionar completo para declarar Alpha terminada.
+El siguiente recorrido debe funcionar completo para declarar Alpha terminada:
 
 * [x] Abrir la aplicación.
 * [x] Login local.
@@ -110,14 +114,15 @@ El siguiente recorrido debe funcionar completo para declarar Alpha terminada.
 * [x] Volver a abrirla.
 * [x] Recuperar la carta.
 
+> ✅ **Resultado:** Golden Path 100% verificado y funcional en Android (`edee173`).
 
 ---
 
 # Bugs conocidos
 
-| ID | Estado | Descripción   |
-| -- | ------ | ------------- |
-| —  | —      | Sin registrar |
+| ID | Estado | Descripción |
+| -- | ------ | ----------- |
+| — | — | Ninguno activo; suite de 63 tests Android y 150 tests Python pasando limpiamente |
 
 ---
 
@@ -129,7 +134,9 @@ Se crea el tag:
 
 únicamente cuando:
 
-* todas las casillas críticas del Golden Path estén completas;
-* Android compile en Release;
-* la suite Python continúe pasando;
-* no existan bloqueos críticos abiertos.
+* todas las casillas críticas del Golden Path estén completas (✅ COMPLETADO);
+* Android compile en Release (Pendiente de ejecución en `WHO-019`);
+* la suite Python continúe pasando (✅ 150/150 PASS);
+* no existan bloqueos críticos abiertos (✅ CERO BLOQUEOS).
+
+*Estado:* Requisitos funcionales y de testing satisfechos. Listo para ejecución del objetivo de empaquetado y release `WHO-019`.

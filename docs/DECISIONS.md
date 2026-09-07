@@ -757,6 +757,55 @@ Aprobado por: [Director Creativo / Project Manager / Consenso]
 
 ---
 
+### DEC-054: Presentación Visual Interactiva de Carta y Volteo Tridimensional (Card Flip)
+* **Fecha:** 2026-09-07
+* **Estado:** `APROBADA`
+* **Objetivo:** `WHO-018C`
+* **Tema:** UX / Animación 3D / Doble Cara de Carta / Presentación de Dominio
+* **Resolución:**
+  1. Se implementa la pantalla unificada `CardPresentationScreen` con renderizado de doble cara desacoplado (`CardFrontView` y `CardBackView`).
+  2. Animación de giro tridimensional táctil mediante Compose `graphicsLayer(rotationY = animatedRotation)` y `cameraDistance = 12f * density`, con cambio de cara exacto a los 90 grados para evitar reflejos especulares de texto.
+  3. Visualización estricta de la separación ontológica tripartita:
+     * **Frente:** Fotografía real de la especie (o fallback artístico), categoría zoológica, nombre común y científico, rareza visual y serial único.
+     * **Reverso:** Ficha científica contrastada (taxonomía, hábitat, dieta, peso, estado de conservación) y sección de Lore (Historia Personal) con advertencia explícita de narrativa personal.
+  4. Flujo interactivo de toma de decisión de colección: Opciones de Guardar en Baúl (con asignación atómica a slot disponible) o Descartar/Liberar (con confirmación modal de seguridad).
+* **Justificación / Principios:** Consolida la experiencia central de la carta física en un formato digital elegante, respetando la regla innegociable de separación entre ciencia y Lore sin acoplar la UI con la lógica de generación.
+* **Aprobado por:** Director Creativo / Project Manager
+
+---
+
+### DEC-055: Auditoría de Integración del Golden Path Alpha y Cierre de Gaps de Persistencia
+* **Fecha:** 2026-09-07
+* **Estado:** `APROBADA`
+* **Objetivo:** `WHO-018D`
+* **Tema:** Integración de Sistemas / Persistencia Room / Auditoría E2E
+* **Resolución:**
+  1. Se audita y verifica el flujo end-to-end continuo desde la apertura de app hasta la persistencia en el Baúl:
+     `Login → Home → Capture → Camera → Observation → Identification → Decision → Capture → Card → Review/Flip → Save → Storage`.
+  2. Identificación de la brecha funcional de Alpha: Visualización en grid y reapertura de la carta persistida desde el Baúl (`WHO-018E`).
+  3. Fortalecimiento de la persistencia Room: Se audita la retención de campos de imagen y Lore personal para garantizar supervivencia total tras reinicio.
+* **Justificación / Principios:** Asegura la continuidad de la experiencia del usuario y detecta discrepancias de integración antes de declarar la madurez de la versión Alpha.
+* **Aprobado por:** Director Creativo / Project Manager
+
+---
+
+### DEC-056: Grid de Colección en Baúl y Reapertura Segura de Cartas Persistidas sin Regeneración
+* **Fecha:** 2026-09-07
+* **Estado:** `APROBADA`
+* **Objetivo:** `WHO-018E`
+* **Tema:** Colección / Baúl / Reopening Inmutable / Persistencia Room V2
+* **Resolución:**
+  1. Evolución de `CollectionPlaceholderScreen` a `CollectionScreen` con navegación por contenedores (`C-1` a `C-10`), indicador de ocupación en tiempo real (baseline 10×30=300 slots) y grid de cartas de 2 columnas con soporte de miniaturas y fallback.
+  2. Regla Absoluta de Reapertura Inmutable: Al seleccionar una carta del Baúl, se recupera exactamente la entidad almacenada desde `CollectionStorageRepository`. Queda terminantemente prohibido regenerar la carta, invocar de nuevo `CardGeneratorService`, alterar `card_id`, `capture_id`, rareza o serial.
+  3. Modos de Presentación de Carta (`CardPresentationMode`):
+     * `NEW_CARD_REVIEW`: Modo de revisión inicial tras captura con acciones de "Guardar en Baúl" y "Descartar".
+     * `PERSISTED_CARD`: Modo de inspección de carta guardada; deshabilita botones de guardado/descarte para evitar duplicaciones o pérdida accidental de datos, ofreciendo navegación limpia de regreso al Baúl.
+  4. Migración de Esquema Room a Versión 2: Incorporación canónica de `imagePath` y `personalLore` en `CardEntity` con mapeo simétrico bidireccional, garantizando la supervivencia integral de la carta tras el reinicio completo de la aplicación.
+* **Justificación / Principios:** Cierra formalmente la última brecha funcional del Golden Path Alpha 0.1, garantizando que el usuario pueda contemplar y voltear sus cartas guardadas cuantas veces desee sin corromper la inmutabilidad histórica del objeto.
+* **Aprobado por:** Director Creativo / Project Manager
+
+---
+
 ### DEC-010: Estilo y Universo Mitológico del Lore (SUPERSEDED)
 * **Tema:** Diseño Narrativo
 * **Estado:** `SUPERSEDED`

@@ -56,9 +56,9 @@
 **Objetivo Rector de Alpha 0.1:**
 > *"Un usuario nuevo debe poder entrar a WHO Animal, fotografiar un animal, obtener una identificación, generar una carta, revisarla, guardarla en su colección, cerrar la aplicación, volver a abrirla y encontrar la carta nuevamente."*
 
-### Golden Path Oficial de Alpha:
+### Golden Path Oficial de Alpha (Completado):
 ```text
-LOGIN → HOME → CAPTURE → CAMERA → OBSERVATION → IDENTIFICATION → RESULT → DECISION → CAPTURE → CARD → REVIEW / FLIP → SAVE → STORAGE
+LOGIN → HOME → CAPTURE → CAMERA → OBSERVATION → IDENTIFICATION → RESULT → DECISION → CAPTURE → CARD → REVIEW / FLIP → SAVE → STORAGE → REOPEN
 ```
 
 ### Alcance Oficial de Alpha:
@@ -67,7 +67,7 @@ LOGIN → HOME → CAPTURE → CAMERA → OBSERVATION → IDENTIFICATION → RES
 * **Capture:** Permisos en runtime, cámara en vivo con CameraX, retícula de fauna, almacenamiento efímero en `cacheDir`, `Observation`, identificación determinista, `IdentificationResult`, decisión explícita y manejo de errores.
 * **Card:** Generación automática tras decisión `ACCEPTED`, vista frontal, animación interactiva de volteo 3D (*flip*), vista posterior con datos zoológicos contrastados y Lore personal, inmutabilidad de campos canónicos y guardado/descarte.
 * **Location:** Ubicación generalizada (`display_location`), sin dirección residencial exacta, protegiendo a la fauna silvestre.
-* **Storage (Baúl):** Persistencia local robusta en 10 containers x 30 espacios (capacidad de 300 cartas de la fase Alpha/Foundation), selector de contenedor, visualización, inspección y supervivencia garantizada tras reinicio de la app.
+* **Storage (Baúl):** Persistencia local robusta en 10 containers x 30 espacios (capacidad de 300 cartas de la fase Alpha/Foundation), selector de contenedor, visualización en grid, reapertura inmutable de la carta persistida y supervivencia garantizada tras reinicio de la app.
 * **UX Mínima:** Splash, estados de carga pedagógicos, *empty state*, diálogo de confirmación de borrado, navegación Back/Home y micro-interacciones pulidas.
 
 ### Secuencia Atómica de Construcción de Alpha:
@@ -77,10 +77,16 @@ LOGIN → HOME → CAPTURE → CAMERA → OBSERVATION → IDENTIFICATION → RES
 * **`WHO-017` — Motor de Persistencia Local y Colección (`Collection Album`)** `[COMPLETADO]`
 * **`WHO-018A` — Login Alpha Local (Perfil y Sesión Offline)** `[COMPLETADO]`
 * **`WHO-018B` — Captura y Cámara Alpha (CameraX / Visual Input)** `[COMPLETADO]`
-* **`WHO-018C` — Visualización y Giro 3D de Carta (Card View & Flip)** `[PROPUESTO]`
-  * Pantalla de visualización interactiva de carta con ambas caras, animación de giro tridimensional táctil, revisión de atributos zoológicos y guardado en la colección persistente.
-* **`WHO-018` — Integración del Mínimo Funcional Android (End-to-End Core Loop)** `[PROPUESTO]`
-  * Cierre integral del flujo de 11 pasos ejecutable en dispositivo o emulador Android.
+* **`WHO-018C` — Visualización y Giro 3D de Carta (Card View & Flip)** `[COMPLETADO]`
+  * Pantalla de visualización interactiva de carta con ambas caras, animación de giro tridimensional táctil, revisión de atributos zoológicos y guardado en la colección persistente (DEC-054).
+* **`WHO-018D` — Auditoría de Integración del Golden Path y UX** `[COMPLETADO]`
+  * Verificación integral del flujo de 11 pasos, detección y documentación de la brecha funcional de reapertura (DEC-055).
+* **`WHO-018E` — Grid de Colección y Reapertura de Cartas Persistidas (Collection Grid & Reopening)** `[COMPLETADO]`
+  * Grid de 2 columnas en Baúl, selector de contenedores C-1 a C-10, reapertura inmutable sin regeneración de carta, modo `PERSISTED_CARD` y Room versión 2 con `imagePath` y `personalLore` (DEC-056).
+* **`WHO-018` — Integración del Mínimo Funcional Android (End-to-End Core Loop)** `[COMPLETADO]`
+  * Consolidado y completado exitosamente a través de la secuencia atómica `WHO-018A` a `WHO-018E`.
+* **`WHO-019` — Alpha 0.1 Release Packaging & Tagging (`v0.1.0-alpha`)** `[PROPUESTO]`
+  * Verificación formal de empaquetado de Release Android (`assembleRelease`), verificación de `versionCode`/`versionName` según gobernanza, suite de regresión y creación del tag de lanzamiento `v0.1.0-alpha`.
 
 ---
 

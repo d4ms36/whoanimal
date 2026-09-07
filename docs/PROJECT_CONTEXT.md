@@ -381,7 +381,7 @@ La planificación estratégica de WHO Animal se estructura oficialmente en siete
 ```
 
 * **1. FOUNDATION (Completada):** Modelos de dominio inmutables, catálogo de 28 especies JSON, arquitectura limpia, contratos de frontera y suite de pruebas.
-* **2. ALPHA (En Curso):** Core Loop end-to-end (`Login → Home → Capture → Identify → Card → Flip → Storage`). Prioridad: estabilidad local.
+* **2. ALPHA (Golden Path Completado):** Core Loop end-to-end (`Login → Home → Capture → Camera → Observation → Identify → Card → Flip → Save → Baúl → Reopen`). Prioridad: estabilidad local y empaquetado de release v0.1.0-alpha.
 * **3. BETA:** Pulido de UX, compatibilidad de dispositivos reales con CameraX, accesibilidad, internacionalización de interfaz, pre-AdService y distribución controlada vía Google Play Internal Testing.
 * **4. RELEASE 1.0:** Lanzamiento público en Google Play Store con Core Loop completo, enciclopedia zoológica, Baúl personal, temas básicos, moneda gratuita, tienda cosmética y publicidad desacoplada (`AdService`). El PvP no bloquea Release 1.0.
 * **5. RELEASE 1.x (GAME):** Capa Game: duelos PvP sencillos tipo RPG de cartas, equipos activos de 10 cartas configurables semanalmente, temporadas y logros.
