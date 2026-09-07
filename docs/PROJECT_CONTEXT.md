@@ -72,12 +72,13 @@ Toda información asociada a un animal o a una carta en WHO Animal pertenece con
 
 ---
 
-## 4. Diferenciación Ontológica: Observation vs. IdentificationResult vs. Animal vs. Capture vs. Carta
+## 4. Diferenciación Ontológica: Observation vs. IdentificationResult vs. IdentificationDecision vs. Animal vs. Capture vs. Carta
 
-> **Observation → IdentificationResult → Animal ≠ Capture ≠ Carta**
+> **Observation → IdentificationResult → IdentificationDecision → Animal ≠ Capture ≠ Carta**
 
 * **Observation (`Observation`):** Representa una observación fotográfica efímera y pendiente de confirmación. Actúa como puente temporal entre una foto y una `Capture`. Su existencia **no** afecta a `AnimalProfile`, no acuña `Card` ni formaliza una `Capture` hasta ser aceptada explícitamente (DEC-043).
 * **IdentificationResult (`IdentificationResult`):** Representa el resultado en bruto emitido por un motor de identificación sobre una `Observation` (DEC-044). Contiene la confianza (confidence) pero **no** representa la decisión de aceptación. Es una estructura de datos inmutable generada durante el procesamiento.
+* **IdentificationDecision (`IdentificationDecision`):** Representa la decisión explícita (`ACCEPTED`, `REJECTED`, `CANCELLED`) tomada sobre un `IdentificationResult` (DEC-045). Desacopla de forma absoluta la confianza de la decisión (`confidence ≠ decision`) y valida estrictamente el `selected_animal_id` contra los candidatos en caso de ser aceptada. No genera automáticamente `Capture` ni `Card`.
 * **Animal (`AnimalProfile`):** Representa la entidad biológica y taxonómica objetiva de la especie en la base de conocimiento de WHO Animal. Describe rasgos universales de la especie (taxonomía, hábitat, dieta, distribución física, esperanza de vida, tamaño, ciclo de actividad). Esta información se considera permanente y estática (ver **DEC-042**). Puede existir en el sistema sin necesidad de haber sido emitido aún en una carta para ningún usuario. **No contiene atributos particulares de individuos observados (ej. `sex ∉ Animal`)**.
 * **Captura / Espécimen (`Capture / Specimen`):** Representa el evento de observación y registro de un individuo físico concreto en el mundo real (`capture_id`, `animal_id`, telemetría de campo, timestamp), usualmente originado al aceptar una `Observation`. **Aquí reside el sexo biológico del ejemplar observado (`sex ∈ Capture`, valores: `MALE`, `FEMALE`, `UNKNOWN`; ver DEC-036). Se trata de un dato opcional y nullable sin valor por defecto (DEC-039), diferenciando la imposibilidad de identificación (`UNKNOWN`) de la ausencia de dato (`null`)**.
 * **Carta (`AnimalCard`):** Representa un ejemplar coleccionable individual, acuñado y emitido en un momento histórico concreto para el álbum de un jugador, vinculado a un espécimen animal pero dotado de propiedades de colección, generación, rareza y autenticación propias. Puede proyectar datos de la captura (como el sexo del individuo observado) en su visualización, pero la fuente primaria de verdad es la captura.

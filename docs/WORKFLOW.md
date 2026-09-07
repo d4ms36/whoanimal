@@ -252,3 +252,11 @@ ative_regions).
 * **Estado:** `APPROVED_COMPLETE`
 * **Commit:** `60b67bf`
 * **Versión:** `0.0.1`
+
+
+### WHO-012C: Formalizar la decisión explícita sobre un IdentificationResult
+* **Propósito:** Formalizar la entidad de dominio `IdentificationDecision` para registrar la decisión explícita (`ACCEPTED`, `REJECTED`, `CANCELLED`) sobre un `IdentificationResult`, desacoplando la decisión de la confianza y validando el animal seleccionado.
+* **Estado:** `APPROVED_COMPLETE`
+* **Commit:** (Pendiente de commit) (*feat(domain): implement identification decision*)
+* **Versión:** `0.0.1`
+

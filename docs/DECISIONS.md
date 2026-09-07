@@ -536,6 +536,22 @@ Aprobado por: [Director Creativo / Project Manager / Consenso]
 
 ---
 
+### DEC-045: Formalización de la Decisión Explícita de Identificación
+* **Tema:** Arquitectura de Dominio (Motor de Observaciones)
+* **Fecha:** 2026-09-07
+* **Estado:** `APPROVED`
+* **Decisión:** Se introduce `IdentificationDecision` para formalizar la decisión explícita tomada sobre un `IdentificationResult`. Se desacopla de forma absoluta la confianza (`confidence`) de la decisión (`decision`).
+* **Justificación / Principios:**
+  * La confianza cuantitativa nunca produce automáticamente una decisión de aceptación o rechazo (`confidence ≠ decision`). No existen umbrales automáticos en la entidad.
+  * Los estados de decisión válidos son exclusivamente: `ACCEPTED`, `REJECTED` y `CANCELLED`.
+  * La decisión `ACCEPTED` exige un `selected_animal_id` que debe pertenecer a los candidatos del `IdentificationResult`.
+  * Las decisiones `REJECTED` y `CANCELLED` no requieren selección de animal y no originan `Capture` ni `Card`.
+  * No se realiza inferencia automática del animal ni se asumen decisiones por defecto.
+  * Esta entidad todavía no crea `Capture` ni `Card` (el puente hacia `Capture` se evaluará en un objetivo posterior).
+* **Aprobado por:** Director Creativo / Project Manager
+
+---
+
 ### DEC-010: Estilo y Universo Mitológico del Lore (SUPERSEDED)
 * **Tema:** Diseño Narrativo
 * **Estado:** `SUPERSEDED`
