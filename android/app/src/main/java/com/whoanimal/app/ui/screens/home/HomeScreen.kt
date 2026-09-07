@@ -42,6 +42,8 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.res.stringResource
+import com.whoanimal.app.R
 import com.whoanimal.app.ui.theme.EmeraldSecondary
 import com.whoanimal.app.ui.theme.ForestGreenPrimary
 import com.whoanimal.app.ui.theme.SageAccent
@@ -87,7 +89,7 @@ fun HomeScreen(
                         }
                         Spacer(modifier = Modifier.width(10.dp))
                         Text(
-                            text = "WHO Animal",
+                            text = stringResource(R.string.app_name),
                             style = MaterialTheme.typography.titleLarge.copy(
                                 fontWeight = FontWeight.Bold
                             )
@@ -125,7 +127,7 @@ fun HomeScreen(
                         color = SageAccent.copy(alpha = 0.25f)
                     ) {
                         Text(
-                            text = "ALPHA 0.1 • FOUNDATION",
+                            text = stringResource(R.string.home_alpha_badge),
                             style = MaterialTheme.typography.labelSmall.copy(
                                 fontWeight = FontWeight.Bold,
                                 color = SageAccent
@@ -136,7 +138,7 @@ fun HomeScreen(
                     if (explorerName != null) {
                         Spacer(modifier = Modifier.height(6.dp))
                         Text(
-                            text = "¡Hola, $explorerName!",
+                            text = stringResource(R.string.home_greeting, explorerName ?: ""),
                             style = MaterialTheme.typography.titleMedium.copy(
                                 color = SageAccent,
                                 fontWeight = FontWeight.SemiBold
@@ -145,7 +147,7 @@ fun HomeScreen(
                     }
                     Spacer(modifier = Modifier.height(10.dp))
                     Text(
-                        text = "Descubre. Identifica. Colecciona.",
+                        text = stringResource(R.string.tagline),
                         style = MaterialTheme.typography.headlineMedium.copy(
                             color = MaterialTheme.colorScheme.onPrimary,
                             fontWeight = FontWeight.Bold
@@ -153,7 +155,7 @@ fun HomeScreen(
                     )
                     Spacer(modifier = Modifier.height(6.dp))
                     Text(
-                        text = "Observa la fauna de forma ética y sin intervenir en su bienestar. Cada avistamiento genera una carta zoológica formal con información científica real.",
+                        text = stringResource(R.string.home_ethical_banner),
                         style = MaterialTheme.typography.bodyMedium.copy(
                             color = MaterialTheme.colorScheme.onPrimary.copy(alpha = 0.85f),
                             lineHeight = 20.sp
@@ -193,13 +195,13 @@ fun HomeScreen(
                         Spacer(modifier = Modifier.width(14.dp))
                         Column(modifier = Modifier.weight(1f)) {
                             Text(
-                                text = "Captura de Fauna",
+                                text = stringResource(R.string.home_capture_card_title),
                                 style = MaterialTheme.typography.titleMedium.copy(
                                     fontWeight = FontWeight.SemiBold
                                 )
                             )
                             Text(
-                                text = "Flujo: Observación → Identificación → Captura",
+                                text = stringResource(R.string.home_capture_card_subtitle),
                                 style = MaterialTheme.typography.bodyMedium,
                                 color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.65f)
                             )
@@ -214,7 +216,7 @@ fun HomeScreen(
                             containerColor = ForestGreenPrimary
                         )
                     ) {
-                        Text("Iniciar Captura")
+                        Text(stringResource(R.string.home_start_capture_action))
                     }
                 }
             }
@@ -250,13 +252,13 @@ fun HomeScreen(
                         Spacer(modifier = Modifier.width(14.dp))
                         Column(modifier = Modifier.weight(1f)) {
                             Text(
-                                text = "Álbum de Colección",
+                                text = stringResource(R.string.home_collection_card_title),
                                 style = MaterialTheme.typography.titleMedium.copy(
                                     fontWeight = FontWeight.SemiBold
                                 )
                             )
                             Text(
-                                text = "Storage: 10 contenedores x 30 cartas (300 cartas)",
+                                text = stringResource(R.string.home_collection_card_subtitle),
                                 style = MaterialTheme.typography.bodyMedium,
                                 color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.65f)
                             )
@@ -268,7 +270,7 @@ fun HomeScreen(
                         modifier = Modifier.fillMaxWidth(),
                         shape = RoundedCornerShape(12.dp)
                     ) {
-                        Text("Ver Álbum y Contenedores")
+                        Text(stringResource(R.string.home_view_collection_action))
                     }
                 }
             }
@@ -297,7 +299,7 @@ fun HomeScreen(
                     )
                     Spacer(modifier = Modifier.width(10.dp))
                     Text(
-                        text = "100% Pet Friendly: Prohibida la persecución o maltrato. Prioridad absoluta al bienestar animal.",
+                        text = stringResource(R.string.home_pet_friendly_footer),
                         style = MaterialTheme.typography.bodySmall,
                         color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.8f)
                     )

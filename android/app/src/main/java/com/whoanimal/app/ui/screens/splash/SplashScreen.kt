@@ -29,18 +29,23 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.whoanimal.app.R
 import com.whoanimal.app.domain.repository.ProfileRepository
 import com.whoanimal.app.ui.theme.ForestGreenPrimary
 import kotlinx.coroutines.delay
 
 /**
- * Pantalla de inicio (Splash) encargada de comprobar de forma asíncrona la sesión local:
- * - Si existe un perfil activo -> navega directamente al Home.
- * - Si no existe perfil activo -> navega a la pantalla de bienvenida (Welcome).
+ * Pantalla de Splash inicial de WHO Animal.
+ *
+ * Responsabilidad:
+ * - Mostrar identidad visual y lema del producto.
+ * - Verificar si existe un perfil de explorador local previamente creado.
+ * - Navegar a [HomeScreen] si existe perfil; o a [WelcomeScreen] si es la primera apertura.
  */
 @Composable
 fun SplashScreen(
@@ -52,11 +57,9 @@ fun SplashScreen(
     var isChecking by remember { mutableStateOf(true) }
     var checkError by remember { mutableStateOf<String?>(null) }
 
-    val verifySession: suspend () -> Unit = {
-        isChecking = true
-        checkError = null
+    LaunchedEffect(Unit) {
         try {
-            delay(500) // Breve pausa estética para la presentación del emblema
+            delay(500)
             val active = profileRepository.getActiveProfile()
             if (active != null) {
                 profileRepository.updateLastOpened(active.profileId)
@@ -65,27 +68,25 @@ fun SplashScreen(
                 onNavigateToWelcome()
             }
         } catch (e: Exception) {
-            checkError = e.message ?: "No se pudo comprobar la sesión local."
             isChecking = false
+            checkError = e.message ?: "No se pudo comprobar la sesión local."
         }
     }
 
-    LaunchedEffect(Unit) {
-        verifySession()
-    }
-
-    Surface(
-        modifier = modifier.fillMaxSize(),
-        color = MaterialTheme.colorScheme.background
+    Box(
+        modifier = modifier
+            .fillMaxSize()
+            .background(MaterialTheme.colorScheme.background),
+        contentAlignment = Alignment.Center
     ) {
         Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(24.dp),
+            horizontalAlignment = Alignment.CenterHorizontally,
             verticalArrangement = Arrangement.Center,
-            horizontalAlignment = Alignment.CenterHorizontally
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 32.dp)
         ) {
-            // Emblema visual de expedición zoológica
+            // Icono emblemático con contenedor circular suave
             Box(
                 modifier = Modifier
                     .size(104.dp)
@@ -97,7 +98,7 @@ fun SplashScreen(
             ) {
                 Icon(
                     imageVector = Icons.Default.Pets,
-                    contentDescription = "WHO Animal Logo",
+                    contentDescription = stringResource(R.string.splash_logo_description),
                     modifier = Modifier.size(58.dp),
                     tint = ForestGreenPrimary
                 )
@@ -106,7 +107,7 @@ fun SplashScreen(
             Spacer(modifier = Modifier.height(28.dp))
 
             Text(
-                text = "WHO ANIMAL",
+                text = stringResource(R.string.app_name).uppercase(),
                 style = MaterialTheme.typography.headlineLarge.copy(
                     fontWeight = FontWeight.ExtraBold,
                     letterSpacing = 2.sp
@@ -118,7 +119,7 @@ fun SplashScreen(
             Spacer(modifier = Modifier.height(8.dp))
 
             Text(
-                text = "Descubre. Identifica. Colecciona.",
+                text = stringResource(R.string.tagline),
                 style = MaterialTheme.typography.titleMedium,
                 color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.75f),
                 textAlign = TextAlign.Center
@@ -132,7 +133,7 @@ fun SplashScreen(
                 modifier = Modifier.padding(horizontal = 16.dp)
             ) {
                 Text(
-                    text = "Alpha 0.1 Foundation • 100% Pet Friendly",
+                    text = stringResource(R.string.splash_alpha_banner),
                     style = MaterialTheme.typography.labelSmall,
                     color = ForestGreenPrimary,
                     modifier = Modifier.padding(horizontal = 14.dp, vertical = 6.dp)
@@ -149,7 +150,7 @@ fun SplashScreen(
                 )
                 Spacer(modifier = Modifier.height(16.dp))
                 Text(
-                    text = "Iniciando expedición...",
+                    text = stringResource(R.string.splash_loading),
                     style = MaterialTheme.typography.bodySmall,
                     color = MaterialTheme.colorScheme.onBackground.copy(alpha = 0.6f)
                 )
@@ -171,7 +172,7 @@ fun SplashScreen(
                         containerColor = ForestGreenPrimary
                     )
                 ) {
-                    Text("Reintentar")
+                    Text(stringResource(R.string.action_retry))
                 }
             }
         }

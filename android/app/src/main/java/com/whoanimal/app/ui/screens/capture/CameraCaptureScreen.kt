@@ -62,6 +62,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.core.content.ContextCompat
+import androidx.compose.ui.res.stringResource
+import com.whoanimal.app.R
 import androidx.compose.ui.platform.LocalLifecycleOwner
 import com.whoanimal.app.domain.identification.IdentificationService
 import com.whoanimal.app.domain.model.IdentificationResultContract
@@ -158,7 +160,7 @@ fun CameraCaptureScreen(
                             imageCapture = capture
                             isCameraBound = true
                         } catch (e: Exception) {
-                            captureErrorMessage = "No se pudo inicializar la cámara: ${e.message}"
+                            captureErrorMessage = context.getString(R.string.camera_error_init, e.message ?: "")
                         }
                     }, ContextCompat.getMainExecutor(ctx))
 
@@ -201,7 +203,7 @@ fun CameraCaptureScreen(
                 ) {
                     Icon(
                         imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                        contentDescription = "Volver",
+                        contentDescription = stringResource(R.string.action_back),
                         tint = Color.White
                     )
                 }
@@ -221,7 +223,7 @@ fun CameraCaptureScreen(
                         )
                         Spacer(modifier = Modifier.width(6.dp))
                         Text(
-                            text = "VISTA EN VIVO",
+                            text = stringResource(R.string.camera_live_view),
                             style = MaterialTheme.typography.labelSmall.copy(
                                 fontWeight = FontWeight.Bold,
                                 letterSpacing = 1.sp
@@ -245,7 +247,7 @@ fun CameraCaptureScreen(
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 Text(
-                    text = "Apunta al espécimen y presiona para observar",
+                    text = stringResource(R.string.camera_hint),
                     style = MaterialTheme.typography.bodySmall,
                     color = Color.White.copy(alpha = 0.8f),
                     textAlign = TextAlign.Center
@@ -283,6 +285,7 @@ fun CameraCaptureScreen(
                                             override fun onImageSaved(outputFileResults: ImageCapture.OutputFileResults) {
                                                 coroutineScope.launch {
                                                     processCapturedPhoto(
+                                                        context = context,
                                                         photoFile = photoFile,
                                                         identificationService = identificationService,
                                                         onSuccess = { result, photoPath ->
@@ -303,7 +306,7 @@ fun CameraCaptureScreen(
 
                                             override fun onError(exception: ImageCaptureException) {
                                                 isProcessingCapture = false
-                                                captureErrorMessage = "Fallo al capturar fotografía: ${exception.message}"
+                                                captureErrorMessage = context.getString(R.string.camera_error_capture_failed, exception.message ?: "")
                                             }
                                         }
                                     )
@@ -345,7 +348,7 @@ fun CameraCaptureScreen(
                         } else {
                             Icon(
                                 imageVector = Icons.Default.CameraAlt,
-                                contentDescription = "Capturar fotografía",
+                                contentDescription = stringResource(R.string.camera_shutter_description),
                                 tint = Color.White,
                                 modifier = Modifier.size(32.dp)
                             )
@@ -381,7 +384,7 @@ fun CameraCaptureScreen(
                 Spacer(modifier = Modifier.height(24.dp))
 
                 Text(
-                    text = "Permiso de Cámara Requerido",
+                    text = stringResource(R.string.camera_permission_title),
                     style = MaterialTheme.typography.titleLarge.copy(
                         fontWeight = FontWeight.Bold
                     ),
@@ -391,7 +394,7 @@ fun CameraCaptureScreen(
                 Spacer(modifier = Modifier.height(10.dp))
 
                 Text(
-                    text = "WHO Animal necesita acceder a la cámara para que puedas fotografiar y estudiar animales en campo sin perturbarlos. Toda observación permanece estrictamente en tu dispositivo.",
+                    text = stringResource(R.string.camera_permission_rationale),
                     style = MaterialTheme.typography.bodyMedium.copy(lineHeight = 20.sp),
                     color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.75f),
                     textAlign = TextAlign.Center
@@ -411,7 +414,7 @@ fun CameraCaptureScreen(
                 ) {
                     Icon(imageVector = Icons.Default.Refresh, contentDescription = null, modifier = Modifier.size(20.dp))
                     Spacer(modifier = Modifier.width(8.dp))
-                    Text("Conceder Permiso de Cámara")
+                    Text(stringResource(R.string.camera_grant_permission_action))
                 }
 
                 Spacer(modifier = Modifier.height(16.dp))
@@ -423,7 +426,7 @@ fun CameraCaptureScreen(
                         .fillMaxWidth(0.85f)
                         .height(50.dp)
                 ) {
-                    Text("Volver al Inicio")
+                    Text(stringResource(R.string.camera_back_to_home_action))
                 }
             }
         }
@@ -444,7 +447,7 @@ fun CameraCaptureScreen(
                 ) {
                     Icon(
                         imageVector = Icons.Default.Warning,
-                        contentDescription = "Error",
+                        contentDescription = stringResource(R.string.error_icon_description),
                         tint = MaterialTheme.colorScheme.error
                     )
                     Spacer(modifier = Modifier.width(10.dp))
@@ -465,6 +468,7 @@ fun CameraCaptureScreen(
  * y ejecuta el análisis taxonómico con [IdentificationService].
  */
 private suspend fun processCapturedPhoto(
+    context: Context,
     photoFile: File,
     identificationService: IdentificationService,
     onSuccess: (IdentificationResultContract, String) -> Unit,
@@ -473,7 +477,7 @@ private suspend fun processCapturedPhoto(
     withContext(Dispatchers.IO) {
         try {
             if (!photoFile.exists() || photoFile.length() == 0L) {
-                onError("El archivo fotográfico temporal es inválido o está vacío.")
+                onError(context.getString(R.string.camera_error_invalid_file))
                 return@withContext
             }
 
@@ -489,7 +493,7 @@ private suspend fun processCapturedPhoto(
             }
         } catch (e: Exception) {
             withContext(Dispatchers.Main) {
-                onError(e.message ?: "Ocurrió un error al identificar la observación.")
+                onError(e.message ?: context.getString(R.string.camera_error_identification))
             }
         }
     }
@@ -523,7 +527,7 @@ private suspend fun executeSimulatedCapture(
             }
         } catch (e: Exception) {
             withContext(Dispatchers.Main) {
-                onError(e.message ?: "Error al procesar la captura simulada.")
+                onError(e.message ?: context.getString(R.string.camera_error_simulated))
 
             }
         }

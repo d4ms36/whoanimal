@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Brand & General -->
+    <string name="app_name">WHO Animal</string>
+    <string name="tagline">Discover. Identify. Collect.</string>
+    <string name="action_back">Back</string>
+    <string name="action_return">Return</string>
+    <string name="action_retry">Retry</string>
+    <string name="action_cancel">Cancel</string>
+    <string name="action_confirm">Confirm</string>
+    <string name="action_save">Save</string>
+    <string name="action_saving">Saving...</string>
+    <string name="error_title">Error</string>
+    <string name="error_icon_description">Error</string>
+    <string name="unknown_species">Unknown Species</string>
+
+    <!-- Splash & Welcome Screens -->
+    <string name="splash_logo_description">WHO Animal Logo</string>
+    <string name="splash_alpha_banner">Alpha 0.1 Foundation • 100% Pet Friendly</string>
+    <string name="splash_loading">Starting expedition...</string>
+    <string name="welcome_logo_description">WHO Animal Logo</string>
+    <string name="welcome_alpha_banner">Alpha 0.1 • 100% Pet Friendly</string>
+    <string name="welcome_body">Welcome to the wildlife discovery and protection expedition. Observe animals responsibly, identify authentic species, and collect scientific cards in your personal field album.</string>
+    <string name="welcome_start_action">Start Expedition</string>
+
+    <!-- Profile Screen -->
+    <string name="profile_badge_description">Explorer Badge</string>
+    <string name="profile_title">Your Explorer Profile</string>
+    <string name="profile_description">Choose the name you will sign your wildlife observations with and register cards in your collection.</string>
+    <string name="profile_name_label">Explorer Name</string>
+    <string name="profile_name_placeholder">e.g. Dr. Carmen Silva</string>
+    <string name="profile_min_characters">Minimum 2 characters</string>
+    <string name="profile_char_counter">%1$d/30</string>
+    <string name="profile_validation_error_description">Validation error</string>
+    <string name="profile_validation_valid_description">Valid name</string>
+    <string name="profile_saving">Creating profile...</string>
+    <string name="profile_submit_action">Enter WHO Animal</string>
+
+    <!-- Home Screen -->
+    <string name="home_alpha_badge">ALPHA 0.1 • FOUNDATION</string>
+    <string name="home_greeting">Hello, %1$s!</string>
+    <string name="home_ethical_banner">Observe wildlife ethically without interfering with animal welfare. Every sighting generates a formal card with authentic scientific data.</string>
+    <string name="home_capture_card_title">Wildlife Capture</string>
+    <string name="home_capture_card_subtitle">Pipeline: Observation → Identification → Capture</string>
+    <string name="home_start_capture_action">Start Capture</string>
+    <string name="home_collection_card_title">Collection Album</string>
+    <string name="home_collection_card_subtitle">Storage: 10 containers x 30 cards (300 cards)</string>
+    <string name="home_view_collection_action">View Album and Containers</string>
+    <string name="home_pet_friendly_footer">100% Pet Friendly: Harassment or mistreatment is prohibited. Absolute priority to animal welfare.</string>
+
+    <!-- Camera & Capture Screen -->
+    <string name="camera_live_view">LIVE VIEW</string>
+    <string name="camera_hint">Aim at specimen and tap to observe</string>
+    <string name="camera_shutter_description">Capture photograph</string>
+    <string name="camera_permission_title">Camera Permission Required</string>
+    <string name="camera_permission_rationale">WHO Animal needs camera access so you can photograph and study animals in the field without disturbing them. All observations remain strictly on your device.</string>
+    <string name="camera_grant_permission_action">Grant Camera Permission</string>
+    <string name="camera_back_to_home_action">Back to Home</string>
+    <string name="capture_screen_title">Capture &amp; Identification</string>
+    <string name="capture_pipeline_title">Wildlife Identification Pipeline</string>
+    <string name="capture_pipeline_subtitle">Alpha 0.1: Selection of observed specimen for deterministic zoological analysis.</string>
+    <string name="capture_focus_specimen_label">Target Specimen (Official Catalog):</string>
+    <string name="capture_identifying">Identifying...</string>
+    <string name="capture_action">Make Observation and Analyze</string>
+    <string name="capture_ontological_flow_label">Controlled Ontological Pipeline:</string>
+    <string name="capture_step_1_title">Observation (Ephemeral)</string>
+    <string name="capture_step_1_detail">Observation is created without mutating catalog</string>
+    <string name="capture_step_2_title">IdentificationService</string>
+    <string name="capture_step_2_detail">Deterministic provider analyzes specimen</string>
+    <string name="capture_step_3_title">IdentificationResult</string>
+    <string name="capture_step_3_detail">Candidates emitted with explicit confidence</string>
+    <string name="capture_step_4_title">Pending Decision</string>
+    <string name="capture_step_4_detail">User accepts or discards; no automatic Capture created</string>
+
+    <!-- Identification Result Screen -->
+    <string name="identification_screen_title">Identification Result</string>
+    <string name="identification_error_title">Identification Error</string>
+    <string name="identification_error_fallback">Could not obtain a valid identification result.</string>
+    <string name="identification_retry_action">Try Again</string>
+    <string name="identification_method_label">Method: %1$s • Official Species</string>
+    <string name="identification_confidence_label">Zoological Confidence</string>
+    <string name="identification_alternative_candidates_title">Alternative Candidates:</string>
+    <string name="identification_acceptance_notice">Accepting prepares the explicit decision (ACCEPTED). Capture and Card creation will be processed in persistence and collection phases.</string>
+    <string name="identification_accept_action">Accept Identification</string>
+    <string name="identification_discard_action">Discard Identification</string>
+
+    <!-- Card Presentation Screen -->
+    <string name="card_mode_persisted_title">Collection • Specimen Card</string>
+    <string name="card_mode_review_title">Card Inspection</string>
+    <string name="card_mode_flipped_subtitle">Reverse • Scientific Fact Sheet &amp; Lore</string>
+    <string name="card_mode_front_subtitle">Front • Collectible</string>
+    <string name="card_flip_action_description">Flip Card</string>
+    <string name="card_generating">Generating card presentation...</string>
+    <string name="card_load_error_title">Could not load card</string>
+    <string name="card_load_error_fallback">Card data is not available.</string>
+    <string name="card_hint_reverso">Showing Back • Tap to return to Front</string>
+    <string name="card_hint_anverso">Showing Front • Tap card to flip</string>
+    <string name="card_release_dialog_title">Release wildlife specimen?</string>
+    <string name="card_release_dialog_body">This action will discard the record without storing it in your collection chest. The specimen will remain free in its natural habitat.</string>
+    <string name="card_release_confirm_action">Yes, Release</string>
+    <string name="rarity_rare">RARE</string>
+    <string name="rarity_common">COMMON</string>
+    <string name="card_expedition_label">Field Expedition</string>
+    <string name="card_rank_label">Rank %1$d</string>
+    <string name="card_biological_sheet_header">BIOLOGICAL SHEET</string>
+    <string name="card_core_badge">WHO Animal Core</string>
+    <string name="card_scientific_info_header">SCIENTIFIC INFORMATION</string>
+    <string name="taxonomy_class_label">Class</string>
+    <string name="taxonomy_order_label">Order</string>
+    <string name="taxonomy_family_label">Family</string>
+    <string name="taxonomy_genus_label">Genus</string>
+    <string name="taxonomy_species_label">Species</string>
+    <string name="fact_conservation_status_label">Conservation status</string>
+    <string name="fact_habitat_label">Habitat</string>
+    <string name="fact_diet_label">Diet</string>
+    <string name="fact_activity_cycle_label">Activity cycle</string>
+    <string name="fact_biometrics_label">Estimated biometrics</string>
+    <string name="biometrics_years_format">%1$d yrs approx.</string>
+    <string name="biometrics_cm_format">%1$d cm</string>
+    <string name="biometrics_kg_format">%1$s kg</string>
+    <string name="card_personal_observation_header">PERSONAL OBSERVATION</string>
+    <string name="card_fact_date_label">Sighting date</string>
+    <string name="card_fact_location_label">Location</string>
+    <string name="card_fact_method_label">Capture method</string>
+    <string name="card_fact_confidence_label">Registration confidence</string>
+    <string name="card_fact_serial_label">Specimen serial</string>
+    <string name="card_fact_verification_label">Verification status</string>
+    <string name="card_lore_disclaimer">Expedition Lore (Game narrative • Not a scientific fact)</string>
+    <string name="card_lore_fallback">No personal field notes recorded.</string>
+    <string name="card_action_release">Release</string>
+    <string name="card_action_show_front">Front</string>
+    <string name="card_action_show_back">Reverse</string>
+    <string name="card_action_view_front">View Front</string>
+    <string name="card_action_view_back">View Reverse</string>
+    <string name="card_action_back_to_storage">Return to Chest</string>
+
+    <!-- Collection / Baúl Screen -->
+    <string name="collection_title">Collection Chest</string>
+    <string name="collection_capacity_summary">%1$d of %2$d cards stored</string>
+    <string name="collection_back_to_home_description">Back to Home</string>
+    <string name="collection_container_title">Container %1$d</string>
+    <string name="collection_container_slots">%1$d / %2$d slots</string>
+    <string name="collection_empty_container_title">Container %1$d Empty</string>
+    <string name="collection_empty_container_body">You have no archived cards in this container. Captured and saved specimens will be stored here.</string>
+
+    <!-- Additional Errors and Dynamic Messages -->
+    <string name="camera_error_init">Could not initialize camera: %1$s</string>
+    <string name="camera_error_capture_failed">Failed to capture photo: %1$s</string>
+    <string name="camera_error_invalid_file">The temporary photo file is invalid or empty.</string>
+    <string name="camera_error_identification">An error occurred while identifying the observation.</string>
+    <string name="camera_error_simulated">Error processing simulated capture.</string>
+    <string name="identification_confidence_percent">%1$d%%</string>
+    <string name="identification_accepted_message">Identification formally Accepted (IdentificationDecision: ACCEPTED). No automatic Capture.</string>
+    <string name="identification_rejected_message">Identification Discarded (IdentificationDecision: REJECTED).</string>
+    <string name="fact_uncalculated_confidence">Not calculated</string>
+    <string name="conservation_lc">Least Concern (LC)</string>
+    <string name="conservation_nt">Near Threatened (NT)</string>
+    <string name="conservation_vu">Vulnerable (VU)</string>
+    <string name="conservation_en">Endangered (EN)</string>
+    <string name="conservation_cr">Critically Endangered (CR)</string>
+    <string name="conservation_ew">Extinct in the Wild (EW)</string>
+    <string name="conservation_ex">Extinct (EX)</string>
+    <string name="conservation_ne">Not Evaluated (NE)</string>
+</resources>

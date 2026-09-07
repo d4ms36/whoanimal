@@ -107,10 +107,10 @@ LOGIN → HOME → CAPTURE → CAMERA → OBSERVATION → IDENTIFICATION → RES
 ### Secuencia Atómica de Construcción de Beta:
 * **`WHO-020` — Auditoría Post-Release Alpha 0.1 y Madurez Beta (Beta Readiness)** `[COMPLETADO]`
   * Auditoría integral por capas (Core, Game, Social, Platform), validación de evidencia en código, plan de cierre de deuda y definición de la hoja de ruta Beta (DEC-057).
-* **`WHO-021` — Ingesta y Sincronización del Catálogo JSON como Android Assets** `[PROPUESTO]`
+* **`WHO-021` — Ingesta y Sincronización del Catálogo JSON como Android Assets** `[COMPLETADO]`
   * Unificación de la fuente única de verdad biológica (`data/species/`), eliminando datos duplicados en código Kotlin y sincronizando los 28 especímenes.
-* **`WHO-022` — Extracción y Externalización de Cadenas de UI (i18n Foundation)** `[PROPUESTO]`
-  * Migración sistemática de cadenas hardcodeadas de Compose a `res/values/strings.xml`, asegurando la separación $\text{UI} \neq \text{Ciencia} \neq \text{Lore}$.
+* **`WHO-022` — Extracción y Externalización de Cadenas de UI (i18n Foundation)** `[COMPLETADO]`
+  * Migración sistemática de cadenas hardcodeadas de Compose a `res/values/strings.xml`, asegurando la separación $\text{UI} \neq \text{Ciencia} \neq \text{Lore}$ y proveyendo fundación inicial en inglés (`values-en/strings.xml`).
 * **`WHO-023` — Edición Interactiva de Lore (DEC-041) y Liberación de Cartas en Baúl** `[PROPUESTO]`
   * Cierre de deuda de UX: UI de edición de Historia Personal con límite de 3 ediciones y acción segura de liberar carta desde el grid del Baúl con diálogo modal de confirmación.
 * **`WHO-024` — Accesibilidad (a11y) y Robustecimiento de Compatibilidad CameraX** `[PROPUESTO]`

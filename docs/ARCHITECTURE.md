@@ -22,6 +22,9 @@ La arquitectura de WHO Animal está concebida para crecer de forma modular sin a
    * Las fotos capturadas residen temporalmente en el caché local (`cacheDir`) para alimentar la `Observation`.
    * Solo las capturas aceptadas formalmente derivan en una `Card` almacenada en Room/SQLite.
 5. **Arquitectura Publicitaria Desacoplada (`AdService`):** Los SDKs de publicidad operan como infraestructura externa desacoplada, exponiendo interfaces limpias (`BannerPlacement`, `InterstitialPolicy`, `RewardedAdService`, `FrequencyPolicy`). Ninguna entidad del dominio conoce de anuncios.
+6. **Frontera de Internacionalización (i18n):**
+   * *Android UI strings use Android Resources as the localization boundary* (`res/values/strings.xml` como idioma base español y `res/values-en/strings.xml` para soporte internacional).
+   * *Scientific catalog data and user-generated Lore are not treated as UI resources*: La taxonomía zoológica reside en el catálogo oficial desacoplado (`SpeciesCatalogRepository`) y el Lore personal en la entidad de carta inmutable; ninguno es tratado como recurso de cadenas de interfaz.
 
 ---
 

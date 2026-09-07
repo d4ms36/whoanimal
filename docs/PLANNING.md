@@ -15,9 +15,9 @@
 | **Fase actual** | Transición Alpha $\rightarrow$ Beta (Auditoría Alpha 0.1 Completada) |
 | **Versión actual** | `0.1.0-alpha` (Build 2) |
 | **Estado** | Auditoría Post-Release Alpha 0.1 y Hoja de Ruta Beta Consolidadas |
-| **Objetivo activo** | Ninguno (Ciclo WHO-021 completado; listo para autorización de WHO-022) |
-| **Último objetivo completado** | `WHO-021` — Ingesta y Sincronización del Catálogo JSON como Android Assets (`DEC-058`) |
-| **Próximo objetivo propuesto** | `WHO-022` — Cierre de Deuda Alpha: Edición de Lore y Liberación Segura desde Baúl |
+| **Objetivo activo** | Ninguno (Ciclo WHO-022 completado; listo para autorización de WHO-023) |
+| **Último objetivo completado** | `WHO-022` — Extracción y Externalización de Cadenas de UI (i18n Foundation) (`DEC-059`) |
+| **Próximo objetivo propuesto** | `WHO-023` — Edición Interactiva de Lore (DEC-041) y Liberación en Baúl |
 | **Bloqueos** | Ninguno |
 | **Decisiones pendientes** | `DEC-009`, `DEC-011`, `DEC-021` a `DEC-025`, `DEC-037-PENDING` |
 | **Última actualización** | 2026-09-07 |
@@ -202,31 +202,31 @@ HOME → STORAGE → CONTAINER → CARD → VIEW / FLIP / BACK
 | **WHO-018** | Integración del Mínimo Funcional Android (End-to-End Core Loop) | Cierre integral del flujo de 11 pasos; formalmente completado y subsumido por la serie `WHO-018A` a `WHO-018E` | Alta | WHO-018E | `COMPLETADO` | **Sí** |
 | **WHO-019** | Alpha 0.1 Release Packaging & Tagging (`v0.1.0-alpha`) | Sincronización de versión Android (versionCode 2, versionName "0.1.0-alpha"), verificación de assembleRelease, registro en RELEASES.md y creación del tag Git v0.1.0-alpha | Alta | WHO-018E | `COMPLETADO` | **Sí** |
 | **WHO-020** | Auditoría Post-Release Alpha 0.1 y Madurez Beta (Beta Readiness) | Auditoría integral por capas, comprobación de evidencia en código, plan de cierre de deuda y definición del roadmap Beta (DEC-057) | Alta | WHO-019 | `COMPLETADO` | **Sí** |
-| **WHO-021** | Ingesta y Sincronización del Catálogo JSON como Android Assets | Unificación de la fuente única de verdad biológica (`data/species/`), eliminando duplicación de especies en código Kotlin | Alta | WHO-020 | `PROPUESTO` | **Sí** |
-| **WHO-022** | Extracción y Externalización de Cadenas de UI (i18n Foundation) | Migración de cadenas hardcodeadas de Compose a `strings.xml`, preparando la internacionalización ($\text{UI} \neq \text{Ciencia} \neq \text{Lore}$) | Alta | WHO-021 | `PROPUESTO` | **Sí** |
+| **WHO-021** | Ingesta y Sincronización del Catálogo JSON como Android Assets | Unificación de la fuente única de verdad biológica (`data/species/`), eliminando duplicación de especies en código Kotlin | Alta | WHO-020 | `COMPLETADO` | **Sí** |
+| **WHO-022** | Extracción y Externalización de Cadenas de UI (i18n Foundation) | Migración de cadenas hardcodeadas de Compose a `strings.xml`, preparando la internacionalización ($\text{UI} \neq \text{Ciencia} \neq \text{Lore}$) | Alta | WHO-021 | `COMPLETADO` | **Sí** |
 | **WHO-023** | Edición Interactiva de Lore (DEC-041) y Liberación en Baúl | UI de edición de Historia Personal con control de cuota de 3 ediciones y acción segura de liberar carta desde Baúl con modal | Alta | WHO-022 | `PROPUESTO` | **Sí** |
 | **WHO-024** | Accesibilidad (a11y) y Robustecimiento de Compatibilidad CameraX | Soporte TalkBack, target táctiles mínimos de 48dp y compatibilidad CameraX ante variantes de sensor y rotación | Media | WHO-023 | `PROPUESTO` | **Sí** |
 | **WHO-025** | Contrato Desacoplado `AdService` y Stubs de Infraestructura | Definición de interfaces limpias de publicidad desacoplada (`DEC-053`) y stubs locales de políticas de frecuencia | Media | WHO-024 | `PROPUESTO` | **Sí** |
 | **WHO-026** | Pipeline de Firma de Release y Google Play Internal Testing | Keystore de release, optimización R8/ProGuard y preparación del paquete de distribución interna `v0.2.0-beta.1` (versionCode 3) | Alta | WHO-025 | `PROPUESTO` | **Sí** |
 
-### 5.1 Especificación Formal del Próximo Objetivo: WHO-021
+### 5.1 Especificación Formal del Próximo Objetivo: WHO-023
 
-* **ID:** `WHO-021`
-* **Nombre Oficial:** `Species Catalog Asset Synchronization & Android Domain Unification`
-* **Objetivo:** Establecer una única fuente de verdad zoológica para el cliente Android empaquetando los 28 archivos JSON de `data/species/` como assets nativos de Android y creando un parser/repositorio en Kotlin que los cargue dinámicamente, eliminando las especies hardcodeadas en código y asegurando paridad absoluta entre Python y Android.
+* **ID:** `WHO-023`
+* **Nombre Oficial:** `Interactive Lore Editing (DEC-041) & Safe Baúl Card Release`
+* **Objetivo:** Implementar la interfaz de edición interactiva de la Historia Personal (`personalLore`) en cartas persistidas respetando el límite inmutable de 3 ediciones por cuenta (`DEC-041`), y habilitar la acción de liberación/eliminación segura de una carta desde el Baúl con modal de confirmación, devolviendo la capacidad disponible al slot correspondiente en Room.
 * **Alcance:**
-  1. Configuración de sincronización de `data/species/` hacia `android/app/src/main/assets/species/` (vía tarea Gradle o symlink/copy).
-  2. Implementación de un loader/parser JSON en Android que alimente el catálogo zoológico en memoria.
-  3. Refactorización de `DeterministicIdentificationProvider` para consultar el catálogo de assets en lugar del mapa hardcodeado en Kotlin.
-  4. Pruebas unitarias de integridad garantizando que las 28 especies del catálogo cargan correctamente con sus 19 campos y atributos biológicos.
+  1. Componente UI de edición de Lore con contador de caracteres (máx 300) y visualizador de ediciones restantes (3 iniciales).
+  2. Mecánica de confirmación y persistencia atómica de la nueva versión del Lore en Room.
+  3. Modal de confirmación para liberación/eliminación de carta persistida en `CollectionScreen` / `CardPresentationScreen`.
+  4. Pruebas unitarias de límite de ediciones y consistencia del almacenamiento en Room.
 * **Fuera de Alcance:**
-  - Descarga de especies desde red / API remota (Alpha/Beta se mantienen offline en catálogo local).
-  - Modificación de los modelos ontológicos canónicos.
-* **Dependencias:** `WHO-020` (Completado).
+  - Modificación de datos científicos o atributos taxonómicos.
+  - Edición de cartas ajenas o sincronización cloud.
+* **Dependencias:** `WHO-022` (Completado).
 * **Criterios de Aceptación:**
-  1. Código Kotlin de Android no contiene datos taxonómicos ni fichas científicas duplicadas en texto plano.
-  2. Las 28 especies de `data/species/` son legibles y válidas desde el runtime de Android.
-  3. Batería de tests existente y nuevos tests pasan al 100%.
+  1. El usuario no puede exceder las 3 ediciones permitidas de su Historia Personal.
+  2. La liberación de una carta libera el slot en Room y actualiza el contador del Baúl.
+  3. Tests pasan al 100%.
 
 > ⚠️ **Aviso de Gobernanza:**  
 > Que un objetivo aparezca en esta tabla **NO constituye autorización para su desarrollo**.  
@@ -285,7 +285,9 @@ HOME → STORAGE → CONTAINER → CARD → VIEW / FLIP / BACK
 | **WHO-018** | `APROBADO` | `VALIDADO`| `COMPLETADO` | `APPROVED_COMPLETE` |
 | **WHO-019** | `APROBADO` | `VALIDADO`| `COMPLETADO` | `APPROVED_COMPLETE` |
 | **WHO-020** | `APROBADO` | `VALIDADO`| `COMPLETADO` | `APPROVED_COMPLETE` |
-| **WHO-021** | `PENDIENTE` | `PROPUESTO` | `NO_INICIADO` | `PENDING_APPROVAL` |
+| **WHO-021** | `APROBADO` | `VALIDADO`| `COMPLETADO` | `APPROVED_COMPLETE` |
+| **WHO-022** | `APROBADO` | `VALIDADO`| `COMPLETADO` | `APPROVED_COMPLETE` |
+| **WHO-023** | `PENDIENTE` | `PROPUESTO` | `NO_INICIADO` | `PENDING_APPROVAL` |
 
 > **Regla:** El Developer no puede auto-aprobar objetivos. La autorización debe ser explícita por parte del Director Creativo y estructurada por el Project Manager.
 

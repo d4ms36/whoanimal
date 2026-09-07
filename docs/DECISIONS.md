@@ -842,6 +842,25 @@ Aprobado por: [Director Creativo / Project Manager / Consenso]
 
 ---
 
+### DEC-059: Frontera Formal de Localización mediante Android Resources y Separación Ontológica de Textos
+* **Fecha:** 2026-09-07
+* **Estado:** `APROBADA`
+* **Objetivo:** `WHO-022`
+* **Tema:** Internacionalización (i18n) / Android Resources / Compose / Ontología de Textos
+* **Resolución:**
+  1. **Frontera de Localización de Interfaz:** Se establece formalmente `android/app/src/main/res/values/strings.xml` como la fuente canónica de strings de UI (idioma base español), complementada con `res/values-en/strings.xml` para la fundación inicial en inglés.
+  2. **Acceso Canónico en Compose:** Todas las cadenas de texto visibles al usuario en Jetpack Compose se obtienen estrictamente mediante `stringResource(R.string.<id>)` o interpolaciones parametrizadas en Android Resources (`%1$s`, `%1$d`).
+  3. **Separación Ontológica Estricta:**
+     * **UI Strings:** Botones, títulos, labels, diálogos, estados de error/vacíos y accesibilidad (`contentDescription`) se externalizan como recursos traducibles.
+     * **Datos Científicos (`ScientificInfo`):** Nombres científicos, jerarquía taxonómica, métricas biométricas y estados de conservación provienen del catálogo zoológico (`SpeciesCatalogRepository`) y NO se tratan como strings de UI.
+     * **Lore Personal (`personalLore`):** Narrativa libre generada por el usuario inmutable, que NO se traduce ni externaliza como recurso de sistema.
+     * **Identificadores Técnicos:** Claves de base de datos, enums, UUIDs y rutas de navegación permanecen estrictamente desacoplados de los recursos de presentación.
+  4. **Preparación de Accesibilidad:** Los atributos `contentDescription` y etiquetas semánticas para lectores de pantalla quedan integrados en Android Resources como preparación para `WHO-024`.
+* **Justificación / Principios:** Cumple el principio de arquitectura desacoplada y preserva la integridad ontológica del producto al evitar que el motor de traducción confunda vocabulario zoológico o expresiones del usuario con elementos de interfaz.
+* **Aprobado por:** Director Creativo / Project Manager
+
+---
+
 ### DEC-010: Estilo y Universo Mitológico del Lore (SUPERSEDED)
 * **Tema:** Diseño Narrativo
 * **Estado:** `SUPERSEDED`

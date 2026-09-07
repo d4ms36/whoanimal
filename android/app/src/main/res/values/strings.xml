@@ -1,5 +1,164 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- Brand & General -->
     <string name="app_name">WHO Animal</string>
     <string name="tagline">Descubre. Identifica. Colecciona.</string>
+    <string name="action_back">Volver</string>
+    <string name="action_return">Regresar</string>
+    <string name="action_retry">Reintentar</string>
+    <string name="action_cancel">Cancelar</string>
+    <string name="action_confirm">Confirmar</string>
+    <string name="action_save">Guardar</string>
+    <string name="action_saving">Guardando...</string>
+    <string name="error_title">Error</string>
+    <string name="error_icon_description">Error</string>
+    <string name="unknown_species">Especie Desconocida</string>
+
+    <!-- Splash & Welcome Screens -->
+    <string name="splash_logo_description">WHO Animal Logo</string>
+    <string name="splash_alpha_banner">Alpha 0.1 Foundation • 100% Pet Friendly</string>
+    <string name="splash_loading">Iniciando expedición...</string>
+    <string name="welcome_logo_description">WHO Animal Logo</string>
+    <string name="welcome_alpha_banner">Alpha 0.1 • 100% Pet Friendly</string>
+    <string name="welcome_body">Bienvenido a la expedición de descubrimiento y protección de fauna. Observa a los animales de forma responsable, identifica especies reales y colecciona cartas zoológicas científicas en tu álbum personal.</string>
+    <string name="welcome_start_action">Comenzar Expedición</string>
+
+    <!-- Profile Screen -->
+    <string name="profile_badge_description">Badge de Explorador</string>
+    <string name="profile_title">Tu Perfil de Explorador</string>
+    <string name="profile_description">Elige el nombre con el que firmarás tus observaciones zoológicas y registrarás las cartas de tu colección.</string>
+    <string name="profile_name_label">Nombre de Explorador</string>
+    <string name="profile_name_placeholder">Ej. Dra. Carmen Silva</string>
+    <string name="profile_min_characters">Mínimo 2 caracteres</string>
+    <string name="profile_char_counter">%1$d/30</string>
+    <string name="profile_validation_error_description">Error de validación</string>
+    <string name="profile_validation_valid_description">Nombre válido</string>
+    <string name="profile_saving">Creando perfil...</string>
+    <string name="profile_submit_action">Entrar a WHO Animal</string>
+
+    <!-- Home Screen -->
+    <string name="home_alpha_badge">ALPHA 0.1 • FOUNDATION</string>
+    <string name="home_greeting">¡Hola, %1$s!</string>
+    <string name="home_ethical_banner">Observa la fauna de forma ética y sin intervenir en su bienestar. Cada avistamiento genera una carta zoológica formal con información científica real.</string>
+    <string name="home_capture_card_title">Captura de Fauna</string>
+    <string name="home_capture_card_subtitle">Flujo: Observación → Identificación → Captura</string>
+    <string name="home_start_capture_action">Iniciar Captura</string>
+    <string name="home_collection_card_title">Álbum de Colección</string>
+    <string name="home_collection_card_subtitle">Storage: 10 contenedores x 30 cartas (300 cartas)</string>
+    <string name="home_view_collection_action">Ver Álbum y Contenedores</string>
+    <string name="home_pet_friendly_footer">100% Pet Friendly: Prohibida la persecución o maltrato. Prioridad absoluta al bienestar animal.</string>
+
+    <!-- Camera & Capture Screen -->
+    <string name="camera_live_view">VISTA EN VIVO</string>
+    <string name="camera_hint">Apunta al espécimen y presiona para observar</string>
+    <string name="camera_shutter_description">Capturar fotografía</string>
+    <string name="camera_permission_title">Permiso de Cámara Requerido</string>
+    <string name="camera_permission_rationale">WHO Animal necesita acceder a la cámara para que puedas fotografiar y estudiar animales en campo sin perturbarlos. Toda observación permanece estrictamente en tu dispositivo.</string>
+    <string name="camera_grant_permission_action">Conceder Permiso de Cámara</string>
+    <string name="camera_back_to_home_action">Volver al Inicio</string>
+    <string name="capture_screen_title">Captura &amp; Identificación</string>
+    <string name="capture_pipeline_title">Tubería de Identificación de Fauna</string>
+    <string name="capture_pipeline_subtitle">Alpha 0.1: Selección de espécimen observado para análisis zoológico determinista.</string>
+    <string name="capture_focus_specimen_label">Espécimen en Foco (Catálogo Oficial):</string>
+    <string name="capture_identifying">Identificando...</string>
+    <string name="capture_action">Realizar Observación y Analizar</string>
+    <string name="capture_ontological_flow_label">Flujo Ontológico Controlado:</string>
+    <string name="capture_step_1_title">Observation (Efímera)</string>
+    <string name="capture_step_1_detail">Se instancia la observación sin mutar el catálogo</string>
+    <string name="capture_step_2_title">IdentificationService</string>
+    <string name="capture_step_2_detail">El provider determinista analiza el espécimen</string>
+    <string name="capture_step_3_title">IdentificationResult</string>
+    <string name="capture_step_3_detail">Se emiten candidatos con confidence explícita</string>
+    <string name="capture_step_4_title">Decisión Pendiente</string>
+    <string name="capture_step_4_detail">El usuario acepta o descarta; no crea Capture automática</string>
+
+    <!-- Identification Result Screen -->
+    <string name="identification_screen_title">Resultado de Identificación</string>
+    <string name="identification_error_title">Error de Identificación</string>
+    <string name="identification_error_fallback">No se pudo obtener un resultado de identificación válido.</string>
+    <string name="identification_retry_action">Volver a intentar</string>
+    <string name="identification_method_label">Método: %1$s • Especies Oficiales</string>
+    <string name="identification_confidence_label">Confianza Zoológica</string>
+    <string name="identification_alternative_candidates_title">Candidatos Alternativos:</string>
+    <string name="identification_acceptance_notice">Aceptar prepara la decisión explícita (ACCEPTED). La creación de Capture y Card se procesará en las fases de persistencia y colección.</string>
+    <string name="identification_accept_action">Aceptar Identificación</string>
+    <string name="identification_discard_action">Descartar Identificación</string>
+
+    <!-- Card Presentation Screen -->
+    <string name="card_mode_persisted_title">Colección • Ficha de Ejemplar</string>
+    <string name="card_mode_review_title">Inspección de Carta</string>
+    <string name="card_mode_flipped_subtitle">Reverso • Ficha Científica &amp; Lore</string>
+    <string name="card_mode_front_subtitle">Anverso • Coleccionable</string>
+    <string name="card_flip_action_description">Voltear Carta</string>
+    <string name="card_generating">Generando presentación de carta...</string>
+    <string name="card_load_error_title">No se pudo cargar la carta</string>
+    <string name="card_load_error_fallback">Los datos de la carta no se encuentran disponibles.</string>
+    <string name="card_hint_reverso">Mostrando Reverso • Toca para volver al Anverso</string>
+    <string name="card_hint_anverso">Mostrando Anverso • Toca la carta para voltear</string>
+    <string name="card_release_dialog_title">¿Liberar captura de fauna?</string>
+    <string name="card_release_dialog_body">Esta acción descartará el registro sin almacenarlo en tu baúl de colección. El ejemplar continuará libre en su ecosistema.</string>
+    <string name="card_release_confirm_action">Sí, Liberar</string>
+    <string name="rarity_rare">RARA</string>
+    <string name="rarity_common">COMÚN</string>
+    <string name="card_expedition_label">Expedición Zoológica</string>
+    <string name="card_rank_label">Rango %1$d</string>
+    <string name="card_biological_sheet_header">FICHA BIOLÓGICA</string>
+    <string name="card_core_badge">WHO Animal Core</string>
+    <string name="card_scientific_info_header">INFORMACIÓN CIENTÍFICA</string>
+    <string name="taxonomy_class_label">Clase</string>
+    <string name="taxonomy_order_label">Orden</string>
+    <string name="taxonomy_family_label">Familia</string>
+    <string name="taxonomy_genus_label">Género</string>
+    <string name="taxonomy_species_label">Especie</string>
+    <string name="fact_conservation_status_label">Estado de conservación</string>
+    <string name="fact_habitat_label">Hábitat</string>
+    <string name="fact_diet_label">Dieta</string>
+    <string name="fact_activity_cycle_label">Ciclo de actividad</string>
+    <string name="fact_biometrics_label">Biometría estimada</string>
+    <string name="biometrics_years_format">%1$d años aprox.</string>
+    <string name="biometrics_cm_format">%1$d cm</string>
+    <string name="biometrics_kg_format">%1$s kg</string>
+    <string name="card_personal_observation_header">OBSERVACIÓN PERSONAL</string>
+    <string name="card_fact_date_label">Fecha de avistamiento</string>
+    <string name="card_fact_location_label">Ubicación</string>
+    <string name="card_fact_method_label">Método de captura</string>
+    <string name="card_fact_confidence_label">Confianza de registro</string>
+    <string name="card_fact_serial_label">Serial de espécimen</string>
+    <string name="card_fact_verification_label">Estado de verificación</string>
+    <string name="card_lore_disclaimer">Lore de Expedición (Narrativa de juego • No es hecho científico)</string>
+    <string name="card_lore_fallback">Sin notas personales de campo registradas.</string>
+    <string name="card_action_release">Liberar</string>
+    <string name="card_action_show_front">Anverso</string>
+    <string name="card_action_show_back">Reverso</string>
+    <string name="card_action_view_front">Ver Anverso</string>
+    <string name="card_action_view_back">Ver Reverso</string>
+    <string name="card_action_back_to_storage">Volver al Baúl</string>
+
+    <!-- Collection / Baúl Screen -->
+    <string name="collection_title">Baúl de Colección</string>
+    <string name="collection_capacity_summary">%1$d de %2$d cartas guardadas</string>
+    <string name="collection_back_to_home_description">Volver al Home</string>
+    <string name="collection_container_title">Contenedor %1$d</string>
+    <string name="collection_container_slots">%1$d / %2$d slots</string>
+    <string name="collection_empty_container_title">Contenedor %1$d Vacío</string>
+    <string name="collection_empty_container_body">No tienes cartas archivadas en este contenedor. Los ejemplares capturados y guardados se almacenarán aquí.</string>
+
+    <!-- Additional Errors and Dynamic Messages -->
+    <string name="camera_error_init">No se pudo inicializar la cámara: %1$s</string>
+    <string name="camera_error_capture_failed">Fallo al capturar fotografía: %1$s</string>
+    <string name="camera_error_invalid_file">El archivo fotográfico temporal es inválido o está vacío.</string>
+    <string name="camera_error_identification">Ocurrió un error al identificar la observación.</string>
+    <string name="camera_error_simulated">Error al procesar la captura simulada.</string>
+    <string name="identification_confidence_percent">%1$d%%</string>
+    <string name="identification_accepted_message">Identificación Aceptada formalmente (IdentificationDecision: ACCEPTED). Sin Capture automática.</string>
+    <string name="identification_rejected_message">Identificación Descartada (IdentificationDecision: REJECTED).</string>
+    <string name="fact_uncalculated_confidence">Sin calcular</string>
+    <string name="conservation_lc">Preocupación Menor (LC)</string>
+    <string name="conservation_nt">Casi Amenazada (NT)</string>
+    <string name="conservation_vu">Vulnerable (VU)</string>
+    <string name="conservation_en">En Peligro (EN)</string>
+    <string name="conservation_cr">En Peligro Crítico (CR)</string>
+    <string name="conservation_ew">Extinta en Estado Silvestre (EW)</string>
+    <string name="conservation_ex">Extinta (EX)</string>
+    <string name="conservation_ne">No Evaluada (NE)</string>
 </resources>

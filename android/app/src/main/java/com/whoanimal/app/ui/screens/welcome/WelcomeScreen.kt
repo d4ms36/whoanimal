@@ -23,15 +23,19 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.whoanimal.app.R
 import com.whoanimal.app.ui.theme.ForestGreenPrimary
-import com.whoanimal.app.ui.theme.SageAccent
 
 /**
- * Pantalla de bienvenida (Welcome) mostrada en la primera apertura de la app.
+ * Pantalla de Bienvenida (Welcome) para la primera apertura en Alpha.
+ *
+ * Muestra la propuesta de valor: observación ética, identificación de fauna real
+ * y colección de cartas científicas en el álbum personal.
  */
 @Composable
 fun WelcomeScreen(
@@ -45,7 +49,7 @@ fun WelcomeScreen(
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(28.dp),
+                .padding(24.dp),
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
@@ -61,7 +65,7 @@ fun WelcomeScreen(
             ) {
                 Icon(
                     imageVector = Icons.Default.Pets,
-                    contentDescription = "WHO Animal Logo",
+                    contentDescription = stringResource(R.string.welcome_logo_description),
                     modifier = Modifier.size(60.dp),
                     tint = ForestGreenPrimary
                 )
@@ -70,7 +74,7 @@ fun WelcomeScreen(
             Spacer(modifier = Modifier.height(28.dp))
 
             Text(
-                text = "WHO ANIMAL",
+                text = stringResource(R.string.app_name).uppercase(),
                 style = MaterialTheme.typography.headlineLarge.copy(
                     fontWeight = FontWeight.ExtraBold,
                     letterSpacing = 2.5.sp
@@ -82,7 +86,7 @@ fun WelcomeScreen(
             Spacer(modifier = Modifier.height(8.dp))
 
             Text(
-                text = "Descubre. Identifica. Colecciona.",
+                text = stringResource(R.string.tagline),
                 style = MaterialTheme.typography.titleMedium.copy(
                     fontWeight = FontWeight.SemiBold
                 ),
@@ -98,7 +102,7 @@ fun WelcomeScreen(
                 modifier = Modifier.padding(horizontal = 16.dp)
             ) {
                 Text(
-                    text = "Alpha 0.1 • 100% Pet Friendly",
+                    text = stringResource(R.string.welcome_alpha_banner),
                     style = MaterialTheme.typography.labelSmall.copy(
                         fontWeight = FontWeight.Bold
                     ),
@@ -110,7 +114,7 @@ fun WelcomeScreen(
             Spacer(modifier = Modifier.height(24.dp))
 
             Text(
-                text = "Bienvenido a la expedición de descubrimiento y protección de fauna. Observa a los animales de forma responsable, identifica especies reales y colecciona cartas zoológicas científicas en tu álbum personal.",
+                text = stringResource(R.string.welcome_body),
                 style = MaterialTheme.typography.bodyMedium.copy(
                     lineHeight = 22.sp
                 ),
@@ -132,7 +136,7 @@ fun WelcomeScreen(
                 )
             ) {
                 Text(
-                    text = "Comenzar Expedición",
+                    text = stringResource(R.string.welcome_start_action),
                     style = MaterialTheme.typography.titleMedium.copy(
                         fontWeight = FontWeight.Bold
                     )

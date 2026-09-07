@@ -49,6 +49,8 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.res.stringResource
+import com.whoanimal.app.R
 import com.whoanimal.app.domain.identification.IdentificationService
 import com.whoanimal.app.domain.identification.OfficialStarterCatalog
 import com.whoanimal.app.domain.model.IdentificationResultContract
@@ -73,12 +75,12 @@ fun CapturePlaceholderScreen(
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("Captura & Identificación") },
+                title = { Text(stringResource(R.string.capture_screen_title)) },
                 navigationIcon = {
                     IconButton(onClick = onNavigateBack) {
                         Icon(
                             imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                            contentDescription = "Volver"
+                            contentDescription = stringResource(R.string.action_back)
                         )
                     }
                 }
@@ -111,14 +113,14 @@ fun CapturePlaceholderScreen(
             }
 
             Text(
-                text = "Tubería de Identificación de Fauna",
+                text = stringResource(R.string.capture_pipeline_title),
                 style = MaterialTheme.typography.titleLarge.copy(
                     fontWeight = FontWeight.Bold
                 )
             )
 
             Text(
-                text = "Alpha 0.1: Selección de espécimen observado para análisis zoológico determinista.",
+                text = stringResource(R.string.capture_pipeline_subtitle),
                 style = MaterialTheme.typography.bodyMedium,
                 color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7f)
             )
@@ -134,7 +136,7 @@ fun CapturePlaceholderScreen(
             ) {
                 Column(modifier = Modifier.padding(18.dp)) {
                     Text(
-                        text = "Espécimen en Foco (Catálogo Oficial):",
+                        text = stringResource(R.string.capture_focus_specimen_label),
                         style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.SemiBold)
                     )
                     Spacer(modifier = Modifier.height(10.dp))
@@ -194,7 +196,7 @@ fun CapturePlaceholderScreen(
                 Icon(imageVector = Icons.Default.Search, contentDescription = null, modifier = Modifier.size(20.dp))
                 Spacer(modifier = Modifier.width(8.dp))
                 Text(
-                    text = if (isProcessing) "Identificando..." else "Realizar Observación y Analizar",
+                    text = if (isProcessing) stringResource(R.string.capture_identifying) else stringResource(R.string.capture_action),
                     style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.SemiBold)
                 )
             }
@@ -213,14 +215,14 @@ fun CapturePlaceholderScreen(
                     verticalArrangement = Arrangement.spacedBy(10.dp)
                 ) {
                     Text(
-                        text = "Flujo Ontológico Controlado:",
+                        text = stringResource(R.string.capture_ontological_flow_label),
                         style = MaterialTheme.typography.titleSmall.copy(fontWeight = FontWeight.SemiBold)
                     )
 
-                    PipelineStep(stepNumber = "1", title = "Observation (Efímera)", detail = "Se instancia la observación sin mutar el catálogo")
-                    PipelineStep(stepNumber = "2", title = "IdentificationService", detail = "El provider determinista analiza el espécimen")
-                    PipelineStep(stepNumber = "3", title = "IdentificationResult", detail = "Se emiten candidatos con confidence explícita")
-                    PipelineStep(stepNumber = "4", title = "Decisión Pendiente", detail = "El usuario acepta o descarta; no crea Capture automática")
+                    PipelineStep(stepNumber = "1", title = stringResource(R.string.capture_step_1_title), detail = stringResource(R.string.capture_step_1_detail))
+                    PipelineStep(stepNumber = "2", title = stringResource(R.string.capture_step_2_title), detail = stringResource(R.string.capture_step_2_detail))
+                    PipelineStep(stepNumber = "3", title = stringResource(R.string.capture_step_3_title), detail = stringResource(R.string.capture_step_3_detail))
+                    PipelineStep(stepNumber = "4", title = stringResource(R.string.capture_step_4_title), detail = stringResource(R.string.capture_step_4_detail))
                 }
             }
         }

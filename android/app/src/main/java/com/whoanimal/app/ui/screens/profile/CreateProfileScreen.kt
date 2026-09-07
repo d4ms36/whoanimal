@@ -38,18 +38,23 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.whoanimal.app.R
 import com.whoanimal.app.domain.repository.ProfileRepository
 import com.whoanimal.app.domain.repository.ProfileValidationResult
 import com.whoanimal.app.ui.theme.ForestGreenPrimary
 import kotlinx.coroutines.launch
 
 /**
- * Pantalla de registro del perfil local de explorador (Create Profile).
+ * Pantalla de Creación de Perfil de Explorador para Alpha 0.1.
+ *
+ * Permite al usuario introducir su nombre de explorador (2-30 caracteres)
+ * y persistirlo de forma totalmente local en Room.
  */
 @Composable
 fun CreateProfileScreen(
@@ -61,25 +66,24 @@ fun CreateProfileScreen(
     var errorMessage by remember { mutableStateOf<String?>(null) }
     var isLoading by remember { mutableStateOf(false) }
 
-    val coroutineScope = rememberCoroutineScope()
+    val scope = rememberCoroutineScope()
     val keyboardController = LocalSoftwareKeyboardController.current
 
-    val submitProfile: () -> Unit = {
-        keyboardController?.hide()
+    val submitProfile = {
         val validation = profileRepository.validateName(explorerName)
         if (validation is ProfileValidationResult.Invalid) {
             errorMessage = validation.reason
         } else {
             errorMessage = null
             isLoading = true
-            coroutineScope.launch {
+            keyboardController?.hide()
+            scope.launch {
                 try {
                     profileRepository.createProfile(explorerName)
-                    isLoading = false
                     onProfileCreated()
                 } catch (e: Exception) {
+                    errorMessage = e.message ?: "Error al guardar el perfil local."
                     isLoading = false
-                    errorMessage = e.message ?: "Ocurrió un error al crear el perfil."
                 }
             }
         }
@@ -92,11 +96,11 @@ fun CreateProfileScreen(
         Column(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(28.dp),
+                .padding(horizontal = 28.dp),
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            // Emblema de perfil de campo
+            // Emblema de credencial de explorador
             Box(
                 modifier = Modifier
                     .size(92.dp)
@@ -108,7 +112,7 @@ fun CreateProfileScreen(
             ) {
                 Icon(
                     imageVector = Icons.Default.Badge,
-                    contentDescription = "Badge de Explorador",
+                    contentDescription = stringResource(R.string.profile_badge_description),
                     modifier = Modifier.size(50.dp),
                     tint = ForestGreenPrimary
                 )
@@ -117,7 +121,7 @@ fun CreateProfileScreen(
             Spacer(modifier = Modifier.height(24.dp))
 
             Text(
-                text = "Tu Perfil de Explorador",
+                text = stringResource(R.string.profile_title),
                 style = MaterialTheme.typography.headlineMedium.copy(
                     fontWeight = FontWeight.Bold
                 ),
@@ -128,7 +132,7 @@ fun CreateProfileScreen(
             Spacer(modifier = Modifier.height(8.dp))
 
             Text(
-                text = "Elige el nombre con el que firmarás tus observaciones zoológicas y registrarás las cartas de tu colección.",
+                text = stringResource(R.string.profile_description),
                 style = MaterialTheme.typography.bodyMedium.copy(
                     lineHeight = 20.sp
                 ),
@@ -149,8 +153,8 @@ fun CreateProfileScreen(
                         }
                     }
                 },
-                label = { Text("Nombre de Explorador") },
-                placeholder = { Text("Ej. Dra. Carmen Silva") },
+                label = { Text(stringResource(R.string.profile_name_label)) },
+                placeholder = { Text(stringResource(R.string.profile_name_placeholder)) },
                 singleLine = true,
                 isError = errorMessage != null,
                 supportingText = {
@@ -159,11 +163,11 @@ fun CreateProfileScreen(
                         horizontalArrangement = Arrangement.SpaceBetween
                     ) {
                         Text(
-                            text = errorMessage ?: "Mínimo 2 caracteres",
+                            text = errorMessage ?: stringResource(R.string.profile_min_characters),
                             color = if (errorMessage != null) MaterialTheme.colorScheme.error else MaterialTheme.colorScheme.onSurfaceVariant
                         )
                         Text(
-                            text = "${explorerName.trim().length}/30",
+                            text = stringResource(R.string.profile_char_counter, explorerName.trim().length),
                             color = MaterialTheme.colorScheme.onSurfaceVariant
                         )
                     }
@@ -172,13 +176,13 @@ fun CreateProfileScreen(
                     if (errorMessage != null) {
                         Icon(
                             imageVector = Icons.Default.ErrorOutline,
-                            contentDescription = "Error de validación",
+                            contentDescription = stringResource(R.string.profile_validation_error_description),
                             tint = MaterialTheme.colorScheme.error
                         )
                     } else if (explorerName.trim().length >= 2) {
                         Icon(
                             imageVector = Icons.Default.CheckCircle,
-                            contentDescription = "Nombre válido",
+                            contentDescription = stringResource(R.string.profile_validation_valid_description),
                             tint = ForestGreenPrimary
                         )
                     }
@@ -220,14 +224,14 @@ fun CreateProfileScreen(
                     )
                     Spacer(modifier = Modifier.width(12.dp))
                     Text(
-                        text = "Creando perfil...",
+                        text = stringResource(R.string.profile_saving),
                         style = MaterialTheme.typography.titleMedium.copy(
                             fontWeight = FontWeight.SemiBold
                         )
                     )
                 } else {
                     Text(
-                        text = "Entrar a WHO Animal",
+                        text = stringResource(R.string.profile_submit_action),
                         style = MaterialTheme.typography.titleMedium.copy(
                             fontWeight = FontWeight.Bold
                         )

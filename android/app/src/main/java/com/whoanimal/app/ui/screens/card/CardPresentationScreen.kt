@@ -74,6 +74,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.res.stringResource
+import com.whoanimal.app.R
 import com.whoanimal.app.domain.identification.OfficialStarterCatalog
 import com.whoanimal.app.domain.model.AnimalCardContract
 import com.whoanimal.app.domain.model.AnimalProfileContract
@@ -129,11 +131,11 @@ fun CardPresentationScreen(
                 title = {
                     Column {
                         Text(
-                            text = if (mode == CardPresentationMode.PERSISTED_CARD) "Colección • Ficha de Ejemplar" else "Inspección de Carta",
+                            text = if (mode == CardPresentationMode.PERSISTED_CARD) stringResource(R.string.card_mode_persisted_title) else stringResource(R.string.card_mode_review_title),
                             style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold)
                         )
                         Text(
-                            text = if (isFlipped) "Reverso • Ficha Científica & Lore" else "Anverso • Coleccionable",
+                            text = if (isFlipped) stringResource(R.string.card_mode_flipped_subtitle) else stringResource(R.string.card_mode_front_subtitle),
                             style = MaterialTheme.typography.labelSmall,
                             color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f)
                         )
@@ -146,7 +148,7 @@ fun CardPresentationScreen(
                     ) {
                         Icon(
                             imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                            contentDescription = "Volver"
+                            contentDescription = stringResource(R.string.action_back)
                         )
                     }
                 },
@@ -157,7 +159,7 @@ fun CardPresentationScreen(
                     ) {
                         Icon(
                             imageVector = Icons.Default.FlipCameraAndroid,
-                            contentDescription = "Voltear Carta",
+                            contentDescription = stringResource(R.string.card_flip_action_description),
                             tint = ForestGreenPrimary
                         )
                     }
@@ -210,7 +212,7 @@ fun CardPresentationScreen(
                         CircularProgressIndicator(color = ForestGreenPrimary)
                         Spacer(modifier = Modifier.height(16.dp))
                         Text(
-                            text = "Generando presentación de carta...",
+                            text = stringResource(R.string.card_generating),
                             style = MaterialTheme.typography.bodyMedium,
                             color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7f)
                         )
@@ -240,13 +242,13 @@ fun CardPresentationScreen(
                             )
                             Spacer(modifier = Modifier.height(12.dp))
                             Text(
-                                text = "No se pudo cargar la carta",
+                                text = stringResource(R.string.card_load_error_title),
                                 style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold),
                                 color = MaterialTheme.colorScheme.onErrorContainer
                             )
                             Spacer(modifier = Modifier.height(6.dp))
                             Text(
-                                text = errorMessage ?: "Los datos de la carta no se encuentran disponibles.",
+                                text = errorMessage ?: stringResource(R.string.card_load_error_fallback),
                                 style = MaterialTheme.typography.bodyMedium,
                                 textAlign = TextAlign.Center,
                                 color = MaterialTheme.colorScheme.onErrorContainer
@@ -256,7 +258,7 @@ fun CardPresentationScreen(
                                 onClick = onNavigateBack,
                                 colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.error)
                             ) {
-                                Text("Regresar")
+                                Text(stringResource(R.string.action_return))
                             }
                         }
                     }
@@ -290,7 +292,7 @@ fun CardPresentationScreen(
                             )
                             Spacer(modifier = Modifier.width(6.dp))
                             Text(
-                                text = if (isFlipped) "Mostrando Reverso • Toca para volver al Anverso" else "Mostrando Anverso • Toca la carta para voltear",
+                                text = if (isFlipped) stringResource(R.string.card_hint_reverso) else stringResource(R.string.card_hint_anverso),
                                 style = MaterialTheme.typography.labelSmall.copy(fontWeight = FontWeight.Medium),
                                 color = ForestGreenPrimary
                             )
@@ -331,7 +333,7 @@ fun CardPresentationScreen(
                                     modifier = Modifier
                                         .fillMaxSize()
                                         .graphicsLayer { rotationY = 180f }
-                                )
+                                    )
                             }
                         }
 
@@ -353,11 +355,9 @@ fun CardPresentationScreen(
                     tint = ForestGreenPrimary
                 )
             },
-            title = { Text("¿Liberar captura de fauna?") },
+            title = { Text(stringResource(R.string.card_release_dialog_title)) },
             text = {
-                Text(
-                    "Esta acción descartará el registro sin almacenarlo en tu baúl de colección. El ejemplar continuará libre en su ecosistema."
-                )
+                Text(stringResource(R.string.card_release_dialog_body))
             },
             confirmButton = {
                 Button(
@@ -368,12 +368,12 @@ fun CardPresentationScreen(
                     },
                     colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.error)
                 ) {
-                    Text("Sí, Liberar")
+                    Text(stringResource(R.string.card_release_confirm_action))
                 }
             },
             dismissButton = {
                 TextButton(onClick = { showReleaseDialog = false }) {
-                    Text("Cancelar")
+                    Text(stringResource(R.string.action_cancel))
                 }
             }
         )
@@ -395,7 +395,7 @@ fun CardFrontFace(
     profile: AnimalProfileContract?,
     modifier: Modifier = Modifier
 ) {
-    val commonName = profile?.commonName ?: "Especie Desconocida"
+    val commonName = profile?.commonName ?: stringResource(R.string.unknown_species)
     val scientificName = profile?.scientificName ?: "Incertae sedis"
     val taxonomy = profile?.taxonomy
     val taxonomyBreadcrumb = listOfNotNull(
@@ -462,7 +462,7 @@ fun CardFrontFace(
                                 )
                                 Spacer(modifier = Modifier.width(4.dp))
                                 Text(
-                                    text = "RARA",
+                                    text = stringResource(R.string.rarity_rare),
                                     style = MaterialTheme.typography.labelSmall.copy(fontWeight = FontWeight.Bold),
                                     color = ForestGreenPrimary
                                 )
@@ -475,7 +475,7 @@ fun CardFrontFace(
                             modifier = Modifier.padding(end = 6.dp)
                         ) {
                             Text(
-                                text = "COMÚN",
+                                text = stringResource(R.string.rarity_common),
                                 style = MaterialTheme.typography.labelSmall.copy(fontWeight = FontWeight.Medium),
                                 color = MaterialTheme.colorScheme.onSurfaceVariant,
                                 modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp)
@@ -555,7 +555,7 @@ fun CardFrontFace(
                         }
                         Spacer(modifier = Modifier.height(8.dp))
                         Text(
-                            text = "Expedición Zoológica",
+                            text = stringResource(R.string.card_expedition_label),
                             style = MaterialTheme.typography.labelMedium.copy(fontWeight = FontWeight.SemiBold),
                             color = ForestGreenPrimary
                         )
@@ -630,7 +630,7 @@ fun CardFrontFace(
                     color = MaterialTheme.colorScheme.surfaceVariant
                 ) {
                     Text(
-                        text = "Rango ${card.rank}",
+                        text = stringResource(R.string.card_rank_label, card.rank),
                         style = MaterialTheme.typography.labelSmall.copy(fontWeight = FontWeight.SemiBold),
                         color = MaterialTheme.colorScheme.onSurfaceVariant,
                         modifier = Modifier.padding(horizontal = 6.dp, vertical = 2.dp)
@@ -684,14 +684,14 @@ fun CardBackFace(
                     )
                     Spacer(modifier = Modifier.width(6.dp))
                     Text(
-                        text = "FICHA BIOLÓGICA",
+                        text = stringResource(R.string.card_biological_sheet_header),
                         style = MaterialTheme.typography.labelMedium.copy(fontWeight = FontWeight.Bold),
                         color = ForestGreenPrimary
                     )
                 }
 
                 Text(
-                    text = "WHO Animal Core",
+                    text = stringResource(R.string.card_core_badge),
                     style = MaterialTheme.typography.labelSmall,
                     color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.45f)
                 )
@@ -711,7 +711,7 @@ fun CardBackFace(
                     verticalArrangement = Arrangement.spacedBy(8.dp)
                 ) {
                     Text(
-                        text = "INFORMACIÓN CIENTÍFICA",
+                        text = stringResource(R.string.card_scientific_info_header),
                         style = MaterialTheme.typography.labelSmall.copy(fontWeight = FontWeight.Bold),
                         color = ForestGreenPrimary
                     )
@@ -719,42 +719,42 @@ fun CardBackFace(
                     // Taxonomía formal
                     profile?.taxonomy?.let { tax ->
                         Column(verticalArrangement = Arrangement.spacedBy(2.dp)) {
-                            TaxonomyFactRow("Clase", tax.className)
-                            TaxonomyFactRow("Orden", tax.order)
-                            TaxonomyFactRow("Familia", tax.family)
-                            TaxonomyFactRow("Género", tax.genus)
-                            TaxonomyFactRow("Especie", tax.species)
+                            TaxonomyFactRow(stringResource(R.string.taxonomy_class_label), tax.className)
+                            TaxonomyFactRow(stringResource(R.string.taxonomy_order_label), tax.order)
+                            TaxonomyFactRow(stringResource(R.string.taxonomy_family_label), tax.family)
+                            TaxonomyFactRow(stringResource(R.string.taxonomy_genus_label), tax.genus)
+                            TaxonomyFactRow(stringResource(R.string.taxonomy_species_label), tax.species)
                         }
                     }
 
                     // Estado de conservación
                     profile?.conservationStatus?.let { status ->
-                        FactItemRow("Estado de conservación", mapConservationStatus(status))
+                        FactItemRow(stringResource(R.string.fact_conservation_status_label), mapConservationStatus(status))
                     }
 
                     // Hábitat
                     profile?.habitat?.let { habitat ->
-                        FactItemRow("Hábitat", habitat)
+                        FactItemRow(stringResource(R.string.fact_habitat_label), habitat)
                     }
 
                     // Dieta
                     profile?.diet?.let { diet ->
-                        FactItemRow("Dieta", diet)
+                        FactItemRow(stringResource(R.string.fact_diet_label), diet)
                     }
 
                     // Ciclo de actividad
                     profile?.activityCycle?.let { cycle ->
-                        FactItemRow("Ciclo de actividad", cycle)
+                        FactItemRow(stringResource(R.string.fact_activity_cycle_label), cycle)
                     }
 
                     // Dimensiones y Longevidad si existen
                     val details = listOfNotNull(
-                        profile?.lifespanYears?.let { "$it años aprox." },
-                        profile?.sizeCm?.let { "$it cm" },
-                        profile?.weightKg?.let { "$it kg" }
+                        profile?.lifespanYears?.let { stringResource(R.string.biometrics_years_format, it) },
+                        profile?.sizeCm?.let { stringResource(R.string.biometrics_cm_format, it) },
+                        profile?.weightKg?.let { stringResource(R.string.biometrics_kg_format, it.toString()) }
                     )
                     if (details.isNotEmpty()) {
-                        FactItemRow("Biometría estimada", details.joinToString(" • "))
+                        FactItemRow(stringResource(R.string.fact_biometrics_label), details.joinToString(" • "))
                     }
 
                     // Curiosidad zoológica
@@ -830,21 +830,21 @@ fun CardBackFace(
                     verticalArrangement = Arrangement.spacedBy(6.dp)
                 ) {
                     Text(
-                        text = "OBSERVACIÓN PERSONAL",
+                        text = stringResource(R.string.card_personal_observation_header),
                         style = MaterialTheme.typography.labelSmall.copy(fontWeight = FontWeight.Bold),
                         color = MaterialTheme.colorScheme.onSurfaceVariant
                     )
 
-                    FactItemRow("Fecha de registro", card.issuedAt.take(19).replace('T', ' '))
+                    FactItemRow(stringResource(R.string.card_fact_date_label), card.issuedAt.take(19).replace('T', ' '))
 
                     // Ubicación generalizada que protege fauna y privacidad
-                    FactItemRow("Zona de avistamiento", card.displayLocation)
+                    FactItemRow(stringResource(R.string.card_fact_location_label), card.displayLocation)
 
                     // Método de verificación y confianza
                     val confidenceText = card.identificationConfidence?.let {
                         "${(it * 100).toInt()}%"
-                    } ?: "Sin calcular"
-                    FactItemRow("Método", "${card.identificationMethod} ($confidenceText)")
+                    } ?: stringResource(R.string.fact_uncalculated_confidence)
+                    FactItemRow(stringResource(R.string.card_fact_method_label), "${card.identificationMethod} ($confidenceText)")
 
                     // Lore narrativo debidamente separado y etiquetado
                     card.personalLore?.let { lore ->
@@ -868,7 +868,7 @@ fun CardBackFace(
                                     )
                                     Spacer(modifier = Modifier.width(6.dp))
                                     Text(
-                                        text = "Lore de Expedición (Narrativa de juego • No es hecho científico)",
+                                        text = stringResource(R.string.card_lore_disclaimer),
                                         style = MaterialTheme.typography.labelSmall.copy(
                                             fontStyle = FontStyle.Italic,
                                             fontSize = 10.sp
@@ -930,16 +930,17 @@ private fun TaxonomyFactRow(rank: String, value: String) {
     }
 }
 
+@Composable
 private fun mapConservationStatus(code: String): String {
     return when (code.uppercase()) {
-        "LC" -> "Preocupación Menor (LC)"
-        "NT" -> "Casi Amenazada (NT)"
-        "VU" -> "Vulnerable (VU)"
-        "EN" -> "En Peligro (EN)"
-        "CR" -> "En Peligro Crítico (CR)"
-        "EW" -> "Extinta en Estado Silvestre (EW)"
-        "EX" -> "Extinta (EX)"
-        "NE" -> "No Evaluada (NE)"
+        "LC" -> stringResource(R.string.conservation_lc)
+        "NT" -> stringResource(R.string.conservation_nt)
+        "VU" -> stringResource(R.string.conservation_vu)
+        "EN" -> stringResource(R.string.conservation_en)
+        "CR" -> stringResource(R.string.conservation_cr)
+        "EW" -> stringResource(R.string.conservation_ew)
+        "EX" -> stringResource(R.string.conservation_ex)
+        "NE" -> stringResource(R.string.conservation_ne)
         else -> code
     }
 }
@@ -985,7 +986,7 @@ private fun CardActionBar(
                     modifier = Modifier.size(16.dp)
                 )
                 Spacer(modifier = Modifier.width(4.dp))
-                Text("Liberar", maxLines = 1)
+                Text(stringResource(R.string.card_action_release), maxLines = 1)
             }
 
             // Botón Voltear (accesibilidad y control explícito)
@@ -1003,7 +1004,7 @@ private fun CardActionBar(
                     modifier = Modifier.size(16.dp)
                 )
                 Spacer(modifier = Modifier.width(4.dp))
-                Text(if (isFlipped) "Anverso" else "Reverso", maxLines = 1)
+                Text(if (isFlipped) stringResource(R.string.card_action_show_front) else stringResource(R.string.card_action_show_back), maxLines = 1)
             }
 
             // Botón Guardar en Baúl (persistencia a colección)
@@ -1023,7 +1024,7 @@ private fun CardActionBar(
                         color = MaterialTheme.colorScheme.onPrimary
                     )
                     Spacer(modifier = Modifier.width(6.dp))
-                    Text("Guardando...")
+                    Text(stringResource(R.string.action_saving))
                 } else {
                     Icon(
                         imageVector = Icons.Default.Archive,
@@ -1031,7 +1032,7 @@ private fun CardActionBar(
                         modifier = Modifier.size(16.dp)
                     )
                     Spacer(modifier = Modifier.width(6.dp))
-                    Text("Guardar", fontWeight = FontWeight.Bold)
+                    Text(stringResource(R.string.action_save), fontWeight = FontWeight.Bold)
                 }
             }
         }
@@ -1073,7 +1074,7 @@ private fun PersistedCardActionBar(
                     modifier = Modifier.size(16.dp)
                 )
                 Spacer(modifier = Modifier.width(6.dp))
-                Text("Volver al Baúl", maxLines = 1)
+                Text(stringResource(R.string.card_action_back_to_storage), maxLines = 1)
             }
 
             Button(
@@ -1090,7 +1091,7 @@ private fun PersistedCardActionBar(
                     modifier = Modifier.size(16.dp)
                 )
                 Spacer(modifier = Modifier.width(6.dp))
-                Text(if (isFlipped) "Ver Anverso" else "Ver Reverso", maxLines = 1, fontWeight = FontWeight.Bold)
+                Text(if (isFlipped) stringResource(R.string.card_action_view_front) else stringResource(R.string.card_action_view_back), maxLines = 1, fontWeight = FontWeight.Bold)
             }
         }
     }

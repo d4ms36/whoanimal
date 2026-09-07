@@ -66,6 +66,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.res.stringResource
+import com.whoanimal.app.R
 import com.whoanimal.app.data.local.WhoAnimalDatabase
 import com.whoanimal.app.data.local.repository.RoomCollectionStorageRepository
 import com.whoanimal.app.domain.boundary.StorageCapacityInfo
@@ -132,11 +134,15 @@ fun CollectionScreen(
                 title = {
                     Column {
                         Text(
-                            text = "Baúl de Colección",
+                            text = stringResource(R.string.collection_title),
                             style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold)
                         )
                         Text(
-                            text = "${capacityInfo.occupiedSlots} de ${capacityInfo.totalCapacity} cartas guardadas",
+                            text = stringResource(
+                                R.string.collection_capacity_summary,
+                                capacityInfo.occupiedSlots,
+                                capacityInfo.totalCapacity
+                            ),
                             style = MaterialTheme.typography.labelSmall,
                             color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.65f)
                         )
@@ -146,7 +152,7 @@ fun CollectionScreen(
                     IconButton(onClick = onNavigateBack) {
                         Icon(
                             imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                            contentDescription = "Volver al Home"
+                            contentDescription = stringResource(R.string.collection_back_to_home_description)
                         )
                     }
                 }
@@ -185,7 +191,7 @@ fun CollectionScreen(
                     )
                     Spacer(modifier = Modifier.width(6.dp))
                     Text(
-                        text = "Contenedor $selectedContainerIndex",
+                        text = stringResource(R.string.collection_container_title, selectedContainerIndex),
                         style = MaterialTheme.typography.titleSmall.copy(fontWeight = FontWeight.Bold)
                     )
                 }
@@ -195,7 +201,11 @@ fun CollectionScreen(
                     color = ForestGreenPrimary.copy(alpha = 0.08f)
                 ) {
                     Text(
-                        text = "${cardsInContainer.size} / ${capacityInfo.slotsPerContainer} slots",
+                        text = stringResource(
+                            R.string.collection_container_slots,
+                            cardsInContainer.size,
+                            capacityInfo.slotsPerContainer
+                        ),
                         style = MaterialTheme.typography.labelSmall.copy(fontWeight = FontWeight.SemiBold),
                         color = ForestGreenPrimary,
                         modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp)
@@ -388,7 +398,7 @@ private fun CollectionCardItem(
                             )
                             Spacer(modifier = Modifier.width(2.dp))
                             Text(
-                                text = "RARA",
+                                text = stringResource(R.string.rarity_rare),
                                 style = MaterialTheme.typography.labelSmall.copy(
                                     fontWeight = FontWeight.Bold,
                                     fontSize = 9.sp
@@ -495,14 +505,14 @@ private fun EmptyContainerView(
         Spacer(modifier = Modifier.height(14.dp))
 
         Text(
-            text = "Contenedor $containerIndex Vacío",
+            text = stringResource(R.string.collection_empty_container_title, containerIndex),
             style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold)
         )
 
         Spacer(modifier = Modifier.height(6.dp))
 
         Text(
-            text = "No tienes cartas archivadas en este contenedor. Los ejemplares capturados y guardados se almacenarán aquí.",
+            text = stringResource(R.string.collection_empty_container_body),
             style = MaterialTheme.typography.bodySmall,
             color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.65f),
             textAlign = TextAlign.Center,

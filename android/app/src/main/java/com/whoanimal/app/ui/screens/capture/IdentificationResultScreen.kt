@@ -50,6 +50,8 @@ import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.compose.ui.res.stringResource
+import com.whoanimal.app.R
 import com.whoanimal.app.domain.model.CandidateSpeciesContract
 import com.whoanimal.app.domain.model.IdentificationResultContract
 import com.whoanimal.app.ui.theme.ForestGreenPrimary
@@ -66,16 +68,18 @@ fun IdentificationResultScreen(
     modifier: Modifier = Modifier
 ) {
     var decisionMadeText by remember { mutableStateOf<String?>(null) }
+    val acceptedMsg = stringResource(R.string.identification_accepted_message)
+    val rejectedMsg = stringResource(R.string.identification_rejected_message)
 
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text("Resultado de Identificación") },
+                title = { Text(stringResource(R.string.identification_screen_title)) },
                 navigationIcon = {
                     IconButton(onClick = onNavigateBack) {
                         Icon(
                             imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                            contentDescription = "Volver"
+                            contentDescription = stringResource(R.string.action_back)
                         )
                     }
                 }
@@ -114,13 +118,13 @@ fun IdentificationResultScreen(
                         Spacer(modifier = Modifier.width(14.dp))
                         Column {
                             Text(
-                                text = "Error de Identificación",
+                                text = stringResource(R.string.identification_error_title),
                                 style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold),
                                 color = MaterialTheme.colorScheme.onErrorContainer
                             )
                             Spacer(modifier = Modifier.height(4.dp))
                             Text(
-                                text = errorMessage ?: "No se pudo obtener un resultado de identificación válido.",
+                                text = errorMessage ?: stringResource(R.string.identification_error_fallback),
                                 style = MaterialTheme.typography.bodyMedium,
                                 color = MaterialTheme.colorScheme.onErrorContainer
                             )
@@ -135,7 +139,7 @@ fun IdentificationResultScreen(
                     modifier = Modifier.fillMaxWidth(),
                     shape = RoundedCornerShape(12.dp)
                 ) {
-                    Text("Volver a intentar")
+                    Text(stringResource(R.string.identification_retry_action))
                 }
                 return@Scaffold
             }
@@ -146,7 +150,7 @@ fun IdentificationResultScreen(
                 color = ForestGreenPrimary.copy(alpha = 0.08f)
             ) {
                 Text(
-                    text = "Método: ${result.identificationMethod} • Especies Oficiales",
+                    text = stringResource(R.string.identification_method_label, result.identificationMethod),
                     style = MaterialTheme.typography.labelSmall.copy(fontWeight = FontWeight.SemiBold),
                     color = ForestGreenPrimary,
                     modifier = Modifier.padding(horizontal = 12.dp, vertical = 6.dp)
@@ -171,9 +175,9 @@ fun IdentificationResultScreen(
                         ) {
                             Box(
                                 modifier = Modifier
-                                    .size(52.dp)
-                                    .clip(CircleShape)
-                                    .background(SageAccent.copy(alpha = 0.25f)),
+                                .size(52.dp)
+                                .clip(CircleShape)
+                                .background(SageAccent.copy(alpha = 0.25f)),
                                 contentAlignment = Alignment.Center
                             ) {
                                 Icon(
@@ -212,11 +216,11 @@ fun IdentificationResultScreen(
                             verticalAlignment = Alignment.CenterVertically
                         ) {
                             Text(
-                                text = "Confianza Zoológica",
+                                text = stringResource(R.string.identification_confidence_label),
                                 style = MaterialTheme.typography.bodyMedium.copy(fontWeight = FontWeight.Medium)
                             )
                             Text(
-                                text = "$confidencePercent%",
+                                text = stringResource(R.string.identification_confidence_percent, confidencePercent),
                                 style = MaterialTheme.typography.titleMedium.copy(
                                     fontWeight = FontWeight.Bold,
                                     color = ForestGreenPrimary
@@ -259,7 +263,7 @@ fun IdentificationResultScreen(
                 ) {
                     Column(modifier = Modifier.padding(16.dp)) {
                         Text(
-                            text = "Candidatos Alternativos:",
+                            text = stringResource(R.string.identification_alternative_candidates_title),
                             style = MaterialTheme.typography.titleSmall.copy(fontWeight = FontWeight.SemiBold)
                         )
                         Spacer(modifier = Modifier.height(8.dp))
@@ -321,7 +325,7 @@ fun IdentificationResultScreen(
                         )
                         Spacer(modifier = Modifier.width(10.dp))
                         Text(
-                            text = "Aceptar prepara la decisión explícita (ACCEPTED). La creación de Capture y Card se procesará en las fases de persistencia y colección.",
+                            text = stringResource(R.string.identification_acceptance_notice),
                             style = MaterialTheme.typography.bodySmall,
                             color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.75f)
                         )
@@ -333,7 +337,7 @@ fun IdentificationResultScreen(
             if (decisionMadeText == null) {
                 Button(
                     onClick = {
-                        decisionMadeText = "Identificación Aceptada formalmente (IdentificationDecision: ACCEPTED). Sin Capture automática."
+                        decisionMadeText = acceptedMsg
                         onAcceptDecision(result)
                     },
                     modifier = Modifier.fillMaxWidth(),
@@ -342,12 +346,12 @@ fun IdentificationResultScreen(
                 ) {
                     Icon(imageVector = Icons.Default.CheckCircle, contentDescription = null, modifier = Modifier.size(18.dp))
                     Spacer(modifier = Modifier.width(8.dp))
-                    Text("Aceptar Identificación")
+                    Text(stringResource(R.string.identification_accept_action))
                 }
 
                 OutlinedButton(
                     onClick = {
-                        decisionMadeText = "Identificación Descartada (IdentificationDecision: REJECTED)."
+                        decisionMadeText = rejectedMsg
                         onDiscardDecision()
                     },
                     modifier = Modifier.fillMaxWidth(),
@@ -355,7 +359,7 @@ fun IdentificationResultScreen(
                 ) {
                     Icon(imageVector = Icons.Default.Close, contentDescription = null, modifier = Modifier.size(18.dp))
                     Spacer(modifier = Modifier.width(8.dp))
-                    Text("Descartar Identificación")
+                    Text(stringResource(R.string.identification_discard_action))
                 }
             } else {
                 Button(
@@ -363,7 +367,7 @@ fun IdentificationResultScreen(
                     modifier = Modifier.fillMaxWidth(),
                     shape = RoundedCornerShape(12.dp)
                 ) {
-                    Text("Regresar")
+                    Text(stringResource(R.string.action_return))
                 }
             }
         }
@@ -392,7 +396,7 @@ private fun AlternativeCandidateRow(candidate: CandidateSpeciesContract) {
         }
         val percent = (candidate.confidence * 100).toInt()
         Text(
-            text = "$percent%",
+            text = stringResource(R.string.identification_confidence_percent, percent),
             style = MaterialTheme.typography.labelMedium.copy(fontWeight = FontWeight.Bold),
             color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.75f)
         )
