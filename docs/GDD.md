@@ -27,7 +27,7 @@ flowchart LR
 2. **Descubrir:** El sistema reconoce el animal y presenta la revelación.
 3. **Obtener Carta:** Se genera y entrega la carta correspondiente con arte y atributos iniciales.
 4. **Explorar Información:** El usuario gira la carta para descubrir datos biológicos, hábitat, dieta y curiosidades.
-5. **Escribir Historia Personal (Lore):** El usuario puede asociar a su carta un relato corto personal de hasta 300 caracteres sobre su encuentro.
+5. **Escribir Historia Personal (Lore):** El usuario puede asociar a su carta un relato corto personal de hasta 300 caracteres sobre su encuentro (sujeto a un límite de 3 ediciones por cuenta, según *DEC-041*).
 6. **Coleccionar:** El espécimen se archiva en el álbum/inventario personal de avistamientos para su consulta y futura evolución.
 
 ---

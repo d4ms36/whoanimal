@@ -472,6 +472,25 @@ Aprobado por: [Director Creativo / Project Manager / Consenso]
 * **Motivo:** Asegurar que la experiencia narrativa y personal del usuario no contamine la verdad zoológica inmutable de la especie ni los datos históricos de autenticación de la carta (`issued_at`, `display_location`, `serial`).
 * **Impacto:** Modela la Historia Personal como una capa evolutiva, separada de la identidad histórica inmutable de la `Card`. Las mecánicas exactas de edición (límite por cuenta/carta, validación de historial, solicitudes y persistencia) quedan pendientes de resolución. Ningún campo canónico de la `Card` es alterado.
 * **Aprobado por:** Director Creativo / Project Manager
+
+---
+
+### DEC-041: Reglas de Edición de la Historia Personal (Lore)
+* **Tema:** Modelo Conceptual de Coleccionismo y Experiencia
+* **Fecha:** 2026-09-06
+* **Estado:** `APPROVED`
+* **Decisión:** La edición de la Historia Personal de una Card está gobernada por las siguientes reglas limitadas:
+  1. El límite máximo de longitud es **300 caracteres** por historia (se rechazan sobrepasos sin truncamiento).
+  2. La creación inicial de la historia por el propietario no consume ninguna edición.
+  3. Se establece un **máximo de 3 ediciones acumulativas por cuenta** (límite global compartido entre todas las Cards de la cuenta).
+  4. Al agotar las 3 ediciones, se bloquea la edición normal de cualquier Historia Personal, pero la Card sigue funcionando normalmente.
+  5. Existe el mecanismo de **Solicitud Oficial (Official Lore Change Request)** para modificaciones excepcionales una vez agotadas las ediciones. Las solicitudes aprobadas **NO consumen** una de las 3 ediciones normales.
+  6. En caso de transferencia de la Card a un nuevo propietario (`owner_id`), la Historia Personal permanece asociada a la pieza. Sin embargo, el nuevo dueño no hereda automáticamente las ediciones del dueño anterior.
+  7. El mantenimiento de un historial/versionado completo queda fuera del alcance inicial.
+* **Motivo:** Mantener la simplicidad técnica al mismo tiempo que se permite evolucionar la experiencia de usuario de manera controlada y evitar el spam de contenido, preservando intactos los 19 campos inmutables de la Card.
+* **Impacto:** Define la lógica de negocio para la futura API de edición y establece el límite a nivel de cuenta (global) y no por Card. No requiere implementar versionado complejo inicialmente.
+* **Aprobado por:** Director Creativo / Project Manager
+
 ## Decisiones Pendientes de Aprobación (Pending)
 
 ### DEC-009-PENDING: Motor Definitivo de Identificación Visual

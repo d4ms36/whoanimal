@@ -68,6 +68,8 @@
   * Implementación del generador de cartas en base al protocolo `CardGeneratorService`.
 * **`WHO-008A` — Formalizar Historia Personal de la Carta (Personal Lore)** `[APPROVED_COMPLETE]`
   * Formalización documental del concepto de "Lore" como Historia Personal escrita por el usuario, limitada a 300 caracteres, asociada a la carta.
+* **`WHO-008B` — Definir reglas de edición de la Historia Personal (Lore)** `[APPROVED_COMPLETE]`
+  * Documentar reglas de edición: límite global de 3 ediciones por cuenta y Solicitud Oficial excepcional.
 * **`WHO-008` — Evaluación y Prototipo de Ingesta Taxonómica** `[PROPOSED]`
   * Conector experimental con APIs de biodiversidad abiertas (GBIF / iNaturalist) para validación de datos.
 * **`WHO-009` — Prototipo del Motor de Identificación por Visión** `[PROPOSED]`

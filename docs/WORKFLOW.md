@@ -190,5 +190,11 @@ Cada tarea u objetivo debe documentarse utilizando la siguiente ficha estructura
 ### WHO-008A: Formalizar Historia Personal de la Carta (Personal Lore)
 * **Propósito:** Formalización documental del concepto de "Lore" como Historia Personal escrita por el usuario. Limita el contenido a 300 caracteres, lo asocia a una carta específica (1 Card -> 0..1 Personal Story) y asegura que no interfiera con los 19 campos canónicos de la entidad Card. Quedan pendientes las mecánicas de edición controlada.
 * **Estado:** `APPROVED_COMPLETE`
-* **Commit:** (Pendiente de commit) (*docs(WHO-008A): formalize personal card story*)
+* **Commit:** `3f2b279` (*docs(WHO-008A): formalize personal card story*)
+* **Versión:** `0.0.1`
+
+### WHO-008B: Definir reglas de edición de la Historia Personal (Lore)
+* **Propósito:** Formalizar documentalmente las reglas de edición del Lore: límite global de 3 ediciones por cuenta, la creación no consume edición, y solicitud oficial para cambios excepcionales (DEC-041).
+* **Estado:** `APPROVED_COMPLETE`
+* **Commit:** (Pendiente de commit) (*docs(WHO-008B): define personal story edit rules*)
 * **Versión:** `0.0.1`

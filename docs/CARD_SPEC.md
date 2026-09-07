@@ -234,7 +234,7 @@ Los 19 campos conceptuales se proyectan visualmente en las dos caras de la carta
 * Visual y de atracción: `artwork` / `image_uri`, `specimen_number`, `serial` (visible en borde inferior), `visual_effects`, `rank` y proyección taxonómica desde `AnimalProfile` (`common_name`, `scientific_name_secondary`, `category`).
 
 #### Reverso de la Carta (`CardBack`)
-* Educativo y formativo: `display_location`, información científica factual de `AnimalProfile` (hábitat, dieta, comportamiento, tamaño, conservación, advertencias ponderadas) y la capa independiente de `LoreProfile` (Historia Personal escrita por el usuario, limitada a 300 caracteres).
+* Educativo y formativo: `display_location`, información científica factual de `AnimalProfile` (hábitat, dieta, comportamiento, tamaño, conservación, advertencias ponderadas) y la capa independiente de `LoreProfile` (Historia Personal escrita por el usuario, limitada a 300 caracteres y sujeta a reglas de edición según *DEC-041*).
 
 ---
 

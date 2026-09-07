@@ -15,8 +15,8 @@
 | **Fase actual** | Alpha |
 | **Versión actual** | `0.0.1` |
 | **Estado** | Foundation |
-| **Objetivo activo** | Ninguno (Ciclo WHO-008A completado; listo para revisión de PM) |
-| **Último objetivo completado** | `WHO-008A` — Formalizar Historia Personal de la Carta (Personal Lore) |
+| **Objetivo activo** | Ninguno (Ciclo WHO-008B completado; listo para revisión de PM) |
+| **Último objetivo completado** | `WHO-008B` — Definir reglas de edición de la Historia Personal (Lore) |
 | **Próximo objetivo propuesto** | `WHO-007` — Banco de Datos Inicial de Fauna (Semilla Educativa) |
 | **Bloqueos** | Ninguno |
 | **Decisiones pendientes** | `DEC-009` a `DEC-012`, `DEC-020` a `DEC-025`, `DEC-037-PENDING` |
@@ -70,6 +70,7 @@ $$\text{FASE} . \text{CORRECCIONES} . \text{ITERACIÓN}$$
 | **WHO-006D**| Formalizar Modelo de Monetización Gratuito + Publicidad | `COMPLETADO` | Alta | 0.0.1 | Sí |
 | **WHO-007** | Banco de Datos Inicial de Fauna (Semilla Educativa) | `COMPLETADO` | Media | 0.0.1 | No |
 | **WHO-008A** | Formalizar Historia Personal de la Carta (Personal Lore) | `COMPLETADO` | Media | 0.0.1 | No |
+| **WHO-008B** | Definir reglas de edición de la Historia Personal (Lore) | `COMPLETADO` | Media | 0.0.1 | No |
 
 ---
 
@@ -79,13 +80,13 @@ $$\text{FASE} . \text{CORRECCIONES} . \text{ITERACIÓN}$$
 ┌─────────────────────────────────────────────────────────────────────────────┐
 │                           OBJETIVO ACTIVO ACTUAL                            │
 ├──────────────────┬──────────────────────────────────────────────────────────┤
-│ ID               │ WHO-008A                                                 │
-│ Nombre           │ Formalizar Historia Personal de la Carta (Personal Lore) │
-│ Propósito        │ Formalizar documentalmente el concepto de Lore como      │
-│                  │ Historia Personal escrita por el usuario.                │
+│ ID               │ WHO-008B                                                 │
+│ Nombre           │ Definir reglas de edición de la Historia Personal (Lore) │
+│ Propósito        │ Formalizar documentalmente los límites de edición del    │
+│                  │ Lore asociado a una carta.                               │
 │ Estado           │ APPROVED_COMPLETE                                        │
 │ Versión Asociada │ 0.0.1                                                    │
-│ Requisitos       │ Ninguno                                                  │
+│ Requisitos       │ WHO-008A completado                                      │
 │ Responsable      │ Developer Principal (Antigravity)                        │
 └──────────────────┴──────────────────────────────────────────────────────────┘
 ```
@@ -150,6 +151,7 @@ Ordenados por prioridad técnica y estratégica.
 | **WHO-006D**| `APROBADO` | `VALIDADO` | `COMPLETADO` | `APPROVED_COMPLETE` |
 | **WHO-007** | `APROBADO` | `VALIDADO` | `COMPLETADO` | `APPROVED_COMPLETE` |
 | **WHO-008A** | `APROBADO` | `VALIDADO` | `COMPLETADO` | `APPROVED_COMPLETE` |
+| **WHO-008B** | `APROBADO` | `VALIDADO` | `COMPLETADO` | `APPROVED_COMPLETE` |
 
 > **Regla:** El Developer no puede auto-aprobar objetivos. La autorización debe ser explícita por parte del Director Creativo y estructurada por el Project Manager.
 
@@ -251,6 +253,7 @@ Para prevenir el desvío del alcance (*scope creep*) y asegurar una base sólida
 | **2026-09-06** | Corrección de Capture.sex (WHO-006C.2) | Implementación de `sex` como OPTIONAL y NULLABLE sin valor default (DEC-039) y actualización de tests y documentación | Developer (`WHO-006C.2`) |
 | **2026-09-06** | Creación del modelo formal AnimalProfile (WHO-007) | Implementación de `AnimalProfile` como fuente única de verdad para la especie, separado de `Capture` y `Card`. | Developer (`WHO-007`) |
 | **2026-09-06** | Formalización Historia Personal (WHO-008A) | Formalización documental del Lore como Historia Personal escrita por el usuario y asociada a una carta. | Developer (`WHO-008A`) |
+| **2026-09-06** | Reglas Edición Historia Personal (WHO-008B) | Formalización documental de los límites de edición del Lore: 3 ediciones por cuenta y solicitud oficial. | Developer (`WHO-008B`) |
 
 ---
 

@@ -35,7 +35,7 @@ flowchart TD
 4. **Cartas:** Formato visual de dos caras (Frente estético y atrayente; Reverso estructurado y formativo) que materializa cada avistamiento.
 5. **Colección:** Mecánica de progresión que permite organizar especímenes en álbumes temáticos, biomas o categorías taxonómicas.
 6. **Exploración:** Invitación a prestar atención a la naturaleza circundante, desde aves urbanas e insectos hasta fauna silvestre protegida.
-7. **Historia Personal (Lore):** Capa de contenido personal escrita por el usuario, asociada a una carta específica, que refleja su experiencia individual (hasta 300 caracteres).
+7. **Historia Personal (Lore):** Capa de contenido personal escrita por el usuario, asociada a una carta específica, que refleja su experiencia individual (hasta 300 caracteres, sujeta a reglas de edición controlada).
 8. **Experiencia Visual:** Diseño de interfaces moderno, limpio, con micro-interacciones de alta fidelidad, dinámico y respetuoso de la fauna.
 
 ---
