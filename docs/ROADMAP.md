@@ -80,6 +80,8 @@
   * Primera ingesta formal de 28 especies JSON, validadas estrictamente sin motor de base de datos.
 * **`WHO-011D` — Enriquecimiento Científico del Catálogo Zoológico** `[APPROVED_COMPLETE]`
   * Incorporación de información científica estable (hábitat, dieta, peso, etc.) a las especies iniciales respetando Clean Architecture.
+* **`WHO-012A` — Implementación del Motor de Observaciones** `[APPROVED_COMPLETE]`
+  * Creación de la entidad de dominio `Observation` como puente efímero entre fotografía y captura.
 * **`WHO-011` — Evaluación y Prototipo de Ingesta Taxonómica** `[PROPOSED]`
   * Conector experimental con APIs de biodiversidad abiertas (GBIF / iNaturalist) para validación de datos.
 * **`WHO-012` — Prototipo del Servicio de Generación de Cartas** `[PROPOSED]`

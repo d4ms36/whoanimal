@@ -239,3 +239,10 @@ ative_regions).
 * **Commit:** (Pendiente de commit) (*feat(dataset): enrich official species catalog*)
 * **Versión:** `0.0.1`
 
+
+### WHO-012A: Implementación del Motor de Observaciones
+* **Propósito:** Crear la entidad de dominio `Observation` como puente entre fotografía y `Capture`.
+* **Estado:** `APPROVED_COMPLETE`
+* **Commit:** (Pendiente de commit) (*feat(domain): implement observation pipeline foundation*)
+* **Versión:** `0.0.1`
+

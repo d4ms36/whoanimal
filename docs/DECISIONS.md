@@ -507,6 +507,22 @@ Aprobado por: [Director Creativo / Project Manager / Consenso]
 
 ---
 
+### DEC-043: Observation como entidad efímera
+* **Tema:** Arquitectura de Dominio (Motor de Observaciones)
+* **Fecha:** 2026-09-06
+* **Estado:** `APPROVED`
+* **Decisión:** Se introduce `Observation` como la entidad que representa una observación fotográfica pendiente de confirmación.
+* **Justificación / Principios:**
+  * Representa una observación pendiente.
+  * Es efímera y puede descartarse o ser rechazada.
+  * **No modifica** automáticamente `AnimalProfile`.
+  * **No crea** automáticamente `Capture`.
+  * **No crea** automáticamente `Card`.
+  * Sólo una observación aceptada puede originar una `Capture` posteriormente en el flujo.
+* **Aprobado por:** Director Creativo / Project Manager
+
+---
+
 ### DEC-010: Estilo y Universo Mitológico del Lore (SUPERSEDED)
 * **Tema:** Diseño Narrativo
 * **Estado:** `SUPERSEDED`
