@@ -172,13 +172,13 @@ Cada tarea u objetivo debe documentarse utilizando la siguiente ficha estructura
 ### WHO-006C.2: Cierre técnico de Capture/Specimen y sex
 * **Propósito:** Corregir la cardinalidad y obligatoriedad de `Capture.sex` en base a la decisión de dominio `DEC-039`, haciéndolo OPTIONAL, NULLABLE y sin valor default `UNKNOWN`, adaptando su constructuor, serialización, y actualizando la batería de pruebas unitarias asociadas.
 * **Estado:** `APPROVED_COMPLETE`
-* **Commit:** (Pendiente de commit) (*fix(domain): finalize capture sex contract*)
+* **Commit:** `fd96ae8` (*fix(domain): finalize capture sex contract*)
 * **Versión:** `0.0.1`
 
 ### WHO-006D: Formalizar Modelo de Monetización Gratuito + Publicidad
 * **Propósito:** Formalizar conceptualmente el modelo comercial inicial de WHO Animal como un producto 100% gratuito (Free-to-Play) en su núcleo y soportado mediante publicidad externa (DEC-038). Establecer que la publicidad (ej. AdMob) opera estrictamente en infraestructura y aislar los datos biológicos y la rareza histórica para prohibir expresamente la monetización o alteración retroactiva de la verdad zoológica o identidad de colección.
 * **Estado:** `APPROVED_COMPLETE`
-* **Commit:** (Pendiente de commit) (*docs(monetization): define free product and advertising model*)
+* **Commit:** `73e1902` (*docs(monetization): define free product and advertising model*)
 * **Versión:** `0.0.1`
 
 ### WHO-007: Banco de Datos Inicial de Fauna (Semilla Educativa)
@@ -196,5 +196,17 @@ Cada tarea u objetivo debe documentarse utilizando la siguiente ficha estructura
 ### WHO-008B: Definir reglas de edición de la Historia Personal (Lore)
 * **Propósito:** Formalizar documentalmente las reglas de edición del Lore: límite global de 3 ediciones por cuenta, la creación no consume edición, y solicitud oficial para cambios excepcionales (DEC-041).
 * **Estado:** `APPROVED_COMPLETE`
-* **Commit:** (Pendiente de commit) (*docs(WHO-008B): define personal story edit rules*)
+* **Commit:** `7a32d78` (*docs(WHO-008B): define personal story edit rules*)
+* **Versión:** `0.0.1`
+
+### WHO-010: Conexión y publicación inicial del repositorio
+* **Propósito:** Configurar la infraestructura Git conectando el repositorio local a GitHub y publicando el historial limpio.
+* **Estado:** `APPROVED_COMPLETE`
+* **Commit:** (Operación de infraestructura, sin commit funcional adicional)
+* **Versión:** `0.0.1`
+
+### WHO-010A: Auditoría y Sincronización Integral de Documentación
+* **Propósito:** Consolidar y auditar la documentación del proyecto para garantizar la alineación estricta de todos los documentos con las decisiones aprobadas hasta WHO-010.
+* **Estado:** `CURRENT`
+* **Commit:** (Pendiente de commit) (*docs(WHO-010A): synchronize project planning and governance*)
 * **Versión:** `0.0.1`

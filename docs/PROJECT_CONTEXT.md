@@ -49,11 +49,19 @@ Toda información asociada a un animal o a una carta en WHO Animal pertenece con
 │                          WHO ANIMAL ECOSYSTEM                          │
 ├───────────────────┬───────────────────────────────┬────────────────────┤
 │  INFORMACIÓN REAL │          EXPERIENCIA          │        LORE        │
-│ • Curiosidades      emisión                       │ • Elementos mito-  │
-│ • Protección      │ • Elementos de colección        lógicos            │
+│                   │                               │ (Historia Personal)│
+├───────────────────┼───────────────────────────────┼────────────────────┤
+│ • Nombre común    │ • Categoría de carta          │ • Experiencia del  │
+│ • Nombre científ. │ • Habilidades de experiencia  │   usuario          │
+│ • Taxonomía       │ • Características de juego    │ • Encuentro        │
+│ • Hábitat y Dieta │ • Rareza de colección         │ • Relato personal  │
+│ • Tamaño y Peso   │ • Generación (Genesis, Gen 1) │                    │
+│ • Conducta        │ • Población al momento de     │                    │
+│ • Curiosidades    │   emisión                     │                    │
+│ • Protección      │ • Elementos de colección      │                    │
 │ • Rareza natural  │ • Interfaz, álbum y volteo    │                    │
 ├───────────────────┼───────────────────────────────┼────────────────────┤
-│  100% Verificable │     100% Estimulante          │   100% Ficticio    │
+│  100% Verificable │     100% Estimulante          │   100% Personal    │
 └───────────────────┴───────────────────────────────┴────────────────────┘
 ```
 

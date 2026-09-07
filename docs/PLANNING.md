@@ -15,12 +15,12 @@
 | **Fase actual** | Alpha |
 | **Versión actual** | `0.0.1` |
 | **Estado** | Foundation |
-| **Objetivo activo** | Ninguno (Ciclo WHO-008B completado; listo para revisión de PM) |
-| **Último objetivo completado** | `WHO-008B` — Definir reglas de edición de la Historia Personal (Lore) |
-| **Próximo objetivo propuesto** | `WHO-007` — Banco de Datos Inicial de Fauna (Semilla Educativa) |
+| **Objetivo activo** | `WHO-010A` — Auditoría y Sincronización Integral de Documentación |
+| **Último objetivo completado** | `WHO-010` — Conexión y publicación inicial del repositorio |
+| **Próximo objetivo propuesto** | Pendiente de aprobación |
 | **Bloqueos** | Ninguno |
 | **Decisiones pendientes** | `DEC-009` a `DEC-012`, `DEC-020` a `DEC-025`, `DEC-037-PENDING` |
-| **Último commit** | `e05a902` |
+| **Último commit** | `7a32d78` |
 | **Última actualización** | 2026-09-06 |
 
 ---
@@ -63,14 +63,16 @@ $$\text{FASE} . \text{CORRECCIONES} . \text{ITERACIÓN}$$
 | **WHO-005B-E.1**| Cierre semántico de `rank` y `rarity` | `COMPLETADO` | Alta | 0.0.1 | Sí |
 | **WHO-006A**| Definición formal de tipos y obligatoriedad de los 19 campos de Card | `COMPLETADO` | Alta | 0.0.1 | Sí |
 | **WHO-006A.1**| Corrección del contrato de obligatoriedad, nullability y defaults de Card | `COMPLETADO` | Alta | 0.0.1 | Sí |
-| **WHO-006B**| Implementación formal del modelo Card (19 campos canónicos) | `NEEDS_CORRECTION` | Alta | 0.0.1 | Sí |
+| **WHO-006B**| Implementación formal del modelo Card (19 campos canónicos) | `COMPLETADO` | Alta | 0.0.1 | Sí |
 | **WHO-006B.1**| Corrección de contrato técnico del modelo Card | `COMPLETADO` | Alta | 0.0.1 | Sí |
-| **WHO-006C**| Formalizar dominio Capture/Specimen (DEC-036) | `NEEDS_CORRECTION` | Alta | 0.0.1 | Sí |
+| **WHO-006C**| Formalizar dominio Capture/Specimen (DEC-036) | `COMPLETADO` | Alta | 0.0.1 | Sí |
 | **WHO-006C.2**| Cierre técnico de Capture/Specimen y sex (DEC-039) | `COMPLETADO` | Alta | 0.0.1 | Sí |
 | **WHO-006D**| Formalizar Modelo de Monetización Gratuito + Publicidad | `COMPLETADO` | Alta | 0.0.1 | Sí |
-| **WHO-007** | Banco de Datos Inicial de Fauna (Semilla Educativa) | `COMPLETADO` | Media | 0.0.1 | No |
-| **WHO-008A** | Formalizar Historia Personal de la Carta (Personal Lore) | `COMPLETADO` | Media | 0.0.1 | No |
-| **WHO-008B** | Definir reglas de edición de la Historia Personal (Lore) | `COMPLETADO` | Media | 0.0.1 | No |
+| **WHO-007** | Banco de Datos Inicial de Fauna (Semilla Educativa) | `COMPLETADO` | Media | 0.0.1 | Sí |
+| **WHO-008A** | Formalizar Historia Personal de la Carta (Personal Lore) | `COMPLETADO` | Media | 0.0.1 | Sí |
+| **WHO-008B** | Definir reglas de edición de la Historia Personal (Lore) | `COMPLETADO` | Media | 0.0.1 | Sí |
+| **WHO-010** | Conexión y publicación inicial del repositorio | `COMPLETADO` | Alta | 0.0.1 | Sí |
+| **WHO-010A** | Auditoría y Sincronización Integral de Documentación | `EN CURSO` | Alta | 0.0.1 | Sí |
 
 ---
 
@@ -80,29 +82,25 @@ $$\text{FASE} . \text{CORRECCIONES} . \text{ITERACIÓN}$$
 ┌─────────────────────────────────────────────────────────────────────────────┐
 │                           OBJETIVO ACTIVO ACTUAL                            │
 ├──────────────────┬──────────────────────────────────────────────────────────┤
-│ ID               │ WHO-008B                                                 │
-│ Nombre           │ Definir reglas de edición de la Historia Personal (Lore) │
-│ Propósito        │ Formalizar documentalmente los límites de edición del    │
-│                  │ Lore asociado a una carta.                               │
-│ Estado           │ APPROVED_COMPLETE                                        │
+│ ID               │ WHO-010A                                                 │
+│ Nombre           │ Auditoría y Sincronización Integral de Documentación     │
+│ Propósito        │ Revisión exhaustiva y consolidación de documentación     │
+│                  │ técnica y directrices del proyecto.                      │
+│ Estado           │ CURRENT                                                  │
 │ Versión Asociada │ 0.0.1                                                    │
-│ Requisitos       │ WHO-008A completado                                      │
+│ Requisitos       │ WHO-010 completado                                       │
 │ Responsable      │ Developer Principal (Antigravity)                        │
 └──────────────────┴──────────────────────────────────────────────────────────┘
 ```
 
 * **Criterios de Aceptación:**
-  1. Entidad `Capture` implementada con `capture_id` UUIDv4 estricto (rechazo de v1, v5, nil e inválidos).
-  2. Campo `sex` implementado con enum `SpecimenSex` (`MALE`, `FEMALE`, `UNKNOWN`) conforme a `DEC-036`.
-  3. Frontera ontológica respetada: `sex` pertenece a `Capture`, no a `Animal`, ni es campo canónico de `Card`.
-  4. Cero campos inventados en el modelo mínimo.
-  5. Inmutabilidad post-registro garantizada.
-  6. Suite de 44 tests unitarios pasando al 100% (cero dependencias añadidas).
-  7. Detención formal tras la entrega sin iniciar objetivos posteriores automáticamente.
-* **Archivos Afectados:** `src/whoanimal/domain/models/capture.py`, `src/whoanimal/domain/enums.py`, `src/whoanimal/domain/models/__init__.py`, `src/whoanimal/domain/__init__.py`, `tests/test_capture.py`, `docs/PLANNING.md`, `docs/ROADMAP.md`, `docs/WORKFLOW.md`.
-* **Dependencias:** Ninguna externa añadida (stdlib).
+  1. Todos los documentos del proyecto reflejan fielmente el estado actual.
+  2. No existen contradicciones de reglas aprobadas o IDs repetidos.
+  3. No se ha implementado código ni modelos nuevos.
+* **Archivos Afectados:** `docs/*.md`, `README.md`, `AGENTS.md`.
+* **Dependencias:** Ninguna externa añadida.
 * **Bloqueos:** Ninguno.
-* **Resultado Esperado:** Frontera ontológica Capture/Specimen formalizada en el dominio.
+* **Resultado Esperado:** Repositorio documental 100% sincronizado con la realidad de WHO-010.
 
 ---
 
@@ -113,12 +111,11 @@ Ordenados por prioridad técnica y estratégica.
 | ID | Nombre | Propósito | Prioridad | Dependencias | Estado | Req. Aprobación Director |
 | :--- | :--- | :--- | :---: | :--- | :---: | :---: |
 | **WHO-005B-B** | Validación de Esquemas y Serialización JSON | Importación/exportación estándar de cartas y perfiles compatibles con extensiones | Alta | WHO-002, WHO-005B-A | `PROPUESTO` | **Sí** |
-| **WHO-006** | Banco de Datos Inicial de Fauna (Semilla) | Dotar al sistema de especímenes reales con datos y Lore | Media | WHO-005B-B | `PROPUESTO` | **Sí** |
-| **WHO-007** | Prototipo del Servicio de Generación de Cartas | Implementación del ensamblador en base al protocolo | Media | WHO-005B-B | `PROPUESTO` | **Sí** |
-| **WHO-008** | Evaluación y Prototipo de Ingesta Taxonómica | Conector experimental con APIs de biodiversidad (GBIF/iNat) | Media | WHO-005B-B, DEC-009 | `PROPUESTO` | **Sí** |
-| **WHO-009** | Prototipo del Motor de Identificación por Visión | Implementación experimental de `IdentificationService` | Alta | WHO-005B-B, DEC-009, DEC-021 | `PROPUESTO` | **Sí** |
-| **WHO-010** | Motor de Persistencia y Álbum de Colección | Almacenamiento local para inventario y álbum | Media | WHO-005B-B | `PROPUESTO` | **Sí** |
-| **WHO-011** | Interfaz Gráfica / Prototipo Cliente Móvil | Primer frontend visual interactivo para volteo de cartas | Alta | WHO-004, DEC-012 | `PROPUESTO` | **Sí** |
+| **WHO-011** | Evaluación y Prototipo de Ingesta Taxonómica | Conector experimental con APIs de biodiversidad (GBIF/iNat) | Media | WHO-005B-B, DEC-009 | `PROPUESTO` | **Sí** |
+| **WHO-012** | Prototipo del Servicio de Generación de Cartas | Implementación del ensamblador en base al protocolo | Media | WHO-005B-B | `PROPUESTO` | **Sí** |
+| **WHO-013** | Prototipo del Motor de Identificación por Visión | Implementación experimental de `IdentificationService` | Alta | WHO-005B-B, DEC-009, DEC-021 | `PROPUESTO` | **Sí** |
+| **WHO-014** | Motor de Persistencia y Álbum de Colección | Almacenamiento local para inventario y álbum | Media | WHO-005B-B | `PROPUESTO` | **Sí** |
+| **WHO-015** | Interfaz Gráfica / Prototipo Cliente Móvil | Primer frontend visual interactivo para volteo de cartas | Alta | WHO-004, DEC-012 | `PROPUESTO` | **Sí** |
 
 > ⚠️ **Aviso de Gobernanza:**  
 > Que un objetivo aparezca en esta tabla **NO constituye autorización para su desarrollo**.  
@@ -144,14 +141,16 @@ Ordenados por prioridad técnica y estratégica.
 | **WHO-005B-E.1**| `APROBADO` | `VALIDADO` | `COMPLETADO` | `APPROVED_COMPLETE` |
 | **WHO-006A**| `APROBADO` | `VALIDADO` | `COMPLETADO` | `APPROVED_COMPLETE` |
 | **WHO-006A.1**| `APROBADO` | `VALIDADO` | `COMPLETADO` | `APPROVED_COMPLETE` |
-| **WHO-006B**| `APROBADO` | `REVISADO` | `COMPLETADO` | `NEEDS_CORRECTION` |
+| **WHO-006B**| `APROBADO` | `VALIDADO` | `COMPLETADO` | `APPROVED_COMPLETE` |
 | **WHO-006B.1**| `APROBADO` | `VALIDADO` | `COMPLETADO` | `APPROVED_COMPLETE` |
-| **WHO-006C**| `APROBADO` | `REVISADO` | `COMPLETADO` | `NEEDS_CORRECTION` |
+| **WHO-006C**| `APROBADO` | `VALIDADO` | `COMPLETADO` | `APPROVED_COMPLETE` |
 | **WHO-006C.2**| `APROBADO` | `VALIDADO` | `COMPLETADO` | `APPROVED_COMPLETE` |
 | **WHO-006D**| `APROBADO` | `VALIDADO` | `COMPLETADO` | `APPROVED_COMPLETE` |
 | **WHO-007** | `APROBADO` | `VALIDADO` | `COMPLETADO` | `APPROVED_COMPLETE` |
 | **WHO-008A** | `APROBADO` | `VALIDADO` | `COMPLETADO` | `APPROVED_COMPLETE` |
 | **WHO-008B** | `APROBADO` | `VALIDADO` | `COMPLETADO` | `APPROVED_COMPLETE` |
+| **WHO-010** | `APROBADO` | `VALIDADO` | `COMPLETADO` | `APPROVED_COMPLETE` |
+| **WHO-010A** | `APROBADO` | `REVISANDO`| `EN CURSO` | `CURRENT` |
 
 > **Regla:** El Developer no puede auto-aprobar objetivos. La autorización debe ser explícita por parte del Director Creativo y estructurada por el Project Manager.
 
@@ -163,12 +162,11 @@ Vista operativa de las decisiones pendientes documentadas oficialmente en [docs/
 
 | ID | Decisión | Impacto | ¿Bloquea desarrollo inmediato? | Estado Oficial |
 | :--- | :--- | :---: | :---: | :---: |
-| **DEC-009** | Motor definitivo de identificación visual (on-device vs. API vs. nube) | Alto | Sí (bloquea WHO-009) | `PENDING` |
-| **DEC-010** | Estilo y universo del Lore (mitología única vs. folclore regional) | Medio | No (en fase de fundación) | `PENDING` |
+| **DEC-009** | Motor definitivo de identificación visual (on-device vs. API vs. nube) | Alto | Sí (bloquea WHO-013) | `PENDING` |
 | **DEC-011** | Convención definitiva de identificadores `card_id` y códigos de colección | Medio | No (temporal en v0.1) | `PENDING` |
-| **DEC-012** | Tecnología cliente definitiva para la app de usuario (Flutter / nativo) | Alto | Sí (bloquea WHO-011) | `PENDING` |
+| **DEC-012** | Tecnología cliente definitiva para la app de usuario (Flutter / nativo) | Alto | Sí (bloquea WHO-015) | `PENDING` |
 | **DEC-020** | Diseño definitivo del esquema JSON de datos (`Animal` y `Card`) | Alto | Sí (requerido para WHO-005B-B)| `PENDING` |
-| **DEC-021** | Umbrales definitivos de confianza en la identificación por visión/cámara | Medio | Sí (para WHO-009) | `PENDING` |
+| **DEC-021** | Umbrales definitivos de confianza en la identificación por visión/cámara | Medio | Sí (para WHO-013) | `PENDING` |
 | **DEC-022** | Algoritmo matemático y curvas de probabilidad para rareza dinámica | Alto | No (en fase documental) | `PENDING` |
 | **DEC-023** | Reglas anti-abuso para validación de observaciones y población | Alto | No (en fase documental) | `PENDING` |
 | **DEC-024** | Sistema definitivo de autenticación y verificación de cartas | Medio | No (en fase documental) | `PENDING` |
@@ -254,6 +252,8 @@ Para prevenir el desvío del alcance (*scope creep*) y asegurar una base sólida
 | **2026-09-06** | Creación del modelo formal AnimalProfile (WHO-007) | Implementación de `AnimalProfile` como fuente única de verdad para la especie, separado de `Capture` y `Card`. | Developer (`WHO-007`) |
 | **2026-09-06** | Formalización Historia Personal (WHO-008A) | Formalización documental del Lore como Historia Personal escrita por el usuario y asociada a una carta. | Developer (`WHO-008A`) |
 | **2026-09-06** | Reglas Edición Historia Personal (WHO-008B) | Formalización documental de los límites de edición del Lore: 3 ediciones por cuenta y solicitud oficial. | Developer (`WHO-008B`) |
+| **2026-09-06** | Conexión y publicación inicial (WHO-010) | Configuración de infraestructura Git/GitHub y sincronización. | Developer (`WHO-010`) |
+| **2026-09-06** | Auditoría y Sincronización Integral (WHO-010A) | Consolidación y validación de la documentación del proyecto, corrección de IDs duplicados. | Developer (`WHO-010A`) |
 
 ---
 

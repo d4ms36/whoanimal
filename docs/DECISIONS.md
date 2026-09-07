@@ -491,6 +491,13 @@ Aprobado por: [Director Creativo / Project Manager / Consenso]
 * **Impacto:** Define la lógica de negocio para la futura API de edición y establece el límite a nivel de cuenta (global) y no por Card. No requiere implementar versionado complejo inicialmente.
 * **Aprobado por:** Director Creativo / Project Manager
 
+---
+
+### DEC-010: Estilo y Universo Mitológico del Lore (SUPERSEDED)
+* **Tema:** Diseño Narrativo
+* **Estado:** `SUPERSEDED`
+* **Motivo:** Sustituido por `DEC-040` (El Lore ya no es un universo mitológico ficticio, sino una Historia Personal escrita por el usuario).
+
 ## Decisiones Pendientes de Aprobación (Pending)
 
 ### DEC-009-PENDING: Motor Definitivo de Identificación Visual
@@ -502,15 +509,7 @@ Aprobado por: [Director Creativo / Project Manager / Consenso]
   3. Modelo multimodal de visión en la nube vía backend propio.
 * **Decisión requerida de:** Director Creativo / Project Manager
 
----
 
-### DEC-010-PENDING: Estilo y Universo Mitológico del Lore
-* **Tema:** Diseño Narrativo
-* **Estado:** `PENDING`
-* **Opciones en evaluación:**
-  1. Universo mitológico unificado de fantasía (ej. "Los Guardianes del Equilibrio").
-  2. Adaptación de fábulas y leyendas folclóricas reales según el bioma y región del animal.
-* **Decisión requerida de:** Director Creativo
 
 ---
 

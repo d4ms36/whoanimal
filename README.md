@@ -2,7 +2,7 @@
 
 > *"Descubre. Identifica. Colecciona."*
 
-**WHO Animal** es una experiencia interactiva de descubrimiento, aprendizaje y colección de fauna. Combina la identificación visual de animales con un sistema de **cartas coleccionables de doble cara**, complementadas con información científica rigurosa y una capa narrativa de fantasía (*Lore*), todo bajo un principio transversal e innegociable: **100% Pet Friendly**.
+**WHO Animal** es una experiencia interactiva de descubrimiento, aprendizaje y colección de fauna. Combina la identificación visual de animales con un sistema de **cartas coleccionables de doble cara**, complementadas con información científica rigurosa y una Historia Personal escrita por el usuario (*Lore*), todo bajo un principio transversal e innegociable: **100% Pet Friendly**.
 
 ---
 
@@ -22,7 +22,7 @@ El proyecto se encuentra en la **Fase 0 — Fundación y Diseño de Producto**.
 
 1. **INFORMACIÓN REAL:** Datos científicos rigurosos, verificables y educativos (hábitat, dieta, comportamiento, etc.).
 2. **EXPERIENCIA:** Estética visual atractiva, mecánica de cartas coleccionables de doble cara e interacción fluida.
-3. **LORE:** Capa narrativa y mitológica independiente que convierte a los animales en personajes dentro del universo Who Animal, sin mezclarse jamás con la realidad biológica.
+3. **LORE (Historia Personal):** Capa de contenido personal escrita por el usuario, asociada a una carta específica, que refleja su experiencia individual (sometida a reglas de edición y sin mezclarse jamás con la realidad biológica).
 4. **100% PET FRIENDLY:** Todo el producto promueve la protección, respeto y observación responsable de los animales y la naturaleza, prohibiendo mecánicas de acoso, captura física o maltrato.
 
 ---

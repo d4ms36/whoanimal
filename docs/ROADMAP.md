@@ -52,7 +52,7 @@
   * Formalización contractual de tipos técnicos, requiredness, nullability, defaults e inmutabilidad previa a la implementación de modelos.
 * **`WHO-006A.1` — Corrección del Contrato de Obligatoriedad, Nullability y Defaults de Card** `[APPROVED_COMPLETE]`
   * Eliminación de defaults no aprobados, distinción estricta entre Optional y Nullable, y protección histórica de `display_location`.
-* **`WHO-006B` — Implementación Formal del Modelo Card** `[NEEDS_CORRECTION]`
+* **`WHO-006B` — Implementación Formal del Modelo Card** `[APPROVED_COMPLETE]`
   * Implementación del modelo de dominio `Card` con los 19 campos canónicos, validación técnica estricta, inmutabilidad post-emisión y cobertura de pruebas.
 * **`WHO-006B.1` — Corrección de Contrato Técnico del Modelo Card** `[APPROVED_COMPLETE]`
   * Alineación estricta con el contrato: UUIDv4 exclusivo, distinción ausencia vs. null en `edition`, `artwork` como tipo abierto, `rank` int/str, protección anti-GPS y 30 tests unitarios.
@@ -64,19 +64,23 @@
 
 * **`WHO-007` — Banco de Datos Inicial de Fauna (Semilla Educativa)** `[APPROVED_COMPLETE]`
   * Creación e implementación formal del modelo de dominio `AnimalProfile` como fuente única de verdad para la identidad zoológica, estableciendo la frontera ontológica inquebrantable frente a `Capture` y `Card`.
-* **`WHO-007` — Prototipo del Servicio de Generación de Cartas** `[PROPOSED]`
-  * Implementación del generador de cartas en base al protocolo `CardGeneratorService`.
 * **`WHO-008A` — Formalizar Historia Personal de la Carta (Personal Lore)** `[APPROVED_COMPLETE]`
   * Formalización documental del concepto de "Lore" como Historia Personal escrita por el usuario, limitada a 300 caracteres, asociada a la carta.
 * **`WHO-008B` — Definir reglas de edición de la Historia Personal (Lore)** `[APPROVED_COMPLETE]`
   * Documentar reglas de edición: límite global de 3 ediciones por cuenta y Solicitud Oficial excepcional.
-* **`WHO-008` — Evaluación y Prototipo de Ingesta Taxonómica** `[PROPOSED]`
+* **`WHO-010` — Conexión y publicación inicial del repositorio** `[APPROVED_COMPLETE]`
+  * Configuración de infraestructura Git/GitHub y publicación del código inicial.
+* **`WHO-010A` — Auditoría y Sincronización Integral de Documentación** `[CURRENT]`
+  * Revisión exhaustiva y consolidación de documentación técnica y directrices del proyecto.
+* **`WHO-011` — Evaluación y Prototipo de Ingesta Taxonómica** `[PROPOSED]`
   * Conector experimental con APIs de biodiversidad abiertas (GBIF / iNaturalist) para validación de datos.
-* **`WHO-009` — Prototipo del Motor de Identificación por Visión** `[PROPOSED]`
+* **`WHO-012` — Prototipo del Servicio de Generación de Cartas** `[PROPOSED]`
+  * Implementación del generador de cartas en base al protocolo `CardGeneratorService`.
+* **`WHO-013` — Prototipo del Motor de Identificación por Visión** `[PROPOSED]`
   * Implementación experimental de `IdentificationService` mediante modelos locales ligeros o API de visión.
-* **`WHO-010` — Motor de Persistencia y Álbum de Colección** `[PROPOSED]`
+* **`WHO-014` — Motor de Persistencia y Álbum de Colección** `[PROPOSED]`
   * Implementación de persistencia local (SQLite) para inventario y álbum de colección.
-* **`WHO-011` — Interfaz Gráfica / Prototipo de Cliente Móvil** `[PROPOSED]`
+* **`WHO-015` — Interfaz Gráfica / Prototipo de Cliente Móvil** `[PROPOSED]`
   * Configuración del frontend cliente (Flutter) para visualización e interacción de cartas con volteo.
 
 ---
