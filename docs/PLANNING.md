@@ -12,14 +12,14 @@
 | Campo | Estado |
 | :--- | :--- |
 | **Proyecto** | WHO Animal |
-| **Fase actual** | Alpha |
+| **Fase actual** | Alpha (Foundation Completa / Transición a Fase 1) |
 | **Versión actual** | `0.0.1` |
-| **Estado** | Foundation |
-| **Objetivo activo** | Ninguno (Ciclo WHO-012D completado; listo para revisión de PM) |
-| **Último objetivo completado** | `WHO-012D` — Implementación del puente IdentificationDecision → Capture |
-| **Próximo objetivo propuesto** | Pendiente de aprobación |
+| **Estado** | Foundation Completa |
+| **Objetivo activo** | Ninguno (Ciclo WHO-013 completado; listo para revisión de PM y Director) |
+| **Último objetivo completado** | `WHO-013` — Consolidación de Arquitectura, Roadmap y Definición del Mínimo Funcional |
+| **Próximo objetivo propuesto** | `WHO-014` — Servicio de Ensamblaje y Generación de Cartas (`Capture → Card`) |
 | **Bloqueos** | Ninguno |
-| **Decisiones pendientes** | `DEC-009` a `DEC-012`, `DEC-020` a `DEC-025`, `DEC-037-PENDING` |
+| **Decisiones pendientes** | `DEC-009` a `DEC-012`, `DEC-021` a `DEC-025`, `DEC-037-PENDING` |
 | **Último commit** | `5bb14dc` |
 | **Última actualización** | 2026-09-07 |
 
@@ -81,6 +81,55 @@ $$\text{FASE} . \text{CORRECCIONES} . \text{ITERACIÓN}$$
 | **WHO-012B** | Implementación del Resultado de Identificación Zoológica | `COMPLETADO` | Alta | 0.0.1 | Sí |
 | **WHO-012C** | Formalizar la decisión explícita sobre un IdentificationResult | `COMPLETADO` | Alta | 0.0.1 | Sí |
 | **WHO-012D** | Implementación del puente IdentificationDecision → Capture | `COMPLETADO` | Alta | 0.0.1 | Sí |
+| **WHO-013** | Consolidación de Arquitectura, Roadmap y Mínimo Funcional | `COMPLETADO` | Alta | 0.0.1 | Sí |
+
+---
+
+### Tabla Maestra de Auditoría de Objetivos WHO (Fase 0 y Propuestos Históricos)
+
+Auditoría integral oficial realizada en **WHO-013** para resolver colisiones de numeración y definir la situación de cada identificador:
+
+| ID | Nombre Oficial | Estado | Fase | Dependencias | Situación / Resolución |
+| :--- | :--- | :---: | :---: | :--- | :--- |
+| **WHO-001** | Evaluación de Requisitos y Estado Cero | `COMPLETADO` | Fase 0 | Ninguna | Base cero inicial verificada |
+| **WHO-002** | Fundación de Arquitectura y Especificación de Cartas | `COMPLETADO` | Fase 0 | WHO-001 | Modelos base inmutables y Clean Architecture |
+| **WHO-003** | Gobernanza, Memoria del Proyecto y Versionado | `COMPLETADO` | Fase 0 | WHO-002 | Manual AGENTS.md, gobernanza y versionado |
+| **WHO-004** | Plan Maestro de Desarrollo y Alineación por Versión | `COMPLETADO` | Fase 0 | WHO-003 | Creación de PLANNING.md |
+| **WHO-005A** | Incorporación de Nuevas Decisiones al Contexto | `COMPLETADO` | Fase 0 | WHO-004 | Memoria de producto y decisiones clave |
+| **WHO-005B-A** | Actualización Documental de Capacidades Futuras | `COMPLETADO` | Fase 0 | WHO-005A | Blindaje documental de capacidades futuras |
+| **WHO-005B-B** | Validación de Esquemas y Serialización JSON | `ABSORBIDO` | Fase 0 | WHO-002, WHO-005B-A | Absorbido en modelos de dominio (`to_dict`/`from_dict`) y esquemas JSON del dataset |
+| **WHO-005B-C** | Semántica de population_at_issuance | `COMPLETADO` | Fase 0 | WHO-005B-A | Definición formal e inmutabilidad (DEC-033) |
+| **WHO-005B-D** | Auditoría y Resolución de verification | `COMPLETADO` | Fase 0 | WHO-005B-C | verification_status como estado mutable (DEC-034) |
+| **WHO-005B-D.1** | Canonicalización de verification_status y null vs UNVERIFIED | `COMPLETADO` | Fase 0 | WHO-005B-D | Estado inicial UNVERIFIED (DEC-035) |
+| **WHO-005C.1** | Definición Conceptual de sex en Animal/Capture | `COMPLETADO` | Fase 0 | WHO-005B-D.1 | Sexo biológico atribuido a Capture (DEC-036) |
+| **WHO-005B-E** | Auditoría Semántica Final de la Estructura Card | `COMPLETADO` | Fase 0 | WHO-005C.1 | Cierre de 19 campos y 6 módulos funcionales |
+| **WHO-005B-E.1** | Cierre Semántico de rank y rarity | `COMPLETADO` | Fase 0 | WHO-005B-E | Ortogonalidad absoluta entre rank y rarity (DEC-032) |
+| **WHO-006A** | Definición Formal de Tipos y Obligatoriedad de Card | `COMPLETADO` | Fase 0 | WHO-005B-E.1 | Contrato formal de tipos de Card |
+| **WHO-006A.1** | Corrección del Contrato de Obligatoriedad y Defaults | `COMPLETADO` | Fase 0 | WHO-006A | Eliminación de defaults y protección anti-GPS |
+| **WHO-006B** | Implementación Formal del Modelo Card | `COMPLETADO` | Fase 0 | WHO-006A.1 | Subsumido por WHO-006B.1 |
+| **WHO-006B.1** | Corrección de Contrato Técnico del Modelo Card | `COMPLETADO` | Fase 0 | WHO-006B | UUIDv4 estricto, 30 tests unitarios pasando |
+| **WHO-006C** | Formalizar Dominio Capture/Specimen | `COMPLETADO` | Fase 0 | WHO-006B.1 | Subsumido por WHO-006C.2 |
+| **WHO-006C.2** | Cierre Técnico de Capture/Specimen y sex | `COMPLETADO` | Fase 0 | WHO-006C | sex como opcional, nullable, sin default (DEC-039) |
+| **WHO-006D** | Formalizar Modelo de Monetización Gratuito + Publicidad | `COMPLETADO` | Fase 0 | WHO-006C.2 | Producto 100% gratuito y Rewarded Ads (DEC-038) |
+| **WHO-007** | Banco de Datos Inicial de Fauna (Semilla Educativa) | `COMPLETADO` | Fase 0 | WHO-006D | Modelo AnimalProfile como fuente única de verdad |
+| **WHO-008A** | Formalizar Historia Personal de la Carta (Lore) | `COMPLETADO` | Fase 0 | WHO-007 | Lore como historia personal de 300 caracteres |
+| **WHO-008B** | Definir reglas de edición de la Historia Personal | `COMPLETADO` | Fase 0 | WHO-008A | Límite de 3 ediciones por cuenta (DEC-041) |
+| **WHO-010** | Conexión y publicación inicial del repositorio | `COMPLETADO` | Fase 0 | WHO-008B | Infraestructura Git y GitHub configurada |
+| **WHO-010A** | Auditoría y Sincronización Integral de Documentación | `COMPLETADO` | Fase 0 | WHO-010 | Sincronización y resolución de duplicados |
+| **WHO-011A** | Infraestructura del Banco de Datos Zoológico | `COMPLETADO` | Fase 0 | WHO-010A | Esquemas JSON y validador de catálogo |
+| **WHO-011B** | Implementación del Índice Taxonómico Oficial | `COMPLETADO` | Fase 0 | WHO-011A | Servicio TaxonomyIndex en memoria sin BD |
+| **WHO-011C** | Implementación del Catálogo Zoológico Oficial Inicial | `COMPLETADO` | Fase 0 | WHO-011B | 28 especies zoológicas validadas |
+| **WHO-011D** | Enriquecimiento Científico del Catálogo Zoológico | `COMPLETADO` | Fase 0 | WHO-011C | Campos científicos agregados (DEC-042) |
+| **WHO-012A** | Implementación del Motor de Observaciones | `COMPLETADO` | Fase 0 | WHO-011D | Modelo Observation efímero (DEC-043) |
+| **WHO-012B** | Implementación del Resultado de Identificación Zoológica | `COMPLETADO` | Fase 0 | WHO-012A | Modelo IdentificationResult (DEC-044) |
+| **WHO-012C** | Formalizar la decisión explícita sobre un IdentificationResult | `COMPLETADO` | Fase 0 | WHO-012B | Modelo IdentificationDecision (DEC-045) |
+| **WHO-012D** | Implementación del puente IdentificationDecision → Capture | `COMPLETADO` | Fase 0 | WHO-012C | Creación de Capture a partir de ACCEPTED (DEC-046) |
+| **WHO-013** | Consolidación de Arquitectura, Roadmap y Mínimo Funcional | `COMPLETADO` | Fase 0 | WHO-012D | Auditoría, cierre de Fase 0 y Roadmap de 5 fases (DEC-047) |
+| **WHO-011 (Antiguo)** | Evaluación y Prototipo de Ingesta Taxonómica API | `REUBICADO` | Fase 4 | WHO-018 | Reubicado a Fase 4 (Ecosystem) para ingesta masiva externa |
+| **WHO-012 (Antiguo)** | Prototipo del Servicio de Generación de Cartas | `REUBICADO` | Fase 1 | WHO-013 | Reubicado y resecuenciado como WHO-014 en Fase 1 |
+| **WHO-013 (Antiguo)** | Prototipo del Motor de Identificación por Visión | `REUBICADO` | Fase 1 | WHO-015 | Reubicado y resecuenciado como WHO-016 en Fase 1 |
+| **WHO-014 (Antiguo)** | Motor de Persistencia y Álbum de Colección | `REUBICADO` | Fase 1 | WHO-016 | Reubicado y resecuenciado como WHO-017 en Fase 1 |
+| **WHO-015 (Antiguo)** | Interfaz Gráfica / Prototipo Cliente Móvil | `REUBICADO` | Fase 1 | WHO-014 | Reubicado y resecuenciado como WHO-015 en Fase 1 |
 
 ---
 
@@ -108,18 +157,17 @@ $$\text{FASE} . \text{CORRECCIONES} . \text{ITERACIÓN}$$
 
 ---
 
-## 5. Próximos Objetivos
+## 5. Próximos Objetivos — Fase 1: Mínimo Funcional (Minimum Functional Product)
 
-Ordenados por prioridad técnica y estratégica.
+Secuencia técnica ordenada para construir el primer producto ejecutable en Android que complete el flujo de 11 pasos (Foto → Colección Local):
 
 | ID | Nombre | Propósito | Prioridad | Dependencias | Estado | Req. Aprobación Director |
 | :--- | :--- | :--- | :---: | :--- | :---: | :---: |
-| **WHO-005B-B** | Validación de Esquemas y Serialización JSON | Importación/exportación estándar de cartas y perfiles compatibles con extensiones | Alta | WHO-002, WHO-005B-A | `PROPUESTO` | **Sí** |
-| **WHO-011** | Evaluación y Prototipo de Ingesta Taxonómica | Conector experimental con APIs de biodiversidad (GBIF/iNat) | Media | WHO-005B-B, DEC-009 | `PROPUESTO` | **Sí** |
-| **WHO-012** | Prototipo del Servicio de Generación de Cartas | Implementación del ensamblador en base al protocolo | Media | WHO-005B-B | `PROPUESTO` | **Sí** |
-| **WHO-013** | Prototipo del Motor de Identificación por Visión | Implementación experimental de `IdentificationService` | Alta | WHO-005B-B, DEC-009, DEC-021 | `PROPUESTO` | **Sí** |
-| **WHO-014** | Motor de Persistencia y Álbum de Colección | Almacenamiento local para inventario y álbum | Media | WHO-005B-B | `PROPUESTO` | **Sí** |
-| **WHO-015** | Interfaz Gráfica / Prototipo Cliente Móvil | Primer frontend visual interactivo para volteo de cartas | Alta | WHO-004, DEC-012 | `PROPUESTO` | **Sí** |
+| **WHO-014** | Servicio de Ensamblaje y Generación de Cartas (`Capture → Card`) | Implementación del servicio de dominio `CardGeneratorService` que emite una `Card` formal desde una `Capture` validada | Alta | WHO-013 | `PROPUESTO` | **Sí** |
+| **WHO-015** | Fundación del Cliente Android y Decisión Tecnológica Móvil | Configuración del proyecto base Android y formalización de la tecnología de interfaz de usuario | Alta | WHO-014, DEC-012 | `PROPUESTO` | **Sí** |
+| **WHO-016** | Servicio de Identificación de Especies (`Observation → IdentificationResult`) | Implementación de `IdentificationService` mediante motor local ligero/on-device | Alta | WHO-015, DEC-009 | `PROPUESTO` | **Sí** |
+| **WHO-017** | Motor de Persistencia Local y Colección (`Collection Album`) | Almacenamiento local para inventario, capturas y visualización de cartas en el álbum del usuario | Media | WHO-016 | `PROPUESTO` | **Sí** |
+| **WHO-018** | Integración del Mínimo Funcional Android (End-to-End Core Loop) | Cierre integral del flujo de 11 pasos ejecutable en dispositivo o emulador Android | Alta | WHO-017 | `PROPUESTO` | **Sí** |
 
 > ⚠️ **Aviso de Gobernanza:**  
 > Que un objetivo aparezca en esta tabla **NO constituye autorización para su desarrollo**.  
@@ -163,6 +211,7 @@ Ordenados por prioridad técnica y estratégica.
 | **WHO-012B** | `APROBADO` | `VALIDADO`| `COMPLETADO` | `APPROVED_COMPLETE` |
 | **WHO-012C** | `APROBADO` | `VALIDADO`| `COMPLETADO` | `APPROVED_COMPLETE` |
 | **WHO-012D** | `APROBADO` | `VALIDADO`| `COMPLETADO` | `APPROVED_COMPLETE` |
+| **WHO-013** | `APROBADO` | `VALIDADO`| `COMPLETADO` | `APPROVED_COMPLETE` |
 
 > **Regla:** El Developer no puede auto-aprobar objetivos. La autorización debe ser explícita por parte del Director Creativo y estructurada por el Project Manager.
 
@@ -174,16 +223,16 @@ Vista operativa de las decisiones pendientes documentadas oficialmente en [docs/
 
 | ID | Decisión | Impacto | ¿Bloquea desarrollo inmediato? | Estado Oficial |
 | :--- | :--- | :---: | :---: | :---: |
-| **DEC-009** | Motor definitivo de identificación visual (on-device vs. API vs. nube) | Alto | Sí (bloquea WHO-013) | `PENDING` |
+| **DEC-009** | Motor definitivo de identificación visual (on-device vs. API vs. nube) | Alto | Sí (bloquea WHO-016) | `PENDING` |
 | **DEC-011** | Convención definitiva de identificadores `card_id` y códigos de colección | Medio | No (temporal en v0.1) | `PENDING` |
-| **DEC-012** | Tecnología cliente definitiva para la app de usuario (Flutter / nativo) | Alto | Sí (bloquea WHO-015) | `PENDING` |
-| **DEC-020** | Diseño definitivo del esquema JSON de datos (`Animal` y `Card`) | Alto | Sí (requerido para WHO-005B-B)| `PENDING` |
-| **DEC-021** | Umbrales definitivos de confianza en la identificación por visión/cámara | Medio | Sí (para WHO-013) | `PENDING` |
-| **DEC-022** | Algoritmo matemático y curvas de probabilidad para rareza dinámica | Alto | No (en fase documental) | `PENDING` |
-| **DEC-023** | Reglas anti-abuso para validación de observaciones y población | Alto | No (en fase documental) | `PENDING` |
-| **DEC-024** | Sistema definitivo de autenticación y verificación de cartas | Medio | No (en fase documental) | `PENDING` |
-| **DEC-025** | Estrategia de compatibilidad y migración entre versiones del esquema JSON | Medio | No (definible en WHO-005B-B)| `PENDING` |
-| **DEC-037** | Sistema definitivo de progresión, niveles y mecánicas de `rank` | Medio | No (en fase documental) | `PENDING` |
+| **DEC-012** | Tecnología cliente definitiva para la app de usuario (Android nativo / Flutter) | Alto | Sí (bloquea WHO-015) | `PENDING` |
+| **DEC-020** | Diseño definitivo del esquema JSON de datos (`Animal` y `Card`) | Alto | No (absorbido en dominio) | `PENDING` |
+| **DEC-021** | Umbrales definitivos de confianza en la identificación por visión/cámara | Medio | Sí (para WHO-016) | `PENDING` |
+| **DEC-022** | Algoritmo matemático y curvas de probabilidad para rareza dinámica | Alto | No (Fase 4 Ecosystem) | `PENDING` |
+| **DEC-023** | Reglas anti-abuso para validación de observaciones y población | Alto | No (Fase 4 Ecosystem) | `PENDING` |
+| **DEC-024** | Sistema definitivo de autenticación y verificación de cartas | Medio | No (Fase 4 Ecosystem) | `PENDING` |
+| **DEC-025** | Estrategia de compatibilidad y migración entre versiones del esquema JSON | Medio | No (en fase documental) | `PENDING` |
+| **DEC-037** | Sistema definitivo de progresión, niveles y mecánicas de `rank` | Medio | No (Fase 4 Ecosystem) | `PENDING` |
 
 ---
 
@@ -274,6 +323,7 @@ Para prevenir el desvío del alcance (*scope creep*) y asegurar una base sólida
 | **2026-09-07** | Resultado de Identificación Zoológica (WHO-012B) | Creación de `IdentificationResult` separando confianza y aceptación. | Developer (`WHO-012B`) |
 | **2026-09-07** | Decisión sobre Identificación (WHO-012C) | Creación de `IdentificationDecision` formalizando decisión explícita. | Developer (`WHO-012C`) |
 | **2026-09-07** | Puente Decisión a Captura (WHO-012D) | Formalización del puente IdentificationDecision ACCEPTED a Capture (DEC-046). | Developer (`WHO-012D`) |
+| **2026-09-07** | Consolidación de Arquitectura y Mínimo Funcional (WHO-013) | Auditoría maestra de objetivos, formalización del Mínimo Funcional Android (11 pasos) y Roadmap en 5 fases (DEC-047). | Developer (`WHO-013`) |
 
 ---
 

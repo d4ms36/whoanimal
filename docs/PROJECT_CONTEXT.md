@@ -2,27 +2,32 @@
 
 **Documento:** `docs/PROJECT_CONTEXT.md`  
 **Propósito:** Memoria y contexto fundamental de WHO Animal para asegurar coherencia transversal a lo largo de todo el ciclo de vida del producto.  
-**Última actualización:** 2026-09-06 (Consolidación de directrices WHO-005A)
+**Última actualización:** 2026-09-07 (Consolidación de Arquitectura, Mínimo Funcional y Roadmap WHO-013 / DEC-047)
 
 ---
 
 ## 1. ¿Qué es WHO Animal?
 
-**WHO Animal** trasciende el concepto de una simple herramienta utilitaria de escaneo o identificación visual de especies. 
+**WHO Animal** es una **aplicación móvil** centrada en el **descubrimiento, identificación, aprendizaje y coleccionismo de fauna mediante cartas coleccionables**.
 
-La visión central es construir una **experiencia integral de descubrimiento, coleccionismo y aprendizaje sobre el reino animal**, articulada a través de un sistema inmersivo de cartas coleccionables.
+Trasciende el concepto de una simple herramienta utilitaria de escaneo o identificación visual de especies. La identificación mediante cámara o imagen es una puerta de entrada al producto, no el producto completo.
 
-La identificación mediante cámara o imagen no es el destino final, sino la **puerta de entrada** a un ciclo continuo de asombro y conocimiento:
+El ciclo conceptual oficial se estructura como:
 
-```mermaid
-flowchart TD
-    A[📷 IDENTIFICAR] --> B[✨ DESCUBRIR]
-    B --> C[🃏 OBTENER CARTA]
-    C --> D[🔬 EXPLORAR INFORMACIÓN]
-    D --> E[💭 ESCRIBIR HISTORIA PERSONAL (LORE)]
-    E --> F[📚 COLECCIONAR]
-    F --> G[🗺️ SEGUIR DESCUBRIENDO]
-    G --> A
+```text
+IDENTIFICAR
+    ↓
+DESCUBRIR
+    ↓
+OBTENER CARTA
+    ↓
+EXPLORAR INFORMACIÓN
+    ↓
+ESCRIBIR LORE
+    ↓
+COLECCIONAR
+    ↓
+SEGUIR DESCUBRIENDO
 ```
 
 ---
@@ -74,7 +79,36 @@ Toda información asociada a un animal o a una carta en WHO Animal pertenece con
 
 ## 4. Diferenciación Ontológica: Observation vs. IdentificationResult vs. IdentificationDecision vs. Animal vs. Capture vs. Carta
 
-> **Observation → IdentificationResult → IdentificationDecision (ACCEPTED) → Capture ≠ Card (Animal = referencia zoológica)**
+> **Flujo Ontológico de Ejecución:**
+> 
+> ```text
+> Android
+>    ↓
+> Capture Image
+>    ↓
+> Observation
+>    ↓
+> IdentificationService
+>    ↓
+> IdentificationResult
+>    ↓
+> IdentificationDecision (ACCEPTED)
+>    ↓
+> Capture
+>    ↓
+> Card
+>    ↓
+> Collection
+> ```
+
+### Reglas de Separación Ontológica Estricta:
+```text
+Observation ≠ IdentificationResult
+IdentificationResult ≠ IdentificationDecision
+Capture ≠ Card
+Animal ≠ Capture
+Animal ≠ Card
+```
 
 * **Observation (`Observation`):** Representa una observación fotográfica efímera y pendiente de confirmación. Actúa como puente temporal entre una foto y una `Capture`. Su existencia **no** afecta a `AnimalProfile`, no acuña `Card` ni formaliza una `Capture` hasta ser aceptada explícitamente (DEC-043).
 * **IdentificationResult (`IdentificationResult`):** Representa el resultado en bruto emitido por un motor de identificación sobre una `Observation` (DEC-044). Contiene la confianza (confidence) pero **no** representa la decisión de aceptación. Es una estructura de datos inmutable generada durante el procesamiento.
@@ -82,6 +116,26 @@ Toda información asociada a un animal o a una carta en WHO Animal pertenece con
 * **Animal (`AnimalProfile`):** Representa la entidad biológica y taxonómica objetiva de la especie en la base de conocimiento de WHO Animal. Describe rasgos universales de la especie (taxonomía, hábitat, dieta, distribución física, esperanza de vida, tamaño, ciclo de actividad). Esta información se considera permanente y estática (ver **DEC-042**). Puede existir en el sistema sin necesidad de haber sido emitido aún en una carta para ningún usuario. **No contiene atributos particulares de individuos observados (ej. `sex ∉ Animal`)**.
 * **Captura / Espécimen (`Capture / Specimen`):** Representa el registro concreto de un individuo animal observado, creado estrictamente a partir de una `IdentificationDecision` en estado `ACCEPTED` (DEC-046). Contiene de forma inmutable `capture_id`, `animal_id` (proveniente de `selected_animal_id`) e `identification_id`. **Aquí reside el sexo biológico del ejemplar observado (`sex ∈ Capture`, valores: `MALE`, `FEMALE`, `UNKNOWN`; ver DEC-036). Se trata de un dato opcional y nullable sin valor por defecto (DEC-039), diferenciando la imposibilidad de identificación (`UNKNOWN`) de la ausencia de dato (`null`)**. No genera automáticamente `Card`.
 * **Carta (`AnimalCard`):** Representa un ejemplar coleccionable individual, acuñado y emitido en un momento histórico concreto para el álbum de un jugador, vinculado a un espécimen animal pero dotado de propiedades de colección, generación, rareza y autenticación propias. Puede proyectar datos de la captura (como el sexo del individuo observado) en su visualización, pero la fuente primaria de verdad es la captura.
+
+---
+
+## 4.1. Mínimo Funcional (Minimum Functional Product)
+
+El **Mínimo Funcional** establece el objetivo técnico y funcional que debe alcanzarse antes de introducir funcionalidades avanzadas de ecosistema. Se construye sobre la plataforma **Android** y demuestra de extremo a extremo el ciclo de 11 pasos:
+
+```text
+1. Abrir aplicación Android
+2. Tomar o seleccionar una fotografía
+3. Crear Observation
+4. Ejecutar identificación (IdentificationService)
+5. Obtener IdentificationResult
+6. Mostrar resultado al usuario
+7. Permitir decisión explícita (ACCEPT / REJECT)
+8. Crear Capture cuando la decisión sea ACCEPTED
+9. Generar/producir una Card a partir del flujo correspondiente
+10. Mostrar la Card (Frente y Reverso)
+11. Conservarla en una colección local (Collection)
+```
 
 ---
 
@@ -190,20 +244,23 @@ En alineación estricta con el principio **100% Pet Friendly** y la protección 
 
 ---
 
-## 13. Capacidades Futuras Aprobadas (Extensiones de Fases Posteriores)
+## 13. Capacidades Futuras Estratégicas (Fase 4 — Ecosystem)
 
-Las siguientes capacidades han sido aprobadas a nivel de diseño conceptual para que **la arquitectura actual no cierre las puertas a su evolución**, pero **permanecen estrictamente fuera de la implementación en la Fase 0**:
+Las siguientes 13 capacidades han sido aprobadas a nivel de diseño conceptual para que **la arquitectura actual no cierre las puertas a su evolución**, pero **permanecen estrictamente fuera del Mínimo Funcional**:
 
-### A. Sistema de Enfrentamientos PVP
-* Enfrentamientos lúdicos o duelos de cartas entre usuarios.
-* Concebido como un módulo independiente desacoplado de los perfiles taxonómicos (`Animal`), de la identificación por visión, de la información científica real y del Lore.
-
-### B. Intercambio y Comercio de Cartas (Trading / Transferencia Controlada)
-* Capacidad de traspasar cartas entre usuarios manteniendo intacta e inmutable la identidad histórica (`card_id`, `specimen_number`, generación, rareza original, población de emisión y serial de autenticación).
-
-### C. Cartas con Artwork Único y Red de Ilustradores
-* Los usuarios podrán solicitar un diseño artístico personalizado para una carta específica interactuando directamente desde la app con ilustradores colaboradores asociados.
-* El artwork constituye una capa estética y creativa adicional que **no sustituye ni deforma**: la identidad del animal, la información científica ni los metadatos históricos de la carta.
+1. **Comercio de cartas (Trading):** Transferencia controlada de propiedad entre coleccionistas preservando la inmutabilidad histórica original (`card_id`, `specimen_number`, generación, rareza original, población de emisión y serial de autenticación).
+2. **Sistema de Duelos PVP:** Enfrentamientos lúdicos entre cartas, estrictamente desacoplados del conocimiento taxonómico y del core loop.
+3. **Cuentas avanzadas / multiusuario:** Autenticación remota, perfiles de usuario y gestión segura de sesiones.
+4. **Infraestructura Cloud:** Backend distribuido y APIs escalables para soporte de red.
+5. **Economía del ecosistema:** Sistema balanceado de progresión y recompensas in-app.
+6. **Marketplace:** Mercado in-app para intercambio y adquisición controlada de cartas.
+7. **Sistema completo de rarezas:** Implementación del algoritmo matemático y curvas de emisión dinámica (DEC-022-PENDING).
+8. **Sistema / Red de ilustradores colaboradores:** Encargos artísticos personalizados gestionados in-app asociados a cartas específicas.
+9. **Sincronización multidispositivo:** Persistencia remota y respaldo en la nube del inventario y álbumes.
+10. **Publicación pública en Google Play:** Despliegue comercial global de la aplicación.
+11. **Expansión progresiva del catálogo zoológico hacia cobertura global:** Principio de crecimiento continuo y responsable de la base zoológica, sin prometer "todas las especies" de forma inmediata ni ficticia.
+12. **Evolución continua del sistema de IA de identificación:** Mejora progresiva de precisión y modelos optimizados, sin falsas garantías de "IA perfecta".
+13. **Gamificación completa:** Progresión profunda de maestría, medallas por biomas y dinámicas avanzadas de `rank` (DEC-037-PENDING).
 
 ---
 

@@ -568,6 +568,31 @@ Aprobado por: [Director Creativo / Project Manager / Consenso]
 
 ---
 
+### DEC-047: Consolidación de Arquitectura, Definición del Mínimo Funcional y Roadmap por Fases
+* **Tema:** Arquitectura de Producto y Planificación Estratégica (WHO-013)
+* **Fecha:** 2026-09-07
+* **Estado:** `APPROVED`
+* **Decisión:** 
+  1. Se define formalmente **WHO Animal** como una aplicación móvil centrada en el descubrimiento, identificación, aprendizaje y coleccionismo de fauna mediante cartas coleccionables. La identificación mediante cámara o imagen es la puerta de entrada, no el destino final.
+  2. Se consagra el **Mínimo Funcional** sobre la plataforma Android como el flujo completo de 11 pasos:
+     `Abrir App → Foto → Observation → Identificación → IdentificationResult → Mostrar al Usuario → Decisión (ACCEPT/REJECT) → Capture (si ACCEPTED) → Card → Mostrar Card → Colección Local`.
+  3. Se reestructura oficialmente el Roadmap en 5 fases estancas:
+     * `PHASE 0 — FOUNDATION` (Arquitectura, dominio, catálogo inicial, puente ontológico completo hasta Capture; completada con WHO-013).
+     * `PHASE 1 — MINIMUM FUNCTIONAL` (Construcción del primer producto funcional Android con el core loop Foto → Colección).
+     * `PHASE 2 — BETA` (Validación con usuarios reales, calibración de IA, rendimiento y Google Play Internal Testing).
+     * `PHASE 3 — RELEASE` (Lanzamiento público comercial en Google Play Store).
+     * `PHASE 4 — ECOSYSTEM` (Módulo avanzado de capacidades: comercio, PVP, cuentas avanzadas, cloud, marketplace, ilustradores, gamificación profunda, etc.).
+  4. Se aíslan las 13 capacidades estratégicas futuras para que la arquitectura las admita sin que constituyan bloqueos o requisitos del Mínimo Funcional.
+  5. Se adoptan como principios obligatorios de honestidad técnica:
+     * *"Evolución continua del sistema de identificación mediante IA y mejora progresiva de precisión"* (prohibido prometer "IA perfecta").
+     * *"Expansión progresiva del catálogo zoológico hacia una cobertura global objetivo"* (prohibido prometer "todas las especies" de forma inmediata).
+* **Justificación / Principios:**
+  * Garantizar trazabilidad y foco operativo absoluto, erradicando el desvío de alcance (*scope creep*).
+  * Resolver colisiones de numeración histórica y fijar una secuencia estricta para la Fase 1.
+* **Aprobado por:** Director Creativo / Project Manager
+
+---
+
 ### DEC-010: Estilo y Universo Mitológico del Lore (SUPERSEDED)
 * **Tema:** Diseño Narrativo
 * **Estado:** `SUPERSEDED`
