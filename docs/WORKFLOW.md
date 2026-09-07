@@ -287,3 +287,10 @@ ative_regions).
 * **Estado:** `APPROVED_COMPLETE`
 * **Commit:** `6a64c17` (*feat(domain): generate cards from captures*)
 * **Versión:** `0.0.1`
+
+
+### WHO-015: Fundación del Cliente Android y Decisión Tecnológica Móvil
+* **Propósito:** Establecer la base técnica ejecutable del cliente móvil Android para Alpha 0.1, adoptando formalmente Android Nativo con Kotlin (2.0+), Jetpack Compose, Material 3 y Navigation Compose (DEC-049), implementando navegación centralizada (Splash, Home, Capture, Collection), contratos de frontera de dominio desacoplados (`DomainContracts`, `DomainBoundaries`), suite de tests unitarios y configuración de build reproducible con Gradle 8.9.
+* **Estado:** `APPROVED_COMPLETE`
+* **Commit:** (Pendiente de commit) (*feat(android): establish Android application foundation*)
+* **Versión:** `0.0.1`

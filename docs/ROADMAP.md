@@ -159,7 +159,7 @@ Trading, PVP, Marketplace, economía completa, Cloud/backend, sincronización mu
 ### Secuencia Inicial Propuesta (Construcción de Alpha):
 * **`WHO-014` — Servicio de Ensamblaje y Generación de Cartas (`Capture → Card`)** `[COMPLETADO]`
   * Implementación del servicio de dominio `CardGeneratorService` que emite una `Card` formal a partir de una `Capture` validada.
-* **`WHO-015` — Fundación del Cliente Android y Decisión Tecnológica Móvil** `[PROPUESTO]`
+* **`WHO-015` — Fundación del Cliente Android y Decisión Tecnológica Móvil** `[COMPLETADO]`
   * Configuración del proyecto base Android y formalización de la tecnología de interfaz de usuario.
 * **`WHO-016` — Servicio de Identificación de Especies (`Observation → IdentificationResult`)** `[PROPUESTO]`
   * Implementación del servicio `IdentificationService` mediante motor local ligero/on-device.

@@ -15,11 +15,11 @@
 | **Fase actual** | Alpha (Foundation Completa / Preparación de Fase 1 Alpha) |
 | **Versión actual** | `0.0.1` |
 | **Estado** | Foundation Completa / Definición Alpha 0.1 Consolidada |
-| **Objetivo activo** | Ninguno (Ciclo WHO-014 completado; listo para autorización de WHO-015) |
-| **Último objetivo completado** | `WHO-014` — Servicio de Ensamblaje y Generación de Cartas (`Capture → Card`) |
-| **Próximo objetivo propuesto** | `WHO-015` — Fundación del Cliente Android y Decisión Tecnológica Móvil |
+| **Objetivo activo** | Ninguno (Ciclo WHO-015 completado; listo para autorización de WHO-016) |
+| **Último objetivo completado** | `WHO-015` — Fundación del Cliente Android y Decisión Tecnológica Móvil |
+| **Próximo objetivo propuesto** | `WHO-016` — Servicio de Identificación de Especies (`Observation → IdentificationResult`) |
 | **Bloqueos** | Ninguno |
-| **Decisiones pendientes** | `DEC-009` a `DEC-012`, `DEC-021` a `DEC-025`, `DEC-037-PENDING` |
+| **Decisiones pendientes** | `DEC-009`, `DEC-011`, `DEC-021` a `DEC-025`, `DEC-037-PENDING` |
 | **Última actualización** | 2026-09-07 |
 
 ---
@@ -179,7 +179,7 @@ HOME → STORAGE → CONTAINER → CARD → VIEW / EDIT / DELETE
 | ID | Nombre | Propósito | Prioridad | Dependencias | Estado | Req. Aprobación Director |
 | :--- | :--- | :--- | :---: | :--- | :---: | :---: |
 | **WHO-014** | Servicio de Ensamblaje y Generación de Cartas (`Capture → Card`) | Implementación del servicio de dominio `CardGeneratorService` que emite una `Card` formal desde una `Capture` validada | Alta | WHO-013.1 | `COMPLETADO` | **Sí** |
-| **WHO-015** | Fundación del Cliente Android y Decisión Tecnológica Móvil | Configuración del proyecto base Android y formalización de la tecnología de interfaz de usuario | Alta | WHO-014, DEC-012 | `PROPUESTO` | **Sí** |
+| **WHO-015** | Fundación del Cliente Android y Decisión Tecnológica Móvil | Configuración del proyecto base Android y formalización de la tecnología de interfaz de usuario | Alta | WHO-014, DEC-012 | `COMPLETADO` | **Sí** |
 | **WHO-016** | Servicio de Identificación de Especies (`Observation → IdentificationResult`) | Implementación de `IdentificationService` mediante motor local ligero/on-device | Alta | WHO-015, DEC-009 | `PROPUESTO` | **Sí** |
 | **WHO-017** | Motor de Persistencia Local y Colección (`Collection Album`) | Almacenamiento local para inventario, capturas y visualización de cartas en el álbum del usuario (10 containers x 30 espacios) | Media | WHO-016 | `PROPUESTO` | **Sí** |
 | **WHO-018** | Integración del Mínimo Funcional Android (End-to-End Core Loop) | Cierre integral del flujo de 11 pasos ejecutable en dispositivo o emulador Android | Alta | WHO-017 | `PROPUESTO` | **Sí** |
@@ -229,6 +229,7 @@ HOME → STORAGE → CONTAINER → CARD → VIEW / EDIT / DELETE
 | **WHO-013** | `APROBADO` | `VALIDADO`| `COMPLETADO` | `APPROVED_COMPLETE` |
 | **WHO-013.1** | `APROBADO` | `VALIDADO`| `COMPLETADO` | `APPROVED_COMPLETE` |
 | **WHO-014** | `APROBADO` | `VALIDADO`| `COMPLETADO` | `APPROVED_COMPLETE` |
+| **WHO-015** | `APROBADO` | `VALIDADO`| `COMPLETADO` | `APPROVED_COMPLETE` |
 
 > **Regla:** El Developer no puede auto-aprobar objetivos. La autorización debe ser explícita por parte del Director Creativo y estructurada por el Project Manager.
 
@@ -242,7 +243,7 @@ Vista operativa de las decisiones pendientes documentadas oficialmente en [docs/
 | :--- | :--- | :---: | :---: | :---: |
 | **DEC-009** | Motor definitivo de identificación visual (on-device vs. API vs. nube) | Alto | Sí (bloquea WHO-016) | `PENDING` |
 | **DEC-011** | Convención definitiva de identificadores `card_id` y códigos de colección | Medio | No (temporal en v0.1) | `PENDING` |
-| **DEC-012** | Tecnología cliente definitiva para la app de usuario (Android nativo / Flutter) | Alto | Sí (bloquea WHO-015) | `PENDING` |
+| **DEC-012** | Tecnología cliente definitiva para la app de usuario (Android nativo / Flutter) | Alto | No (resuelto por DEC-049) | `RESOLVED` |
 | **DEC-020** | Diseño definitivo del esquema JSON de datos (`Animal` y `Card`) | Alto | No (absorbido en dominio) | `PENDING` |
 | **DEC-021** | Umbrales definitivos de confianza en la identificación por visión/cámara | Medio | Sí (para WHO-016) | `PENDING` |
 | **DEC-022** | Algoritmo matemático y curvas de probabilidad para rareza dinámica | Alto | No (Fase 4 Ecosystem) | `PENDING` |
@@ -350,6 +351,7 @@ Para prevenir el desvío del alcance (*scope creep*) y asegurar la entrega de un
 | **2026-09-07** | Consolidación de Arquitectura y Mínimo Funcional (WHO-013) | Auditoría maestra de objetivos, formalización del Mínimo Funcional Android (11 pasos) y Roadmap en 5 fases (DEC-047). | Developer (`WHO-013`) |
 | **2026-09-07** | Formalización de Alpha y Horizontes Estratégicos (WHO-013.1) | Formalización canónica de Alpha 0.1, Golden Path, delimitación de Storage (10x30=300), exclusiones y 4 horizontes estratégicos (DEC-048). | Developer (`WHO-013.1`) |
 | **2026-09-07** | Servicio de Ensamblaje y Generación de Cartas (WHO-014) | Implementación del servicio de dominio `CardGeneratorService` (Capture → AnimalCard), protección ontológica y 15 tests específicos. | Developer (`WHO-014`) |
+| **2026-09-07** | Fundación del Cliente Android (WHO-015) | Configuración de Android nativo (Kotlin, Jetpack Compose, Material 3, Navigation Compose, contratos de frontera de dominio, tests y build exitoso; DEC-049). | Developer (`WHO-015`) |
 
 ---
 

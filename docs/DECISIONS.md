@@ -635,6 +635,28 @@ Aprobado por: [Director Creativo / Project Manager / Consenso]
 
 ---
 
+### DEC-049: Fundación de la Aplicación Android Nativa (Kotlin + Jetpack Compose)
+* **Fecha:** 2026-09-07
+* **Estado:** `APROBADA`
+* **Objetivo:** `WHO-015`
+* **Tema:** Arquitectura Móvil / Frontend
+* **Resolución:**
+  1. Se adopta oficialmente **Android Nativo** con **Kotlin (2.0+)**, **Jetpack Compose**, **Material 3** y **Navigation Compose** como la tecnología cliente definitiva para Alpha 0.1 de WHO Animal.
+  2. Se resuelve formalmente la propuesta abierta en `DEC-012-PENDING`, sustituyéndola por una implementación nativa moderna para garantizar rendimiento óptimo en la renderización de cartas, micro-interacciones de dos caras (flip), e integración directa con las APIs de cámara e inferencia local de visión.
+  3. Se establece una arquitectura desacoplada y limpia:
+     * `UI`: Activity, Jetpack Compose, componentes visuales, temas (Material 3) y navegación centralizada (`AppNavHost`, `NavDestination`: `Splash`, `Home`, `Capture`, `Collection`).
+     * `Domain Boundary`: Contratos inmutables de datos (`AnimalProfileContract`, `ObservationContract`, `IdentificationResultContract`, `IdentificationDecisionContract`, `CaptureContract`, `AnimalCardContract`) e interfaces de servicio (`IdentificationServiceBoundary`, `CollectionStorageBoundary`, `CardGeneratorBoundary`).
+  4. Se preserva rigurosamente la ontología estricta del proyecto:
+     * `Observation ≠ IdentificationResult ≠ IdentificationDecision ≠ Capture ≠ AnimalCard`.
+     * `Capture != Card`: La captura es inmutable y no se contamina con campos de carta.
+     * `Capture.sex` restringido a `{ MALE, FEMALE, UNKNOWN }` (excluido de `Animal`).
+     * `auth_serial` / `serial` alfanumérico limpio sin coordenadas GPS ni datos privados.
+  5. Las capacidades de cámara real (CameraX), motor visual (IA on-device), persistencia local (Room/SQLite) y generación desde Android quedan estrictamente delimitadas para sus respectivos objetivos posteriores (`WHO-016`, `WHO-017` y `WHO-018`).
+* **Justificación / Principios:** Máximo rendimiento visual, facilidad de integración con librerías nativas de machine learning y hardware de cámara, adherencia al diseño declarativo moderno de Android, y estricto respeto a las fronteras arquitectónicas de dominio.
+* **Aprobado por:** Director Creativo / Project Manager
+
+---
+
 ### DEC-010: Estilo y Universo Mitológico del Lore (SUPERSEDED)
 * **Tema:** Diseño Narrativo
 * **Estado:** `SUPERSEDED`
@@ -663,11 +685,10 @@ Aprobado por: [Director Creativo / Project Manager / Consenso]
 
 ---
 
-### DEC-012-PENDING: Tecnología Cliente Definitiva para la App de Usuario
+### DEC-012: Tecnología Cliente Definitiva para la App de Usuario (RESOLVED)
 * **Tema:** Frontend Móvil
-* **Estado:** `PENDING`
-* **Propuesta inicial:** Flutter para aplicación móvil multiplataforma (Android / iOS) consumiendo los servicios y modelos definidos en Python.
-* **Decisión requerida de:** Director Creativo / Project Manager
+* **Estado:** `RESOLVED` (Resuelto por `DEC-049`)
+* **Resolución:** Sustituida formalmente por `DEC-049`. Se adopta Android Nativo con Kotlin (2.0+), Jetpack Compose, Material 3 y Navigation Compose para el cliente oficial de WHO Animal.
 
 ---
 

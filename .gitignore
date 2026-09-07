@@ -72,3 +72,13 @@ desktop.ini
 .env.*.local
 secrets/
 *.log
+
+# Android build and environment files
+.gradle/
+android/.gradle/
+**/build/
+local.properties
+*.apk
+*.aab
+*.ap_
+*.dex
