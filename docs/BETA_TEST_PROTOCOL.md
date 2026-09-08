@@ -20,7 +20,13 @@ Validar la estabilidad, usabilidad y correcto funcionamiento del Core Loop de WH
 Consultar la matriz exhaustiva en [MANUAL_TEST_MATRIX.md](MANUAL_TEST_MATRIX.md). Todo tester deberá completar esta matriz en al menos un dispositivo físico.
 
 ## 5. Registro de Incidencias
-Todo crash, comportamiento inesperado o regresión funcional debe ser documentado siguiendo la plantilla oficial [ISSUE_TEMPLATE.md](ISSUE_TEMPLATE.md) y clasificado adecuadamente según su prioridad (Blocker, High, Medium, Low).
+Todo tester (incluso sin experiencia técnica) debe reportar cualquier comportamiento inesperado o regresión funcional documentándolo con la plantilla oficial [ISSUE_TEMPLATE.md](ISSUE_TEMPLATE.md). Para ello:
+1. Indica **qué hiciste** (Pasos realizados).
+2. Indica **qué observaste** (Resultado observado).
+3. Indica **qué debería ocurrir** (Resultado esperado según el caso de prueba).
+4. Clasifica adecuadamente según su prioridad (Blocker, High, Medium, Low) y categoría.
+
+No es necesario el uso de herramientas técnicas (como Android Studio, terminal o `adb`). Tu descripción clara de los pasos y capturas de pantalla/video serán la evidencia principal.
 
 ## 6. Criterios de Aceptación (Release to Production)
 Para que esta fase Beta se considere exitosa y apruebe el paso a Producción:
