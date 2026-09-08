@@ -150,21 +150,21 @@ Auditoría integral oficial realizada en **WHO-013** y consolidada en **WHO-013.
 ┌─────────────────────────────────────────────────────────────────────────────┐
 │                           OBJETIVO ACTIVO ACTUAL                            │
 ├──────────────────┬──────────────────────────────────────────────────────────┤
-│ ID               │ Ninguno                                                  │
-│ Nombre           │ N/A                                                      │
-│ Propósito        │ N/A                                                      │
-│ Estado           │ N/A                                                      │
-│ Versión Asociada │ N/A                                                      │
-│ Requisitos       │ N/A                                                      │
-│ Responsable      │ N/A                                                      │
+│ ID               │ WHO-028                                                  │
+│ Nombre           │ Beta UI Visual Redesign & Theming                        │
+│ Propósito        │ Rediseño visual de la Beta usando paleta de colores y temas semánticos │
+│ Estado           │ EN CURSO                                                 │
+│ Versión Asociada │ v0.2.0-beta.1                                            │
+│ Requisitos       │ Mejorar UX/UI, implementar modo oscuro/claro, preparar espacios para Ads │
+│ Responsable      │ Developer                                                │
 └──────────────────┴──────────────────────────────────────────────────────────┘
 ```
 
-* **Criterios de Aceptación:** N/A
-* **Archivos Afectados:** N/A
-* **Dependencias:** N/A
+* **Criterios de Aceptación:** Aplicación de nueva paleta de colores, implementación de tema semántico para modo claro y oscuro, mejora de jerarquía de botones, separación visual, preparación de `AdBannerSlot`.
+* **Archivos Afectados:** Componentes UI en Jetpack Compose, Color.kt, Theme.kt.
+* **Dependencias:** WHO-027E completado.
 * **Bloqueos:** Ninguno.
-* **Resultado Esperado:** Esperando aprobación formal del Director o Project Manager para iniciar un nuevo objetivo.
+* **Resultado Esperado:** Interfaz visualmente renovada y coherente con las directrices de diseño compartidas.
 
 ---
 
@@ -209,6 +209,7 @@ HOME → STORAGE → CONTAINER → CARD → VIEW / FLIP / BACK
 | **WHO-026** | Pipeline de Firma de Release y Google Play Internal Testing | Keystore de release, optimización R8/ProGuard y preparación del paquete de distribución interna `v0.2.0-beta.1` (versionCode 3) | Alta | WHO-025 | `COMPLETADO` | **Sí** |
 | **WHO-027** | Beta Validation Protocol & Field Testing | Protocolo de test Beta (Casos manuales, compatibilidad, reporte de bugs, smoke test) para validar en dispositivos físicos la estabilidad de `v0.2.0-beta.1` | Alta | WHO-026 | `COMPLETADO` | **Sí** |
 | **WHO-027E**| Bootstrap Admin Beta & Emulator Docs | Credencial inicial admin/1234 para testeo (SHA-256) y documentación oficial del entorno Android Emulator | Alta | WHO-027 | `COMPLETADO` | **Sí** |
+| **WHO-028** | Beta UI Visual Redesign & Theming | Rediseño visual de la interfaz de usuario de Beta utilizando un sistema semántico de temas (Light/Dark) y adaptación de los componentes y espacios. | Alta | WHO-027E | `EN CURSO` | **Sí** |
 
 ### 5.1 Especificación Formal del Próximo Objetivo: Pendiente
 
@@ -293,6 +294,7 @@ HOME → STORAGE → CONTAINER → CARD → VIEW / FLIP / BACK
 | **WHO-026** | `APROBADO` | `VALIDADO` | `COMPLETADO` | `APPROVED_COMPLETE` |
 | **WHO-027** | `APROBADO` | `VALIDADO` | `COMPLETADO` | `APPROVED_COMPLETE` |
 | **WHO-027E**| `APROBADO` | `VALIDADO` | `COMPLETADO` | `APPROVED_COMPLETE` |
+| **WHO-028** | `APROBADO` | `VALIDADO` | `EN CURSO`   | `APPROVED_IN_PROGRESS` |
 
 > **Regla:** El Developer no puede auto-aprobar objetivos. La autorización debe ser explícita por parte del Director Creativo y estructurada por el Project Manager.
 

@@ -44,9 +44,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.res.stringResource
 import com.whoanimal.app.R
-import com.whoanimal.app.ui.theme.EmeraldSecondary
-import com.whoanimal.app.ui.theme.ForestGreenPrimary
-import com.whoanimal.app.ui.theme.SageAccent
 
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -83,13 +80,13 @@ fun HomeScreen(
                         Box(
                             modifier = Modifier
                                 .size(34.dp)
-                                .background(ForestGreenPrimary.copy(alpha = 0.15f), CircleShape),
+                                .background(MaterialTheme.colorScheme.primary.copy(alpha = 0.15f), CircleShape),
                             contentAlignment = Alignment.Center
                         ) {
                             Icon(
                                 imageVector = Icons.Default.Pets,
                                 contentDescription = null,
-                                tint = ForestGreenPrimary,
+                                tint = MaterialTheme.colorScheme.primary,
                                 modifier = Modifier.size(20.dp)
                             )
                         }
@@ -120,7 +117,7 @@ fun HomeScreen(
             // Hero Card de Bienvenida
             Card(
                 colors = CardDefaults.cardColors(
-                    containerColor = ForestGreenPrimary
+                    containerColor = MaterialTheme.colorScheme.primary
                 ),
                 shape = RoundedCornerShape(20.dp),
                 modifier = Modifier.fillMaxWidth()
@@ -130,13 +127,13 @@ fun HomeScreen(
                 ) {
                     Surface(
                         shape = RoundedCornerShape(8.dp),
-                        color = SageAccent.copy(alpha = 0.25f)
+                        color = MaterialTheme.colorScheme.tertiary.copy(alpha = 0.25f)
                     ) {
                         Text(
                             text = stringResource(R.string.home_alpha_badge),
                             style = MaterialTheme.typography.labelSmall.copy(
                                 fontWeight = FontWeight.Bold,
-                                color = SageAccent
+                                color = MaterialTheme.colorScheme.tertiary
                             ),
                             modifier = Modifier.padding(horizontal = 10.dp, vertical = 4.dp)
                         )
@@ -146,7 +143,7 @@ fun HomeScreen(
                         Text(
                             text = stringResource(R.string.home_greeting, explorerName ?: ""),
                             style = MaterialTheme.typography.titleMedium.copy(
-                                color = SageAccent,
+                                color = MaterialTheme.colorScheme.tertiary,
                                 fontWeight = FontWeight.SemiBold
                             )
                         )
@@ -188,13 +185,13 @@ fun HomeScreen(
                             modifier = Modifier
                                 .size(48.dp)
                                 .clip(RoundedCornerShape(12.dp))
-                                .background(SageAccent.copy(alpha = 0.2f)),
+                                .background(MaterialTheme.colorScheme.tertiary.copy(alpha = 0.2f)),
                             contentAlignment = Alignment.Center
                         ) {
                             Icon(
                                 imageVector = Icons.Default.CameraAlt,
                                 contentDescription = null,
-                                tint = ForestGreenPrimary,
+                                tint = MaterialTheme.colorScheme.primary,
                                 modifier = Modifier.size(26.dp)
                             )
                         }
@@ -219,7 +216,7 @@ fun HomeScreen(
                         modifier = Modifier.fillMaxWidth(),
                         shape = RoundedCornerShape(12.dp),
                         colors = ButtonDefaults.buttonColors(
-                            containerColor = ForestGreenPrimary
+                            containerColor = MaterialTheme.colorScheme.primary
                         )
                     ) {
                         Text(stringResource(R.string.home_start_capture_action))
@@ -245,13 +242,13 @@ fun HomeScreen(
                             modifier = Modifier
                                 .size(48.dp)
                                 .clip(RoundedCornerShape(12.dp))
-                                .background(EmeraldSecondary.copy(alpha = 0.15f)),
+                                .background(MaterialTheme.colorScheme.secondary.copy(alpha = 0.15f)),
                             contentAlignment = Alignment.Center
                         ) {
                             Icon(
                                 imageVector = Icons.Default.CollectionsBookmark,
                                 contentDescription = null,
-                                tint = EmeraldSecondary,
+                                tint = MaterialTheme.colorScheme.secondary,
                                 modifier = Modifier.size(26.dp)
                             )
                         }
@@ -300,7 +297,7 @@ fun HomeScreen(
                     Icon(
                         imageVector = Icons.Default.Shield,
                         contentDescription = null,
-                        tint = ForestGreenPrimary,
+                        tint = MaterialTheme.colorScheme.primary,
                         modifier = Modifier.size(22.dp)
                     )
                     Spacer(modifier = Modifier.width(10.dp))

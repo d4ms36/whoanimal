@@ -8,29 +8,43 @@ import androidx.compose.material3.dynamicDarkColorScheme
 import androidx.compose.material3.dynamicLightColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 
 private val DarkColorScheme = darkColorScheme(
-    primary = SageAccent,
-    onPrimary = SageOnAccent,
-    secondary = EmeraldSecondary,
-    onSecondary = EmeraldOnSecondary,
-    background = NatureBackgroundDark,
-    surface = NatureSurfaceDark,
-    onBackground = NatureOnBackgroundDark,
-    onSurface = NatureOnSurfaceDark
+    primary = DmcDarkOrangeSpice,
+    onPrimary = DmcWhite,
+    secondary = DmcLightWedgwood,
+    onSecondary = DmcVeryDarkBrownGray,
+    tertiary = DmcVeryLightTerraCotta,
+    onTertiary = DmcVeryDarkBrownGray,
+    background = DmcVeryDarkBrownGray,
+    surface = DmcVeryDarkBrownGray,
+    surfaceVariant = DmcUltraDarkBeigeGray,
+    onBackground = DmcWhite,
+    onSurface = DmcWhite,
+    onSurfaceVariant = DmcWhite,
+    outline = DmcLightGrayGreen,
+    error = DmcErrorDark,
+    onError = DmcVeryDarkBrownGray
 )
 
 private val LightColorScheme = lightColorScheme(
-    primary = ForestGreenPrimary,
-    onPrimary = ForestGreenOnPrimary,
-    secondary = EmeraldSecondary,
-    onSecondary = EmeraldOnSecondary,
-    tertiary = SageAccent,
-    background = NatureBackgroundLight,
-    surface = NatureSurfaceLight,
-    onBackground = NatureOnBackgroundLight,
-    onSurface = NatureOnSurfaceLight
+    primary = DmcDarkOrangeSpice,
+    onPrimary = DmcWhite,
+    secondary = DmcLightWedgwood,
+    onSecondary = DmcWhite,
+    tertiary = DmcUltraDarkBeigeGray,
+    onTertiary = DmcWhite,
+    background = Color(0xFFF9F9F9), // Blanco casi puro, o usar DmcWhite
+    surface = DmcWhite,
+    surfaceVariant = DmcLightGrayGreen.copy(alpha = 0.2f),
+    onBackground = DmcVeryDarkBrownGray,
+    onSurface = DmcVeryDarkBrownGray,
+    onSurfaceVariant = DmcVeryDarkBrownGray,
+    outline = DmcLightGrayGreen,
+    error = DmcErrorRed,
+    onError = DmcWhite
 )
 
 @Composable

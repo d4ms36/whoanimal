@@ -29,7 +29,6 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.whoanimal.app.R
-import com.whoanimal.app.ui.theme.ForestGreenPrimary
 
 /**
  * Pantalla de Bienvenida (Welcome) para la primera apertura en Alpha.
@@ -58,7 +57,7 @@ fun WelcomeScreen(
                 modifier = Modifier
                     .size(108.dp)
                     .background(
-                        color = ForestGreenPrimary.copy(alpha = 0.12f),
+                        color = MaterialTheme.colorScheme.primary.copy(alpha = 0.12f),
                         shape = CircleShape
                     ),
                 contentAlignment = Alignment.Center
@@ -67,7 +66,7 @@ fun WelcomeScreen(
                     imageVector = Icons.Default.Pets,
                     contentDescription = stringResource(R.string.welcome_logo_description),
                     modifier = Modifier.size(60.dp),
-                    tint = ForestGreenPrimary
+                    tint = MaterialTheme.colorScheme.primary
                 )
             }
 
@@ -79,7 +78,7 @@ fun WelcomeScreen(
                     fontWeight = FontWeight.ExtraBold,
                     letterSpacing = 2.5.sp
                 ),
-                color = ForestGreenPrimary,
+                color = MaterialTheme.colorScheme.primary,
                 textAlign = TextAlign.Center
             )
 
@@ -98,7 +97,7 @@ fun WelcomeScreen(
 
             Surface(
                 shape = RoundedCornerShape(16.dp),
-                color = ForestGreenPrimary.copy(alpha = 0.08f),
+                color = MaterialTheme.colorScheme.primary.copy(alpha = 0.08f),
                 modifier = Modifier.padding(horizontal = 16.dp)
             ) {
                 Text(
@@ -106,7 +105,7 @@ fun WelcomeScreen(
                     style = MaterialTheme.typography.labelSmall.copy(
                         fontWeight = FontWeight.Bold
                     ),
-                    color = ForestGreenPrimary,
+                    color = MaterialTheme.colorScheme.primary,
                     modifier = Modifier.padding(horizontal = 14.dp, vertical = 6.dp)
                 )
             }
@@ -132,7 +131,7 @@ fun WelcomeScreen(
                     .height(54.dp),
                 shape = RoundedCornerShape(27.dp),
                 colors = ButtonDefaults.buttonColors(
-                    containerColor = ForestGreenPrimary
+                    containerColor = MaterialTheme.colorScheme.primary
                 )
             ) {
                 Text(

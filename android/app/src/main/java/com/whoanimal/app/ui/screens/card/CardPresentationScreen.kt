@@ -94,10 +94,6 @@ import com.whoanimal.app.R
 import com.whoanimal.app.domain.identification.OfficialStarterCatalog
 import com.whoanimal.app.domain.model.AnimalCardContract
 import com.whoanimal.app.domain.model.AnimalProfileContract
-import com.whoanimal.app.ui.theme.AmberWarning
-import com.whoanimal.app.ui.theme.ForestGreenPrimary
-import com.whoanimal.app.ui.theme.SageAccent
-import com.whoanimal.app.ui.theme.SoftCardBorder
 import java.io.File
 
 enum class CardPresentationMode {
@@ -184,7 +180,7 @@ fun CardPresentationScreen(
                         Icon(
                             imageVector = Icons.Default.FlipCameraAndroid,
                             contentDescription = stringResource(R.string.card_flip_action_description),
-                            tint = ForestGreenPrimary
+                            tint = MaterialTheme.colorScheme.primary
                         )
                     }
                 }
@@ -244,7 +240,7 @@ fun CardPresentationScreen(
                         horizontalAlignment = Alignment.CenterHorizontally,
                         verticalArrangement = Arrangement.Center
                     ) {
-                        CircularProgressIndicator(color = ForestGreenPrimary)
+                        CircularProgressIndicator(color = MaterialTheme.colorScheme.primary)
                         Spacer(modifier = Modifier.height(16.dp))
                         Text(
                             text = stringResource(R.string.card_generating),
@@ -323,13 +319,13 @@ fun CardPresentationScreen(
                                 imageVector = Icons.Default.FlipCameraAndroid,
                                 contentDescription = null,
                                 modifier = Modifier.size(16.dp),
-                                tint = ForestGreenPrimary
+                                tint = MaterialTheme.colorScheme.primary
                             )
                             Spacer(modifier = Modifier.width(6.dp))
                             Text(
                                 text = if (isFlipped) stringResource(R.string.card_hint_reverso) else stringResource(R.string.card_hint_anverso),
                                 style = MaterialTheme.typography.labelSmall.copy(fontWeight = FontWeight.Medium),
-                                color = ForestGreenPrimary
+                                color = MaterialTheme.colorScheme.primary
                             )
                         }
 
@@ -405,7 +401,7 @@ fun CardPresentationScreen(
                 Icon(
                     imageVector = Icons.Default.NaturePeople,
                     contentDescription = null,
-                    tint = ForestGreenPrimary
+                    tint = MaterialTheme.colorScheme.primary
                 )
             },
             title = { Text(stringResource(R.string.card_release_dialog_title)) },
@@ -507,7 +503,7 @@ fun CardPresentationScreen(
                 Icon(
                     imageVector = Icons.Default.Warning,
                     contentDescription = null,
-                    tint = AmberWarning
+                    tint = MaterialTheme.colorScheme.error
                 )
             },
             title = { Text(stringResource(R.string.lore_limit_reached)) },
@@ -551,8 +547,8 @@ fun CardFrontFace(
         modifier = modifier
             .border(
                 width = if (isRare) 2.dp else 1.dp,
-                brush = if (isRare) Brush.linearGradient(listOf(SageAccent, ForestGreenPrimary))
-                else Brush.linearGradient(listOf(SoftCardBorder, SoftCardBorder)),
+                brush = if (isRare) Brush.linearGradient(listOf(MaterialTheme.colorScheme.tertiary, MaterialTheme.colorScheme.primary))
+                else Brush.linearGradient(listOf(MaterialTheme.colorScheme.outline, MaterialTheme.colorScheme.outline)),
                 shape = RoundedCornerShape(20.dp)
             )
             .testTag("card_front_face"),
@@ -574,12 +570,12 @@ fun CardFrontFace(
             ) {
                 Surface(
                     shape = RoundedCornerShape(8.dp),
-                    color = ForestGreenPrimary.copy(alpha = 0.1f)
+                    color = MaterialTheme.colorScheme.primary.copy(alpha = 0.1f)
                 ) {
                     Text(
                         text = "#${card.specimenNumber.toString().padStart(3, '0')}",
                         style = MaterialTheme.typography.labelSmall.copy(fontWeight = FontWeight.Bold),
-                        color = ForestGreenPrimary,
+                        color = MaterialTheme.colorScheme.primary,
                         modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp)
                     )
                 }
@@ -588,7 +584,7 @@ fun CardFrontFace(
                     if (isRare) {
                         Surface(
                             shape = RoundedCornerShape(8.dp),
-                            color = SageAccent.copy(alpha = 0.2f),
+                            color = MaterialTheme.colorScheme.tertiary.copy(alpha = 0.2f),
                             modifier = Modifier.padding(end = 6.dp)
                         ) {
                             Row(
@@ -598,14 +594,14 @@ fun CardFrontFace(
                                 Icon(
                                     imageVector = Icons.Default.AutoAwesome,
                                     contentDescription = null,
-                                    tint = ForestGreenPrimary,
+                                    tint = MaterialTheme.colorScheme.primary,
                                     modifier = Modifier.size(12.dp)
                                 )
                                 Spacer(modifier = Modifier.width(4.dp))
                                 Text(
                                     text = stringResource(R.string.rarity_rare),
                                     style = MaterialTheme.typography.labelSmall.copy(fontWeight = FontWeight.Bold),
-                                    color = ForestGreenPrimary
+                                    color = MaterialTheme.colorScheme.primary
                                 )
                             }
                         }
@@ -645,12 +641,12 @@ fun CardFrontFace(
                     .background(
                         Brush.verticalGradient(
                             listOf(
-                                SageAccent.copy(alpha = 0.2f),
-                                ForestGreenPrimary.copy(alpha = 0.08f)
+                                MaterialTheme.colorScheme.tertiary.copy(alpha = 0.2f),
+                                MaterialTheme.colorScheme.primary.copy(alpha = 0.08f)
                             )
                         )
                     )
-                    .border(1.dp, SoftCardBorder, RoundedCornerShape(14.dp)),
+                    .border(1.dp, MaterialTheme.colorScheme.outline, RoundedCornerShape(14.dp)),
                 contentAlignment = Alignment.Center
             ) {
                 val localBitmap = remember(card.imagePath) {
@@ -684,13 +680,13 @@ fun CardFrontFace(
                             modifier = Modifier
                                 .size(72.dp)
                                 .clip(CircleShape)
-                                .background(SageAccent.copy(alpha = 0.25f)),
+                                .background(MaterialTheme.colorScheme.tertiary.copy(alpha = 0.25f)),
                             contentAlignment = Alignment.Center
                         ) {
                             Icon(
                                 imageVector = Icons.Default.Pets,
                                 contentDescription = null,
-                                tint = ForestGreenPrimary,
+                                tint = MaterialTheme.colorScheme.primary,
                                 modifier = Modifier.size(38.dp)
                             )
                         }
@@ -698,7 +694,7 @@ fun CardFrontFace(
                         Text(
                             text = stringResource(R.string.card_expedition_label),
                             style = MaterialTheme.typography.labelMedium.copy(fontWeight = FontWeight.SemiBold),
-                            color = ForestGreenPrimary
+                            color = MaterialTheme.colorScheme.primary
                         )
                     }
                 }
@@ -712,7 +708,7 @@ fun CardFrontFace(
                     Text(
                         text = taxonomyBreadcrumb,
                         style = MaterialTheme.typography.labelSmall.copy(fontWeight = FontWeight.Medium),
-                        color = ForestGreenPrimary,
+                        color = MaterialTheme.colorScheme.primary,
                         maxLines = 1,
                         overflow = TextOverflow.Ellipsis
                     )
@@ -743,7 +739,7 @@ fun CardFrontFace(
             }
 
             Spacer(modifier = Modifier.height(10.dp))
-            HorizontalDivider(color = SoftCardBorder)
+            HorizontalDivider(color = MaterialTheme.colorScheme.outline)
             Spacer(modifier = Modifier.height(8.dp))
 
             // Footer: Serial de colección visual & Rango
@@ -799,7 +795,7 @@ fun CardBackFace(
 ) {
     Card(
         modifier = modifier
-            .border(1.dp, SoftCardBorder, RoundedCornerShape(20.dp))
+            .border(1.dp, MaterialTheme.colorScheme.outline, RoundedCornerShape(20.dp))
             .testTag("card_back_face"),
         shape = RoundedCornerShape(20.dp),
         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
@@ -822,14 +818,14 @@ fun CardBackFace(
                     Icon(
                         imageVector = Icons.Default.Science,
                         contentDescription = null,
-                        tint = ForestGreenPrimary,
+                        tint = MaterialTheme.colorScheme.primary,
                         modifier = Modifier.size(18.dp)
                     )
                     Spacer(modifier = Modifier.width(6.dp))
                     Text(
                         text = stringResource(R.string.card_biological_sheet_header),
                         style = MaterialTheme.typography.labelMedium.copy(fontWeight = FontWeight.Bold),
-                        color = ForestGreenPrimary
+                        color = MaterialTheme.colorScheme.primary
                     )
                 }
 
@@ -845,8 +841,8 @@ fun CardBackFace(
             // ==========================================
             Surface(
                 shape = RoundedCornerShape(14.dp),
-                color = ForestGreenPrimary.copy(alpha = 0.04f),
-                border = androidx.compose.foundation.BorderStroke(1.dp, ForestGreenPrimary.copy(alpha = 0.12f)),
+                color = MaterialTheme.colorScheme.primary.copy(alpha = 0.04f),
+                border = androidx.compose.foundation.BorderStroke(1.dp, MaterialTheme.colorScheme.primary.copy(alpha = 0.12f)),
                 modifier = Modifier.fillMaxWidth()
             ) {
                 Column(
@@ -856,7 +852,7 @@ fun CardBackFace(
                     Text(
                         text = stringResource(R.string.card_scientific_info_header),
                         style = MaterialTheme.typography.labelSmall.copy(fontWeight = FontWeight.Bold),
-                        color = ForestGreenPrimary
+                        color = MaterialTheme.colorScheme.primary
                     )
 
                     // Taxonomía formal
@@ -905,7 +901,7 @@ fun CardBackFace(
                         Spacer(modifier = Modifier.height(2.dp))
                         Surface(
                             shape = RoundedCornerShape(8.dp),
-                            color = SageAccent.copy(alpha = 0.12f),
+                            color = MaterialTheme.colorScheme.tertiary.copy(alpha = 0.12f),
                             modifier = Modifier.fillMaxWidth()
                         ) {
                             Row(
@@ -915,7 +911,7 @@ fun CardBackFace(
                                 Icon(
                                     imageVector = Icons.Default.Info,
                                     contentDescription = null,
-                                    tint = ForestGreenPrimary,
+                                    tint = MaterialTheme.colorScheme.primary,
                                     modifier = Modifier.size(16.dp)
                                 )
                                 Spacer(modifier = Modifier.width(8.dp))
@@ -933,8 +929,8 @@ fun CardBackFace(
                         Spacer(modifier = Modifier.height(2.dp))
                         Surface(
                             shape = RoundedCornerShape(8.dp),
-                            color = AmberWarning.copy(alpha = 0.12f),
-                            border = androidx.compose.foundation.BorderStroke(1.dp, AmberWarning.copy(alpha = 0.3f)),
+                            color = MaterialTheme.colorScheme.error.copy(alpha = 0.12f),
+                            border = androidx.compose.foundation.BorderStroke(1.dp, MaterialTheme.colorScheme.error.copy(alpha = 0.3f)),
                             modifier = Modifier.fillMaxWidth()
                         ) {
                             Row(
@@ -944,7 +940,7 @@ fun CardBackFace(
                                 Icon(
                                     imageVector = Icons.Default.Warning,
                                     contentDescription = null,
-                                    tint = AmberWarning,
+                                    tint = MaterialTheme.colorScheme.error,
                                     modifier = Modifier.size(16.dp)
                                 )
                                 Spacer(modifier = Modifier.width(8.dp))
@@ -1016,7 +1012,7 @@ fun CardBackFace(
                                             imageVector = Icons.Default.AutoAwesome,
                                             contentDescription = null,
                                             modifier = Modifier.size(14.dp),
-                                            tint = SageAccent
+                                            tint = MaterialTheme.colorScheme.tertiary
                                         )
                                         Spacer(modifier = Modifier.width(6.dp))
                                         Text(
@@ -1190,7 +1186,7 @@ private fun CardActionBar(
                 onClick = onSave,
                 enabled = !isProcessing,
                 shape = RoundedCornerShape(12.dp),
-                colors = ButtonDefaults.buttonColors(containerColor = ForestGreenPrimary),
+                colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.primary),
                 modifier = Modifier
                     .weight(1.3f)
                     .defaultMinSize(minHeight = 48.dp)
@@ -1320,7 +1316,7 @@ private fun PersistedCardActionBar(
                 Button(
                     onClick = onToggleFlip,
                     shape = RoundedCornerShape(12.dp),
-                    colors = ButtonDefaults.buttonColors(containerColor = ForestGreenPrimary),
+                    colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.primary),
                     modifier = Modifier
                         .weight(1f)
                         .defaultMinSize(minHeight = 48.dp)
@@ -1367,7 +1363,7 @@ fun LoreEditDialog(
                 Text(
                     text = stringResource(R.string.lore_edits_remaining, remainingEdits),
                     style = MaterialTheme.typography.labelSmall,
-                    color = ForestGreenPrimary
+                    color = MaterialTheme.colorScheme.primary
                 )
             }
         },
@@ -1422,7 +1418,7 @@ fun LoreEditDialog(
                 onClick = { onSave(text) },
                 enabled = text.length <= maxChars,
                 modifier = Modifier.testTag("action_save_lore_edit"),
-                colors = ButtonDefaults.buttonColors(containerColor = ForestGreenPrimary)
+                colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.primary)
             ) {
                 Text(stringResource(R.string.action_save))
             }

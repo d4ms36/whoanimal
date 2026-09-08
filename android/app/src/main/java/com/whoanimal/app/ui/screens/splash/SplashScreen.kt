@@ -36,7 +36,6 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.whoanimal.app.R
 import com.whoanimal.app.domain.repository.ProfileRepository
-import com.whoanimal.app.ui.theme.ForestGreenPrimary
 import kotlinx.coroutines.delay
 
 /**
@@ -92,7 +91,7 @@ fun SplashScreen(
                 modifier = Modifier
                     .size(104.dp)
                     .background(
-                        color = ForestGreenPrimary.copy(alpha = 0.12f),
+                        color = MaterialTheme.colorScheme.primary.copy(alpha = 0.12f),
                         shape = CircleShape
                     ),
                 contentAlignment = Alignment.Center
@@ -101,7 +100,7 @@ fun SplashScreen(
                     imageVector = Icons.Default.Pets,
                     contentDescription = stringResource(R.string.splash_logo_description),
                     modifier = Modifier.size(58.dp),
-                    tint = ForestGreenPrimary
+                    tint = MaterialTheme.colorScheme.primary
                 )
             }
 
@@ -113,7 +112,7 @@ fun SplashScreen(
                     fontWeight = FontWeight.ExtraBold,
                     letterSpacing = 2.sp
                 ),
-                color = ForestGreenPrimary,
+                color = MaterialTheme.colorScheme.primary,
                 textAlign = TextAlign.Center
             )
 
@@ -130,13 +129,13 @@ fun SplashScreen(
 
             Surface(
                 shape = RoundedCornerShape(16.dp),
-                color = ForestGreenPrimary.copy(alpha = 0.06f),
+                color = MaterialTheme.colorScheme.primary.copy(alpha = 0.06f),
                 modifier = Modifier.padding(horizontal = 16.dp)
             ) {
                 Text(
                     text = stringResource(R.string.splash_alpha_banner),
                     style = MaterialTheme.typography.labelSmall,
-                    color = ForestGreenPrimary,
+                    color = MaterialTheme.colorScheme.primary,
                     modifier = Modifier.padding(horizontal = 14.dp, vertical = 6.dp)
                 )
             }
@@ -146,7 +145,7 @@ fun SplashScreen(
             if (isChecking) {
                 CircularProgressIndicator(
                     modifier = Modifier.size(36.dp),
-                    color = ForestGreenPrimary,
+                    color = MaterialTheme.colorScheme.primary,
                     strokeWidth = 3.dp
                 )
                 Spacer(modifier = Modifier.height(16.dp))
@@ -170,7 +169,7 @@ fun SplashScreen(
                         checkError = null
                     },
                     colors = ButtonDefaults.buttonColors(
-                        containerColor = ForestGreenPrimary
+                        containerColor = MaterialTheme.colorScheme.primary
                     )
                 ) {
                     Text(stringResource(R.string.action_retry))

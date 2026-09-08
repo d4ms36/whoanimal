@@ -75,8 +75,6 @@ import com.whoanimal.app.R
 import com.whoanimal.app.domain.identification.IdentificationService
 import com.whoanimal.app.domain.model.IdentificationResultContract
 import com.whoanimal.app.domain.model.ObservationContract
-import com.whoanimal.app.ui.theme.ForestGreenPrimary
-import com.whoanimal.app.ui.theme.SageAccent
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -289,7 +287,7 @@ fun CameraCaptureScreen(
                             .size(260.dp)
                             .border(
                                 width = 2.dp,
-                                color = SageAccent.copy(alpha = 0.65f),
+                                color = MaterialTheme.colorScheme.tertiary.copy(alpha = 0.65f),
                                 shape = RoundedCornerShape(24.dp)
                             )
                     )
@@ -453,7 +451,7 @@ fun CameraCaptureScreen(
                             enabled = !isProcessingCapture,
                             modifier = Modifier
                                 .fillMaxSize()
-                                .background(ForestGreenPrimary, CircleShape)
+                                .background(MaterialTheme.colorScheme.primary, CircleShape)
                                 .semantics {
                                     role = Role.Button
                                     contentDescription = shutterDesc
@@ -531,13 +529,13 @@ private fun CameraPermissionDeniedView(
         Box(
             modifier = Modifier
                 .size(88.dp)
-                .background(ForestGreenPrimary.copy(alpha = 0.12f), CircleShape),
+                .background(MaterialTheme.colorScheme.primary.copy(alpha = 0.12f), CircleShape),
             contentAlignment = Alignment.Center
         ) {
             Icon(
                 imageVector = Icons.Default.Lock,
                 contentDescription = null,
-                tint = ForestGreenPrimary,
+                tint = MaterialTheme.colorScheme.primary,
                 modifier = Modifier.size(46.dp)
             )
         }
@@ -566,7 +564,7 @@ private fun CameraPermissionDeniedView(
         Button(
             onClick = onGrantPermission,
             shape = RoundedCornerShape(24.dp),
-            colors = ButtonDefaults.buttonColors(containerColor = ForestGreenPrimary),
+            colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.primary),
             modifier = Modifier
                 .fillMaxWidth(0.85f)
                 .height(50.dp)
@@ -646,7 +644,7 @@ private fun CameraUnavailableView(
             onClick = onSimulateCapture,
             enabled = !isProcessing,
             shape = RoundedCornerShape(24.dp),
-            colors = ButtonDefaults.buttonColors(containerColor = ForestGreenPrimary),
+            colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.primary),
             modifier = Modifier
                 .fillMaxWidth(0.85f)
                 .height(50.dp)

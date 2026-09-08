@@ -55,8 +55,6 @@ import com.whoanimal.app.domain.identification.IdentificationService
 import com.whoanimal.app.domain.identification.OfficialStarterCatalog
 import com.whoanimal.app.domain.model.IdentificationResultContract
 import com.whoanimal.app.domain.model.ObservationContract
-import com.whoanimal.app.ui.theme.ForestGreenPrimary
-import com.whoanimal.app.ui.theme.SageAccent
 import java.time.Instant
 import java.util.UUID
 
@@ -101,13 +99,13 @@ fun CapturePlaceholderScreen(
                 modifier = Modifier
                     .size(76.dp)
                     .clip(CircleShape)
-                    .background(ForestGreenPrimary.copy(alpha = 0.12f)),
+                    .background(MaterialTheme.colorScheme.primary.copy(alpha = 0.12f)),
                 contentAlignment = Alignment.Center
             ) {
                 Icon(
                     imageVector = Icons.Default.CameraAlt,
                     contentDescription = null,
-                    tint = ForestGreenPrimary,
+                    tint = MaterialTheme.colorScheme.primary,
                     modifier = Modifier.size(40.dp)
                 )
             }
@@ -153,7 +151,7 @@ fun CapturePlaceholderScreen(
                             RadioButton(
                                 selected = selectedSpeciesIndex == index,
                                 onClick = { selectedSpeciesIndex = index },
-                                colors = RadioButtonDefaults.colors(selectedColor = ForestGreenPrimary)
+                                colors = RadioButtonDefaults.colors(selectedColor = MaterialTheme.colorScheme.primary)
                             )
                             Spacer(modifier = Modifier.width(8.dp))
                             Column {
@@ -190,7 +188,7 @@ fun CapturePlaceholderScreen(
                     .fillMaxWidth()
                     .height(50.dp),
                 shape = RoundedCornerShape(12.dp),
-                colors = ButtonDefaults.buttonColors(containerColor = ForestGreenPrimary),
+                colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.primary),
                 enabled = !isProcessing
             ) {
                 Icon(imageVector = Icons.Default.Search, contentDescription = null, modifier = Modifier.size(20.dp))
@@ -242,13 +240,13 @@ private fun PipelineStep(
         Box(
             modifier = Modifier
                 .size(24.dp)
-                .background(SageAccent.copy(alpha = 0.3f), CircleShape),
+                .background(MaterialTheme.colorScheme.tertiary.copy(alpha = 0.3f), CircleShape),
             contentAlignment = Alignment.Center
         ) {
             Text(
                 text = stepNumber,
                 style = MaterialTheme.typography.labelSmall.copy(fontWeight = FontWeight.Bold),
-                color = ForestGreenPrimary
+                color = MaterialTheme.colorScheme.primary
             )
         }
         Spacer(modifier = Modifier.width(10.dp))

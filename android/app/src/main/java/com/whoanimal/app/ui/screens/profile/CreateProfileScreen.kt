@@ -49,7 +49,6 @@ import androidx.compose.ui.unit.sp
 import com.whoanimal.app.R
 import com.whoanimal.app.domain.repository.ProfileRepository
 import com.whoanimal.app.domain.repository.ProfileValidationResult
-import com.whoanimal.app.ui.theme.ForestGreenPrimary
 import kotlinx.coroutines.launch
 
 /**
@@ -109,7 +108,7 @@ fun CreateProfileScreen(
                 modifier = Modifier
                     .size(92.dp)
                     .background(
-                        color = ForestGreenPrimary.copy(alpha = 0.12f),
+                        color = MaterialTheme.colorScheme.primary.copy(alpha = 0.12f),
                         shape = CircleShape
                     ),
                 contentAlignment = Alignment.Center
@@ -118,7 +117,7 @@ fun CreateProfileScreen(
                     imageVector = Icons.Default.Badge,
                     contentDescription = stringResource(R.string.profile_badge_description),
                     modifier = Modifier.size(50.dp),
-                    tint = ForestGreenPrimary
+                    tint = MaterialTheme.colorScheme.primary
                 )
             }
 
@@ -187,7 +186,7 @@ fun CreateProfileScreen(
                         Icon(
                             imageVector = Icons.Default.CheckCircle,
                             contentDescription = stringResource(R.string.profile_validation_valid_description),
-                            tint = ForestGreenPrimary
+                            tint = MaterialTheme.colorScheme.primary
                         )
                     }
                 },
@@ -196,9 +195,9 @@ fun CreateProfileScreen(
                 ),
                 shape = RoundedCornerShape(14.dp),
                 colors = OutlinedTextFieldDefaults.colors(
-                    focusedBorderColor = ForestGreenPrimary,
-                    focusedLabelColor = ForestGreenPrimary,
-                    cursorColor = ForestGreenPrimary
+                    focusedBorderColor = MaterialTheme.colorScheme.primary,
+                    focusedLabelColor = MaterialTheme.colorScheme.primary,
+                    cursorColor = MaterialTheme.colorScheme.primary
                 ),
                 modifier = Modifier.fillMaxWidth()
             )
@@ -220,9 +219,9 @@ fun CreateProfileScreen(
                 ),
                 shape = RoundedCornerShape(14.dp),
                 colors = OutlinedTextFieldDefaults.colors(
-                    focusedBorderColor = ForestGreenPrimary,
-                    focusedLabelColor = ForestGreenPrimary,
-                    cursorColor = ForestGreenPrimary
+                    focusedBorderColor = MaterialTheme.colorScheme.primary,
+                    focusedLabelColor = MaterialTheme.colorScheme.primary,
+                    cursorColor = MaterialTheme.colorScheme.primary
                 ),
                 modifier = Modifier.fillMaxWidth()
             )
@@ -237,8 +236,8 @@ fun CreateProfileScreen(
                     .height(54.dp),
                 shape = RoundedCornerShape(27.dp),
                 colors = ButtonDefaults.buttonColors(
-                    containerColor = ForestGreenPrimary,
-                    disabledContainerColor = ForestGreenPrimary.copy(alpha = 0.4f)
+                    containerColor = MaterialTheme.colorScheme.primary,
+                    disabledContainerColor = MaterialTheme.colorScheme.primary.copy(alpha = 0.4f)
                 )
             ) {
                 if (isLoading) {

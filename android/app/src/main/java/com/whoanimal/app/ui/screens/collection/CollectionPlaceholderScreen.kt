@@ -79,9 +79,6 @@ import com.whoanimal.app.domain.boundary.StorageCapacityInfo
 import com.whoanimal.app.domain.identification.OfficialStarterCatalog
 import com.whoanimal.app.domain.model.AnimalCardContract
 import com.whoanimal.app.domain.repository.CollectionStorageRepository
-import com.whoanimal.app.ui.theme.ForestGreenPrimary
-import com.whoanimal.app.ui.theme.SageAccent
-import com.whoanimal.app.ui.theme.SoftCardBorder
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import java.io.File
@@ -205,7 +202,7 @@ fun CollectionScreen(
                     Icon(
                         imageVector = Icons.Default.Inventory2,
                         contentDescription = null,
-                        tint = ForestGreenPrimary,
+                        tint = MaterialTheme.colorScheme.primary,
                         modifier = Modifier.size(18.dp)
                     )
                     Spacer(modifier = Modifier.width(6.dp))
@@ -217,7 +214,7 @@ fun CollectionScreen(
 
                 Surface(
                     shape = RoundedCornerShape(8.dp),
-                    color = ForestGreenPrimary.copy(alpha = 0.08f)
+                    color = MaterialTheme.colorScheme.primary.copy(alpha = 0.08f)
                 ) {
                     Text(
                         text = stringResource(
@@ -226,7 +223,7 @@ fun CollectionScreen(
                             capacityInfo.slotsPerContainer
                         ),
                         style = MaterialTheme.typography.labelSmall.copy(fontWeight = FontWeight.SemiBold),
-                        color = ForestGreenPrimary,
+                        color = MaterialTheme.colorScheme.primary,
                         modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp)
                     )
                 }
@@ -241,7 +238,7 @@ fun CollectionScreen(
             ) {
                 when {
                     isLoadingContainer -> {
-                        CircularProgressIndicator(color = ForestGreenPrimary)
+                        CircularProgressIndicator(color = MaterialTheme.colorScheme.primary)
                     }
 
                     cardsInContainer.isEmpty() -> {
@@ -332,7 +329,7 @@ private fun ContainerSelectorBar(
                         )
                     },
                     colors = FilterChipDefaults.filterChipColors(
-                        selectedContainerColor = ForestGreenPrimary,
+                        selectedContainerColor = MaterialTheme.colorScheme.primary,
                         selectedLabelColor = MaterialTheme.colorScheme.onPrimary
                     ),
                     modifier = Modifier
@@ -392,8 +389,8 @@ private fun CollectionCardItem(
             .fillMaxWidth()
             .border(
                 width = if (isRare) 2.dp else 1.dp,
-                brush = if (isRare) Brush.linearGradient(listOf(SageAccent, ForestGreenPrimary))
-                else Brush.linearGradient(listOf(SoftCardBorder, SoftCardBorder)),
+                brush = if (isRare) Brush.linearGradient(listOf(MaterialTheme.colorScheme.tertiary, MaterialTheme.colorScheme.primary))
+                else Brush.linearGradient(listOf(MaterialTheme.colorScheme.outline, MaterialTheme.colorScheme.outline)),
                 shape = RoundedCornerShape(16.dp)
             )
             .clip(RoundedCornerShape(16.dp))
@@ -426,7 +423,7 @@ private fun CollectionCardItem(
                 if (isRare) {
                     Surface(
                         shape = RoundedCornerShape(6.dp),
-                        color = SageAccent.copy(alpha = 0.2f)
+                        color = MaterialTheme.colorScheme.tertiary.copy(alpha = 0.2f)
                     ) {
                         Row(
                             verticalAlignment = Alignment.CenterVertically,
@@ -435,7 +432,7 @@ private fun CollectionCardItem(
                             Icon(
                                 imageVector = Icons.Default.AutoAwesome,
                                 contentDescription = null,
-                                tint = ForestGreenPrimary,
+                                tint = MaterialTheme.colorScheme.primary,
                                 modifier = Modifier.size(10.dp)
                             )
                             Spacer(modifier = Modifier.width(2.dp))
@@ -445,7 +442,7 @@ private fun CollectionCardItem(
                                     fontWeight = FontWeight.Bold,
                                     fontSize = 9.sp
                                 ),
-                                color = ForestGreenPrimary
+                                color = MaterialTheme.colorScheme.primary
                             )
                         }
                     }
@@ -463,8 +460,8 @@ private fun CollectionCardItem(
                     .background(
                         Brush.verticalGradient(
                             listOf(
-                                SageAccent.copy(alpha = 0.18f),
-                                ForestGreenPrimary.copy(alpha = 0.08f)
+                                MaterialTheme.colorScheme.tertiary.copy(alpha = 0.18f),
+                                MaterialTheme.colorScheme.primary.copy(alpha = 0.08f)
                             )
                         )
                     ),
@@ -482,13 +479,13 @@ private fun CollectionCardItem(
                         modifier = Modifier
                             .size(42.dp)
                             .clip(CircleShape)
-                            .background(SageAccent.copy(alpha = 0.25f)),
+                            .background(MaterialTheme.colorScheme.tertiary.copy(alpha = 0.25f)),
                         contentAlignment = Alignment.Center
                     ) {
                         Icon(
                             imageVector = Icons.Default.Pets,
                             contentDescription = null,
-                            tint = ForestGreenPrimary,
+                            tint = MaterialTheme.colorScheme.primary,
                             modifier = Modifier.size(24.dp)
                         )
                     }
@@ -533,13 +530,13 @@ private fun EmptyContainerView(
             modifier = Modifier
                 .size(72.dp)
                 .clip(CircleShape)
-                .background(ForestGreenPrimary.copy(alpha = 0.08f)),
+                .background(MaterialTheme.colorScheme.primary.copy(alpha = 0.08f)),
             contentAlignment = Alignment.Center
         ) {
             Icon(
                 imageVector = Icons.Default.Inbox,
                 contentDescription = null,
-                tint = ForestGreenPrimary,
+                tint = MaterialTheme.colorScheme.primary,
                 modifier = Modifier.size(36.dp)
             )
         }

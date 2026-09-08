@@ -59,8 +59,6 @@ import androidx.compose.ui.res.stringResource
 import com.whoanimal.app.R
 import com.whoanimal.app.domain.model.CandidateSpeciesContract
 import com.whoanimal.app.domain.model.IdentificationResultContract
-import com.whoanimal.app.ui.theme.ForestGreenPrimary
-import com.whoanimal.app.ui.theme.SageAccent
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -156,12 +154,12 @@ fun IdentificationResultScreen(
             // Badge de método de identificación
             Surface(
                 shape = RoundedCornerShape(12.dp),
-                color = ForestGreenPrimary.copy(alpha = 0.08f)
+                color = MaterialTheme.colorScheme.primary.copy(alpha = 0.08f)
             ) {
                 Text(
                     text = stringResource(R.string.identification_method_label, result.identificationMethod),
                     style = MaterialTheme.typography.labelSmall.copy(fontWeight = FontWeight.SemiBold),
-                    color = ForestGreenPrimary,
+                    color = MaterialTheme.colorScheme.primary,
                     modifier = Modifier.padding(horizontal = 12.dp, vertical = 6.dp)
                 )
             }
@@ -186,13 +184,13 @@ fun IdentificationResultScreen(
                                 modifier = Modifier
                                 .size(52.dp)
                                 .clip(CircleShape)
-                                .background(SageAccent.copy(alpha = 0.25f)),
+                                .background(MaterialTheme.colorScheme.tertiary.copy(alpha = 0.25f)),
                                 contentAlignment = Alignment.Center
                             ) {
                                 Icon(
                                     imageVector = Icons.Default.Pets,
                                     contentDescription = null,
-                                    tint = ForestGreenPrimary,
+                                    tint = MaterialTheme.colorScheme.primary,
                                     modifier = Modifier.size(28.dp)
                                 )
                             }
@@ -232,7 +230,7 @@ fun IdentificationResultScreen(
                                 text = stringResource(R.string.identification_confidence_percent, confidencePercent),
                                 style = MaterialTheme.typography.titleMedium.copy(
                                     fontWeight = FontWeight.Bold,
-                                    color = ForestGreenPrimary
+                                    color = MaterialTheme.colorScheme.primary
                                 )
                             )
                         }
@@ -249,8 +247,8 @@ fun IdentificationResultScreen(
                                 .semantics {
                                     contentDescription = confidenceA11y
                                 },
-                            color = ForestGreenPrimary,
-                            trackColor = SageAccent.copy(alpha = 0.2f)
+                            color = MaterialTheme.colorScheme.primary,
+                            trackColor = MaterialTheme.colorScheme.tertiary.copy(alpha = 0.2f)
                         )
 
                         Spacer(modifier = Modifier.height(10.dp))
@@ -292,7 +290,7 @@ fun IdentificationResultScreen(
             if (decisionMadeText != null) {
                 Surface(
                     shape = RoundedCornerShape(14.dp),
-                    color = ForestGreenPrimary.copy(alpha = 0.1f),
+                    color = MaterialTheme.colorScheme.primary.copy(alpha = 0.1f),
                     modifier = Modifier
                         .fillMaxWidth()
                         .semantics { liveRegion = LiveRegionMode.Polite }
@@ -304,14 +302,14 @@ fun IdentificationResultScreen(
                         Icon(
                             imageVector = Icons.Default.CheckCircle,
                             contentDescription = null,
-                            tint = ForestGreenPrimary,
+                            tint = MaterialTheme.colorScheme.primary,
                             modifier = Modifier.size(24.dp)
                         )
                         Spacer(modifier = Modifier.width(12.dp))
                         Text(
                             text = decisionMadeText!!,
                             style = MaterialTheme.typography.bodyMedium.copy(fontWeight = FontWeight.SemiBold),
-                            color = ForestGreenPrimary
+                            color = MaterialTheme.colorScheme.primary
                         )
                     }
                 }
@@ -335,7 +333,7 @@ fun IdentificationResultScreen(
                         Icon(
                             imageVector = Icons.Default.Info,
                             contentDescription = null,
-                            tint = ForestGreenPrimary,
+                            tint = MaterialTheme.colorScheme.primary,
                             modifier = Modifier.size(20.dp)
                         )
                         Spacer(modifier = Modifier.width(10.dp))
@@ -359,7 +357,7 @@ fun IdentificationResultScreen(
                         .fillMaxWidth()
                         .defaultMinSize(minHeight = 48.dp),
                     shape = RoundedCornerShape(12.dp),
-                    colors = ButtonDefaults.buttonColors(containerColor = ForestGreenPrimary)
+                    colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.primary)
                 ) {
                     Icon(imageVector = Icons.Default.CheckCircle, contentDescription = null, modifier = Modifier.size(18.dp))
                     Spacer(modifier = Modifier.width(8.dp))
