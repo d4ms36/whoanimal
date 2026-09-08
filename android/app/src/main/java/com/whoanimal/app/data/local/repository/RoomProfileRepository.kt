@@ -7,6 +7,7 @@ import com.whoanimal.app.domain.repository.InvalidProfileException
 import com.whoanimal.app.domain.repository.LoreConstants
 import com.whoanimal.app.domain.repository.ProfileRepository
 import com.whoanimal.app.domain.repository.ProfileValidationResult
+import com.whoanimal.app.domain.repository.AuthUtil
 import java.util.UUID
 
 /**
@@ -81,6 +82,55 @@ class RoomProfileRepository(
 
     override suspend fun canEditLore(): Boolean {
         return getRemainingLoreEdits() > 0
+    }
+
+    override suspend fun bootstrapAdminIfNeeded() {
+        if (profileDao.countProfiles() == 0) {
+            val now = System.currentTimeMillis()
+            val adminProfile = ExplorerProfile(
+                profileId = UUID.randomUUID().toString(),
+                explorerName = "admin",
+                createdAt = now,
+                lastOpenedAt = now,
+                isActive = false, // Must login manually
+                passwordHash = AuthUtil.hash("1234")
+            )
+            profileDao.insertProfile(ProfileEntity.fromDomain(adminProfile))
+        }
+    }
+
+    override suspend fun authenticateOrCreateProfile(name: String, password: String?): ExplorerProfile {
+        val existingEntity = profileDao.getProfileByName(name.trim())
+        if (existingEntity != null) {
+            // Authenticación
+            if (existingEntity.passwordHash != null) {
+                if (password == null || AuthUtil.hash(password) != existingEntity.passwordHash) {
+                    throw InvalidProfileException("Contraseña incorrecta.")
+                }
+            }
+            // Activar el perfil existente
+            val activeEntity = existingEntity.copy(isActive = true)
+            profileDao.setActiveProfile(activeEntity)
+            return activeEntity.toDomain()
+        } else {
+            // Creación normal (si no existe, lo crea. Si escribió contraseña, se la guardamos)
+            val validation = validateName(name)
+            if (validation is ProfileValidationResult.Invalid) {
+                throw InvalidProfileException(validation.reason)
+            }
+            val trimmedName = name.trim()
+            val now = System.currentTimeMillis()
+            val profile = ExplorerProfile(
+                profileId = UUID.randomUUID().toString(),
+                explorerName = trimmedName,
+                createdAt = now,
+                lastOpenedAt = now,
+                isActive = true,
+                passwordHash = password?.let { AuthUtil.hash(it) }
+            )
+            profileDao.setActiveProfile(ProfileEntity.fromDomain(profile))
+            return profile
+        }
     }
 
     override suspend fun consumeLoreEdit(): Boolean {

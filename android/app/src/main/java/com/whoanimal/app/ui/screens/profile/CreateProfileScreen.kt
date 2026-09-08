@@ -41,6 +41,8 @@ import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -63,6 +65,7 @@ fun CreateProfileScreen(
     modifier: Modifier = Modifier
 ) {
     var explorerName by remember { mutableStateOf("") }
+    var password by remember { mutableStateOf("") }
     var errorMessage by remember { mutableStateOf<String?>(null) }
     var isLoading by remember { mutableStateOf(false) }
 
@@ -79,7 +82,8 @@ fun CreateProfileScreen(
             keyboardController?.hide()
             scope.launch {
                 try {
-                    profileRepository.createProfile(explorerName)
+                    val finalPassword = if (password.isNotBlank()) password.trim() else null
+                    profileRepository.authenticateOrCreateProfile(explorerName, finalPassword)
                     onProfileCreated()
                 } catch (e: Exception) {
                     errorMessage = e.message ?: "Error al guardar el perfil local."
@@ -187,6 +191,27 @@ fun CreateProfileScreen(
                         )
                     }
                 },
+                keyboardOptions = KeyboardOptions(
+                    imeAction = ImeAction.Next
+                ),
+                shape = RoundedCornerShape(14.dp),
+                colors = OutlinedTextFieldDefaults.colors(
+                    focusedBorderColor = ForestGreenPrimary,
+                    focusedLabelColor = ForestGreenPrimary,
+                    cursorColor = ForestGreenPrimary
+                ),
+                modifier = Modifier.fillMaxWidth()
+            )
+
+            Spacer(modifier = Modifier.height(16.dp))
+
+            OutlinedTextField(
+                value = password,
+                onValueChange = { password = it },
+                label = { Text("Password (Optional)") },
+                placeholder = { Text("Required for Admin") },
+                singleLine = true,
+                visualTransformation = PasswordVisualTransformation(),
                 keyboardOptions = KeyboardOptions(
                     imeAction = ImeAction.Done
                 ),

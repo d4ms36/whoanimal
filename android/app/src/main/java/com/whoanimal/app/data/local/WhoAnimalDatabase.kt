@@ -19,7 +19,7 @@ import com.whoanimal.app.data.local.entities.StorageSlotEntity
         StorageSlotEntity::class,
         ProfileEntity::class
     ],
-    version = 3,
+    version = 4,
     exportSchema = false
 )
 
@@ -39,6 +39,12 @@ abstract class WhoAnimalDatabase : RoomDatabase() {
             }
         }
 
+        val MIGRATION_3_4 = object : Migration(3, 4) {
+            override fun migrate(db: SupportSQLiteDatabase) {
+                db.execSQL("ALTER TABLE profiles ADD COLUMN password_hash TEXT DEFAULT NULL")
+            }
+        }
+
         fun getInstance(context: Context, databaseName: String = "whoanimal.db"): WhoAnimalDatabase {
             return INSTANCE ?: synchronized(this) {
                 val instance = Room.databaseBuilder(
@@ -46,7 +52,7 @@ abstract class WhoAnimalDatabase : RoomDatabase() {
                     WhoAnimalDatabase::class.java,
                     databaseName
                 )
-                    .addMigrations(MIGRATION_2_3)
+                    .addMigrations(MIGRATION_2_3, MIGRATION_3_4)
                     .fallbackToDestructiveMigration()
                     .build()
                 INSTANCE = instance
@@ -70,7 +76,7 @@ abstract class WhoAnimalDatabase : RoomDatabase() {
                 databaseName
             )
                 .allowMainThreadQueries()
-                .addMigrations(MIGRATION_2_3)
+                .addMigrations(MIGRATION_2_3, MIGRATION_3_4)
                 .fallbackToDestructiveMigration()
                 .build()
         }

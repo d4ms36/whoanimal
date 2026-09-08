@@ -57,6 +57,16 @@ interface ProfileRepository {
     suspend fun canEditLore(): Boolean
 
     /**
+     * Bootstraps the admin user if no users exist.
+     */
+    suspend fun bootstrapAdminIfNeeded()
+
+    /**
+     * Authenticates an existing profile or creates a new one.
+     */
+    suspend fun authenticateOrCreateProfile(name: String, password: String?): ExplorerProfile
+
+    /**
      * Consume una edición de Lore de la cuenta activa.
      * Devuelve true si la edición fue consumida con éxito, o false si se alcanzó el límite de 3.
      */

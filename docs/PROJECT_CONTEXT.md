@@ -130,7 +130,7 @@ Animal ≠ Card
 
 ## 4.1. Producto Funcional Alpha (Alpha 0.1) y Mínimo Funcional
 
-El **Producto Funcional Alpha (Alpha 0.1)** formaliza el objetivo técnico y funcional prioritario de WHO Animal: construir un producto Android funcional y demostrable en el menor tiempo razonable, erradicando el *scope creep* sin imponer una rigidez excesiva.
+El **Producto Funcional Alpha (Alpha 0.1)** formaliza el objetivo técnico y funcional prioritario de WHO Animal: construir un producto Android funcional y demostrable en el menor tiempo razonable, erradicando el *scope creep* sin imponer una rigidez excesiva. *(Nota: La Beta posterior incluyó la credencial inicial `admin / 1234` mediante WHO-027E para facilitar el testing).*
 
 ### Definición Oficial de Alpha 0.1 (Objetivo Rector)
 > *"Un usuario nuevo debe poder entrar a WHO Animal, fotografiar un animal, obtener una identificación, generar una carta, revisarla, guardarla en su colección, cerrar la aplicación, volver a abrirla y encontrar la carta nuevamente."*

@@ -36,7 +36,10 @@ data class ProfileEntity(
     val isActive: Boolean,
 
     @ColumnInfo(name = "lore_edits_used", defaultValue = "0")
-    val loreEditsUsed: Int = 0
+    val loreEditsUsed: Int = 0,
+
+    @ColumnInfo(name = "password_hash")
+    val passwordHash: String? = null
 ) {
     fun toDomain(): ExplorerProfile = ExplorerProfile(
         profileId = profileId,
@@ -44,7 +47,8 @@ data class ProfileEntity(
         createdAt = createdAt,
         lastOpenedAt = lastOpenedAt,
         isActive = isActive,
-        loreEditsUsed = loreEditsUsed
+        loreEditsUsed = loreEditsUsed,
+        passwordHash = passwordHash
     )
 
     companion object {
@@ -54,7 +58,8 @@ data class ProfileEntity(
             createdAt = profile.createdAt,
             lastOpenedAt = profile.lastOpenedAt,
             isActive = profile.isActive,
-            loreEditsUsed = profile.loreEditsUsed
+            loreEditsUsed = profile.loreEditsUsed,
+            passwordHash = profile.passwordHash
         )
     }
 }

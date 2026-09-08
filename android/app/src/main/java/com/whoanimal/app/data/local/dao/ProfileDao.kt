@@ -19,6 +19,12 @@ interface ProfileDao {
     @Query("SELECT COUNT(*) FROM profiles WHERE is_active = 1")
     suspend fun countActiveProfiles(): Int
 
+    @Query("SELECT * FROM profiles WHERE explorer_name = :name LIMIT 1")
+    suspend fun getProfileByName(name: String): ProfileEntity?
+
+    @Query("SELECT COUNT(*) FROM profiles")
+    suspend fun countProfiles(): Int
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertProfile(profile: ProfileEntity)
 

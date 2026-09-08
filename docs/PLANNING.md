@@ -15,8 +15,7 @@
 | **Fase actual** | Transición Alpha $\rightarrow$ Beta (Auditoría Alpha 0.1 Completada) |
 | **Versión actual** | `0.1.0-alpha` (Build 2) |
 | **Estado** | Auditoría Post-Release Alpha 0.1 y Hoja de Ruta Beta Consolidadas |
-| **Objetivo activo** | Ninguno (Ciclo WHO-027 completado) |
-| **Último objetivo completado** | `WHO-024` — Accesibilidad (a11y) y Robustecimiento de Compatibilidad CameraX (`DEC-061`) |
+| **Último objetivo completado** | `WHO-027E` — Bootstrap Admin Beta + Documentación del Emulador Oficial |
 | **Próximo objetivo propuesto** | Pendiente de definición |
 | **Bloqueos** | Ninguno |
 | **Decisiones pendientes** | `DEC-009`, `DEC-011`, `DEC-021` a `DEC-025`, `DEC-037-PENDING` |
@@ -209,6 +208,7 @@ HOME → STORAGE → CONTAINER → CARD → VIEW / FLIP / BACK
 | **WHO-025** | Contrato Desacoplado `AdService` y Stubs de Infraestructura | Definición de interfaces limpias de publicidad desacoplada (`DEC-053`) y stubs locales de políticas de frecuencia | Media | WHO-024 | `COMPLETADO` | **Sí** |
 | **WHO-026** | Pipeline de Firma de Release y Google Play Internal Testing | Keystore de release, optimización R8/ProGuard y preparación del paquete de distribución interna `v0.2.0-beta.1` (versionCode 3) | Alta | WHO-025 | `COMPLETADO` | **Sí** |
 | **WHO-027** | Beta Validation Protocol & Field Testing | Protocolo de test Beta (Casos manuales, compatibilidad, reporte de bugs, smoke test) para validar en dispositivos físicos la estabilidad de `v0.2.0-beta.1` | Alta | WHO-026 | `COMPLETADO` | **Sí** |
+| **WHO-027E**| Bootstrap Admin Beta & Emulator Docs | Credencial inicial admin/1234 para testeo (SHA-256) y documentación oficial del entorno Android Emulator | Alta | WHO-027 | `COMPLETADO` | **Sí** |
 
 ### 5.1 Especificación Formal del Próximo Objetivo: Pendiente
 
@@ -290,6 +290,9 @@ HOME → STORAGE → CONTAINER → CARD → VIEW / FLIP / BACK
 | **WHO-023** | `APROBADO` | `VALIDADO`| `COMPLETADO` | `APPROVED_COMPLETE` |
 | **WHO-024** | `APROBADO` | `VALIDADO`| `COMPLETADO` | `APPROVED_COMPLETE` |
 | **WHO-025** | `APROBADO` | `VALIDADO` | `COMPLETADO` | `APPROVED_COMPLETE` |
+| **WHO-026** | `APROBADO` | `VALIDADO` | `COMPLETADO` | `APPROVED_COMPLETE` |
+| **WHO-027** | `APROBADO` | `VALIDADO` | `COMPLETADO` | `APPROVED_COMPLETE` |
+| **WHO-027E**| `APROBADO` | `VALIDADO` | `COMPLETADO` | `APPROVED_COMPLETE` |
 
 > **Regla:** El Developer no puede auto-aprobar objetivos. La autorización debe ser explícita por parte del Director Creativo y estructurada por el Project Manager.
 
@@ -427,6 +430,7 @@ Para prevenir el desvío del alcance (*scope creep*) y asegurar la entrega de un
 | **2026-09-07** | Sincronización de Catálogo de Especies y Unificación de Dominio Android (WHO-021) | Unificación de la fuente única de verdad zoológica (data/species/ a Android assets), erradicación de listas hardcodeadas en Kotlin, repositorio y parser dedicados, compatibilidad con 28 especies y tests unitarios 100% PASS (DEC-058). | Developer (`WHO-021`) |
 | **2026-09-07** | Externalización de Textos de UI y Fundación i18n (WHO-022) | Extracción de strings de interfaz en Android Resources con paridad español/inglés, preservación ontológica UI ≠ Ciencia ≠ Lore y tests de recursos (DEC-059). | Developer (`WHO-022`) |
 | **2026-09-07** | Edición Interactiva de Lore y Liberación de Cartas desde el Baúl (WHO-023) | Lore personal editable (máx 300 caracteres), cuota atómica de 3 ediciones por cuenta persistida en Profile (DEC-041), liberación segura con modal y recuperación íntegra de slots en Room (DEC-060). | Developer (`WHO-023`) |
+| **2026-09-07** | Bootstrap Admin Beta y Emulador (WHO-027E) | Implementación de usuario `admin` (pass 1234 con SHA-256) para Beta testing, adaptación de Room v4 y creación de `ANDROID_EMULATOR_SETUP.md`. | Developer (`WHO-027E`) |
 
 ---
 

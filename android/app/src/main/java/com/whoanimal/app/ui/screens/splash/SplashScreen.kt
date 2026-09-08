@@ -60,6 +60,7 @@ fun SplashScreen(
     LaunchedEffect(Unit) {
         try {
             delay(500)
+            profileRepository.bootstrapAdminIfNeeded()
             val active = profileRepository.getActiveProfile()
             if (active != null) {
                 profileRepository.updateLastOpened(active.profileId)

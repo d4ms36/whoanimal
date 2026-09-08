@@ -121,6 +121,8 @@ LOGIN → HOME → CAPTURE → CAMERA → OBSERVATION → IDENTIFICATION → RES
   * Configuración de keystore de release, optimización R8/ProGuard y preparación del paquete de distribución interna `v0.2.0-beta.1` (versionCode 3).
 * **`WHO-027` — Beta Validation Protocol & Field Testing** `[COMPLETADO]`
   * Creación del protocolo de pruebas, matrices de compatibilidad (Android 8-15) y Smoke Tests para la validación física en dispositivos reales.
+* **`WHO-027E` — Bootstrap Admin Beta & Emulator Docs** `[COMPLETADO]`
+  * Usuario `admin` (pass `1234`) inicial para agilizar validaciones y creación de la guía `ANDROID_EMULATOR_SETUP.md` para emulación oficial.
 
 ---
 
