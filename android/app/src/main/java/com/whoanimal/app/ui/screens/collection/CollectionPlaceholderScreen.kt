@@ -381,19 +381,19 @@ private fun CollectionCardItem(
         }
     }
 
-    Card(
-        shape = RoundedCornerShape(16.dp),
-        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
-        elevation = CardDefaults.cardElevation(defaultElevation = 3.dp),
+    // Mini Collectible Frame
+    Surface(
+        shape = RoundedCornerShape(12.dp),
+        color = MaterialTheme.colorScheme.surfaceVariant,
+        shadowElevation = 4.dp,
         modifier = modifier
             .fillMaxWidth()
             .border(
                 width = if (isRare) 2.dp else 1.dp,
                 brush = if (isRare) Brush.linearGradient(listOf(MaterialTheme.colorScheme.tertiary, MaterialTheme.colorScheme.primary))
-                else Brush.linearGradient(listOf(MaterialTheme.colorScheme.outline, MaterialTheme.colorScheme.outline)),
-                shape = RoundedCornerShape(16.dp)
+                else androidx.compose.ui.graphics.SolidColor(MaterialTheme.colorScheme.secondary),
+                shape = RoundedCornerShape(12.dp)
             )
-            .clip(RoundedCornerShape(16.dp))
             .semantics {
                 role = Role.Button
                 contentDescription = cardA11yDescription
@@ -401,121 +401,96 @@ private fun CollectionCardItem(
             .clickable(onClick = onCardClick)
             .testTag("collection_card_${card.cardId}")
     ) {
-        Column(modifier = Modifier.padding(10.dp)) {
-            // Header del item: Slot y Rareza
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceBetween,
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                Surface(
-                    shape = RoundedCornerShape(6.dp),
-                    color = MaterialTheme.colorScheme.surfaceVariant
+        // Inner Passepartout
+        Surface(
+            modifier = Modifier.padding(4.dp),
+            shape = RoundedCornerShape(8.dp),
+            color = MaterialTheme.colorScheme.surface,
+            border = androidx.compose.foundation.BorderStroke(1.dp, MaterialTheme.colorScheme.outline.copy(alpha=0.3f))
+        ) {
+            Column(modifier = Modifier.padding(6.dp)) {
+                
+                // Header (S-XX)
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    verticalAlignment = Alignment.CenterVertically
                 ) {
                     Text(
                         text = "S-$slotIndex",
-                        style = MaterialTheme.typography.labelSmall.copy(fontWeight = FontWeight.Bold),
-                        color = MaterialTheme.colorScheme.onSurfaceVariant,
-                        modifier = Modifier.padding(horizontal = 6.dp, vertical = 2.dp)
+                        style = MaterialTheme.typography.labelSmall.copy(fontWeight = FontWeight.Black, fontSize = 9.sp),
+                        color = MaterialTheme.colorScheme.primary
                     )
+                    if (isRare) {
+                        Icon(
+                            imageVector = Icons.Default.AutoAwesome,
+                            contentDescription = null,
+                            tint = MaterialTheme.colorScheme.primary,
+                            modifier = Modifier.size(10.dp)
+                        )
+                    }
                 }
 
-                if (isRare) {
-                    Surface(
-                        shape = RoundedCornerShape(6.dp),
-                        color = MaterialTheme.colorScheme.tertiary.copy(alpha = 0.2f)
-                    ) {
-                        Row(
-                            verticalAlignment = Alignment.CenterVertically,
-                            modifier = Modifier.padding(horizontal = 6.dp, vertical = 2.dp)
+                Spacer(modifier = Modifier.height(4.dp))
+
+                // Thumbnail Visual (Artwork Frame)
+                Surface(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .aspectRatio(1.2f),
+                    shape = RoundedCornerShape(4.dp),
+                    color = MaterialTheme.colorScheme.tertiary.copy(alpha = 0.1f),
+                    border = androidx.compose.foundation.BorderStroke(1.dp, MaterialTheme.colorScheme.onSurface.copy(alpha=0.15f))
+                ) {
+                    if (localBitmap != null) {
+                        Image(
+                            bitmap = localBitmap,
+                            contentDescription = commonName,
+                            contentScale = ContentScale.Crop,
+                            modifier = Modifier.fillMaxSize()
+                        )
+                    } else {
+                        Box(
+                            modifier = Modifier.fillMaxSize(),
+                            contentAlignment = Alignment.Center
                         ) {
                             Icon(
-                                imageVector = Icons.Default.AutoAwesome,
+                                imageVector = Icons.Default.Pets,
                                 contentDescription = null,
-                                tint = MaterialTheme.colorScheme.primary,
-                                modifier = Modifier.size(10.dp)
-                            )
-                            Spacer(modifier = Modifier.width(2.dp))
-                            Text(
-                                text = stringResource(R.string.rarity_rare),
-                                style = MaterialTheme.typography.labelSmall.copy(
-                                    fontWeight = FontWeight.Bold,
-                                    fontSize = 9.sp
-                                ),
-                                color = MaterialTheme.colorScheme.primary
+                                tint = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.2f),
+                                modifier = Modifier.size(24.dp)
                             )
                         }
                     }
                 }
-            }
 
-            Spacer(modifier = Modifier.height(8.dp))
+                Spacer(modifier = Modifier.height(6.dp))
 
-            // Thumbnail visual
-            Box(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .aspectRatio(1.2f)
-                    .clip(RoundedCornerShape(10.dp))
-                    .background(
-                        Brush.verticalGradient(
-                            listOf(
-                                MaterialTheme.colorScheme.tertiary.copy(alpha = 0.18f),
-                                MaterialTheme.colorScheme.primary.copy(alpha = 0.08f)
-                            )
-                        )
-                    ),
-                contentAlignment = Alignment.Center
-            ) {
-                if (localBitmap != null) {
-                    Image(
-                        bitmap = localBitmap,
-                        contentDescription = commonName,
-                        contentScale = ContentScale.Crop,
-                        modifier = Modifier.fillMaxSize()
+                // Info Footer
+                Column(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    Text(
+                        text = commonName.uppercase(),
+                        style = MaterialTheme.typography.titleSmall.copy(fontWeight = FontWeight.Black, fontSize = 11.sp),
+                        color = MaterialTheme.colorScheme.onSurface,
+                        maxLines = 1,
+                        overflow = TextOverflow.Ellipsis
                     )
-                } else {
-                    Box(
-                        modifier = Modifier
-                            .size(42.dp)
-                            .clip(CircleShape)
-                            .background(MaterialTheme.colorScheme.tertiary.copy(alpha = 0.25f)),
-                        contentAlignment = Alignment.Center
-                    ) {
-                        Icon(
-                            imageVector = Icons.Default.Pets,
-                            contentDescription = null,
-                            tint = MaterialTheme.colorScheme.primary,
-                            modifier = Modifier.size(24.dp)
-                        )
-                    }
+                    Text(
+                        text = scientificName,
+                        style = MaterialTheme.typography.labelSmall.copy(fontStyle = FontStyle.Italic, fontSize = 9.sp),
+                        color = MaterialTheme.colorScheme.secondary,
+                        maxLines = 1,
+                        overflow = TextOverflow.Ellipsis
+                    )
                 }
             }
-
-            Spacer(modifier = Modifier.height(8.dp))
-
-            // Textos de identidad
-            Text(
-                text = commonName,
-                style = MaterialTheme.typography.titleSmall.copy(fontWeight = FontWeight.Bold),
-                maxLines = 1,
-                overflow = TextOverflow.Ellipsis
-            )
-
-            Text(
-                text = scientificName,
-                style = MaterialTheme.typography.labelSmall.copy(fontStyle = FontStyle.Italic),
-                color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.65f),
-                maxLines = 1,
-                overflow = TextOverflow.Ellipsis
-            )
         }
     }
 }
 
-/**
- * Estado visual cuando el contenedor seleccionado no tiene cartas almacenadas.
- */
 @Composable
 private fun EmptyContainerView(
     containerIndex: Int,

@@ -36,8 +36,8 @@ private val LightColorScheme = lightColorScheme(
     onSecondary = DmcWhite,
     tertiary = DmcUltraDarkBeigeGray,
     onTertiary = DmcWhite,
-    background = Color(0xFFF9F9F9), // Blanco casi puro, o usar DmcWhite
-    surface = DmcWhite,
+    background = DmcCreamBackground, // Creamy natural background
+    surface = DmcCardPaper,          // Warm paper tone for surfaces
     surfaceVariant = DmcLightGrayGreen.copy(alpha = 0.2f),
     onBackground = DmcVeryDarkBrownGray,
     onSurface = DmcVeryDarkBrownGray,

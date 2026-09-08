@@ -534,61 +534,64 @@ fun CardFrontFace(
 ) {
     val commonName = profile?.commonName ?: stringResource(R.string.unknown_species)
     val scientificName = profile?.scientificName ?: "Incertae sedis"
-    val taxonomy = profile?.taxonomy
-    val taxonomyBreadcrumb = listOfNotNull(
-        taxonomy?.className,
-        taxonomy?.order,
-        taxonomy?.family
-    ).joinToString(" • ")
-
     val isRare = card.rarity.equals("RARE", ignoreCase = true) || (profile?.isRareSpecies == true)
 
-    Card(
+    // Outer collectible frame
+    Surface(
         modifier = modifier
+            .testTag("card_front_face")
             .border(
-                width = if (isRare) 2.dp else 1.dp,
+                width = if (isRare) 3.dp else 2.dp,
                 brush = if (isRare) Brush.linearGradient(listOf(MaterialTheme.colorScheme.tertiary, MaterialTheme.colorScheme.primary))
-                else Brush.linearGradient(listOf(MaterialTheme.colorScheme.outline, MaterialTheme.colorScheme.outline)),
+                        else androidx.compose.ui.graphics.SolidColor(MaterialTheme.colorScheme.secondary),
                 shape = RoundedCornerShape(20.dp)
-            )
-            .testTag("card_front_face"),
+            ),
         shape = RoundedCornerShape(20.dp),
-        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
-        elevation = CardDefaults.cardElevation(defaultElevation = 6.dp)
+        color = MaterialTheme.colorScheme.surfaceVariant,
+        shadowElevation = 8.dp
     ) {
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(16.dp),
-            verticalArrangement = Arrangement.SpaceBetween
+        // Inner card content (Passepartout / Paper)
+        Surface(
+            modifier = Modifier.padding(6.dp),
+            shape = RoundedCornerShape(14.dp),
+            color = MaterialTheme.colorScheme.surface,
+            border = androidx.compose.foundation.BorderStroke(1.dp, MaterialTheme.colorScheme.outline.copy(alpha=0.5f))
         ) {
-            // Header: Specimen number, Rarity capsule, Edition
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceBetween,
-                verticalAlignment = Alignment.CenterVertically
+            Column(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(14.dp),
+                verticalArrangement = Arrangement.SpaceBetween
             ) {
-                Surface(
-                    shape = RoundedCornerShape(8.dp),
-                    color = MaterialTheme.colorScheme.primary.copy(alpha = 0.1f)
+                // Header (Number & Rarity)
+                Row(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalArrangement = Arrangement.SpaceBetween,
+                    verticalAlignment = Alignment.CenterVertically
                 ) {
-                    Text(
-                        text = "#${card.specimenNumber.toString().padStart(3, '0')}",
-                        style = MaterialTheme.typography.labelSmall.copy(fontWeight = FontWeight.Bold),
-                        color = MaterialTheme.colorScheme.primary,
-                        modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp)
-                    )
-                }
+                    // Specimen Number Pill
+                    Surface(
+                        shape = CircleShape,
+                        color = MaterialTheme.colorScheme.primary.copy(alpha = 0.12f),
+                        border = androidx.compose.foundation.BorderStroke(1.dp, MaterialTheme.colorScheme.primary.copy(alpha=0.3f))
+                    ) {
+                        Text(
+                            text = "S-${card.specimenNumber.toString().padStart(3, '0')}",
+                            style = MaterialTheme.typography.labelSmall.copy(fontWeight = FontWeight.Black),
+                            color = MaterialTheme.colorScheme.primary,
+                            modifier = Modifier.padding(horizontal = 10.dp, vertical = 4.dp)
+                        )
+                    }
 
-                Row(verticalAlignment = Alignment.CenterVertically) {
+                    // Rarity Indicator
                     if (isRare) {
                         Surface(
-                            shape = RoundedCornerShape(8.dp),
-                            color = MaterialTheme.colorScheme.tertiary.copy(alpha = 0.2f),
-                            modifier = Modifier.padding(end = 6.dp)
+                            shape = CircleShape,
+                            color = MaterialTheme.colorScheme.tertiary.copy(alpha = 0.15f),
+                            border = androidx.compose.foundation.BorderStroke(1.dp, MaterialTheme.colorScheme.tertiary.copy(alpha=0.3f))
                         ) {
                             Row(
-                                modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp),
+                                modifier = Modifier.padding(horizontal = 10.dp, vertical = 4.dp),
                                 verticalAlignment = Alignment.CenterVertically
                             ) {
                                 Icon(
@@ -599,178 +602,93 @@ fun CardFrontFace(
                                 )
                                 Spacer(modifier = Modifier.width(4.dp))
                                 Text(
-                                    text = stringResource(R.string.rarity_rare),
-                                    style = MaterialTheme.typography.labelSmall.copy(fontWeight = FontWeight.Bold),
+                                    text = stringResource(R.string.rarity_rare).uppercase(),
+                                    style = MaterialTheme.typography.labelSmall.copy(fontWeight = FontWeight.Black, letterSpacing = 1.sp),
                                     color = MaterialTheme.colorScheme.primary
                                 )
                             }
                         }
-                    } else {
-                        Surface(
-                            shape = RoundedCornerShape(8.dp),
-                            color = MaterialTheme.colorScheme.surfaceVariant,
-                            modifier = Modifier.padding(end = 6.dp)
-                        ) {
-                            Text(
-                                text = stringResource(R.string.rarity_common),
-                                style = MaterialTheme.typography.labelSmall.copy(fontWeight = FontWeight.Medium),
-                                color = MaterialTheme.colorScheme.onSurfaceVariant,
-                                modifier = Modifier.padding(horizontal = 8.dp, vertical = 4.dp)
-                            )
+                    }
+                }
+
+                Spacer(modifier = Modifier.height(14.dp))
+
+                // Artwork Frame
+                Surface(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .weight(1f),
+                    shape = RoundedCornerShape(8.dp),
+                    color = MaterialTheme.colorScheme.tertiary.copy(alpha = 0.1f),
+                    border = androidx.compose.foundation.BorderStroke(1.dp, MaterialTheme.colorScheme.onSurface.copy(alpha = 0.2f)),
+                    shadowElevation = 2.dp
+                ) {
+                    val localBitmap = remember(card.imagePath) {
+                        card.imagePath?.let { path ->
+                            val file = File(path)
+                            if (file.exists() && file.length() > 0) {
+                                try {
+                                    BitmapFactory.decodeFile(path)?.asImageBitmap()
+                                } catch (_: Exception) { null }
+                            } else null
                         }
                     }
-
-                    card.edition?.let { ed ->
-                        Text(
-                            text = ed,
-                            style = MaterialTheme.typography.labelSmall,
-                            color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.5f)
+                    if (localBitmap != null) {
+                        Image(
+                            bitmap = localBitmap,
+                            contentDescription = commonName,
+                            contentScale = ContentScale.Crop,
+                            modifier = Modifier.fillMaxSize()
                         )
-                    }
-                }
-            }
-
-            Spacer(modifier = Modifier.height(10.dp))
-
-            // Artwork / Imagen principal del animal
-            Box(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .weight(1f)
-                    .clip(RoundedCornerShape(14.dp))
-                    .background(
-                        Brush.verticalGradient(
-                            listOf(
-                                MaterialTheme.colorScheme.tertiary.copy(alpha = 0.2f),
-                                MaterialTheme.colorScheme.primary.copy(alpha = 0.08f)
-                            )
-                        )
-                    )
-                    .border(1.dp, MaterialTheme.colorScheme.outline, RoundedCornerShape(14.dp)),
-                contentAlignment = Alignment.Center
-            ) {
-                val localBitmap = remember(card.imagePath) {
-                    card.imagePath?.let { path ->
-                        val file = File(path)
-                        if (file.exists() && file.length() > 0) {
-                            try {
-                                BitmapFactory.decodeFile(path)?.asImageBitmap()
-                            } catch (_: Exception) {
-                                null
-                            }
-                        } else null
-                    }
-                }
-
-                if (localBitmap != null) {
-                    Image(
-                        bitmap = localBitmap,
-                        contentDescription = commonName,
-                        contentScale = ContentScale.Crop,
-                        modifier = Modifier.fillMaxSize()
-                    )
-                } else {
-                    // Placeholder visual elegante y temático de fauna
-                    Column(
-                        horizontalAlignment = Alignment.CenterHorizontally,
-                        verticalArrangement = Arrangement.Center,
-                        modifier = Modifier.padding(16.dp)
-                    ) {
+                    } else {
                         Box(
-                            modifier = Modifier
-                                .size(72.dp)
-                                .clip(CircleShape)
-                                .background(MaterialTheme.colorScheme.tertiary.copy(alpha = 0.25f)),
+                            modifier = Modifier.fillMaxSize(),
                             contentAlignment = Alignment.Center
                         ) {
                             Icon(
                                 imageVector = Icons.Default.Pets,
                                 contentDescription = null,
-                                tint = MaterialTheme.colorScheme.primary,
-                                modifier = Modifier.size(38.dp)
+                                tint = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.2f),
+                                modifier = Modifier.size(48.dp)
                             )
                         }
-                        Spacer(modifier = Modifier.height(8.dp))
-                        Text(
-                            text = stringResource(R.string.card_expedition_label),
-                            style = MaterialTheme.typography.labelMedium.copy(fontWeight = FontWeight.SemiBold),
-                            color = MaterialTheme.colorScheme.primary
-                        )
                     }
                 }
-            }
 
-            Spacer(modifier = Modifier.height(12.dp))
+                Spacer(modifier = Modifier.height(18.dp))
 
-            // Identidad biológica
-            Column(modifier = Modifier.fillMaxWidth()) {
-                if (taxonomyBreadcrumb.isNotBlank()) {
-                    Text(
-                        text = taxonomyBreadcrumb,
-                        style = MaterialTheme.typography.labelSmall.copy(fontWeight = FontWeight.Medium),
-                        color = MaterialTheme.colorScheme.primary,
-                        maxLines = 1,
-                        overflow = TextOverflow.Ellipsis
-                    )
-                    Spacer(modifier = Modifier.height(2.dp))
-                }
-
-                Text(
-                    text = commonName,
-                    style = MaterialTheme.typography.titleLarge.copy(
-                        fontWeight = FontWeight.Bold,
-                        fontSize = 22.sp
-                    ),
-                    color = MaterialTheme.colorScheme.onSurface,
-                    maxLines = 1,
-                    overflow = TextOverflow.Ellipsis
-                )
-
-                Text(
-                    text = scientificName,
-                    style = MaterialTheme.typography.bodyMedium.copy(
-                        fontStyle = FontStyle.Italic,
-                        fontWeight = FontWeight.Medium
-                    ),
-                    color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7f),
-                    maxLines = 1,
-                    overflow = TextOverflow.Ellipsis
-                )
-            }
-
-            Spacer(modifier = Modifier.height(10.dp))
-            HorizontalDivider(color = MaterialTheme.colorScheme.outline)
-            Spacer(modifier = Modifier.height(8.dp))
-
-            // Footer: Serial de colección visual & Rango
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceBetween,
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                Text(
-                    text = card.serial,
-                    style = MaterialTheme.typography.labelSmall.copy(
-                        fontFamily = androidx.compose.ui.text.font.FontFamily.Monospace,
-                        fontSize = 10.sp
-                    ),
-                    color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.5f),
-                    maxLines = 1,
-                    overflow = TextOverflow.Ellipsis,
-                    modifier = Modifier.weight(1f)
-                )
-
-                Spacer(modifier = Modifier.width(8.dp))
-
-                Surface(
-                    shape = RoundedCornerShape(6.dp),
-                    color = MaterialTheme.colorScheme.surfaceVariant
+                // Info Footer
+                Column(
+                    modifier = Modifier.fillMaxWidth(),
+                    horizontalAlignment = Alignment.CenterHorizontally
                 ) {
                     Text(
-                        text = stringResource(R.string.card_rank_label, card.rank),
-                        style = MaterialTheme.typography.labelSmall.copy(fontWeight = FontWeight.SemiBold),
-                        color = MaterialTheme.colorScheme.onSurfaceVariant,
-                        modifier = Modifier.padding(horizontal = 6.dp, vertical = 2.dp)
+                        text = commonName.uppercase(),
+                        style = MaterialTheme.typography.titleLarge.copy(
+                            fontWeight = FontWeight.Black,
+                            letterSpacing = 1.2.sp
+                        ),
+                        color = MaterialTheme.colorScheme.onSurface,
+                        textAlign = TextAlign.Center
+                    )
+                    Spacer(modifier = Modifier.height(2.dp))
+                    Text(
+                        text = scientificName,
+                        style = MaterialTheme.typography.bodyMedium.copy(
+                            fontStyle = FontStyle.Italic,
+                            fontWeight = FontWeight.Medium
+                        ),
+                        color = MaterialTheme.colorScheme.secondary,
+                        textAlign = TextAlign.Center
+                    )
+                    
+                    Spacer(modifier = Modifier.height(12.dp))
+                    
+                    // Decorative bottom line
+                    HorizontalDivider(
+                        modifier = Modifier.width(40.dp),
+                        thickness = 2.dp,
+                        color = MaterialTheme.colorScheme.primary.copy(alpha = 0.5f)
                     )
                 }
             }
@@ -778,13 +696,6 @@ fun CardFrontFace(
     }
 }
 
-/**
- * REVERSO DE LA CARTA (CARD BACK)
- *
- * Separación estricta de dos pilares conceptuales:
- * A. INFORMACIÓN CIENTÍFICA (Factual, biológica, taxonómica, educativa).
- * B. OBSERVACIÓN PERSONAL & LORE (Avistamiento, fecha, ubicación generalizada y narrativa).
- */
 @Composable
 fun CardBackFace(
     card: AnimalCardContract,
@@ -793,269 +704,63 @@ fun CardBackFace(
     onOpenLoreEditor: () -> Unit = {},
     modifier: Modifier = Modifier
 ) {
-    Card(
+    val isRare = card.rarity.equals("RARE", ignoreCase = true) || (profile?.isRareSpecies == true)
+
+    Surface(
         modifier = modifier
-            .border(1.dp, MaterialTheme.colorScheme.outline, RoundedCornerShape(20.dp))
-            .testTag("card_back_face"),
+            .testTag("card_back_face")
+            .border(
+                width = if (isRare) 3.dp else 2.dp,
+                brush = if (isRare) Brush.linearGradient(listOf(MaterialTheme.colorScheme.tertiary, MaterialTheme.colorScheme.primary))
+                        else androidx.compose.ui.graphics.SolidColor(MaterialTheme.colorScheme.secondary),
+                shape = RoundedCornerShape(20.dp)
+            ),
         shape = RoundedCornerShape(20.dp),
-        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
-        elevation = CardDefaults.cardElevation(defaultElevation = 6.dp)
+        color = MaterialTheme.colorScheme.surfaceVariant,
+        shadowElevation = 8.dp
     ) {
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .verticalScroll(rememberScrollState())
-                .padding(18.dp),
-            verticalArrangement = Arrangement.spacedBy(14.dp)
+        // Inner card content with pattern
+        Surface(
+            modifier = Modifier.padding(6.dp),
+            shape = RoundedCornerShape(14.dp),
+            color = MaterialTheme.colorScheme.secondary,
+            border = androidx.compose.foundation.BorderStroke(1.dp, MaterialTheme.colorScheme.onSecondary.copy(alpha=0.3f))
         ) {
-            // Header del Reverso
-            Row(
-                modifier = Modifier.fillMaxWidth(),
-                horizontalArrangement = Arrangement.SpaceBetween,
-                verticalAlignment = Alignment.CenterVertically
-            ) {
-                Row(verticalAlignment = Alignment.CenterVertically) {
-                    Icon(
-                        imageVector = Icons.Default.Science,
-                        contentDescription = null,
-                        tint = MaterialTheme.colorScheme.primary,
-                        modifier = Modifier.size(18.dp)
-                    )
-                    Spacer(modifier = Modifier.width(6.dp))
-                    Text(
-                        text = stringResource(R.string.card_biological_sheet_header),
-                        style = MaterialTheme.typography.labelMedium.copy(fontWeight = FontWeight.Bold),
-                        color = MaterialTheme.colorScheme.primary
-                    )
-                }
-
-                Text(
-                    text = stringResource(R.string.card_core_badge),
-                    style = MaterialTheme.typography.labelSmall,
-                    color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.45f)
-                )
-            }
-
-            // ==========================================
-            // SECCIÓN A: INFORMACIÓN CIENTÍFICA FACTUAL
-            // ==========================================
-            Surface(
-                shape = RoundedCornerShape(14.dp),
-                color = MaterialTheme.colorScheme.primary.copy(alpha = 0.04f),
-                border = androidx.compose.foundation.BorderStroke(1.dp, MaterialTheme.colorScheme.primary.copy(alpha = 0.12f)),
-                modifier = Modifier.fillMaxWidth()
-            ) {
+            Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+                // Background Pattern simulation
                 Column(
-                    modifier = Modifier.padding(14.dp),
-                    verticalArrangement = Arrangement.spacedBy(8.dp)
+                    modifier = Modifier.fillMaxSize(),
+                    verticalArrangement = Arrangement.SpaceEvenly,
+                    horizontalAlignment = Alignment.CenterHorizontally
                 ) {
-                    Text(
-                        text = stringResource(R.string.card_scientific_info_header),
-                        style = MaterialTheme.typography.labelSmall.copy(fontWeight = FontWeight.Bold),
-                        color = MaterialTheme.colorScheme.primary
-                    )
-
-                    // Taxonomía formal
-                    profile?.taxonomy?.let { tax ->
-                        Column(verticalArrangement = Arrangement.spacedBy(2.dp)) {
-                            TaxonomyFactRow(stringResource(R.string.taxonomy_class_label), tax.className)
-                            TaxonomyFactRow(stringResource(R.string.taxonomy_order_label), tax.order)
-                            TaxonomyFactRow(stringResource(R.string.taxonomy_family_label), tax.family)
-                            TaxonomyFactRow(stringResource(R.string.taxonomy_genus_label), tax.genus)
-                            TaxonomyFactRow(stringResource(R.string.taxonomy_species_label), tax.species)
-                        }
-                    }
-
-                    // Estado de conservación
-                    profile?.conservationStatus?.let { status ->
-                        FactItemRow(stringResource(R.string.fact_conservation_status_label), mapConservationStatus(status))
-                    }
-
-                    // Hábitat
-                    profile?.habitat?.let { habitat ->
-                        FactItemRow(stringResource(R.string.fact_habitat_label), habitat)
-                    }
-
-                    // Dieta
-                    profile?.diet?.let { diet ->
-                        FactItemRow(stringResource(R.string.fact_diet_label), diet)
-                    }
-
-                    // Ciclo de actividad
-                    profile?.activityCycle?.let { cycle ->
-                        FactItemRow(stringResource(R.string.fact_activity_cycle_label), cycle)
-                    }
-
-                    // Dimensiones y Longevidad si existen
-                    val details = listOfNotNull(
-                        profile?.lifespanYears?.let { stringResource(R.string.biometrics_years_format, it) },
-                        profile?.sizeCm?.let { stringResource(R.string.biometrics_cm_format, it) },
-                        profile?.weightKg?.let { stringResource(R.string.biometrics_kg_format, it.toString()) }
-                    )
-                    if (details.isNotEmpty()) {
-                        FactItemRow(stringResource(R.string.fact_biometrics_label), details.joinToString(" • "))
-                    }
-
-                    // Curiosidad zoológica
-                    profile?.curiosity?.let { cur ->
-                        Spacer(modifier = Modifier.height(2.dp))
-                        Surface(
-                            shape = RoundedCornerShape(8.dp),
-                            color = MaterialTheme.colorScheme.tertiary.copy(alpha = 0.12f),
-                            modifier = Modifier.fillMaxWidth()
-                        ) {
-                            Row(
-                                modifier = Modifier.padding(10.dp),
-                                verticalAlignment = Alignment.Top
-                            ) {
+                    repeat(4) {
+                        Row(horizontalArrangement = Arrangement.SpaceEvenly, modifier = Modifier.fillMaxWidth()) {
+                            repeat(3) {
                                 Icon(
-                                    imageVector = Icons.Default.Info,
+                                    imageVector = Icons.Default.NaturePeople,
                                     contentDescription = null,
-                                    tint = MaterialTheme.colorScheme.primary,
-                                    modifier = Modifier.size(16.dp)
-                                )
-                                Spacer(modifier = Modifier.width(8.dp))
-                                Text(
-                                    text = cur,
-                                    style = MaterialTheme.typography.bodySmall,
-                                    color = MaterialTheme.colorScheme.onSurface
-                                )
-                            }
-                        }
-                    }
-
-                    // Advertencia preventiva responsable (nunca alarmista)
-                    profile?.dangerLevel?.let { danger ->
-                        Spacer(modifier = Modifier.height(2.dp))
-                        Surface(
-                            shape = RoundedCornerShape(8.dp),
-                            color = MaterialTheme.colorScheme.error.copy(alpha = 0.12f),
-                            border = androidx.compose.foundation.BorderStroke(1.dp, MaterialTheme.colorScheme.error.copy(alpha = 0.3f)),
-                            modifier = Modifier.fillMaxWidth()
-                        ) {
-                            Row(
-                                modifier = Modifier.padding(10.dp),
-                                verticalAlignment = Alignment.Top
-                            ) {
-                                Icon(
-                                    imageVector = Icons.Default.Warning,
-                                    contentDescription = null,
-                                    tint = MaterialTheme.colorScheme.error,
-                                    modifier = Modifier.size(16.dp)
-                                )
-                                Spacer(modifier = Modifier.width(8.dp))
-                                Text(
-                                    text = danger,
-                                    style = MaterialTheme.typography.bodySmall.copy(fontWeight = FontWeight.Medium),
-                                    color = MaterialTheme.colorScheme.onSurface
+                                    tint = MaterialTheme.colorScheme.onSecondary.copy(alpha = 0.08f),
+                                    modifier = Modifier.size(48.dp)
                                 )
                             }
                         }
                     }
                 }
-            }
-
-            // ==========================================
-            // SECCIÓN B: OBSERVACIÓN PERSONAL & LORE
-            // ==========================================
-            Surface(
-                shape = RoundedCornerShape(14.dp),
-                color = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = 0.45f),
-                border = androidx.compose.foundation.BorderStroke(1.dp, MaterialTheme.colorScheme.outlineVariant),
-                modifier = Modifier.fillMaxWidth()
-            ) {
-                Column(
-                    modifier = Modifier.padding(14.dp),
-                    verticalArrangement = Arrangement.spacedBy(6.dp)
+                
+                // Central Logo or Emblem
+                Surface(
+                    shape = CircleShape,
+                    color = MaterialTheme.colorScheme.surface,
+                    border = androidx.compose.foundation.BorderStroke(2.dp, MaterialTheme.colorScheme.primary),
+                    shadowElevation = 4.dp
                 ) {
-                    Text(
-                        text = stringResource(R.string.card_personal_observation_header),
-                        style = MaterialTheme.typography.labelSmall.copy(fontWeight = FontWeight.Bold),
-                        color = MaterialTheme.colorScheme.onSurfaceVariant
-                    )
-
-                    FactItemRow(stringResource(R.string.card_fact_date_label), card.issuedAt.take(19).replace('T', ' '))
-
-                    // Ubicación generalizada que protege fauna y privacidad
-                    FactItemRow(stringResource(R.string.card_fact_location_label), card.displayLocation)
-
-                    // Método de verificación y confianza
-                    val confidenceText = card.identificationConfidence?.let {
-                        "${(it * 100).toInt()}%"
-                    } ?: stringResource(R.string.fact_uncalculated_confidence)
-                    FactItemRow(stringResource(R.string.card_fact_method_label), "${card.identificationMethod} ($confidenceText)")
-
-                    // Lore narrativo debidamente separado y etiquetado
-                    val hasLore = !card.personalLore.isNullOrBlank()
-                    if (hasLore || mode == CardPresentationMode.PERSISTED_CARD) {
-                        Spacer(modifier = Modifier.height(4.dp))
-                        Surface(
-                            shape = RoundedCornerShape(8.dp),
-                            color = MaterialTheme.colorScheme.surface,
-                            border = androidx.compose.foundation.BorderStroke(
-                                1.dp,
-                                MaterialTheme.colorScheme.outlineVariant
-                            ),
-                            modifier = Modifier.fillMaxWidth()
-                        ) {
-                            Column(modifier = Modifier.padding(10.dp)) {
-                                Row(
-                                    verticalAlignment = Alignment.CenterVertically,
-                                    horizontalArrangement = Arrangement.SpaceBetween,
-                                    modifier = Modifier.fillMaxWidth()
-                                ) {
-                                    Row(
-                                        verticalAlignment = Alignment.CenterVertically,
-                                        modifier = Modifier.weight(1f)
-                                    ) {
-                                        Icon(
-                                            imageVector = Icons.Default.AutoAwesome,
-                                            contentDescription = null,
-                                            modifier = Modifier.size(14.dp),
-                                            tint = MaterialTheme.colorScheme.tertiary
-                                        )
-                                        Spacer(modifier = Modifier.width(6.dp))
-                                        Text(
-                                            text = stringResource(R.string.card_lore_disclaimer),
-                                            style = MaterialTheme.typography.labelSmall.copy(
-                                                fontStyle = FontStyle.Italic,
-                                                fontSize = 10.sp
-                                            ),
-                                            color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.6f)
-                                        )
-                                    }
-                                    if (mode == CardPresentationMode.PERSISTED_CARD) {
-                                        TextButton(
-                                            onClick = onOpenLoreEditor,
-                                            contentPadding = PaddingValues(horizontal = 6.dp, vertical = 0.dp),
-                                            modifier = Modifier
-                                                .defaultMinSize(minHeight = 48.dp)
-                                                .testTag("action_card_back_edit_lore_button")
-                                        ) {
-                                            Icon(
-                                                imageVector = Icons.Default.Edit,
-                                                contentDescription = null,
-                                                modifier = Modifier.size(12.dp)
-                                            )
-                                            Spacer(modifier = Modifier.width(3.dp))
-                                            Text(
-                                                text = stringResource(R.string.action_edit_lore),
-                                                style = MaterialTheme.typography.labelSmall.copy(fontWeight = FontWeight.Bold)
-                                            )
-                                        }
-                                    }
-                                }
-                                Spacer(modifier = Modifier.height(4.dp))
-                                Text(
-                                    text = if (hasLore) card.personalLore!! else stringResource(R.string.card_lore_empty_placeholder),
-                                    style = MaterialTheme.typography.bodySmall.copy(
-                                        fontStyle = FontStyle.Italic,
-                                        color = if (hasLore) MaterialTheme.colorScheme.onSurface.copy(alpha = 0.85f)
-                                        else MaterialTheme.colorScheme.onSurface.copy(alpha = 0.5f)
-                                    )
-                                )
-                            }
-                        }
+                    Box(modifier = Modifier.padding(24.dp), contentAlignment = Alignment.Center) {
+                        Icon(
+                            imageVector = Icons.Default.Pets,
+                            contentDescription = null,
+                            tint = MaterialTheme.colorScheme.primary,
+                            modifier = Modifier.size(40.dp)
+                        )
                     }
                 }
             }
