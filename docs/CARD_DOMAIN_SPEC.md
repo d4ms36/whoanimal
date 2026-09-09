@@ -1,10 +1,13 @@
-# Especificación Conceptual de la Carta (Card Specification)
+# Especificación de Dominio de la Carta (Card Domain Specification)
 
-**Documento:** `CARD_SPEC.md`  
-**Estado:** Especificación Base v0.3 (Alineada con directrices WHO-005B-A)  
-**Objetivo:** Definir el modelo conceptual, campos de datos, inmutabilidad, privacidad y estructura de visualización de las cartas coleccionables de Who Animal.
+**Documento:** `docs/CARD_DOMAIN_SPEC.md` (Anteriormente `docs/CARD_SPEC.md`)  
+**Estado:** Canónico / Normalizado (Alineado con directrices WHO-005B-A y WHO-DOC-002)  
+**Propósito:** Fuente de verdad del modelo conceptual de dominio, campos canónicos, inmutabilidad, privacidad y contratos de datos de las cartas coleccionables de WHO Animal.  
+**Cadena de Creación Ontológica:** `Species → Observation → IdentificationResult → IdentificationDecision → Capture → Card`  
+**Referencia Visual:** Para la anatomía gráfica, diseño UI y tokens de rareza, consultar [Especificación Visual de la Carta (`docs/CARD_VISUAL_SPEC.md`)](CARD_VISUAL_SPEC.md).
 
 ---
+
 
 ## 1. Principios de Diseño de la Carta
 
