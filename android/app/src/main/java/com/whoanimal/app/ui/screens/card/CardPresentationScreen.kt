@@ -94,6 +94,7 @@ import com.whoanimal.app.R
 import com.whoanimal.app.domain.identification.OfficialStarterCatalog
 import com.whoanimal.app.domain.model.AnimalCardContract
 import com.whoanimal.app.domain.model.AnimalProfileContract
+import com.whoanimal.app.ui.card.SpecimenCard
 import java.io.File
 
 enum class CardPresentationMode {
@@ -520,11 +521,15 @@ fun CardPresentationScreen(
 /**
  * ANVERSO DE LA CARTA (CARD FRONT)
  *
- * Jerarquía visual:
- * 1. Animal (fotografía real o arte zoológico).
- * 2. Identidad (nombre común y científico).
- * 3. Estética coleccionable (rareza, edición, serial, rango).
- * 4. Metadatos secundarios.
+ * WHO-003B-R2: Ahora delega en [SpecimenCard] para implementar el Design Lock R1.
+ * La firma pública permanece idéntica para no romper ningún consumidor existente.
+ *
+ * Jerarquía visual (Design Lock inmutable):
+ *  1. Animal (fotografía).
+ *  2. Rareza / valor coleccionable.
+ *  3. Identidad de captura (nombre común Serif).
+ *  4. Información científica (científico Monospace, max 2 líneas).
+ *  5. RPG Ligero (stats, rank, skills).
  */
 @Composable
 fun CardFrontFace(
@@ -532,168 +537,26 @@ fun CardFrontFace(
     profile: AnimalProfileContract?,
     modifier: Modifier = Modifier
 ) {
-    val commonName = profile?.commonName ?: stringResource(R.string.unknown_species)
-    val scientificName = profile?.scientificName ?: "Incertae sedis"
-    val isRare = card.rarity.equals("RARE", ignoreCase = true) || (profile?.isRareSpecies == true)
-
-    // Outer collectible frame
-    Surface(
-        modifier = modifier
-            .testTag("card_front_face")
-            .border(
-                width = if (isRare) 3.dp else 2.dp,
-                brush = if (isRare) Brush.linearGradient(listOf(MaterialTheme.colorScheme.tertiary, MaterialTheme.colorScheme.primary))
-                        else androidx.compose.ui.graphics.SolidColor(MaterialTheme.colorScheme.secondary),
-                shape = RoundedCornerShape(20.dp)
-            ),
-        shape = RoundedCornerShape(20.dp),
-        color = MaterialTheme.colorScheme.surfaceVariant,
-        shadowElevation = 8.dp
-    ) {
-        // Inner card content (Passepartout / Paper)
-        Surface(
-            modifier = Modifier.padding(6.dp),
-            shape = RoundedCornerShape(14.dp),
-            color = MaterialTheme.colorScheme.surface,
-            border = androidx.compose.foundation.BorderStroke(1.dp, MaterialTheme.colorScheme.outline.copy(alpha=0.5f))
-        ) {
-            Column(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(14.dp),
-                verticalArrangement = Arrangement.SpaceBetween
-            ) {
-                // Header (Number & Rarity)
-                Row(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalArrangement = Arrangement.SpaceBetween,
-                    verticalAlignment = Alignment.CenterVertically
-                ) {
-                    // Specimen Number Pill
-                    Surface(
-                        shape = CircleShape,
-                        color = MaterialTheme.colorScheme.primary.copy(alpha = 0.12f),
-                        border = androidx.compose.foundation.BorderStroke(1.dp, MaterialTheme.colorScheme.primary.copy(alpha=0.3f))
-                    ) {
-                        Text(
-                            text = "S-${card.specimenNumber.toString().padStart(3, '0')}",
-                            style = MaterialTheme.typography.labelSmall.copy(fontWeight = FontWeight.Black),
-                            color = MaterialTheme.colorScheme.primary,
-                            modifier = Modifier.padding(horizontal = 10.dp, vertical = 4.dp)
-                        )
-                    }
-
-                    // Rarity Indicator
-                    if (isRare) {
-                        Surface(
-                            shape = CircleShape,
-                            color = MaterialTheme.colorScheme.tertiary.copy(alpha = 0.15f),
-                            border = androidx.compose.foundation.BorderStroke(1.dp, MaterialTheme.colorScheme.tertiary.copy(alpha=0.3f))
-                        ) {
-                            Row(
-                                modifier = Modifier.padding(horizontal = 10.dp, vertical = 4.dp),
-                                verticalAlignment = Alignment.CenterVertically
-                            ) {
-                                Icon(
-                                    imageVector = Icons.Default.AutoAwesome,
-                                    contentDescription = null,
-                                    tint = MaterialTheme.colorScheme.primary,
-                                    modifier = Modifier.size(12.dp)
-                                )
-                                Spacer(modifier = Modifier.width(4.dp))
-                                Text(
-                                    text = stringResource(R.string.rarity_rare).uppercase(),
-                                    style = MaterialTheme.typography.labelSmall.copy(fontWeight = FontWeight.Black, letterSpacing = 1.sp),
-                                    color = MaterialTheme.colorScheme.primary
-                                )
-                            }
-                        }
-                    }
-                }
-
-                Spacer(modifier = Modifier.height(14.dp))
-
-                // Artwork Frame
-                Surface(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .weight(1f),
-                    shape = RoundedCornerShape(8.dp),
-                    color = MaterialTheme.colorScheme.tertiary.copy(alpha = 0.1f),
-                    border = androidx.compose.foundation.BorderStroke(1.dp, MaterialTheme.colorScheme.onSurface.copy(alpha = 0.2f)),
-                    shadowElevation = 2.dp
-                ) {
-                    val localBitmap = remember(card.imagePath) {
-                        card.imagePath?.let { path ->
-                            val file = File(path)
-                            if (file.exists() && file.length() > 0) {
-                                try {
-                                    BitmapFactory.decodeFile(path)?.asImageBitmap()
-                                } catch (_: Exception) { null }
-                            } else null
-                        }
-                    }
-                    if (localBitmap != null) {
-                        Image(
-                            bitmap = localBitmap,
-                            contentDescription = commonName,
-                            contentScale = ContentScale.Crop,
-                            modifier = Modifier.fillMaxSize()
-                        )
-                    } else {
-                        Box(
-                            modifier = Modifier.fillMaxSize(),
-                            contentAlignment = Alignment.Center
-                        ) {
-                            Icon(
-                                imageVector = Icons.Default.Pets,
-                                contentDescription = null,
-                                tint = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.2f),
-                                modifier = Modifier.size(48.dp)
-                            )
-                        }
-                    }
-                }
-
-                Spacer(modifier = Modifier.height(18.dp))
-
-                // Info Footer
-                Column(
-                    modifier = Modifier.fillMaxWidth(),
-                    horizontalAlignment = Alignment.CenterHorizontally
-                ) {
-                    Text(
-                        text = commonName.uppercase(),
-                        style = MaterialTheme.typography.titleLarge.copy(
-                            fontWeight = FontWeight.Black,
-                            letterSpacing = 1.2.sp
-                        ),
-                        color = MaterialTheme.colorScheme.onSurface,
-                        textAlign = TextAlign.Center
-                    )
-                    Spacer(modifier = Modifier.height(2.dp))
-                    Text(
-                        text = scientificName,
-                        style = MaterialTheme.typography.bodyMedium.copy(
-                            fontStyle = FontStyle.Italic,
-                            fontWeight = FontWeight.Medium
-                        ),
-                        color = MaterialTheme.colorScheme.secondary,
-                        textAlign = TextAlign.Center
-                    )
-                    
-                    Spacer(modifier = Modifier.height(12.dp))
-                    
-                    // Decorative bottom line
-                    HorizontalDivider(
-                        modifier = Modifier.width(40.dp),
-                        thickness = 2.dp,
-                        color = MaterialTheme.colorScheme.primary.copy(alpha = 0.5f)
-                    )
-                }
-            }
+    // Cargar bitmap desde path local (misma lógica anterior)
+    val backgroundBitmap = remember(card.imagePath) {
+        card.imagePath?.let { path ->
+            val file = File(path)
+            if (file.exists() && file.length() > 0) {
+                try { BitmapFactory.decodeFile(path)?.asImageBitmap() } catch (_: Exception) { null }
+            } else null
         }
     }
+
+    // foregroundBitmap = null por ahora (Hero Silhouette requiere asset independiente)
+    // Cuando el backend provea el asset, se inyecta aquí sin cambiar la firma pública.
+    SpecimenCard(
+        card             = card,
+        profile          = profile,
+        backgroundBitmap = backgroundBitmap,
+        foregroundBitmap = null,
+        isThumbnail      = false,
+        modifier         = modifier.testTag("card_front_face")
+    )
 }
 
 @Composable
