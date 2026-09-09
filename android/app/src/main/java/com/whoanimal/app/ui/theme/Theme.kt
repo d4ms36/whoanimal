@@ -12,39 +12,35 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 
 private val DarkColorScheme = darkColorScheme(
-    primary = DmcDarkOrangeSpice,
-    onPrimary = DmcWhite,
-    secondary = DmcLightWedgwood,
-    onSecondary = DmcVeryDarkBrownGray,
-    tertiary = DmcVeryLightTerraCotta,
-    onTertiary = DmcVeryDarkBrownGray,
-    background = DmcVeryDarkBrownGray,
-    surface = DmcVeryDarkBrownGray,
-    surfaceVariant = DmcUltraDarkBeigeGray,
-    onBackground = DmcWhite,
-    onSurface = DmcWhite,
-    onSurfaceVariant = DmcWhite,
-    outline = DmcLightGrayGreen,
-    error = DmcErrorDark,
-    onError = DmcVeryDarkBrownGray
+    primary = DarkPrimary,
+    onPrimary = PrimaryOn,
+    secondary = DarkSecondary,
+    onSecondary = SecondaryOn,
+    background = DarkBackground,
+    surface = DarkCardSurface,
+    surfaceVariant = DarkSurfaceVariant,
+    onBackground = DarkTextPrimary,
+    onSurface = DarkTextPrimary,
+    onSurfaceVariant = DarkTextSecondary,
+    outline = DarkBorder,
+    error = DarkError,
+    onError = DarkTextPrimary
 )
 
 private val LightColorScheme = lightColorScheme(
-    primary = DmcDarkOrangeSpice,
-    onPrimary = DmcWhite,
-    secondary = DmcLightWedgwood,
-    onSecondary = DmcWhite,
-    tertiary = DmcUltraDarkBeigeGray,
-    onTertiary = DmcWhite,
-    background = DmcCreamBackground, // Creamy natural background
-    surface = DmcCardPaper,          // Warm paper tone for surfaces
-    surfaceVariant = DmcLightGrayGreen.copy(alpha = 0.2f),
-    onBackground = DmcVeryDarkBrownGray,
-    onSurface = DmcVeryDarkBrownGray,
-    onSurfaceVariant = DmcVeryDarkBrownGray,
-    outline = DmcLightGrayGreen,
-    error = DmcErrorRed,
-    onError = DmcWhite
+    primary = Primary,
+    onPrimary = PrimaryOn,
+    secondary = Secondary,
+    onSecondary = SecondaryOn,
+    background = Background,
+    surface = CardSurface,
+    surfaceVariant = SurfaceVariant,
+    onBackground = TextPrimary,
+    onSurface = TextPrimary,
+    onSurfaceVariant = TextSecondary,
+    outline = Border,
+    error = Error,
+    onError = TextPrimary
 )
 
 @Composable

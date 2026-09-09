@@ -18,3 +18,36 @@ val DmcErrorRed = Color(0xFFBA1A1A)
 val DmcErrorDark = Color(0xFFFFB4AB)
 val DmcSoftCardBorder = Color(0xFFE2E2E2)
 
+
+// Semantic Color Tokens – Light Theme
+val Primary = DmcDarkOrangeSpice
+val Secondary = DmcLightWedgwood
+val Surface = DmcCreamBackground
+val SurfaceVariant = DmcLightGrayGreen
+val Background = DmcCreamBackground
+val CardSurface = DmcCardPaper
+val Border = DmcSoftCardBorder
+val TextPrimary = DmcVeryDarkBrownGray
+val TextSecondary = DmcVeryLightTerraCotta
+val Success = Color(0xFF4CAF50) // Green
+val Warning = Color(0xFFFFC107) // Amber
+val Error = DmcErrorRed
+val PrimaryOn = DmcWhite
+val SecondaryOn = DmcWhite
+val ExplorerMark = Color(0x4D000000)
+val ExplorerDarkMark = Color(0x33FFFFFF)
+
+
+// Semantic Color Tokens – Dark Theme (using darker variants)
+val DarkPrimary = DmcDarkOrangeSpice
+val DarkSecondary = DmcLightWedgwood
+val DarkSurface = DmcUltraDarkBeigeGray
+val DarkSurfaceVariant = DmcVeryDarkBrownGray
+val DarkBackground = DmcUltraDarkBeigeGray
+val DarkCardSurface = DmcVeryDarkBrownGray
+val DarkBorder = DmcSoftCardBorder
+val DarkTextPrimary = DmcWhite
+val DarkTextSecondary = DmcLightGrayGreen
+val DarkSuccess = Color(0xFF81C784)
+val DarkWarning = Color(0xFFFFD54F)
+val DarkError = DmcErrorDark

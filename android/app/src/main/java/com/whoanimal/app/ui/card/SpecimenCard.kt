@@ -58,6 +58,9 @@ import com.whoanimal.app.domain.model.AnimalProfileContract
 import com.whoanimal.app.domain.model.TaxonomyContract
 import com.whoanimal.app.ui.theme.WhoAnimalTheme
 import java.io.File
+import com.whoanimal.app.ui.theme.*
+import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.foundation.BorderStroke
 
 // ─────────────────────────────────────────────────────────────────────────────
 // WHO-003B-R2 — SpecimenCard: DESIGN LOCK IMPLEMENTATION
@@ -80,14 +83,7 @@ import java.io.File
 //  - Prisma: holografía sutil y controlada.
 // ─────────────────────────────────────────────────────────────────────────────
 
-/** Colores base del tema Explorer — cálido, natural, premium. */
-private object ExplorerColors {
-    val paperSurface  = Color(0xFFF9F6F0)   // Papel natural cálido
-    val textPrimary   = Color(0xFF2c251e)    // Texto oscuro cálido
-    val textSecondary = Color(0xFF8b3a2a)    // Acento cobre/marrón
-    val divider       = Color(0x1A2c251e)    // Divisor sutil
-    val exploreMark   = Color(0x4D000000)    // Fondo del mark
-}
+// ExplorerColors removed; using semantic color tokens defined in Color.kt
 
 /**
  * SpecimenCard — Composable principal de la carta coleccionable de WHO Animal.
@@ -152,7 +148,7 @@ fun SpecimenCard(
                 // ── INNER CARD (warm paper) ────────────────────────────────
                 Surface(
                     shape  = RoundedCornerShape(innerCorner),
-                    color  = ExplorerColors.paperSurface,
+                    color  = Surface,
                     modifier = Modifier.fillMaxSize()
                 ) {
                     Column(modifier = Modifier.fillMaxSize()) {
@@ -222,7 +218,7 @@ fun SpecimenCard(
                                     .align(Alignment.BottomCenter)
                                     .background(
                                         brush = Brush.verticalGradient(
-                                            colors = listOf(Color.Transparent, ExplorerColors.paperSurface)
+                                            colors = listOf(Color.Transparent, Surface)
                                         )
                                     )
                             )
@@ -236,7 +232,9 @@ fun SpecimenCard(
                                         .size(20.dp, 10.dp)
                                         .align(Alignment.Center)
                                         .clip(TriangleShape)
-                                        .background(ExplorerColors.paperSurface)
+                                        .background(
+                                            Surface
+                                        )
                                 )
                             }
                         }
@@ -261,7 +259,7 @@ fun SpecimenCard(
                                     fontFamily= FontFamily.Serif,
                                     fontWeight= FontWeight.Bold,
                                     fontSize  = if (isThumbnail) 10.sp else 22.sp,
-                                    color     = ExplorerColors.textPrimary,
+                                    color     = TextPrimary,
                                     textAlign = TextAlign.Center,
                                     maxLines  = if (isThumbnail) 2 else 1,
                                     overflow  = TextOverflow.Ellipsis,
@@ -278,7 +276,7 @@ fun SpecimenCard(
                                         fontWeight= FontWeight.Normal,
                                         fontSize  = 11.sp,
                                         lineHeight= 15.sp,
-                                        color     = ExplorerColors.textSecondary,
+                                        color     = TextSecondary,
                                         textAlign = TextAlign.Center,
                                         maxLines  = 2,
                                         overflow  = TextOverflow.Ellipsis,
@@ -292,13 +290,13 @@ fun SpecimenCard(
                             if (!isThumbnail && profile != null) {
                                 Column(modifier = Modifier.fillMaxWidth()) {
                                     HorizontalDivider(
-                                        color    = ExplorerColors.divider,
+                                        color    = Border,
                                         thickness= 1.dp,
                                         modifier = Modifier.padding(vertical = 6.dp)
                                     )
                                     AnatomicalStatsRow(profile = profile)
                                     HorizontalDivider(
-                                        color    = ExplorerColors.divider,
+                                        color    = Border,
                                         thickness= 1.dp,
                                         modifier = Modifier.padding(top = 6.dp)
                                     )
@@ -347,7 +345,8 @@ fun SpecimenCard(
 private fun ExplorerMarkBadge(modifier: Modifier = Modifier) {
     Surface(
         shape      = CircleShape,
-        color      = ExplorerColors.exploreMark,
+        color      = if (isSystemInDarkTheme()) ExplorerDarkMark else ExplorerMark,
+        border = BorderStroke(1.dp, Border),
         modifier   = modifier.size(30.dp)
     ) {
         Box(contentAlignment = Alignment.Center, modifier = Modifier.fillMaxSize()) {
@@ -436,7 +435,7 @@ private fun StatItem(icon: String, value: String) {
             fontFamily = FontFamily.Monospace,
             fontWeight = FontWeight.Bold,
             fontSize   = 9.sp,
-            color      = ExplorerColors.textSecondary,
+            color      = TextSecondary,
             letterSpacing = 0.5.sp
         )
         Text(
@@ -444,7 +443,7 @@ private fun StatItem(icon: String, value: String) {
             fontFamily = FontFamily.SansSerif,
             fontWeight = FontWeight.Bold,
             fontSize   = 12.sp,
-            color      = ExplorerColors.textPrimary
+            color      = TextPrimary
         )
     }
 }
