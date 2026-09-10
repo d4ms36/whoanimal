@@ -194,4 +194,10 @@
     <!-- Decoupled Advertising (WHO-025) -->
     <string name="ad_stub_banner_label">WHO Animal • Anuncio de Prueba (%1$s)</string>
     <string name="ad_banner_a11y_description">Espacio publicitario de prueba</string>
+    <string name="home_explore_welcome">Bienvenido a la fase de Exploración. Descubre y observa la fauna.</string>
+    <string name="home_explore_card_title">Explorar fauna</string>
+    <string name="home_explore_card_subtitle">Inicia tu aventura de descubrimiento</string>
+    <string name="explore_radar_header">Radar de Exploración</string>
+    <string name="explore_radar_subtitle">Descubre y observa la fauna sin iniciar captura</string>
+    <string name="home_start_explore_action">Comenzar Exploración</string>
 </resources>

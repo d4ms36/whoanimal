@@ -12,6 +12,7 @@ sealed class NavDestination(val route: String) {
     object CreateProfile : NavDestination("create_profile")
     object Home : NavDestination("home")
     object Capture : NavDestination("capture")
+    object Explore : NavDestination("explore")
     object IdentificationResult : NavDestination("identification_result")
     object CardReview : NavDestination("card_review")
     object Collection : NavDestination("collection")

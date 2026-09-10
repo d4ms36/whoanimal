@@ -194,4 +194,10 @@
     <!-- Ads (WHO-025) -->
     <string name="ad_stub_banner_label">AD STUB (%1$s)</string>
     <string name="ad_banner_a11y_description">Test ad banner</string>
+    <string name="explore_radar_header">Exploration Radar</string>
+    <string name="explore_radar_subtitle">Discover and observe wildlife without starting capture</string>
+    <string name="home_explore_welcome">Welcome to the Exploration phase. Discover and observe wildlife.</string>
+    <string name="home_explore_card_title">Explore wildlife</string>
+    <string name="home_explore_card_subtitle">Start your discovery adventure</string>
+    <string name="home_start_explore_action">Start Exploration</string>
 </resources>

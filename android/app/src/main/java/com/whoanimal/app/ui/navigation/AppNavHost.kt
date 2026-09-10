@@ -28,6 +28,7 @@ import com.whoanimal.app.ui.screens.welcome.WelcomeScreen
 import androidx.compose.runtime.rememberCoroutineScope
 import com.whoanimal.app.data.local.repository.RoomCollectionStorageRepository
 import com.whoanimal.app.domain.model.AnimalCardContract
+import com.whoanimal.app.ui.screens.explore.ExploreScreen
 import com.whoanimal.app.domain.model.DecisionStatus
 import com.whoanimal.app.domain.model.IdentificationDecisionContract
 import com.whoanimal.app.domain.model.ObservationContract
@@ -115,15 +116,16 @@ fun AppNavHost(
 
         composable(NavDestination.Home.route) {
             HomeScreen(
-                onNavigateToCapture = {
-                    navController.navigate(NavDestination.Capture.route)
-                },
-                onNavigateToCollection = {
-                    navController.navigate(NavDestination.Collection.route)
-                },
+                onNavigateToCapture = { navController.navigate(NavDestination.Capture.route) },
+                onNavigateToExplore = { navController.navigate(NavDestination.Explore.route) },
+                onNavigateToCollection = { navController.navigate(NavDestination.Collection.route) },
                 profileRepository = effectiveProfileRepository,
                 adService = effectiveAdService
             )
+        }
+
+        composable(NavDestination.Explore.route) {
+            ExploreScreen()
         }
 
         composable(NavDestination.Capture.route) {
@@ -142,6 +144,9 @@ fun AppNavHost(
                 }
             )
         }
+
+
+
 
         composable(NavDestination.IdentificationResult.route) {
             IdentificationResultScreen(
